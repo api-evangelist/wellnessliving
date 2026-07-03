@@ -1,0 +1,130 @@
+specification: API Commons Plans
+specificationVersion: '0.1'
+schema: https://raw.githubusercontent.com/api-evangelist/interface-research/main/schema/api-commons.yml#/$defs/Plans
+provider: WellnessLiving
+providerId: wellnessliving
+created: '2026-07-03'
+modified: '2026-07-03'
+reconciled: false
+tags:
+- Fitness
+- Wellness
+- Business Management
+- Plans
+- Per-Location Pricing
+description: >-
+  WellnessLiving sells its business-management platform on a per-location monthly (or annual,
+  10% off) subscription, in four public tiers - Starter, Business, BusinessPro, and Enterprise -
+  each unlocking more of the platform (staff seats, rewards/loyalty, marketing, white-labeling).
+  The API itself is not a paid add-on with its own price tag: it is a partner/integration
+  feature gated by an approval process (Account Executive or Support contact, an API Access
+  Questionnaire, and a signed NDA plus API Agreement) rather than a metered SKU on the pricing
+  page. Introductory/promotional pricing is common and time-boxed; list prices below are the
+  regular (non-promotional) monthly rates as published.
+notes: >-
+  Prices and tier names are as publicly listed at wellnessliving.com/knowledge-sharing/pricing/
+  and third-party pricing aggregators (Capterra, G2, SchedulingKit) as of the review date and are
+  per location. Enterprise pricing is custom/negotiated. Verify current rates and promotional
+  pricing directly with WellnessLiving before quoting.
+sources:
+- https://www.wellnessliving.com/knowledge-sharing/pricing/
+- https://schedulingkit.com/pricing-guides/wellnessliving-pricing
+- https://www.capterra.com/p/145039/WellnessLiving/pricing/
+- https://www.g2.com/products/wellnessliving/pricing
+- https://www.wellnessliving.com/developer-portal/getting-started/introduction/
+plans:
+- id: wellnessliving-starter
+  name: Starter
+  type: paid
+  description: >-
+    Entry tier for a single-location, single-staff business: class and appointment booking, the
+    Achieve client app, the Elevate staff app, point of sale and credit card processing, and
+    email/SMS notifications.
+  entries:
+  - label: Monthly Subscription (per location)
+    name: starter_monthly
+    type: flat
+    metric: location
+    limit: 1
+    timeFrame: month
+    geo: global
+    unit: 1
+    price: "$69/month per location (list; promotional first-month rates vary)"
+    userMultiplied: false
+  elements:
+  - name: Classes and Appointments Booking
+  - name: Achieve Client App
+  - name: Elevate Staff App
+  - name: POS and Credit Card Processing
+  - name: Email and SMS Notifications
+  - name: One Staff Member
+- id: wellnessliving-business
+  name: Business
+  type: paid
+  description: >-
+    Adds unlimited staff seats, the Rewards & Loyalty program, event scheduling, email/text
+    marketing, and lead management on top of Starter.
+  entries:
+  - label: Monthly Subscription (per location)
+    name: business_monthly
+    type: flat
+    metric: location
+    limit: 1
+    timeFrame: month
+    geo: global
+    unit: 1
+    price: "$199/month per location (list; promotional first-month rates vary)"
+    userMultiplied: false
+  elements:
+  - name: Everything in Starter
+  - name: Unlimited Staff
+  - name: Rewards and Loyalty
+  - name: Events Scheduling
+  - name: Email and Text Marketing
+  - name: Lead Management
+- id: wellnessliving-businesspro
+  name: BusinessPro
+  type: paid
+  description: >-
+    Adds a white-label (business-branded) version of the Achieve client app on top of Business.
+  entries:
+  - label: Monthly Subscription (per location)
+    name: businesspro_monthly
+    type: flat
+    metric: location
+    limit: 1
+    timeFrame: month
+    geo: global
+    unit: 1
+    price: "$349/month per location (list; promotional first-month rates vary)"
+    userMultiplied: false
+  elements:
+  - name: Everything in Business
+  - name: White Label Achieve Client App
+- id: wellnessliving-enterprise
+  name: Enterprise
+  type: enterprise
+  description: >-
+    Custom agreement for multi-location franchises/enterprises: everything in BusinessPro plus
+    additional customization, franchise tooling, and dedicated account management. This is also
+    the tier under which API/integration access is arranged - approval is contract-based, not a
+    self-serve metered add-on.
+  entries:
+  - label: Enterprise Agreement
+    name: enterprise_agreement
+    type: flat
+    metric: contract
+    limit: -1
+    timeFrame: year
+    geo: global
+    unit: 1
+    price: contact sales
+    userMultiplied: false
+  elements:
+  - name: Everything in BusinessPro
+  - name: Franchise / Multi-Location Tooling
+  - name: Custom Integrations
+  - name: API Access (by NDA and API Agreement)
+maintainers:
+- FN: Kin Lane
+  email: kin@apievangelist.com

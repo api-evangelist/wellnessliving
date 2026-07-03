@@ -1,0 +1,126 @@
+asyncapi: '2.6.0'
+info:
+  title: WellnessLiving Real-Time Notifications (WebSocket)
+  version: '1.1.20260620071011'
+  description: >-
+    WellnessLiving's own web and mobile clients (Achieve, Elevate, the backend console) receive
+    live updates - report-generation progress, visit/attendance status changes, and messenger
+    chat messages - over a channel-based WebSocket protocol. The officially published REST
+    OpenAPI document (github.com/wellnessliving/openapi) documents one companion HTTP operation
+    for this transport, tagged `WebSocket`: `POST /Core/WebSocket/Subscribe.json`. Per its
+    description, this call is "Called by the WebSocket client immediately after a connection is
+    established, to register interest in a specific channel (identified by CID and key fields)."
+    A channel is identified by a numeric channel-controller CID plus a set of key fields (for
+    example CID 735 = report-storage progress, keyed by business + report; CID 1921 = visit
+    status, keyed by business + user + visit status; CID 1583 = messenger, keyed by channel).
+    On a successful subscribe, the server returns any messages already queued for that channel
+    so the client does not miss events broadcast before it connected.
+
+    This document models that subscribe/authorize exchange as an AsyncAPI operation. It does
+    NOT assert a literal `wss://` connection URL or handshake protocol: neither the public
+    OpenAPI spec nor the public wl-sdk / wl-sdk-js repositories publish the raw socket host,
+    port, or upgrade handshake used to originally open the connection before this REST
+    subscribe call is made. That transport-establishment detail is treated as undocumented
+    (internal) even though the channel/subscribe protocol riding on top of it is documented.
+  contact:
+    name: WellnessLiving Support
+    email: support@wellnessliving.com
+    url: https://www.wellnessliving.com/support
+tags:
+  - name: WebSocket
+    description: Real-time channel subscription and message-broadcast delivery.
+servers:
+  production-us:
+    url: us.wellnessliving.com
+    protocol: wss
+    description: >-
+      Real-time channel host is not publicly documented; this server entry is inferred by
+      analogy with the documented REST production host (https://us.wellnessliving.com) and is
+      NOT a confirmed literal WebSocket endpoint. Treat as unconfirmed/modeled.
+    x-confirmed: false
+defaultContentType: application/json
+channels:
+  wl/websocket/channel:
+    description: >-
+      A generic WellnessLiving real-time channel. The concrete channel is selected at
+      subscribe-time by `cid_channel` (the channel-controller CID) plus `a_key` (the key
+      fields that scope the channel, e.g. business/report, business/user/visit, or a
+      messenger channel key). Known CIDs observed in the official OpenAPI schema include
+      735 (report generation progress), 1921 (visit status), and 1583 (messenger message).
+    subscribe:
+      operationId: subscribeToChannel
+      summary: Client authorizes onto a channel immediately after opening the WebSocket connection.
+      description: >-
+        Documented as a REST companion call (`POST /Core/WebSocket/Subscribe.json`) rather than
+        an in-band WebSocket frame in the public spec, but it is the mechanism by which a
+        WebSocket client is authorized to receive events on a channel, so it is modeled here
+        as the channel's subscribe operation.
+      message:
+        $ref: '#/components/messages/SubscribeRequest'
+    publish:
+      operationId: receiveBroadcastMessage
+      summary: Server pushes queued/live messages for the subscribed channel to the client.
+      description: >-
+        On successful subscribe, all messages already queued for the channel are sent
+        immediately (`a_message_broadcast`); subsequent events on the channel are pushed to the
+        open socket as they occur. The shape of an individual message varies by channel CID.
+      message:
+        $ref: '#/components/messages/ChannelBroadcastMessage'
+operations: {}
+components:
+  messages:
+    SubscribeRequest:
+      name: SubscribeRequest
+      title: Channel subscribe request
+      summary: Authorizes and subscribes the current WebSocket connection to a channel.
+      contentType: application/x-www-form-urlencoded
+      payload:
+        type: object
+        required:
+          - cid_channel
+          - a_key
+          - s_token
+          - s_password
+        properties:
+          cid_channel:
+            type: integer
+            description: Channel controller CID selecting which kind of channel to subscribe to (e.g. 735, 1921, 1583).
+          a_key:
+            type: object
+            additionalProperties: true
+            description: >-
+              Key fields scoping the channel (e.g. k_business + s_report for CID 735;
+              k_business + uid + id_visit for CID 1921; k_channel for CID 1583). Subscriber
+              only receives events where all given key values match.
+          s_token:
+            type: string
+            description: Request token identifying this specific asynchronous subscribe request.
+          s_password:
+            type: string
+            description: Subscriber password / credential used to authorize the subscription.
+    ChannelBroadcastMessage:
+      name: ChannelBroadcastMessage
+      title: Channel broadcast message
+      summary: A queued or live event delivered to a subscribed channel.
+      contentType: application/json
+      payload:
+        type: object
+        properties:
+          a_message_broadcast:
+            type: object
+            additionalProperties: true
+            description: >-
+              Map of message key to message data. On initial subscribe this contains the
+              entire backlog queued before the client connected; the same shape is used for
+              messages pushed afterward. Example known payload shapes: `{i_cas_change,
+              id_report_status}` for report-progress (CID 735); `{k_visit}` for visit-status
+              (CID 1921); `{a_data}` for messenger (CID 1583).
+sources:
+  - url: https://github.com/wellnessliving/openapi
+    note: >-
+      Official OpenAPI spec (production/openapi.yaml), operation
+      `POST /Core/WebSocket/Subscribe.json`, tag `WebSocket`.
+  - url: https://github.com/wellnessliving/wl-sdk-js
+    note: WellnessLiving/Core/WebSocket/SubscribeModel.js - matching field-level client model, no literal connection URL.
+  - url: https://github.com/wellnessliving/wl-sdk
+    note: WellnessLiving/WlWebhook.php - the separate (non-WebSocket) outbound webhook push mechanism, for contrast.

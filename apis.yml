@@ -1,0 +1,367 @@
+aid: wellnessliving
+url: https://raw.githubusercontent.com/api-evangelist/wellnessliving/refs/heads/main/apis.yml
+name: WellnessLiving
+kind: company
+description: 'WellnessLiving is all-in-one business-management software for fitness studios, gyms, spas,
+  salons, and wellness businesses - scheduling, point of sale, memberships/passes, marketing, and client
+  engagement in one platform, serving over 10 million users worldwide. WellnessLiving publishes a real,
+  extensive RESTful API (324+ JSON-over-HTTPS endpoints across 45+ resource areas as of the 2026-06-20
+  build) that powers its own Achieve client app and Elevate staff app - documented in an official public
+  OpenAPI specification (github.com/wellnessliving/openapi) and public PHP/JavaScript SDKs (wl-sdk, wl-sdk-js)
+  - but the API itself is partner-gated: access requires contacting a WellnessLiving Account Executive
+  or Support, completing an API Access Questionnaire, and signing an NDA and API Agreement before the
+  Integrations Team issues application credentials for staging and production. Core resources cover clients/members,
+  classes and schedules, one-on-one appointments, the shared booking/checkout wizard, memberships and
+  passes (Purchase Options), staff, locations, business configuration, retail sales/catalog, payments
+  (the Thoth payment microservice), authentication, rewards/loyalty, reviews, reporting, and a channel-based
+  real-time WebSocket notification layer.'
+image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+tags:
+- Fitness
+- Wellness
+- Spa
+- Business Management
+- Scheduling
+- Memberships
+- Point of Sale
+created: '2026-07-03'
+modified: '2026-07-03'
+specificationVersion: '0.19'
+apis:
+- aid: wellnessliving:clients
+  name: WellnessLiving Clients API
+  tags:
+  - Clients
+  - Members
+  - Profile
+  - Family
+  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+  humanURL: https://help.wellnessliving.com/en/articles/10697645-getting-started-with-the-wellnessliving-api
+  baseURL: https://us.wellnessliving.com
+  properties:
+  - url: https://www.wellnessliving.com/developer-portal/getting-started/introduction/
+    type: Documentation
+  - url: https://help.wellnessliving.com/en/articles/10697645-getting-started-with-the-wellnessliving-api
+    type: APIReference
+  - url: openapi/wellnessliving-openapi.yml
+    type: OpenAPI
+  - url: collections/wellnessliving.postman_collection.json
+    type: Postman
+  - url: collections/wellnessliving.opencollection.json
+    type: OpenCollection
+  description: Client (member) profile management, purchase history, and family relationships - the customer
+    record at the center of every booking, membership, and sale.
+- aid: wellnessliving:classes-schedule
+  name: WellnessLiving Classes & Schedules API
+  tags:
+  - Classes
+  - Schedules
+  - Group Fitness
+  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+  humanURL: https://www.wellnessliving.com/developer-portal/endpoints/endpoints
+  baseURL: https://us.wellnessliving.com
+  properties:
+  - url: https://www.wellnessliving.com/developer-portal/getting-started/introduction/
+    type: Documentation
+  - url: https://www.wellnessliving.com/developer-portal/endpoints/endpoints
+    type: APIReference
+  - url: openapi/wellnessliving-openapi.yml
+    type: OpenAPI
+  - url: collections/wellnessliving.postman_collection.json
+    type: Postman
+  - url: collections/wellnessliving.opencollection.json
+    type: OpenCollection
+  description: Group class and event catalog plus the live schedule of bookable sessions - listing, viewing,
+    filtering by location/staff/time, and cancelling a client's booked session.
+- aid: wellnessliving:appointments
+  name: WellnessLiving Appointments API
+  tags:
+  - Appointments
+  - 1:1 Services
+  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+  humanURL: https://www.wellnessliving.com/developer-portal/endpoints/endpoints
+  baseURL: https://us.wellnessliving.com
+  properties:
+  - url: https://www.wellnessliving.com/developer-portal/getting-started/introduction/
+    type: Documentation
+  - url: https://www.wellnessliving.com/developer-portal/endpoints/endpoints
+    type: APIReference
+  - url: openapi/wellnessliving-openapi.yml
+    type: OpenAPI
+  - url: collections/wellnessliving.postman_collection.json
+    type: Postman
+  - url: collections/wellnessliving.opencollection.json
+    type: OpenCollection
+  description: One-on-one appointment booking - service and staff availability, calendar day availability,
+    and completing (or rescheduling) an appointment booking for one or more clients.
+- aid: wellnessliving:booking-wizard
+  name: WellnessLiving Booking Wizard API
+  tags:
+  - Booking
+  - Checkout
+  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+  humanURL: https://www.wellnessliving.com/developer-portal/endpoints/endpoints
+  baseURL: https://us.wellnessliving.com
+  properties:
+  - url: https://www.wellnessliving.com/developer-portal/getting-started/introduction/
+    type: Documentation
+  - url: https://www.wellnessliving.com/developer-portal/endpoints/endpoints
+    type: APIReference
+  - url: openapi/wellnessliving-openapi.yml
+    type: OpenAPI
+  - url: collections/wellnessliving.postman_collection.json
+    type: Postman
+  - url: collections/wellnessliving.opencollection.json
+    type: OpenCollection
+  description: The multi-step booking/checkout engine shared by classes, events, and appointments - resolves
+    the ordered wizard steps, prices and books the selected Purchase Option or payment method, and checks
+    whether an existing booking can be cancelled.
+- aid: wellnessliving:memberships-passes
+  name: WellnessLiving Memberships & Passes API
+  tags:
+  - Promotions
+  - Memberships
+  - Guest Pass
+  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+  humanURL: https://www.wellnessliving.com/developer-portal/endpoints/endpoints
+  baseURL: https://us.wellnessliving.com
+  properties:
+  - url: https://www.wellnessliving.com/developer-portal/getting-started/introduction/
+    type: Documentation
+  - url: https://www.wellnessliving.com/developer-portal/endpoints/endpoints
+    type: APIReference
+  - url: openapi/wellnessliving-openapi.yml
+    type: OpenAPI
+  - url: collections/wellnessliving.postman_collection.json
+    type: Postman
+  - url: collections/wellnessliving.opencollection.json
+    type: OpenCollection
+  description: Purchase Options - memberships, class packages, and passes - plus the guest passes clients
+    can extend to friends and family from an active membership.
+- aid: wellnessliving:staff
+  name: WellnessLiving Staff API
+  tags:
+  - Staff
+  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+  humanURL: https://www.wellnessliving.com/developer-portal/endpoints/endpoints
+  baseURL: https://us.wellnessliving.com
+  properties:
+  - url: https://www.wellnessliving.com/developer-portal/getting-started/introduction/
+    type: Documentation
+  - url: https://www.wellnessliving.com/developer-portal/endpoints/endpoints
+    type: APIReference
+  - url: openapi/wellnessliving-openapi.yml
+    type: OpenAPI
+  - url: collections/wellnessliving.postman_collection.json
+    type: Postman
+  - url: collections/wellnessliving.opencollection.json
+    type: OpenCollection
+  description: Staff directory, staff profile detail, create/update of a staff record, and the privilege
+    set that governs what a signed-in staff member can access.
+- aid: wellnessliving:locations
+  name: WellnessLiving Locations API
+  tags:
+  - Locations
+  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+  humanURL: https://www.wellnessliving.com/developer-portal/endpoints/endpoints
+  baseURL: https://us.wellnessliving.com
+  properties:
+  - url: https://www.wellnessliving.com/developer-portal/getting-started/introduction/
+    type: Documentation
+  - url: https://www.wellnessliving.com/developer-portal/endpoints/endpoints
+    type: APIReference
+  - url: openapi/wellnessliving-openapi.yml
+    type: OpenAPI
+  - url: collections/wellnessliving.postman_collection.json
+    type: Postman
+  - url: collections/wellnessliving.opencollection.json
+    type: OpenCollection
+  description: Business location directory and detail, plus creating/editing a location and its weekly
+    working-hours schedule.
+- aid: wellnessliving:business
+  name: WellnessLiving Business API
+  tags:
+  - Business
+  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+  humanURL: https://www.wellnessliving.com/developer-portal/endpoints/endpoints
+  baseURL: https://us.wellnessliving.com
+  properties:
+  - url: https://www.wellnessliving.com/developer-portal/getting-started/introduction/
+    type: Documentation
+  - url: https://www.wellnessliving.com/developer-portal/endpoints/endpoints
+    type: APIReference
+  - url: openapi/wellnessliving-openapi.yml
+    type: OpenAPI
+  - url: collections/wellnessliving.postman_collection.json
+    type: Postman
+  - url: collections/wellnessliving.opencollection.json
+    type: OpenCollection
+  description: Business-level profile and configuration - locale, franchise status, enabled services,
+    subscription/plan state - and self-service creation of a new business account.
+- aid: wellnessliving:sales-catalog
+  name: WellnessLiving Sales & Catalog API
+  tags:
+  - Catalog
+  - Purchases
+  - Point of Sale
+  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+  humanURL: https://www.wellnessliving.com/developer-portal/endpoints/endpoints
+  baseURL: https://us.wellnessliving.com
+  properties:
+  - url: https://www.wellnessliving.com/developer-portal/getting-started/introduction/
+    type: Documentation
+  - url: https://www.wellnessliving.com/developer-portal/endpoints/endpoints
+    type: APIReference
+  - url: openapi/wellnessliving-openapi.yml
+    type: OpenAPI
+  - url: collections/wellnessliving.postman_collection.json
+    type: Postman
+  - url: collections/wellnessliving.opencollection.json
+    type: OpenCollection
+  description: Retail storefront catalog (products, promotions, events, coupons), live cart pricing, checkout/payment
+    for store items, and purchase receipts.
+- aid: wellnessliving:payments
+  name: WellnessLiving Payments API
+  tags:
+  - Payments
+  - Thoth WlPay
+  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+  humanURL: https://www.wellnessliving.com/developer-portal/endpoints/endpoints
+  baseURL: https://us.wellnessliving.com
+  properties:
+  - url: https://www.wellnessliving.com/developer-portal/getting-started/introduction/
+    type: Documentation
+  - url: https://www.wellnessliving.com/developer-portal/endpoints/endpoints
+    type: APIReference
+  - url: openapi/wellnessliving-openapi.yml
+    type: OpenAPI
+  - url: collections/wellnessliving.postman_collection.json
+    type: Postman
+  - url: collections/wellnessliving.opencollection.json
+    type: OpenCollection
+  description: The Thoth payment microservice underlying WellnessLiving checkout - client payment accounts,
+    saved bank cards, manually charging/crediting an account, and daily transaction reporting.
+- aid: wellnessliving:authentication
+  name: WellnessLiving Authentication API
+  tags:
+  - Authentication
+  - Login
+  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+  humanURL: https://www.wellnessliving.com/developer-portal/getting-started/authentication-guide/
+  baseURL: https://us.wellnessliving.com
+  properties:
+  - url: https://www.wellnessliving.com/developer-portal/getting-started/introduction/
+    type: Documentation
+  - url: https://www.wellnessliving.com/developer-portal/getting-started/authentication-guide/
+    type: APIReference
+  - url: openapi/wellnessliving-openapi.yml
+    type: OpenAPI
+  - url: collections/wellnessliving.postman_collection.json
+    type: Postman
+  - url: collections/wellnessliving.opencollection.json
+    type: OpenCollection
+  description: Session sign-in/sign-out and JWT token issuance for the officially published API, plus
+    looking up a user's public login information within a business.
+- aid: wellnessliving:rewards-loyalty
+  name: WellnessLiving Rewards & Loyalty API
+  tags:
+  - Rewards
+  - Loyalty
+  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+  humanURL: https://www.wellnessliving.com/developer-portal/endpoints/endpoints
+  baseURL: https://us.wellnessliving.com
+  properties:
+  - url: https://www.wellnessliving.com/developer-portal/getting-started/introduction/
+    type: Documentation
+  - url: https://www.wellnessliving.com/developer-portal/endpoints/endpoints
+    type: APIReference
+  - url: openapi/wellnessliving-openapi.yml
+    type: OpenAPI
+  - url: collections/wellnessliving.postman_collection.json
+    type: Postman
+  - url: collections/wellnessliving.opencollection.json
+    type: OpenCollection
+  description: The WellnessLiving Rewards points program - current score and leaderboard rank, redeemable
+    prizes, and the reward-earning actions configured for a business.
+- aid: wellnessliving:reviews
+  name: WellnessLiving Reviews API
+  tags:
+  - Reviews
+  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+  humanURL: https://www.wellnessliving.com/developer-portal/endpoints/endpoints
+  baseURL: https://us.wellnessliving.com
+  properties:
+  - url: https://www.wellnessliving.com/developer-portal/getting-started/introduction/
+    type: Documentation
+  - url: https://www.wellnessliving.com/developer-portal/endpoints/endpoints
+    type: APIReference
+  - url: openapi/wellnessliving-openapi.yml
+    type: OpenAPI
+  - url: collections/wellnessliving.postman_collection.json
+    type: Postman
+  - url: collections/wellnessliving.opencollection.json
+    type: OpenCollection
+  description: Client reviews for a business location - submitting a rating and review, listing reviews,
+    and posting a business reply.
+- aid: wellnessliving:reports
+  name: WellnessLiving Reports API
+  tags:
+  - Reports
+  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+  humanURL: https://www.wellnessliving.com/developer-portal/endpoints/endpoints
+  baseURL: https://us.wellnessliving.com
+  properties:
+  - url: https://www.wellnessliving.com/developer-portal/getting-started/introduction/
+    type: Documentation
+  - url: https://www.wellnessliving.com/developer-portal/endpoints/endpoints
+    type: APIReference
+  - url: openapi/wellnessliving-openapi.yml
+    type: OpenAPI
+  - url: collections/wellnessliving.postman_collection.json
+    type: Postman
+  - url: collections/wellnessliving.opencollection.json
+    type: OpenCollection
+  description: Business-intelligence reporting - single-report data, multi-report page collections, and
+    an access check for a given report.
+- aid: wellnessliving:realtime-notifications
+  name: WellnessLiving Real-Time Notifications API
+  tags:
+  - WebSocket
+  - Real-Time
+  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+  humanURL: https://github.com/wellnessliving/openapi
+  baseURL: https://us.wellnessliving.com
+  properties:
+  - url: https://www.wellnessliving.com/developer-portal/getting-started/introduction/
+    type: Documentation
+  - url: https://github.com/wellnessliving/openapi
+    type: APIReference
+  - url: openapi/wellnessliving-openapi.yml
+    type: OpenAPI
+  - url: collections/wellnessliving.postman_collection.json
+    type: Postman
+  - url: collections/wellnessliving.opencollection.json
+    type: OpenCollection
+  - url: asyncapi/wellnessliving-asyncapi.yml
+    type: AsyncAPI
+  description: The channel-based WebSocket push layer used by WellnessLiving's own web and mobile clients
+    for live updates (report progress, visit status, messenger chat) - a client authorizes onto a channel
+    with this REST call immediately after opening the socket.
+common:
+- type: GitHubOrganization
+  url: https://github.com/wellnessliving
+- type: LinkedIn
+  url: https://www.linkedin.com/company/wellnesslivingsoftware
+- type: Website
+  url: https://www.wellnessliving.com/
+- type: Documentation
+  url: https://www.wellnessliving.com/developer-portal/getting-started/introduction/
+- type: Plans
+  url: plans/wellnessliving-plans-pricing.yml
+- type: RateLimits
+  url: rate-limits/wellnessliving-rate-limits.yml
+- type: FinOps
+  url: finops/wellnessliving-finops.yml
+maintainers:
+- FN: Kin Lane
+  email: kin@apievangelist.com

@@ -1,0 +1,797 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "WellnessLiving API",
+    "version": "1.1"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Clients",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Returns information about specified member.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://us.wellnessliving.com/Wl/Member/Info/Info.json"
+          },
+          "docs": "Supports both single-user and batch modes: when `$a_uid` is provided, returns a keyed list of user data in\n`$a_result_list`; otherwise returns data for the single user identified by `$uid`. When `$is_full` is `true`,\nadditional profile details, group membership, visit history, and lifetime value are included."
+        },
+        {
+          "info": {
+            "name": "Retrieves a list of user's purchase items to show in user profile.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://us.wellnessliving.com/Wl/Profile/Purchase/PurchaseList.json"
+          },
+          "docs": "Returns the complete purchase history for the client in the given business, covering all\n item types such as memberships, redemption codes, enrollments, products, appointments, and\n gift cards. Package components are resolved and included inline beside their parent item."
+        },
+        {
+          "info": {
+            "name": "Creates a new client profile with the provided personal details in the specified business.",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://us.wellnessliving.com/Wl/Profile/ProfileCreate.json",
+            "body": {
+              "type": "json",
+              "data": "{\n  \"a_intents\": \"\",\n  \"dt_birthday\": \"\",\n  \"id_gender\": \"\",\n  \"id_lead_source\": \"\",\n  \"id_vaccination_status\": \"\",\n  \"is_lead\": \"\"\n}"
+            }
+          },
+          "docs": "Creates or retrieves a user account by email or phone, saves personal details such as name,\n address, phones, birthday, gender, and vaccination status, registers the user in the\n business, and optionally adds them to the lead report and sets intents."
+        },
+        {
+          "info": {
+            "name": "Gets relationships list.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://us.wellnessliving.com/Wl/Family/Relation/FamilyRelation.json"
+          },
+          "docs": "Returns all relationship types enabled for the given business, or all system-defined relationship types if no\nbusiness key is provided."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Classes & Schedules",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Returns list of classes and events in the business.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://us.wellnessliving.com/Wl/Classes/ClassList/List.json"
+          },
+          "docs": "Used by import and integration tools to enumerate all classes and events offered by a business.\nIn franchise mode, classes from all franchisee locations are included. Results are sorted by title\nand start date."
+        },
+        {
+          "info": {
+            "name": "Returns class information including schedules, images, and booking settings for the specified business.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://us.wellnessliving.com/Wl/Classes/ClassView/Element.json"
+          },
+          "docs": "Used by import tools to read the full class catalog for a business. Returns a map of all classes\n(or a single class) with the information needed to replicate class data in an external system:\nschedules, images, booking constraints, and descriptions."
+        },
+        {
+          "info": {
+            "name": "Retrieves a list of classes and class information for the given business and date range.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://us.wellnessliving.com/Wl/Schedule/ClassList/ClassList.json"
+          },
+          "docs": "Returns upcoming class sessions for a business, with optional filtering by location,\nday of week, time of day, staff member, and virtual or in-person mode. The result includes\nper-session details such as staff, capacity, booking counts, and virtual locations, as well as\na calendar map indicating which dates have at least one scheduled session."
+        },
+        {
+          "info": {
+            "name": "Cancels session for the client.\nThis method is an alias for partners using the API or SDK.",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://us.wellnessliving.com/Wl/Schedule/Cancel.json"
+          },
+          "docs": "Identical in behavior to `get()`; exists as a POST alias for partner\nintegrations that cannot issue GET requests."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Appointments",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Gets information about appointment.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://us.wellnessliving.com/Wl/Appointment/Info/Info.json"
+          },
+          "docs": "Returns detailed information about the specified appointment, including service details, staff member,\n date and time in the location's timezone, booking status, client information, and any associated\n assets or add-ons. Access is validated against the current user's permissions."
+        },
+        {
+          "info": {
+            "name": "Retrieves a list with all calendar days in specified period with available and unavailable appointment booking schedule.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://us.wellnessliving.com/Wl/Appointment/Book/Schedule/Calendar.json"
+          },
+          "docs": "Returns each day in the requested month marked as available or unavailable for booking the given\n service at the given location. Availability is determined by the business schedule, holidays,\n and staff availability for the selected date range."
+        },
+        {
+          "info": {
+            "name": "Retrieves an information about staff members for the current service.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://us.wellnessliving.com/Wl/Appointment/Book/Staff/List.json"
+          },
+          "docs": "Returns the list of staff members who can perform the specified service at the given location\n on the specified date and time. Each entry includes the staff member's name, image, gender,\n and availability. An 'any staff' option is included when the service allows random staff assignment."
+        },
+        {
+          "info": {
+            "name": "Completes the appointment booking for one or more providers, optionally creating a new client.",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://us.wellnessliving.com/Wl/Appointment/Book/Finish/FinishMultiple.json",
+            "body": {
+              "type": "json",
+              "data": "{\n  \"a_answer\": \"\",\n  \"a_book_data\": \"\",\n  \"a_notification\": \"\",\n  \"a_paid\": \"\",\n  \"a_pay_form\": \"\",\n  \"a_payment_data\": \"\"\n}"
+            }
+          },
+          "docs": "Accepts booking details for one or more providers in `a_book_data`,\n processes payment using the selected Purchase Option, creates appointment records, and sends\n booking confirmation notifications. A new client account can be created by supplying user\n details in `a_user` when no UID is provided."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Booking Wizard",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Returns the ordered list of booking wizard steps for the given session and client.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://us.wellnessliving.com/Wl/Book/Process/Process.json"
+          },
+          "docs": "Evaluates the session, user profile, payment requirements, asset selection, and subscription state to build\nan ordered list of steps the client must complete to finish the booking. The first step in the list is marked\nas current, and additional flags about event type, wait-list availability, and payment options are returned."
+        },
+        {
+          "info": {
+            "name": "Processes purchases and books sessions on the \"Pay/Billing info\" step of the booking wizard.",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://us.wellnessliving.com/Wl/Book/Process/Payment/Payment.json",
+            "body": {
+              "type": "json",
+              "data": "{\n  \"a_item\": \"\",\n  \"a_pay_form\": \"\",\n  \"a_quiz_response\": \"\",\n  \"a_repeat\": \"\",\n  \"a_resource\": \"\",\n  \"a_session\": \"\"\n}"
+            }
+          },
+          "docs": "Accepts the selected purchase items, payment form, optional discount code, and installment template, then\ncollects payment, applies discounts and prizes, and creates the booking records. Returns visit keys, activity\nkeys, and purchase activity key upon success."
+        },
+        {
+          "info": {
+            "name": "Returns available purchase options, existing client promotions, session passes, and prizes for the specified session.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://us.wellnessliving.com/Wl/Book/Process/Purchase/Purchase.json"
+          },
+          "docs": "Loads all purchase options that can be used to book the specified class period for the given user, including\nexisting login promotions with remaining session counts, new purchasable options, reward prizes, and login prizes.\nReturns pricing, image, program category, and availability data for each option."
+        },
+        {
+          "info": {
+            "name": "Returns information about whether the given user can cancel the booking and the expected consequences.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://us.wellnessliving.com/Wl/Book/Cancel/CancelCan.json"
+          },
+          "docs": "Accepts a business key and a visit key, validates access, and performs a dry-run cancellation to determine\nwhether the visit can be cancelled online, whether a late-cancel penalty applies, and whether the purchase\noption credit would be refunded."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Memberships & Passes",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Gets a list of packages/passes/memberships.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://us.wellnessliving.com/Wl/Promotion/Index/PromotionIndex.json"
+          },
+          "docs": "Returns introductory promotion offers available at the specified location, optionally filtered by program type,\nincluding pricing, duration, visit limits, and access information for each item."
+        },
+        {
+          "info": {
+            "name": "Returns promotion list of the specified business.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://us.wellnessliving.com/Wl/Promotion/PromotionList.json"
+          },
+          "docs": "Returns all active promotions for the given business, with optional inclusion of Enterprise Location promotions\nwhen the business is a franchisor and `is_franchise` is set to `true`."
+        },
+        {
+          "info": {
+            "name": "Saves promotion data.",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://us.wellnessliving.com/Wl/Promotion/Promotion.json",
+            "body": {
+              "type": "json",
+              "data": "{\n  \"a_promotion\": \"\",\n  \"o_guest_settings\": \"\"\n}"
+            }
+          },
+          "docs": "Accepts the full promotion configuration including title, description, access rules, duration, tags, and guest\npass settings, then validates and persists the changes."
+        },
+        {
+          "info": {
+            "name": "Retrieves guest passes for a specific client.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://us.wellnessliving.com/Wl/Login/Promotion/GuestPass/GuestPassList.json"
+          },
+          "docs": "Returns all guest passes assigned to the given user, optionally filtered by class and location."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Staff",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Returns the list of staff members for the given business.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://us.wellnessliving.com/Wl/Staff/StaffList/StaffList.json"
+          },
+          "docs": "Returns all active (or optionally inactive) staff members for the business, including\ntheir name, role, assigned services, contact details, and location assignments. Can be\nfiltered to only staff who have a specific privilege, and whether access-level checks\nshould be applied when building the result."
+        },
+        {
+          "info": {
+            "name": "Retrieves information about staff.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://us.wellnessliving.com/Wl/Staff/StaffView/StaffView.json"
+          },
+          "docs": "This method can accept or one staff key `k_staff` or staff list\n`a_staff_list` but not both (exception would be thrown)."
+        },
+        {
+          "info": {
+            "name": "Update or create staff.",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://us.wellnessliving.com/Wl/Staff/StaffElement.json",
+            "body": {
+              "type": "json",
+              "data": "{\n  \"a_location\": \"\",\n  \"dl_end\": \"\",\n  \"dl_start\": \"\",\n  \"id_gender\": \"\",\n  \"id_role\": \"\",\n  \"is_employ\": \"\"\n}"
+            }
+          },
+          "docs": "Creates a new staff member or updates an existing one in the business. When creating,\na new user account is provisioned if no matching email exists. When updating, the target\nstaff member must already belong to the business. Role, location, contact details,\nemployment dates, and custom profile fields can all be set in a single call."
+        },
+        {
+          "info": {
+            "name": "Returns the list of privileges for the current user in the given business.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://us.wellnessliving.com/Wl/Staff/Privilege/PrivilegeList.json"
+          },
+          "docs": "Returns the complete access profile of the signed-in user for the given business: staff\nprivileges by ID, named admin privileges, and a flag indicating super-admin status. Can\nonly be called for the currently authenticated user, not on behalf of another user."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Locations",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Retrieves a list of locations for the given business.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://us.wellnessliving.com/Wl/Location/List.json"
+          },
+          "docs": "Accepts a single business key, a JSON-encoded list of business keys, or an array of business keys, and\nreturns location details including coordinates, address, timezone, directories, and logo URLs. For\nfranchisor businesses, automatically expands to include all franchisee locations."
+        },
+        {
+          "info": {
+            "name": "Returns detailed information about the specified location.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://us.wellnessliving.com/Wl/Location/View/View.json"
+          },
+          "docs": "Returns the full profile of a location, including address, coordinates, timezone, contact information,\nbusiness hours, logo, slide images, amenities, social media links, and a description."
+        },
+        {
+          "info": {
+            "name": "Creates new location or edits the existing location.",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://us.wellnessliving.com/Wl/Location/Location.json",
+            "body": {
+              "type": "json",
+              "data": "{\n  \"k_business\": \"\",\n  \"k_city\": \"\",\n  \"k_location\": \"\",\n  \"k_timezone\": \"\",\n  \"text_address\": \"\",\n  \"text_email\": \"\"\n}"
+            }
+          },
+          "docs": "When `k_location` is omitted, creates a new location requiring `k_city`,\n `text_address`, and `text_title`.\nWhen `k_location` is provided, updates only the supplied fields of the existing location.\n Returns the key of the created or updated location."
+        },
+        {
+          "info": {
+            "name": "Saves working hours of the location.",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://us.wellnessliving.com/Wl/Location/WorkTime/LocationWorkTime.json",
+            "body": {
+              "type": "json",
+              "data": "{\n  \"a_work_time\": \"\",\n  \"k_business\": \"\",\n  \"k_location\": \"\"\n}"
+            }
+          },
+          "docs": "Accepts a list of day-and-time-range entries representing the weekly schedule and replaces all existing\nworking hours for the location. Days not present in the list are treated as non-working days."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Business",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Returns detailed information about the specified business, including locale, franchise status, services, tips, social URLs, and logo.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://us.wellnessliving.com/Wl/Business/Data.json"
+          },
+          "docs": "Used to bootstrap client-facing pages and widgets that need to know the full business profile: which\nservices are enabled, tip and progress log settings, franchise relationship, social media links, and\ndeep links to the schedule, catalog, and sign-up pages. Accepts either a business key or a location\nrequest token for widget contexts where the key is not available."
+        },
+        {
+          "info": {
+            "name": "Gets information about a business config.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://us.wellnessliving.com/Wl/Business/Config/BusinessConfig.json"
+          },
+          "docs": "Used by the booking widget and checkout flow to know the rules governing client interactions: which\nfamily member relations are allowed, whether clients or staff must select a location at checkout,\nwhat cancellation penalties apply, and whether white-label mode is active."
+        },
+        {
+          "info": {
+            "name": "Gets information about subscription.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://us.wellnessliving.com/Wl/Business/Account/Subscription/SubscriptionInfo.json"
+          },
+          "docs": "Used in the backend settings UI to read the current state of a business subscription (e.g., Achieve or\nanother product). Returns whether the subscription is active, the current plan tier, and the business\nlocale. Requires backend access to the business."
+        },
+        {
+          "info": {
+            "name": "Creates new business.",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://us.wellnessliving.com/Wl/Business/Business.json",
+            "body": {
+              "type": "json",
+              "data": "{\n  \"a_staff_member\": \"\",\n  \"id_locale\": \"\",\n  \"is_location_create\": \"\",\n  \"is_mail_send\": \"\",\n  \"k_business_type\": \"\",\n  \"k_office_city\": \"\"\n}"
+            }
+          },
+          "docs": "Used during the self-onboarding flow when a new client signs up for WellnessLiving. Creates the business\nwith its default integrations, optional first location, default service categories, and an optional owner\nstaff account - all in a single transaction. Rate-limited per IP and globally to prevent abuse."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Sales & Catalog",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Retrieves a list of all sale items.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://us.wellnessliving.com/Wl/Catalog/CatalogList/List.json"
+          },
+          "docs": "Used to render the full client-facing store catalog for a business. Returns all purchasable items -\npromotions, products, events, and coupons - merged across the business's categories. The separate\nde-duplicated list and category list support both the flat and category-tabbed views."
+        },
+        {
+          "info": {
+            "name": "Gets purchase cost data.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://us.wellnessliving.com/Wl/Catalog/Cart/Cart.json"
+          },
+          "docs": "Used in the client-facing checkout flow to show a live price summary before the client submits\npayment. Calculates the full breakdown - subtotal, taxes, applied discounts, reward redemptions,\nand tips - so the client can review the total before confirming."
+        },
+        {
+          "info": {
+            "name": "Allows to pay items for the client.",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://us.wellnessliving.com/Wl/Catalog/Payment/Payment.json",
+            "body": {
+              "type": "json",
+              "data": "{\n  \"a_item\": \"\",\n  \"a_pay_form\": \"\",\n  \"a_quiz_response\": \"\",\n  \"f_discount_percent\": \"\",\n  \"k_pay_installment_template\": \"\",\n  \"k_visit\": \"\"\n}"
+            }
+          },
+          "docs": "The checkout endpoint that finalizes a purchase in the client-facing store. Charges the client's\nselected payment method, applies any discounts and tips, and creates the purchase record. Returns\nthe resulting purchase key so the frontend can redirect to the confirmation page."
+        },
+        {
+          "info": {
+            "name": "Gets purchase information.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://us.wellnessliving.com/Wl/Purchase/Receipt/PurchaseReceipt.json"
+          },
+          "docs": "Returns full receipt data for the specified purchase, including business details, customer information,\nitemized purchase items, payment methods, pricing summary, and print URLs."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Payments",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Retrieves information about accounts of given user in given business.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://us.wellnessliving.com/Thoth/WlPay/Account/Account.json"
+          },
+          "docs": "Retrieves information about accounts of given user in given business."
+        },
+        {
+          "info": {
+            "name": "Retrieves information about user's bank cards.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://us.wellnessliving.com/Thoth/WlPay/Bank/Card/List.json"
+          },
+          "docs": "Retrieves information about user's bank cards."
+        },
+        {
+          "info": {
+            "name": "Allows the user account to be filled with a specified payment, or to perform the reset change manually.",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://us.wellnessliving.com/Thoth/WlPay/Account/Charge/Charge.json",
+            "body": {
+              "type": "json",
+              "data": "{\n  \"a_pay_form\": \"\",\n  \"id_mode\": \"\",\n  \"m_amount\": \"\",\n  \"s_comment\": \"\"\n}"
+            }
+          },
+          "docs": "Allows the user account to be filled with a specified payment, or to perform the reset change manually."
+        },
+        {
+          "info": {
+            "name": "Gets the daily transaction data.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://us.wellnessliving.com/Thoth/WlPay/Transaction/Report/TransactionAllPayment.json"
+          },
+          "docs": "Gets the daily transaction data."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Authentication",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Signs the user in using their login and hashed password.",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://us.wellnessliving.com/Core/Passport/Login/Enter/Enter.json",
+            "body": {
+              "type": "json",
+              "data": "{\n  \"json_data\": \"\",\n  \"s_captcha\": \"\",\n  \"s_login\": \"\",\n  \"s_notepad\": \"\",\n  \"s_password\": \"\",\n  \"s_remember\": \"\"\n}"
+            }
+          },
+          "docs": "Accepts the user login, a password hash derived using the notepad obtained from [NotepadApi](/Core/Passport/Login/Enter/Notepad.json),\nand an optional remember preference. Validates credentials, enforces CAPTCHA when too many failed\nattempts have occurred, starts a session for the user, and returns a redirect URL if applicable."
+        },
+        {
+          "info": {
+            "name": "Returns a jwt token that can be used to log user.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://us.wellnessliving.com/Core/Passport/Enter/Jwt/JwtToken.json"
+          },
+          "docs": "Requires the user to be signed in. Generates a signed JWT token tied to the current authorization\nheader and user ID that can be passed to other services to authenticate the user without sharing session cookies."
+        },
+        {
+          "info": {
+            "name": "Signs user out.",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://us.wellnessliving.com/Core/Passport/Login/SignOut/SignOut.json"
+          },
+          "docs": "Requires the user to be signed in, fires a before-logout event allowing listeners to intercept or\nhandle the logout, then clears the current session. Throws an error if the user is authenticated\nvia SAML SSO, as API-based logout is not supported in that case."
+        },
+        {
+          "info": {
+            "name": "Retrieves information about user.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://us.wellnessliving.com/Wl/Login/Login.json"
+          },
+          "docs": "Returns name, gender, photo URL, email, and staff details for the specified user within the given business.\nPublic staff information is returned even without profile access; full client details require access to the\nuser's profile."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Rewards & Loyalty",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Retrieves information about current score in wellnessliving points.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://us.wellnessliving.com/Wl/Reward/Score/Current/Current.json"
+          },
+          "docs": "Returns the user's current reward point balance, their rank in the first available leaderboard, and the\nleaderboard title for the specified business."
+        },
+        {
+          "info": {
+            "name": "Retrieves a list of redeemable prizes.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://us.wellnessliving.com/Wl/Reward/Prize/Prize.json"
+          },
+          "docs": "Returns all active redeemable prizes for the specified business, ordered by point cost, including the prize key\nand required score for each item."
+        },
+        {
+          "info": {
+            "name": "Retrieves a list of available reward actions.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://us.wellnessliving.com/Wl/Reward/Action/Action.json"
+          },
+          "docs": "Returns all reward actions visible to the specified user in the given business, optionally filtered by category,\nincluding the score value and request status for each action."
+        },
+        {
+          "info": {
+            "name": "Retrieves a list of reward board items to show.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://us.wellnessliving.com/Wl/Reward/Board/List.json"
+          },
+          "docs": "Returns an ordered list of user IDs ranked by points for the specified reward board, up to the configured\nmaximum number of entries."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Reviews",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Submits user's review.",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://us.wellnessliving.com/Wl/Review/Review.json",
+            "body": {
+              "type": "json",
+              "data": "{\n  \"i_rate\": \"\",\n  \"k_location\": \"\",\n  \"k_visit\": \"\",\n  \"s_text\": \"\"\n}"
+            }
+          },
+          "docs": "Validates the captcha, saves the review rating and text for the specified location, and returns reward score\ninformation if the business awards points for leaving a review."
+        },
+        {
+          "info": {
+            "name": "Retrieves a list of reviews.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://us.wellnessliving.com/Wl/Review/ReviewList/ReviewList.json"
+          },
+          "docs": "Returns reviews for the specified location, or all reviews for the business if no location is given, with support\nfor filtering by user, ordering, and pagination."
+        },
+        {
+          "info": {
+            "name": "Saves the reply text and optional status update for the given review.",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://us.wellnessliving.com/Wl/Review/ReviewReply.json",
+            "body": {
+              "type": "json",
+              "data": "{\n  \"id_review_status\": \"\",\n  \"k_business\": \"\",\n  \"k_review\": \"\",\n  \"text_reply\": \"\"\n}"
+            }
+          },
+          "docs": "Validates edit access for the current user, persists the reply text and optional review status change,\nand records the replying staff or admin user."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Reports",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Gets data of required report.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://us.wellnessliving.com/Wl/Report/Data.json"
+          },
+          "docs": "Loads the specified report for the given business, applying filter, sort, and pagination parameters,\nand returns the report rows and totals."
+        },
+        {
+          "info": {
+            "name": "Gets data of required report collection.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://us.wellnessliving.com/Wl/Report/PageData.json"
+          },
+          "docs": "Loads all reports belonging to the specified report page collection for the given business, applying shared\nfilter, sort, group, and view parameters, and returns the data for each report keyed by report ID."
+        },
+        {
+          "info": {
+            "name": "Checks access to given report.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://us.wellnessliving.com/Wl/Report/Access.json"
+          },
+          "docs": "Accepts either `id_report` (first-generation reports) or `cid_report` (second-generation reports), but not both,\nand returns `has_access` indicating whether the current user may view the report in the given business."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Real-Time Notifications",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Checks whether a listener can subscribe to specified channel.\nSubscribes in a case of positive result.",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://us.wellnessliving.com/Core/WebSocket/Subscribe.json",
+            "body": {
+              "type": "json",
+              "data": "{\n  \"a_key\": \"\",\n  \"cid_channel\": \"\",\n  \"s_password\": \"\",\n  \"s_token\": \"\"\n}"
+            }
+          },
+          "docs": "Called by the WebSocket client immediately after a connection is established, to register interest in\na specific channel (identified by CID and key fields). If the current user is not permitted to receive\nevents on that channel, the subscription is rejected. On success, any messages already queued for the\nchannel are returned so the client does not miss events that arrived before the subscription "
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

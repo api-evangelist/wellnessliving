@@ -1,0 +1,120 @@
+aid: wellnessliving
+name: WellnessLiving
+review:
+  question: Does WellnessLiving expose a documented public WebSocket API?
+  answer: true
+  date: '2026-07-03'
+  reviewer: API Evangelist
+  asyncapiSpecCreated: true
+  asyncapiScopeNote: |
+    WellnessLiving's official public OpenAPI specification (github.com/wellnessliving/openapi)
+    includes one operation explicitly tagged `WebSocket`: `POST /Core/WebSocket/Subscribe.json`.
+    Its description states it is "Called by the WebSocket client immediately after a connection
+    is established, to register interest in a specific channel (identified by CID and key
+    fields)." This documents a real channel-based real-time push protocol (report progress,
+    visit status, messenger chat) used by WellnessLiving's own Achieve/Elevate clients - it is
+    not a false positive like an SSE stream mislabeled as WebSocket. However, neither the public
+    OpenAPI spec nor the public wl-sdk (PHP) / wl-sdk-js SDKs publish the literal `wss://`
+    connection host, port, or handshake used to originally open the socket before this REST
+    subscribe call is made - only the subscribe/authorize companion call and its message shapes
+    are documented. An AsyncAPI 2.6 document was created at asyncapi/wellnessliving-asyncapi.yml
+    to model the channel/subscribe/broadcast exchange, with the raw connection server entry
+    explicitly marked `x-confirmed: false` to avoid overstating what is publicly known.
+findings:
+  summary: |
+    WellnessLiving does expose a documented WebSocket-based real-time layer, but only partially:
+    the channel subscription/authorization protocol is documented (as a REST companion operation
+    tagged `WebSocket` in the official OpenAPI spec, plus a matching client-side model in
+    wl-sdk-js), while the actual `wss://` socket endpoint and connection handshake are not
+    published anywhere in the public spec or SDKs. This makes WellnessLiving a genuinely
+    different case from typical API-Evangelist reviews (e.g. Groq, Sequin) where the answer is a
+    clean "no WebSocket at all" - here there is a confirmed, real, but incompletely-documented
+    WebSocket surface.
+  transports:
+    - protocol: REST
+      scheme: https
+      baseURL: https://us.wellnessliving.com (production, US); https://au.wellnessliving.com (production, AU)
+      documented: true
+      note: >-
+        The primary, fully-documented transport - 324 JSON-over-HTTPS endpoints in the official
+        OpenAPI spec, each derived from an SDK model class's namespace (e.g. Wl/Staff/StaffElement.json).
+    - protocol: WebSocket
+      scheme: wss
+      documented: partial
+      note: >-
+        A channel-based push protocol is real and used internally (CIDs observed: 735 = report
+        generation progress, 1921 = visit status, 1583 = messenger chat). The subscribe/authorize
+        REST call (POST /Core/WebSocket/Subscribe.json) and its request/response field shapes are
+        documented in the official public OpenAPI spec and mirrored in wl-sdk-js
+        (Core/WebSocket/SubscribeModel.js). The literal connection URL/host, port, and handshake
+        used to open the underlying socket are NOT documented publicly.
+    - protocol: Webhook
+      scheme: https
+      documented: true
+      note: >-
+        A separate, simpler mechanism: WlWebhook.php in the public wl-sdk shows WellnessLiving
+        can push outbound HTTP POST notifications (signed with a Date header + signature) for
+        row-level CREATED/MODIFIED/DELETED operations. This is server-to-endpoint HTTP push, not
+        WebSocket, and per WellnessLiving's own "Getting Started" help article, webhook access is
+        included once API approval is granted.
+  endpointsConfirmedRest:
+    - GET  https://us.wellnessliving.com/Wl/Member/Info/Info.json
+    - GET  https://us.wellnessliving.com/Wl/Profile/Purchase/PurchaseList.json
+    - POST https://us.wellnessliving.com/Wl/Profile/ProfileCreate.json
+    - GET  https://us.wellnessliving.com/Wl/Classes/ClassList/List.json
+    - GET  https://us.wellnessliving.com/Wl/Schedule/ClassList/ClassList.json
+    - POST https://us.wellnessliving.com/Wl/Schedule/Cancel.json
+    - GET  https://us.wellnessliving.com/Wl/Appointment/Info/Info.json
+    - POST https://us.wellnessliving.com/Wl/Appointment/Book/Finish/FinishMultiple.json
+    - GET  https://us.wellnessliving.com/Wl/Book/Process/Process.json
+    - POST https://us.wellnessliving.com/Wl/Book/Process/Payment/Payment.json
+    - GET  https://us.wellnessliving.com/Wl/Promotion/Index/PromotionIndex.json
+    - GET  https://us.wellnessliving.com/Wl/Staff/StaffList/StaffList.json
+    - GET  https://us.wellnessliving.com/Wl/Location/List.json
+    - GET  https://us.wellnessliving.com/Wl/Business/Data.json
+    - GET  https://us.wellnessliving.com/Wl/Catalog/CatalogList/List.json
+    - GET  https://us.wellnessliving.com/Thoth/WlPay/Account/Account.json
+    - POST https://us.wellnessliving.com/Core/Passport/Login/Enter/Enter.json
+    - GET  https://us.wellnessliving.com/Core/Passport/Enter/Jwt/JwtToken.json
+    - GET  https://us.wellnessliving.com/Wl/Reward/Score/Current/Current.json
+    - POST https://us.wellnessliving.com/Wl/Review/Review.json
+    - GET  https://us.wellnessliving.com/Wl/Report/Data.json
+  endpointsConfirmedWebSocketSubscribe:
+    - POST https://us.wellnessliving.com/Core/WebSocket/Subscribe.json
+  endpointsModeledUnconfirmed:
+    - "wss://us.wellnessliving.com (or equivalent) - inferred by analogy with the documented REST host; no literal WebSocket connection URL is published."
+sources:
+  - url: https://github.com/wellnessliving/openapi
+    type: OpenAPI
+    note: >-
+      Official public OpenAPI spec (production/openapi.yaml, version 1.1.20260620071011; 324
+      paths). Confirms JWT Bearer security scheme, per-operation x-rate-limit values, and the
+      single WebSocket-tagged Subscribe operation.
+  - url: https://github.com/wellnessliving/wl-sdk
+    type: SourceCode
+    note: >-
+      Public PHP SDK. WlConfigProduction.php / WlConfigDeveloper.php confirm real production
+      (us.wellnessliving.com, au.wellnessliving.com) and staging/demo hosts plus an Edge Cache
+      host; WlModelAbstract::resource() shows the deterministic class-name-to-endpoint-path
+      algorithm; WlWebhook.php confirms the separate outbound webhook signing mechanism.
+  - url: https://github.com/wellnessliving/wl-sdk-js
+    type: SourceCode
+    note: JavaScript SDK; Core/WebSocket/SubscribeModel.js mirrors the OpenAPI Subscribe operation field-for-field, with no additional connection-URL detail.
+  - url: https://www.wellnessliving.com/developer-portal/getting-started/introduction/
+    type: Documentation
+    note: Developer portal introduction; confirms gated access model (username/password/BID/authorization code/ID).
+  - url: https://www.wellnessliving.com/developer-portal/getting-started/authentication-guide/
+    type: Documentation
+    note: Confirms session/signature-based legacy authentication flow (Notepad + Enter models, persistent/transient cookies).
+  - url: https://help.wellnessliving.com/en/articles/10697645-getting-started-with-the-wellnessliving-api
+    type: Documentation
+    note: Confirms the NDA/API Agreement approval process and that webhook access is included with API approval.
+actions:
+  asyncapiPath: asyncapi/wellnessliving-asyncapi.yml
+  apisYmlUpdated: true
+  reason: |
+    A genuine (if partially documented) WebSocket surface exists, unlike the typical false-answer
+    case. An AsyncAPI 2.6 document was authored for the confirmed channel-subscribe/broadcast
+    exchange, explicitly flagging the unconfirmed raw connection endpoint so the artifact does not
+    overstate what WellnessLiving has actually published. The apis.yml WellnessLiving Real-Time
+    Notifications API entry links to this AsyncAPI document alongside the shared OpenAPI file.

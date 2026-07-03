@@ -1,0 +1,83 @@
+specification: API Commons Rate Limits
+specificationVersion: '0.1'
+schema: https://raw.githubusercontent.com/api-evangelist/interface-research/main/schema/api-commons.yml#/$defs/RateLimits
+provider: WellnessLiving
+providerId: wellnessliving
+created: '2026-07-03'
+modified: '2026-07-03'
+reconciled: false
+tags:
+- Fitness
+- Wellness
+- Rate Limiting
+- Quotas
+description: >-
+  WellnessLiving's official OpenAPI specification (github.com/wellnessliving/openapi) embeds a
+  machine-readable `x-rate-limit` extension directly on most operations, so - unusually for a
+  partner-gated API - numeric limits are confirmed straight from the published spec rather than
+  inferred. Of 324 documented paths in the production build, 458 operation-level rate-limit
+  entries were found (some operations expose both GET and POST): the overwhelming majority (454)
+  are capped at 200,000 requests per hour, with a small number of high-load schedule/class-listing
+  operations further restricted to 3,000 requests per 5 minutes. The API additionally supports an
+  opt-in `X-Error-Rules` request header that converts internal error statuses into real 4xx HTTP
+  codes (by default every response is HTTP 200 with the error encoded in the JSON body), which
+  matters for building correct retry/backoff logic against throttling responses.
+notes: >-
+  Limits are read directly from the `x-rate-limit` (`limit`/`period` in seconds) extension in
+  production/openapi.yaml as of build version 1.1.20260620071011. Scope (per application, per
+  business, or per IP) is not explicitly labeled on the extension; WellnessLiving Support should
+  be asked to confirm scope for a specific integration. Business self-signup
+  (`POST /Wl/Business/Business.json`) is separately described in its own spec text as
+  "Rate-limited per IP and globally to prevent abuse," without a published numeric figure.
+sources:
+- https://github.com/wellnessliving/openapi
+- https://www.wellnessliving.com/developer-portal/getting-started/introduction/
+- https://www.wellnessliving.com/developer-portal/getting-started/api-usage/
+responseCodes:
+  throttled: 429
+limits:
+- name: Standard Endpoint Limit
+  scope: application
+  metric: requests
+  limit: 200000 per 3600 seconds (200,000/hour)
+  notes: >-
+    The default `x-rate-limit` value found on 454 of 458 rate-limited operations in the official
+    OpenAPI spec, including authentication (JwtToken), payments (Thoth/WlPay), and reporting
+    (Thoth/ReportCore, Thoth/ExplorerSearch) endpoints.
+- name: High-Traffic Schedule Endpoint Limit
+  scope: application
+  metric: requests
+  limit: 3000 per 300 seconds (3,000/5 minutes)
+  notes: >-
+    A tighter limit applied to a small number of heavily-polled endpoints, confirmed on
+    Wl/Schedule/ClassList/ClassList(.json/68) and Wl/Schedule/ClassView/ClassView.json.
+- name: Business Self-Signup Limit
+  scope: ip and global
+  metric: requests
+  limit: not numerically published
+  notes: >-
+    POST /Wl/Business/Business.json is documented as "Rate-limited per IP and globally to
+    prevent abuse" in the official spec description, without a published numeric figure.
+- name: Error-to-HTTP-Code Conversion
+  scope: request
+  metric: n/a
+  limit: opt-in via X-Error-Rules header
+  notes: >-
+    By default every WellnessLiving API response is HTTP 200, with success/failure encoded in
+    the JSON body. Setting the `X-Error-Rules` header (e.g. to `default`) makes matched error
+    statuses surface as real 400/403/404 HTTP codes instead, which is required to build
+    standard HTTP-status-based retry/backoff handling, including for throttling.
+policies:
+- name: Approval Gate
+  description: >-
+    Rate limits apply per registered Application ID, issued only after WellnessLiving's
+    Integrations Team approves an API Access Questionnaire and both parties sign an NDA and API
+    Agreement.
+- name: Backoff Strategy
+  description: >-
+    Clients should implement exponential backoff with jitter on repeated throttling and honor
+    any `Retry-After`-equivalent guidance from WellnessLiving Support for a given application,
+    since the public spec does not itself document a Retry-After response header.
+maintainers:
+- FN: Kin Lane
+  email: kin@apievangelist.com

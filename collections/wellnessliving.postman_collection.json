@@ -1,0 +1,1944 @@
+{
+  "info": {
+    "name": "WellnessLiving API",
+    "description": "Curated, representative subset of WellnessLiving's official production API. Base URL shown is the US production data center (https://us.wellnessliving.com); Australia-hosted businesses use https://au.wellnessliving.com. Auth: sign in via Core/Passport/Login/Enter/Enter, mint a JWT via Core/Passport/Enter/Jwt/JwtToken, then send it as a Bearer token. API access requires WellnessLiving Integrations Team approval, an NDA/API Agreement, and application credentials.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://us.wellnessliving.com",
+      "type": "string"
+    },
+    {
+      "key": "bearerToken",
+      "value": "",
+      "type": "string"
+    },
+    {
+      "key": "k_business",
+      "value": "",
+      "type": "string"
+    },
+    {
+      "key": "uid",
+      "value": "",
+      "type": "string"
+    }
+  ],
+  "item": [
+    {
+      "name": "Clients",
+      "item": [
+        {
+          "name": "Returns information about specified member",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/Wl/Member/Info/Info.json",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "Wl",
+                "Member",
+                "Info",
+                "Info.json"
+              ]
+            },
+            "description": "Supports both single-user and batch modes: when `$a_uid` is provided, returns a keyed list of user data in\n`$a_result_list`; otherwise returns data for the single user identified by `$uid`. When `$is_full` is `true`,\nadditional profile details, group membership, visit history, and lifetime value are included."
+          }
+        },
+        {
+          "name": "Retrieves a list of user's purchase items to show in user profile",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/Wl/Profile/Purchase/PurchaseList.json",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "Wl",
+                "Profile",
+                "Purchase",
+                "PurchaseList.json"
+              ]
+            },
+            "description": "Returns the complete purchase history for the client in the given business, covering all\n item types such as memberships, redemption codes, enrollments, products, appointments, and\n gift cards. Package components are resolved and included inline beside their parent item."
+          }
+        },
+        {
+          "name": "Creates a new client profile with the provided personal details in the specified business",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/x-www-form-urlencoded"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/Wl/Profile/ProfileCreate.json",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "Wl",
+                "Profile",
+                "ProfileCreate.json"
+              ]
+            },
+            "description": "Creates or retrieves a user account by email or phone, saves personal details such as name,\n address, phones, birthday, gender, and vaccination status, registers the user in the\n business, and optionally adds them to the lead report and sets intents.",
+            "body": {
+              "mode": "urlencoded",
+              "urlencoded": [
+                {
+                  "key": "a_intents",
+                  "value": "",
+                  "type": "text"
+                },
+                {
+                  "key": "dt_birthday",
+                  "value": "",
+                  "type": "text"
+                },
+                {
+                  "key": "id_gender",
+                  "value": "",
+                  "type": "text"
+                },
+                {
+                  "key": "id_lead_source",
+                  "value": "",
+                  "type": "text"
+                },
+                {
+                  "key": "id_vaccination_status",
+                  "value": "",
+                  "type": "text"
+                },
+                {
+                  "key": "is_lead",
+                  "value": "",
+                  "type": "text"
+                },
+                {
+                  "key": "k_business",
+                  "value": "",
+                  "type": "text"
+                },
+                {
+                  "key": "k_lead_source",
+                  "value": "",
+                  "type": "text"
+                },
+                {
+                  "key": "k_location_home",
+                  "value": "",
+                  "type": "text"
+                },
+                {
+                  "key": "text_address",
+                  "value": "",
+                  "type": "text"
+                },
+                {
+                  "key": "text_firstname",
+                  "value": "",
+                  "type": "text"
+                },
+                {
+                  "key": "text_lastname",
+                  "value": "",
+                  "type": "text"
+                },
+                {
+                  "key": "text_mail",
+                  "value": "",
+                  "type": "text"
+                },
+                {
+                  "key": "text_phone",
+                  "value": "",
+                  "type": "text"
+                },
+                {
+                  "key": "text_phone_home",
+                  "value": "",
+                  "type": "text"
+                }
+              ]
+            }
+          }
+        },
+        {
+          "name": "Gets relationships list",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/Wl/Family/Relation/FamilyRelation.json",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "Wl",
+                "Family",
+                "Relation",
+                "FamilyRelation.json"
+              ]
+            },
+            "description": "Returns all relationship types enabled for the given business, or all system-defined relationship types if no\nbusiness key is provided."
+          }
+        }
+      ]
+    },
+    {
+      "name": "Classes & Schedules",
+      "item": [
+        {
+          "name": "Returns list of classes and events in the business",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/Wl/Classes/ClassList/List.json",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "Wl",
+                "Classes",
+                "ClassList",
+                "List.json"
+              ]
+            },
+            "description": "Used by import and integration tools to enumerate all classes and events offered by a business.\nIn franchise mode, classes from all franchisee locations are included. Results are sorted by title\nand start date."
+          }
+        },
+        {
+          "name": "Returns class information including schedules, images, and booking settings for the specified business",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/Wl/Classes/ClassView/Element.json",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "Wl",
+                "Classes",
+                "ClassView",
+                "Element.json"
+              ]
+            },
+            "description": "Used by import tools to read the full class catalog for a business. Returns a map of all classes\n(or a single class) with the information needed to replicate class data in an external system:\nschedules, images, booking constraints, and descriptions."
+          }
+        },
+        {
+          "name": "Retrieves a list of classes and class information for the given business and date range",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/Wl/Schedule/ClassList/ClassList.json",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "Wl",
+                "Schedule",
+                "ClassList",
+                "ClassList.json"
+              ]
+            },
+            "description": "Returns upcoming class sessions for a business, with optional filtering by location,\nday of week, time of day, staff member, and virtual or in-person mode. The result includes\nper-session details such as staff, capacity, booking counts, and virtual locations, as well as\na calendar map indicating which dates have at least one scheduled session."
+          }
+        },
+        {
+          "name": "Cancels session for the client.\nThis method is an alias for partners using the API or SDK",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/Wl/Schedule/Cancel.json",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "Wl",
+                "Schedule",
+                "Cancel.json"
+              ]
+            },
+            "description": "Identical in behavior to `get()`; exists as a POST alias for partner\nintegrations that cannot issue GET requests."
+          }
+        }
+      ]
+    },
+    {
+      "name": "Appointments",
+      "item": [
+        {
+          "name": "Gets information about appointment",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/Wl/Appointment/Info/Info.json",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "Wl",
+                "Appointment",
+                "Info",
+                "Info.json"
+              ]
+            },
+            "description": "Returns detailed information about the specified appointment, including service details, staff member,\n date and time in the location's timezone, booking status, client information, and any associated\n assets or add-ons. Access is validated against the current user's permissions."
+          }
+        },
+        {
+          "name": "Retrieves a list with all calendar days in specified period with available and unavailable appointment booking schedule",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/Wl/Appointment/Book/Schedule/Calendar.json",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "Wl",
+                "Appointment",
+                "Book",
+                "Schedule",
+                "Calendar.json"
+              ]
+            },
+            "description": "Returns each day in the requested month marked as available or unavailable for booking the given\n service at the given location. Availability is determined by the business schedule, holidays,\n and staff availability for the selected date range."
+          }
+        },
+        {
+          "name": "Retrieves an information about staff members for the current service",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/Wl/Appointment/Book/Staff/List.json",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "Wl",
+                "Appointment",
+                "Book",
+                "Staff",
+                "List.json"
+              ]
+            },
+            "description": "Returns the list of staff members who can perform the specified service at the given location\n on the specified date and time. Each entry includes the staff member's name, image, gender,\n and availability. An 'any staff' option is included when the service allows random staff assignment."
+          }
+        },
+        {
+          "name": "Completes the appointment booking for one or more providers, optionally creating a new client",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/x-www-form-urlencoded"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/Wl/Appointment/Book/Finish/FinishMultiple.json",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "Wl",
+                "Appointment",
+                "Book",
+                "Finish",
+                "FinishMultiple.json"
+              ]
+            },
+            "description": "Accepts booking details for one or more providers in `a_book_data`,\n processes payment using the selected Purchase Option, creates appointment records, and sends\n booking confirmation notifications. A new client account can be created by supplying user\n details in `a_user` when no UID is provided.",
+            "body": {
+              "mode": "urlencoded",
+              "urlencoded": [
+                {
+                  "key": "a_answer",
+                  "value": "",
+                  "type": "text"
+                },
+                {
+                  "key": "a_book_data",
+                  "value": "",
+                  "type": "text"
+                },
+                {
+                  "key": "a_notification",
+                  "value": "",
+                  "type": "text"
+                },
+                {
+                  "key": "a_paid",
+                  "value": "",
+                  "type": "text"
+                },
+                {
+                  "key": "a_pay_form",
+                  "value": "",
+                  "type": "text"
+                },
+                {
+                  "key": "a_payment_data",
+                  "value": "",
+                  "type": "text"
+                },
+                {
+                  "key": "a_purchase_item",
+                  "value": "",
+                  "type": "text"
+                },
+                {
+                  "key": "a_quiz_response",
+                  "value": "",
+                  "type": "text"
+                },
+                {
+                  "key": "id_mode",
+                  "value": "",
+                  "type": "text"
+                },
+                {
+                  "key": "is_back_to_back",
+                  "value": "",
+                  "type": "text"
+                },
+                {
+                  "key": "is_try",
+                  "value": "",
+                  "type": "text"
+                },
+                {
+                  "key": "s_id",
+                  "value": "",
+                  "type": "text"
+                }
+              ]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Booking Wizard",
+      "item": [
+        {
+          "name": "Returns the ordered list of booking wizard steps for the given session and client",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/Wl/Book/Process/Process.json",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "Wl",
+                "Book",
+                "Process",
+                "Process.json"
+              ]
+            },
+            "description": "Evaluates the session, user profile, payment requirements, asset selection, and subscription state to build\nan ordered list of steps the client must complete to finish the booking. The first step in the list is marked\nas current, and additional flags about event type, wait-list availability, and payment options are returned."
+          }
+        },
+        {
+          "name": "Processes purchases and books sessions on the \"Pay/Billing info\" step of the booking wizard",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/x-www-form-urlencoded"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/Wl/Book/Process/Payment/Payment.json",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "Wl",
+                "Book",
+                "Process",
+                "Payment",
+                "Payment.json"
+              ]
+            },
+            "description": "Accepts the selected purchase items, payment form, optional discount code, and installment template, then\ncollects payment, applies discounts and prizes, and creates the booking records. Returns visit keys, activity\nkeys, and purchase activity key upon success.",
+            "body": {
+              "mode": "urlencoded",
+              "urlencoded": [
+                {
+                  "key": "a_item",
+                  "value": "",
+                  "type": "text"
+                },
+                {
+                  "key": "a_pay_form",
+                  "value": "",
+                  "type": "text"
+                },
+                {
+                  "key": "a_quiz_response",
+                  "value": "",
+                  "type": "text"
+                },
+                {
+                  "key": "a_repeat",
+                  "value": "",
+                  "type": "text"
+                },
+                {
+                  "key": "a_resource",
+                  "value": "",
+                  "type": "text"
+                },
+                {
+                  "key": "a_session",
+                  "value": "",
+                  "type": "text"
+                },
+                {
+                  "key": "a_session_wait_list_unpaid",
+                  "value": "",
+                  "type": "text"
+                },
+                {
+                  "key": "can_book",
+                  "value": "",
+                  "type": "text"
+                },
+                {
+                  "key": "is_book_unpaid",
+                  "value": "",
+                  "type": "text"
+                },
+                {
+                  "key": "is_card_authorize",
+                  "value": "",
+                  "type": "text"
+                },
+                {
+                  "key": "is_force_pay_later",
+                  "value": "",
+                  "type": "text"
+                },
+                {
+                  "key": "k_login_promotion",
+                  "value": "",
+                  "type": "text"
+                },
+                {
+                  "key": "k_pay_installment_template",
+                  "value": "",
+                  "type": "text"
+                },
+                {
+                  "key": "k_session_pass",
+                  "value": "",
+                  "type": "text"
+                },
+                {
+                  "key": "text_discount_code",
+                  "value": "",
+                  "type": "text"
+                }
+              ]
+            }
+          }
+        },
+        {
+          "name": "Returns available purchase options, existing client promotions, session passes, and prizes for the specified session",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/Wl/Book/Process/Purchase/Purchase.json",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "Wl",
+                "Book",
+                "Process",
+                "Purchase",
+                "Purchase.json"
+              ]
+            },
+            "description": "Loads all purchase options that can be used to book the specified class period for the given user, including\nexisting login promotions with remaining session counts, new purchasable options, reward prizes, and login prizes.\nReturns pricing, image, program category, and availability data for each option."
+          }
+        },
+        {
+          "name": "Returns information about whether the given user can cancel the booking and the expected consequences",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/Wl/Book/Cancel/CancelCan.json",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "Wl",
+                "Book",
+                "Cancel",
+                "CancelCan.json"
+              ]
+            },
+            "description": "Accepts a business key and a visit key, validates access, and performs a dry-run cancellation to determine\nwhether the visit can be cancelled online, whether a late-cancel penalty applies, and whether the purchase\noption credit would be refunded."
+          }
+        }
+      ]
+    },
+    {
+      "name": "Memberships & Passes",
+      "item": [
+        {
+          "name": "Gets a list of packages/passes/memberships",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/Wl/Promotion/Index/PromotionIndex.json",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "Wl",
+                "Promotion",
+                "Index",
+                "PromotionIndex.json"
+              ]
+            },
+            "description": "Returns introductory promotion offers available at the specified location, optionally filtered by program type,\nincluding pricing, duration, visit limits, and access information for each item."
+          }
+        },
+        {
+          "name": "Returns promotion list of the specified business",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/Wl/Promotion/PromotionList.json",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "Wl",
+                "Promotion",
+                "PromotionList.json"
+              ]
+            },
+            "description": "Returns all active promotions for the given business, with optional inclusion of Enterprise Location promotions\nwhen the business is a franchisor and `is_franchise` is set to `true`."
+          }
+        },
+        {
+          "name": "Saves promotion data",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/x-www-form-urlencoded"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/Wl/Promotion/Promotion.json",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "Wl",
+                "Promotion",
+                "Promotion.json"
+              ]
+            },
+            "description": "Accepts the full promotion configuration including title, description, access rules, duration, tags, and guest\npass settings, then validates and persists the changes.",
+            "body": {
+              "mode": "urlencoded",
+              "urlencoded": [
+                {
+                  "key": "a_promotion",
+                  "value": "",
+                  "type": "text"
+                },
+                {
+                  "key": "o_guest_settings",
+                  "value": "",
+                  "type": "text"
+                }
+              ]
+            }
+          }
+        },
+        {
+          "name": "Retrieves guest passes for a specific client",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/Wl/Login/Promotion/GuestPass/GuestPassList.json",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "Wl",
+                "Login",
+                "Promotion",
+                "GuestPass",
+                "GuestPassList.json"
+              ]
+            },
+            "description": "Returns all guest passes assigned to the given user, optionally filtered by class and location."
+          }
+        }
+      ]
+    },
+    {
+      "name": "Staff",
+      "item": [
+        {
+          "name": "Returns the list of staff members for the given business",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/Wl/Staff/StaffList/StaffList.json",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "Wl",
+                "Staff",
+                "StaffList",
+                "StaffList.json"
+              ]
+            },
+            "description": "Returns all active (or optionally inactive) staff members for the business, including\ntheir name, role, assigned services, contact details, and location assignments. Can be\nfiltered to only staff who have a specific privilege, and whether access-level checks\nshould be applied when building the result."
+          }
+        },
+        {
+          "name": "Retrieves information about staff",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/Wl/Staff/StaffView/StaffView.json",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "Wl",
+                "Staff",
+                "StaffView",
+                "StaffView.json"
+              ]
+            },
+            "description": "This method can accept or one staff key `k_staff` or staff list\n`a_staff_list` but not both (exception would be thrown)."
+          }
+        },
+        {
+          "name": "Update or create staff",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/x-www-form-urlencoded"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/Wl/Staff/StaffElement.json",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "Wl",
+                "Staff",
+                "StaffElement.json"
+              ]
+            },
+            "description": "Creates a new staff member or updates an existing one in the business. When creating,\na new user account is provisioned if no matching email exists. When updating, the target\nstaff member must already belong to the business. Role, location, contact details,\nemployment dates, and custom profile fields can all be set in a single call.",
+            "body": {
+              "mode": "urlencoded",
+              "urlencoded": [
+                {
+                  "key": "a_location",
+                  "value": "",
+                  "type": "text"
+                },
+                {
+                  "key": "dl_end",
+                  "value": "",
+                  "type": "text"
+                },
+                {
+                  "key": "dl_start",
+                  "value": "",
+                  "type": "text"
+                },
+                {
+                  "key": "id_gender",
+                  "value": "",
+                  "type": "text"
+                },
+                {
+                  "key": "id_role",
+                  "value": "",
+                  "type": "text"
+                },
+                {
+                  "key": "is_employ",
+                  "value": "",
+                  "type": "text"
+                },
+                {
+                  "key": "is_microsite",
+                  "value": "",
+                  "type": "text"
+                },
+                {
+                  "key": "is_password_set_disable",
+                  "value": "",
+                  "type": "text"
+                },
+                {
+                  "key": "is_uid",
+                  "value": "",
+                  "type": "text"
+                },
+                {
+                  "key": "k_business",
+                  "value": "",
+                  "type": "text"
+                },
+                {
+                  "key": "k_business_role",
+                  "value": "",
+                  "type": "text"
+                },
+                {
+                  "key": "k_city",
+                  "value": "",
+                  "type": "text"
+                },
+                {
+                  "key": "k_location",
+                  "value": "",
+                  "type": "text"
+                },
+                {
+                  "key": "text_address",
+                  "value": "",
+                  "type": "text"
+                },
+                {
+                  "key": "text_biography",
+                  "value": "",
+                  "type": "text"
+                }
+              ]
+            }
+          }
+        },
+        {
+          "name": "Returns the list of privileges for the current user in the given business",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/Wl/Staff/Privilege/PrivilegeList.json",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "Wl",
+                "Staff",
+                "Privilege",
+                "PrivilegeList.json"
+              ]
+            },
+            "description": "Returns the complete access profile of the signed-in user for the given business: staff\nprivileges by ID, named admin privileges, and a flag indicating super-admin status. Can\nonly be called for the currently authenticated user, not on behalf of another user."
+          }
+        }
+      ]
+    },
+    {
+      "name": "Locations",
+      "item": [
+        {
+          "name": "Retrieves a list of locations for the given business",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/Wl/Location/List.json",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "Wl",
+                "Location",
+                "List.json"
+              ]
+            },
+            "description": "Accepts a single business key, a JSON-encoded list of business keys, or an array of business keys, and\nreturns location details including coordinates, address, timezone, directories, and logo URLs. For\nfranchisor businesses, automatically expands to include all franchisee locations."
+          }
+        },
+        {
+          "name": "Returns detailed information about the specified location",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/Wl/Location/View/View.json",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "Wl",
+                "Location",
+                "View",
+                "View.json"
+              ]
+            },
+            "description": "Returns the full profile of a location, including address, coordinates, timezone, contact information,\nbusiness hours, logo, slide images, amenities, social media links, and a description."
+          }
+        },
+        {
+          "name": "Creates new location or edits the existing location",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/x-www-form-urlencoded"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/Wl/Location/Location.json",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "Wl",
+                "Location",
+                "Location.json"
+              ]
+            },
+            "description": "When `k_location` is omitted, creates a new location requiring `k_city`,\n `text_address`, and `text_title`.\nWhen `k_location` is provided, updates only the supplied fields of the existing location.\n Returns the key of the created or updated location.",
+            "body": {
+              "mode": "urlencoded",
+              "urlencoded": [
+                {
+                  "key": "k_business",
+                  "value": "",
+                  "type": "text"
+                },
+                {
+                  "key": "k_city",
+                  "value": "",
+                  "type": "text"
+                },
+                {
+                  "key": "k_location",
+                  "value": "",
+                  "type": "text"
+                },
+                {
+                  "key": "k_timezone",
+                  "value": "",
+                  "type": "text"
+                },
+                {
+                  "key": "text_address",
+                  "value": "",
+                  "type": "text"
+                },
+                {
+                  "key": "text_email",
+                  "value": "",
+                  "type": "text"
+                },
+                {
+                  "key": "text_phone",
+                  "value": "",
+                  "type": "text"
+                },
+                {
+                  "key": "text_postal",
+                  "value": "",
+                  "type": "text"
+                },
+                {
+                  "key": "text_title",
+                  "value": "",
+                  "type": "text"
+                }
+              ]
+            }
+          }
+        },
+        {
+          "name": "Saves working hours of the location",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/x-www-form-urlencoded"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/Wl/Location/WorkTime/LocationWorkTime.json",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "Wl",
+                "Location",
+                "WorkTime",
+                "LocationWorkTime.json"
+              ]
+            },
+            "description": "Accepts a list of day-and-time-range entries representing the weekly schedule and replaces all existing\nworking hours for the location. Days not present in the list are treated as non-working days.",
+            "body": {
+              "mode": "urlencoded",
+              "urlencoded": [
+                {
+                  "key": "a_work_time",
+                  "value": "",
+                  "type": "text"
+                },
+                {
+                  "key": "k_business",
+                  "value": "",
+                  "type": "text"
+                },
+                {
+                  "key": "k_location",
+                  "value": "",
+                  "type": "text"
+                }
+              ]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Business",
+      "item": [
+        {
+          "name": "Returns detailed information about the specified business, including locale, franchise status, services, tips, social URLs, and logo",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/Wl/Business/Data.json",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "Wl",
+                "Business",
+                "Data.json"
+              ]
+            },
+            "description": "Used to bootstrap client-facing pages and widgets that need to know the full business profile: which\nservices are enabled, tip and progress log settings, franchise relationship, social media links, and\ndeep links to the schedule, catalog, and sign-up pages. Accepts either a business key or a location\nrequest token for widget contexts where the key is not available."
+          }
+        },
+        {
+          "name": "Gets information about a business config",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/Wl/Business/Config/BusinessConfig.json",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "Wl",
+                "Business",
+                "Config",
+                "BusinessConfig.json"
+              ]
+            },
+            "description": "Used by the booking widget and checkout flow to know the rules governing client interactions: which\nfamily member relations are allowed, whether clients or staff must select a location at checkout,\nwhat cancellation penalties apply, and whether white-label mode is active."
+          }
+        },
+        {
+          "name": "Gets information about subscription",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/Wl/Business/Account/Subscription/SubscriptionInfo.json",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "Wl",
+                "Business",
+                "Account",
+                "Subscription",
+                "SubscriptionInfo.json"
+              ]
+            },
+            "description": "Used in the backend settings UI to read the current state of a business subscription (e.g., Achieve or\nanother product). Returns whether the subscription is active, the current plan tier, and the business\nlocale. Requires backend access to the business."
+          }
+        },
+        {
+          "name": "Creates new business",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/x-www-form-urlencoded"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/Wl/Business/Business.json",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "Wl",
+                "Business",
+                "Business.json"
+              ]
+            },
+            "description": "Used during the self-onboarding flow when a new client signs up for WellnessLiving. Creates the business\nwith its default integrations, optional first location, default service categories, and an optional owner\nstaff account - all in a single transaction. Rate-limited per IP and globally to prevent abuse.",
+            "body": {
+              "mode": "urlencoded",
+              "urlencoded": [
+                {
+                  "key": "a_staff_member",
+                  "value": "",
+                  "type": "text"
+                },
+                {
+                  "key": "id_locale",
+                  "value": "",
+                  "type": "text"
+                },
+                {
+                  "key": "is_location_create",
+                  "value": "",
+                  "type": "text"
+                },
+                {
+                  "key": "is_mail_send",
+                  "value": "",
+                  "type": "text"
+                },
+                {
+                  "key": "k_business_type",
+                  "value": "",
+                  "type": "text"
+                },
+                {
+                  "key": "k_office_city",
+                  "value": "",
+                  "type": "text"
+                },
+                {
+                  "key": "s_clarity_session_id",
+                  "value": "",
+                  "type": "text"
+                },
+                {
+                  "key": "text_mail",
+                  "value": "",
+                  "type": "text"
+                },
+                {
+                  "key": "text_office_address",
+                  "value": "",
+                  "type": "text"
+                },
+                {
+                  "key": "text_office_postal",
+                  "value": "",
+                  "type": "text"
+                },
+                {
+                  "key": "text_phone",
+                  "value": "",
+                  "type": "text"
+                },
+                {
+                  "key": "text_title",
+                  "value": "",
+                  "type": "text"
+                },
+                {
+                  "key": "url_site",
+                  "value": "",
+                  "type": "text"
+                }
+              ]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Sales & Catalog",
+      "item": [
+        {
+          "name": "Retrieves a list of all sale items",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/Wl/Catalog/CatalogList/List.json",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "Wl",
+                "Catalog",
+                "CatalogList",
+                "List.json"
+              ]
+            },
+            "description": "Used to render the full client-facing store catalog for a business. Returns all purchasable items -\npromotions, products, events, and coupons - merged across the business's categories. The separate\nde-duplicated list and category list support both the flat and category-tabbed views."
+          }
+        },
+        {
+          "name": "Gets purchase cost data",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/Wl/Catalog/Cart/Cart.json",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "Wl",
+                "Catalog",
+                "Cart",
+                "Cart.json"
+              ]
+            },
+            "description": "Used in the client-facing checkout flow to show a live price summary before the client submits\npayment. Calculates the full breakdown - subtotal, taxes, applied discounts, reward redemptions,\nand tips - so the client can review the total before confirming."
+          }
+        },
+        {
+          "name": "Allows to pay items for the client",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/x-www-form-urlencoded"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/Wl/Catalog/Payment/Payment.json",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "Wl",
+                "Catalog",
+                "Payment",
+                "Payment.json"
+              ]
+            },
+            "description": "The checkout endpoint that finalizes a purchase in the client-facing store. Charges the client's\nselected payment method, applies any discounts and tips, and creates the purchase record. Returns\nthe resulting purchase key so the frontend can redirect to the confirmation page.",
+            "body": {
+              "mode": "urlencoded",
+              "urlencoded": [
+                {
+                  "key": "a_item",
+                  "value": "",
+                  "type": "text"
+                },
+                {
+                  "key": "a_pay_form",
+                  "value": "",
+                  "type": "text"
+                },
+                {
+                  "key": "a_quiz_response",
+                  "value": "",
+                  "type": "text"
+                },
+                {
+                  "key": "f_discount_percent",
+                  "value": "",
+                  "type": "text"
+                },
+                {
+                  "key": "k_pay_installment_template",
+                  "value": "",
+                  "type": "text"
+                },
+                {
+                  "key": "k_visit",
+                  "value": "",
+                  "type": "text"
+                },
+                {
+                  "key": "m_discount_flat",
+                  "value": "",
+                  "type": "text"
+                },
+                {
+                  "key": "m_surcharge",
+                  "value": "",
+                  "type": "text"
+                },
+                {
+                  "key": "m_tip",
+                  "value": "",
+                  "type": "text"
+                },
+                {
+                  "key": "text_discount_code",
+                  "value": "",
+                  "type": "text"
+                },
+                {
+                  "key": "text_receipt_note",
+                  "value": "",
+                  "type": "text"
+                }
+              ]
+            }
+          }
+        },
+        {
+          "name": "Gets purchase information",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/Wl/Purchase/Receipt/PurchaseReceipt.json",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "Wl",
+                "Purchase",
+                "Receipt",
+                "PurchaseReceipt.json"
+              ]
+            },
+            "description": "Returns full receipt data for the specified purchase, including business details, customer information,\nitemized purchase items, payment methods, pricing summary, and print URLs."
+          }
+        }
+      ]
+    },
+    {
+      "name": "Payments",
+      "item": [
+        {
+          "name": "Retrieves information about accounts of given user in given business",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/Thoth/WlPay/Account/Account.json",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "Thoth",
+                "WlPay",
+                "Account",
+                "Account.json"
+              ]
+            },
+            "description": "Retrieves information about accounts of given user in given business."
+          }
+        },
+        {
+          "name": "Retrieves information about user's bank cards",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/Thoth/WlPay/Bank/Card/List.json",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "Thoth",
+                "WlPay",
+                "Bank",
+                "Card",
+                "List.json"
+              ]
+            },
+            "description": "Retrieves information about user's bank cards."
+          }
+        },
+        {
+          "name": "Allows the user account to be filled with a specified payment, or to perform the reset change manually",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/x-www-form-urlencoded"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/Thoth/WlPay/Account/Charge/Charge.json",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "Thoth",
+                "WlPay",
+                "Account",
+                "Charge",
+                "Charge.json"
+              ]
+            },
+            "description": "Allows the user account to be filled with a specified payment, or to perform the reset change manually.",
+            "body": {
+              "mode": "urlencoded",
+              "urlencoded": [
+                {
+                  "key": "a_pay_form",
+                  "value": "",
+                  "type": "text"
+                },
+                {
+                  "key": "id_mode",
+                  "value": "",
+                  "type": "text"
+                },
+                {
+                  "key": "m_amount",
+                  "value": "",
+                  "type": "text"
+                },
+                {
+                  "key": "s_comment",
+                  "value": "",
+                  "type": "text"
+                }
+              ]
+            }
+          }
+        },
+        {
+          "name": "Gets the daily transaction data",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/Thoth/WlPay/Transaction/Report/TransactionAllPayment.json",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "Thoth",
+                "WlPay",
+                "Transaction",
+                "Report",
+                "TransactionAllPayment.json"
+              ]
+            },
+            "description": "Gets the daily transaction data."
+          }
+        }
+      ]
+    },
+    {
+      "name": "Authentication",
+      "item": [
+        {
+          "name": "Signs the user in using their login and hashed password",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/x-www-form-urlencoded"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/Core/Passport/Login/Enter/Enter.json",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "Core",
+                "Passport",
+                "Login",
+                "Enter",
+                "Enter.json"
+              ]
+            },
+            "description": "Accepts the user login, a password hash derived using the notepad obtained from [NotepadApi](/Core/Passport/Login/Enter/Notepad.json),\nand an optional remember preference. Validates credentials, enforces CAPTCHA when too many failed\nattempts have occurred, starts a session for the user, and returns a redirect URL if applicable.",
+            "body": {
+              "mode": "urlencoded",
+              "urlencoded": [
+                {
+                  "key": "json_data",
+                  "value": "",
+                  "type": "text"
+                },
+                {
+                  "key": "s_captcha",
+                  "value": "",
+                  "type": "text"
+                },
+                {
+                  "key": "s_login",
+                  "value": "",
+                  "type": "text"
+                },
+                {
+                  "key": "s_notepad",
+                  "value": "",
+                  "type": "text"
+                },
+                {
+                  "key": "s_password",
+                  "value": "",
+                  "type": "text"
+                },
+                {
+                  "key": "s_remember",
+                  "value": "",
+                  "type": "text"
+                },
+                {
+                  "key": "url_return",
+                  "value": "",
+                  "type": "text"
+                }
+              ]
+            }
+          }
+        },
+        {
+          "name": "Returns a jwt token that can be used to log user",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/Core/Passport/Enter/Jwt/JwtToken.json",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "Core",
+                "Passport",
+                "Enter",
+                "Jwt",
+                "JwtToken.json"
+              ]
+            },
+            "description": "Requires the user to be signed in. Generates a signed JWT token tied to the current authorization\nheader and user ID that can be passed to other services to authenticate the user without sharing session cookies."
+          }
+        },
+        {
+          "name": "Signs user out",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/Core/Passport/Login/SignOut/SignOut.json",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "Core",
+                "Passport",
+                "Login",
+                "SignOut",
+                "SignOut.json"
+              ]
+            },
+            "description": "Requires the user to be signed in, fires a before-logout event allowing listeners to intercept or\nhandle the logout, then clears the current session. Throws an error if the user is authenticated\nvia SAML SSO, as API-based logout is not supported in that case."
+          }
+        },
+        {
+          "name": "Retrieves information about user",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/Wl/Login/Login.json",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "Wl",
+                "Login",
+                "Login.json"
+              ]
+            },
+            "description": "Returns name, gender, photo URL, email, and staff details for the specified user within the given business.\nPublic staff information is returned even without profile access; full client details require access to the\nuser's profile."
+          }
+        }
+      ]
+    },
+    {
+      "name": "Rewards & Loyalty",
+      "item": [
+        {
+          "name": "Retrieves information about current score in wellnessliving points",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/Wl/Reward/Score/Current/Current.json",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "Wl",
+                "Reward",
+                "Score",
+                "Current",
+                "Current.json"
+              ]
+            },
+            "description": "Returns the user's current reward point balance, their rank in the first available leaderboard, and the\nleaderboard title for the specified business."
+          }
+        },
+        {
+          "name": "Retrieves a list of redeemable prizes",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/Wl/Reward/Prize/Prize.json",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "Wl",
+                "Reward",
+                "Prize",
+                "Prize.json"
+              ]
+            },
+            "description": "Returns all active redeemable prizes for the specified business, ordered by point cost, including the prize key\nand required score for each item."
+          }
+        },
+        {
+          "name": "Retrieves a list of available reward actions",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/Wl/Reward/Action/Action.json",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "Wl",
+                "Reward",
+                "Action",
+                "Action.json"
+              ]
+            },
+            "description": "Returns all reward actions visible to the specified user in the given business, optionally filtered by category,\nincluding the score value and request status for each action."
+          }
+        },
+        {
+          "name": "Retrieves a list of reward board items to show",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/Wl/Reward/Board/List.json",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "Wl",
+                "Reward",
+                "Board",
+                "List.json"
+              ]
+            },
+            "description": "Returns an ordered list of user IDs ranked by points for the specified reward board, up to the configured\nmaximum number of entries."
+          }
+        }
+      ]
+    },
+    {
+      "name": "Reviews",
+      "item": [
+        {
+          "name": "Submits user's review",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/x-www-form-urlencoded"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/Wl/Review/Review.json",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "Wl",
+                "Review",
+                "Review.json"
+              ]
+            },
+            "description": "Validates the captcha, saves the review rating and text for the specified location, and returns reward score\ninformation if the business awards points for leaving a review.",
+            "body": {
+              "mode": "urlencoded",
+              "urlencoded": [
+                {
+                  "key": "i_rate",
+                  "value": "",
+                  "type": "text"
+                },
+                {
+                  "key": "k_location",
+                  "value": "",
+                  "type": "text"
+                },
+                {
+                  "key": "k_visit",
+                  "value": "",
+                  "type": "text"
+                },
+                {
+                  "key": "s_text",
+                  "value": "",
+                  "type": "text"
+                }
+              ]
+            }
+          }
+        },
+        {
+          "name": "Retrieves a list of reviews",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/Wl/Review/ReviewList/ReviewList.json",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "Wl",
+                "Review",
+                "ReviewList",
+                "ReviewList.json"
+              ]
+            },
+            "description": "Returns reviews for the specified location, or all reviews for the business if no location is given, with support\nfor filtering by user, ordering, and pagination."
+          }
+        },
+        {
+          "name": "Saves the reply text and optional status update for the given review",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/x-www-form-urlencoded"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/Wl/Review/ReviewReply.json",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "Wl",
+                "Review",
+                "ReviewReply.json"
+              ]
+            },
+            "description": "Validates edit access for the current user, persists the reply text and optional review status change,\nand records the replying staff or admin user.",
+            "body": {
+              "mode": "urlencoded",
+              "urlencoded": [
+                {
+                  "key": "id_review_status",
+                  "value": "",
+                  "type": "text"
+                },
+                {
+                  "key": "k_business",
+                  "value": "",
+                  "type": "text"
+                },
+                {
+                  "key": "k_review",
+                  "value": "",
+                  "type": "text"
+                },
+                {
+                  "key": "text_reply",
+                  "value": "",
+                  "type": "text"
+                }
+              ]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Reports",
+      "item": [
+        {
+          "name": "Gets data of required report",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/Wl/Report/Data.json",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "Wl",
+                "Report",
+                "Data.json"
+              ]
+            },
+            "description": "Loads the specified report for the given business, applying filter, sort, and pagination parameters,\nand returns the report rows and totals."
+          }
+        },
+        {
+          "name": "Gets data of required report collection",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/Wl/Report/PageData.json",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "Wl",
+                "Report",
+                "PageData.json"
+              ]
+            },
+            "description": "Loads all reports belonging to the specified report page collection for the given business, applying shared\nfilter, sort, group, and view parameters, and returns the data for each report keyed by report ID."
+          }
+        },
+        {
+          "name": "Checks access to given report",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/Wl/Report/Access.json",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "Wl",
+                "Report",
+                "Access.json"
+              ]
+            },
+            "description": "Accepts either `id_report` (first-generation reports) or `cid_report` (second-generation reports), but not both,\nand returns `has_access` indicating whether the current user may view the report in the given business."
+          }
+        }
+      ]
+    },
+    {
+      "name": "Real-Time Notifications",
+      "item": [
+        {
+          "name": "Checks whether a listener can subscribe to specified channel.\nSubscribes in a case of positive result",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/x-www-form-urlencoded"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/Core/WebSocket/Subscribe.json",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "Core",
+                "WebSocket",
+                "Subscribe.json"
+              ]
+            },
+            "description": "Called by the WebSocket client immediately after a connection is established, to register interest in\na specific channel (identified by CID and key fields). If the current user is not permitted to receive\nevents on that channel, the subscription is rejected. On success, any messages already queued for the\nchannel are returned so the client does not miss events that arrived before the subscription was set up.",
+            "body": {
+              "mode": "urlencoded",
+              "urlencoded": [
+                {
+                  "key": "a_key",
+                  "value": "",
+                  "type": "text"
+                },
+                {
+                  "key": "cid_channel",
+                  "value": "",
+                  "type": "text"
+                },
+                {
+                  "key": "s_password",
+                  "value": "",
+                  "type": "text"
+                },
+                {
+                  "key": "s_token",
+                  "value": "",
+                  "type": "text"
+                }
+              ]
+            }
+          }
+        }
+      ]
+    }
+  ]
+}
