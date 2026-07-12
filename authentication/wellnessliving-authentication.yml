@@ -1,0 +1,18 @@
+generated: '2026-07-11'
+method: derived
+source: openapi/wellnessliving-openapi.yml
+summary:
+  types:
+  - http
+schemes:
+- name: BearerAuth
+  type: http
+  scheme: bearer
+  bearerFormat: JWT
+  description: 'The officially published OpenAPI declares a JWT Bearer scheme: sign in via `POST
+    /Core/Passport/Login/Enter/Enter.json`, then mint a token with `GET /Core/Passport/Enter/Jwt/JwtToken.json`
+    and send it as `Authorization: Bearer <token>`. The underlying PHP/JS SDKs additionally
+    support the legacy scheme: a registered Application ID + secret code sign a per-request
+    HMAC (SHA3-based) placed in the `Au'
+  sources:
+  - openapi/wellnessliving-openapi.yml

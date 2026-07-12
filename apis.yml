@@ -348,6 +348,10 @@ apis:
     for live updates (report progress, visit status, messenger chat) - a client authorizes onto a channel
     with this REST call immediately after opening the socket.
 common:
+- type: DomainSecurity
+  url: security/wellnessliving-domain-security.yml
+- type: Authentication
+  url: authentication/wellnessliving-authentication.yml
 - type: GitHubOrganization
   url: https://github.com/wellnessliving
 - type: LinkedIn
@@ -362,6 +366,8 @@ common:
   url: rate-limits/wellnessliving-rate-limits.yml
 - type: FinOps
   url: finops/wellnessliving-finops.yml
+- url: https://www.wellnessliving.com/blog/feed/
+  type: Blog
 maintainers:
 - FN: Kin Lane
   email: kin@apievangelist.com
