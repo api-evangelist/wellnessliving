@@ -1,0 +1,668 @@
+generated: '2026-07-15'
+method: generated
+source: openapi/wellnessliving-openapi.yml
+description: Recommended x-agentic-access execution contracts, classified heuristically from
+  the OpenAPI. A governance starting point for exposing this API to AI agents — review and bind
+  audience per deployment. See research/curity/agentic-governance/.
+summary:
+  operations: 55
+  by_action_class:
+    connected: 39
+    acting: 16
+  by_consequence:
+    read: 39
+    write: 13
+    physical: 2
+    safety-critical: 1
+  human_in_the_loop_required: 1
+operations:
+- path: /Wl/Member/Info/Info.json
+  method: get
+  operationId: get_Wl_Member_Info_Info
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /Wl/Profile/Purchase/PurchaseList.json
+  method: get
+  operationId: get_Wl_Profile_Purchase_PurchaseList
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /Wl/Profile/ProfileCreate.json
+  method: post
+  operationId: post_Wl_Profile_ProfileCreate
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /Wl/Family/Relation/FamilyRelation.json
+  method: get
+  operationId: get_Wl_Family_Relation_FamilyRelation
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /Wl/Classes/ClassList/List.json
+  method: get
+  operationId: get_Wl_Classes_ClassList_List
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /Wl/Classes/ClassView/Element.json
+  method: get
+  operationId: get_Wl_Classes_ClassView_Element
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /Wl/Schedule/ClassList/ClassList.json
+  method: get
+  operationId: get_Wl_Schedule_ClassList_ClassList
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /Wl/Schedule/Cancel.json
+  method: post
+  operationId: post_Wl_Schedule_Cancel
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /Wl/Appointment/Info/Info.json
+  method: get
+  operationId: get_Wl_Appointment_Info_Info
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /Wl/Appointment/Book/Schedule/Calendar.json
+  method: get
+  operationId: get_Wl_Appointment_Book_Schedule_Calendar
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /Wl/Appointment/Book/Staff/List.json
+  method: get
+  operationId: get_Wl_Appointment_Book_Staff_List
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /Wl/Appointment/Book/Finish/FinishMultiple.json
+  method: post
+  operationId: post_Wl_Appointment_Book_Finish_FinishMultiple
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /Wl/Book/Process/Process.json
+  method: get
+  operationId: get_Wl_Book_Process_Process
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /Wl/Book/Process/Payment/Payment.json
+  method: post
+  operationId: post_Wl_Book_Process_Payment_Payment
+  x-agentic-access:
+    action-class: acting
+    consequence: physical
+    subject: required
+    audience: null
+    token:
+      max-ttl: 300
+      exchange: true
+      purpose-required: true
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /Wl/Book/Process/Purchase/Purchase.json
+  method: get
+  operationId: get_Wl_Book_Process_Purchase_Purchase
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /Wl/Book/Cancel/CancelCan.json
+  method: get
+  operationId: get_Wl_Book_Cancel_CancelCan
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /Wl/Promotion/Index/PromotionIndex.json
+  method: get
+  operationId: get_Wl_Promotion_Index_PromotionIndex
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /Wl/Promotion/PromotionList.json
+  method: get
+  operationId: get_Wl_Promotion_PromotionList
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /Wl/Promotion/Promotion.json
+  method: post
+  operationId: post_Wl_Promotion_Promotion
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /Wl/Login/Promotion/GuestPass/GuestPassList.json
+  method: get
+  operationId: get_Wl_Login_Promotion_GuestPass_GuestPassList
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /Wl/Staff/StaffList/StaffList.json
+  method: get
+  operationId: get_Wl_Staff_StaffList_StaffList
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /Wl/Staff/StaffView/StaffView.json
+  method: get
+  operationId: get_Wl_Staff_StaffView_StaffView
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /Wl/Staff/StaffElement.json
+  method: post
+  operationId: post_Wl_Staff_StaffElement
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /Wl/Staff/Privilege/PrivilegeList.json
+  method: get
+  operationId: get_Wl_Staff_Privilege_PrivilegeList
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /Wl/Location/List.json
+  method: get
+  operationId: get_Wl_Location_List
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /Wl/Location/View/View.json
+  method: get
+  operationId: get_Wl_Location_View_View
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /Wl/Location/Location.json
+  method: post
+  operationId: post_Wl_Location_Location
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /Wl/Location/WorkTime/LocationWorkTime.json
+  method: post
+  operationId: post_Wl_Location_WorkTime_LocationWorkTime
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /Wl/Business/Data.json
+  method: get
+  operationId: get_Wl_Business_Data
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /Wl/Business/Config/BusinessConfig.json
+  method: get
+  operationId: get_Wl_Business_Config_BusinessConfig
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /Wl/Business/Account/Subscription/SubscriptionInfo.json
+  method: get
+  operationId: get_Wl_Business_Account_Subscription_SubscriptionInfo
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /Wl/Business/Business.json
+  method: post
+  operationId: post_Wl_Business_Business
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /Wl/Catalog/CatalogList/List.json
+  method: get
+  operationId: get_Wl_Catalog_CatalogList_List
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /Wl/Catalog/Cart/Cart.json
+  method: get
+  operationId: get_Wl_Catalog_Cart_Cart
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /Wl/Catalog/Payment/Payment.json
+  method: post
+  operationId: post_Wl_Catalog_Payment_Payment
+  x-agentic-access:
+    action-class: acting
+    consequence: physical
+    subject: required
+    audience: null
+    token:
+      max-ttl: 300
+      exchange: true
+      purpose-required: true
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /Wl/Purchase/Receipt/PurchaseReceipt.json
+  method: get
+  operationId: get_Wl_Purchase_Receipt_PurchaseReceipt
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /Thoth/WlPay/Account/Account.json
+  method: get
+  operationId: get_Thoth_WlPay_Account_Account
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /Thoth/WlPay/Bank/Card/List.json
+  method: get
+  operationId: get_Thoth_WlPay_Bank_Card_List
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /Thoth/WlPay/Account/Charge/Charge.json
+  method: post
+  operationId: post_Thoth_WlPay_Account_Charge_Charge
+  x-agentic-access:
+    action-class: acting
+    consequence: safety-critical
+    subject: required
+    audience: null
+    token:
+      max-ttl: 120
+      exchange: true
+      purpose-required: true
+      proof-of-possession: true
+    escalation:
+      human-in-the-loop: required
+    audit: required
+- path: /Thoth/WlPay/Transaction/Report/TransactionAllPayment.json
+  method: get
+  operationId: get_Thoth_WlPay_Transaction_Report_TransactionAllPayment
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /Core/Passport/Login/Enter/Enter.json
+  method: post
+  operationId: post_Core_Passport_Login_Enter_Enter
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /Core/Passport/Enter/Jwt/JwtToken.json
+  method: get
+  operationId: get_Core_Passport_Enter_Jwt_JwtToken
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /Core/Passport/Login/SignOut/SignOut.json
+  method: post
+  operationId: post_Core_Passport_Login_SignOut_SignOut
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /Wl/Login/Login.json
+  method: get
+  operationId: get_Wl_Login_Login
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /Wl/Reward/Score/Current/Current.json
+  method: get
+  operationId: get_Wl_Reward_Score_Current_Current
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /Wl/Reward/Prize/Prize.json
+  method: get
+  operationId: get_Wl_Reward_Prize_Prize
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /Wl/Reward/Action/Action.json
+  method: get
+  operationId: get_Wl_Reward_Action_Action
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /Wl/Reward/Board/List.json
+  method: get
+  operationId: get_Wl_Reward_Board_List
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /Wl/Review/Review.json
+  method: post
+  operationId: post_Wl_Review_Review
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /Wl/Review/ReviewList/ReviewList.json
+  method: get
+  operationId: get_Wl_Review_ReviewList_ReviewList
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /Wl/Review/ReviewReply.json
+  method: post
+  operationId: post_Wl_Review_ReviewReply
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /Wl/Report/Data.json
+  method: get
+  operationId: get_Wl_Report_Data
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /Wl/Report/PageData.json
+  method: get
+  operationId: get_Wl_Report_PageData
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /Wl/Report/Access.json
+  method: get
+  operationId: get_Wl_Report_Access
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /Core/WebSocket/Subscribe.json
+  method: post
+  operationId: post_Core_WebSocket_Subscribe
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required

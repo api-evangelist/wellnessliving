@@ -348,6 +348,8 @@ apis:
     for live updates (report progress, visit status, messenger chat) - a client authorizes onto a channel
     with this REST call immediately after opening the socket.
 common:
+- type: AgenticAccess
+  url: agentic-access/wellnessliving-agentic-access.yml
 - type: DomainSecurity
   url: security/wellnessliving-domain-security.yml
 - type: Authentication
