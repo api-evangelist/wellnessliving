@@ -1,0 +1,416 @@
+openapi: 3.0.3
+info:
+  title: WellnessLiving Appointments Business API
+  description: Curated, representative subset of WellnessLiving's official production API (RESTful, JSON-over-HTTPS). WellnessLiving is business-management software for fitness studios, gyms, spas, and salons; this API is the same one its own web and mobile clients (Achieve, Elevate) call, and is published for approved partners via an official OpenAPI document at github.com/wellnessliving/openapi (324 paths across 45+ resource areas as of the 2026-06-20 build). Endpoints below are grounded in that official spec and in the public github.com/wellnessliving/wl-sdk (PHP) and wl-sdk-js SDKs; this file selects roughly four representative endpoints per logical API area rather than reproducing the full catalog. Every WellnessLiving API resource is a `.json`-suffixed endpoint whose path is derived deterministically from the SDK model class's namespace (e.g. the PHP class `WellnessLiving\Wl\Staff\StaffElementModel` serves `/Wl/Staff/StaffElement.json`). Legacy numbered variants of several endpoints exist for backward compatibility (e.g. `Finish47`, `ServiceList52`, `Purchase72`) and are omitted here in favor of their current unsuffixed counterpart.
+  version: 1.1.20260620071011
+  contact:
+    name: WellnessLiving Support
+    email: support@wellnessliving.com
+    url: https://www.wellnessliving.com/support
+  license:
+    name: Proprietary
+    url: https://www.wellnessliving.com/knowledge-sharing/terms-of-use/
+  termsOfService: https://www.wellnessliving.com/knowledge-sharing/terms-of-use/
+servers:
+- url: https://us.wellnessliving.com
+  description: Production - United States data center
+- url: https://au.wellnessliving.com
+  description: Production - Australia data center
+- url: https://staging.wellnessliving.com
+  description: Staging (pre-release QA branch)
+- url: https://demo.wellnessliving.com
+  description: Demo/trunk (active development branch)
+security:
+- BearerAuth: []
+tags:
+- name: Business
+paths:
+  /Wl/Business/Data.json:
+    get:
+      operationId: get_Wl_Business_Data
+      summary: Returns detailed information about the specified business, including locale, franchise status, services, tips, social URLs, and logo.
+      description: 'Used to bootstrap client-facing pages and widgets that need to know the full business profile: which
+
+        services are enabled, tip and progress log settings, franchise relationship, social media links, and
+
+        deep links to the schedule, catalog, and sign-up pages. Accepts either a business key or a location
+
+        request token for widget contexts where the key is not available.'
+      tags:
+      - Business
+      parameters:
+      - $ref: '#/components/parameters/XErrorRules'
+      - name: i_logo_height
+        in: query
+        required: true
+        schema:
+          type: integer
+        description: The maximum height of the business image (in pixels).
+      - name: i_logo_width
+        in: query
+        required: true
+        schema:
+          type: integer
+        description: The maximum width of the business image (in pixels).
+      - name: k_business
+        in: query
+        required: true
+        schema:
+          type: string
+        description: The business key.
+      - name: text_token
+        in: query
+        required: true
+        schema:
+          type: string
+        description: 'The authorization token.
+
+          This may be used instead of `k_business` to
+
+          identify a business.'
+      responses:
+        '200':
+          description: Successful response.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  a_service_list:
+                    description: The `a_service_list` field.
+                    nullable: true
+                  a_tip_predefine:
+                    description: The `a_tip_predefine` field.
+                    nullable: true
+                  id_category:
+                    description: The `id_category` field.
+                    nullable: true
+                  id_claim_status:
+                    description: The `id_claim_status` field.
+                    nullable: true
+                  id_currency:
+                    description: The `id_currency` field.
+                    nullable: true
+                  id_locale:
+                    description: The `id_locale` field.
+                    nullable: true
+                  id_rank_type:
+                    description: The `id_rank_type` field.
+                    nullable: true
+                  id_region:
+                    description: The `id_region` field.
+                    nullable: true
+                  is_apply_surcharge:
+                    description: The `is_apply_surcharge` field.
+                    nullable: true
+                  is_franchise:
+                    description: The `is_franchise` field.
+                    nullable: true
+                  is_location_multiple:
+                    description: The `is_location_multiple` field.
+                    nullable: true
+                  is_profile_timezone:
+                    description: The `is_profile_timezone` field.
+                    nullable: true
+                  is_progress_client:
+                    description: The `is_progress_client` field.
+                    nullable: true
+                  is_progress_verify:
+                    description: The `is_progress_verify` field.
+                    nullable: true
+                  is_quiz_available:
+                    description: The `is_quiz_available` field.
+                    nullable: true
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '422':
+          $ref: '#/components/responses/ValidationError'
+        '500':
+          $ref: '#/components/responses/ServerError'
+  /Wl/Business/Config/BusinessConfig.json:
+    get:
+      operationId: get_Wl_Business_Config_BusinessConfig
+      summary: Gets information about a business config.
+      description: 'Used by the booking widget and checkout flow to know the rules governing client interactions: which
+
+        family member relations are allowed, whether clients or staff must select a location at checkout,
+
+        what cancellation penalties apply, and whether white-label mode is active.'
+      tags:
+      - Business
+      parameters:
+      - $ref: '#/components/parameters/XErrorRules'
+      - name: k_business
+        in: query
+        required: true
+        schema:
+          type: string
+        description: The business key.
+      responses:
+        '200':
+          description: Successful response.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  a_business_policy:
+                    description: The `a_business_policy` field.
+                    nullable: true
+                  a_penalty:
+                    description: The `a_penalty` field.
+                    nullable: true
+                  is_location_client_select:
+                    description: The `is_location_client_select` field.
+                    nullable: true
+                  is_location_select:
+                    description: The `is_location_select` field.
+                    nullable: true
+                  is_white_label:
+                    description: The `is_white_label` field.
+                    nullable: true
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '422':
+          $ref: '#/components/responses/ValidationError'
+        '500':
+          $ref: '#/components/responses/ServerError'
+  /Wl/Business/Account/Subscription/SubscriptionInfo.json:
+    get:
+      operationId: get_Wl_Business_Account_Subscription_SubscriptionInfo
+      summary: Gets information about subscription.
+      description: 'Used in the backend settings UI to read the current state of a business subscription (e.g., Achieve or
+
+        another product). Returns whether the subscription is active, the current plan tier, and the business
+
+        locale. Requires backend access to the business.'
+      tags:
+      - Business
+      parameters:
+      - $ref: '#/components/parameters/XErrorRules'
+      - name: cid_subscription
+        in: query
+        required: true
+        schema:
+          type: string
+          description: Enumerated/coded value (see WellnessLiving *Sid constant classes).
+        description: CID of the subscription information of which is requested.
+      - name: k_business
+        in: query
+        required: true
+        schema:
+          type: string
+        description: Business key for which subscription information is requested.
+      responses:
+        '200':
+          description: Successful response.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id_locale:
+                    description: The `id_locale` field.
+                    nullable: true
+                  id_plan:
+                    description: The `id_plan` field.
+                    nullable: true
+                  is_active:
+                    description: The `is_active` field.
+                    nullable: true
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '422':
+          $ref: '#/components/responses/ValidationError'
+        '500':
+          $ref: '#/components/responses/ServerError'
+  /Wl/Business/Business.json:
+    post:
+      operationId: post_Wl_Business_Business
+      summary: Creates new business.
+      description: 'Used during the self-onboarding flow when a new client signs up for WellnessLiving. Creates the business
+
+        with its default integrations, optional first location, default service categories, and an optional owner
+
+        staff account - all in a single transaction. Rate-limited per IP and globally to prevent abuse.'
+      tags:
+      - Business
+      parameters:
+      - $ref: '#/components/parameters/XErrorRules'
+      requestBody:
+        required: true
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+              properties:
+                a_staff_member:
+                  description: The `a_staff_member` field. See WellnessLiving developer portal for full field semantics.
+                  type: string
+                id_locale:
+                  description: The `id_locale` field. See WellnessLiving developer portal for full field semantics.
+                  type: string
+                is_location_create:
+                  description: The `is_location_create` field. See WellnessLiving developer portal for full field semantics.
+                  type: string
+                is_mail_send:
+                  description: The `is_mail_send` field. See WellnessLiving developer portal for full field semantics.
+                  type: string
+                k_business_type:
+                  description: The `k_business_type` field. See WellnessLiving developer portal for full field semantics.
+                  type: string
+                k_office_city:
+                  description: The `k_office_city` field. See WellnessLiving developer portal for full field semantics.
+                  type: string
+                s_clarity_session_id:
+                  description: The `s_clarity_session_id` field. See WellnessLiving developer portal for full field semantics.
+                  type: string
+                text_mail:
+                  description: The `text_mail` field. See WellnessLiving developer portal for full field semantics.
+                  type: string
+                text_office_address:
+                  description: The `text_office_address` field. See WellnessLiving developer portal for full field semantics.
+                  type: string
+                text_office_postal:
+                  description: The `text_office_postal` field. See WellnessLiving developer portal for full field semantics.
+                  type: string
+                text_phone:
+                  description: The `text_phone` field. See WellnessLiving developer portal for full field semantics.
+                  type: string
+                text_title:
+                  description: The `text_title` field. See WellnessLiving developer portal for full field semantics.
+                  type: string
+                url_site:
+                  description: The `url_site` field. See WellnessLiving developer portal for full field semantics.
+                  type: string
+              required:
+              - a_staff_member
+              - id_locale
+              - is_location_create
+              - is_mail_send
+              - k_business_type
+              - k_office_city
+              - s_clarity_session_id
+              - text_mail
+              - text_office_address
+              - text_office_postal
+              - text_phone
+              - text_title
+              - url_site
+      responses:
+        '200':
+          description: Successful response.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  k_business:
+                    description: The `k_business` field.
+                    nullable: true
+                  k_location:
+                    description: The `k_location` field.
+                    nullable: true
+                  uid:
+                    description: The `uid` field.
+                    nullable: true
+                  url_password_change:
+                    description: The `url_password_change` field.
+                    nullable: true
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '422':
+          $ref: '#/components/responses/ValidationError'
+        '500':
+          $ref: '#/components/responses/ServerError'
+components:
+  parameters:
+    XErrorRules:
+      name: X-Error-Rules
+      in: header
+      required: false
+      schema:
+        type: string
+      description: Opt in to mapping internal API error statuses to real 4xx HTTP codes. By default the API always answers HTTP 200 even on error, with the failure encoded in the JSON body; setting this header (e.g. to `default`) makes the gateway translate matched error statuses to 400/403/404 responses instead.
+  responses:
+    ServerError:
+      description: Unexpected server error.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    ValidationError:
+      description: The request payload failed field-level validation.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    Unauthorized:
+      description: Missing, expired, or invalid Bearer token / session.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    BadRequest:
+      description: 'Client-side error: invalid input, failed validation, throttling, or other request error (only returned as an HTTP status when `X-Error-Rules` opts in; otherwise encoded in a 200 body).'
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    NotFound:
+      description: The requested resource does not exist.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    Forbidden:
+      description: Authenticated but not permitted to access this business, location, or resource.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+  schemas:
+    ErrorResponse:
+      type: object
+      description: Standard WellnessLiving API error response shape.
+      properties:
+        status:
+          type: string
+          description: Machine-readable status/error code string (e.g. `access-denied`, `not-found`).
+        text_message:
+          type: string
+          description: Human-readable error message.
+        a_field:
+          type: object
+          additionalProperties: true
+          description: Per-field validation errors, when the failure is a 422-style validation error.
+  securitySchemes:
+    BearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+      description: 'The officially published OpenAPI declares a JWT Bearer scheme: sign in via `POST /Core/Passport/Login/Enter/Enter.json`, then mint a token with `GET /Core/Passport/Enter/Jwt/JwtToken.json` and send it as `Authorization: Bearer <token>`. The underlying PHP/JS SDKs additionally support the legacy scheme: a registered Application ID + secret code sign a per-request HMAC (SHA3-based) placed in the `Authorization:` header alongside session cookies established by the `Notepad`/`Enter` model pair. Both schemes require WellnessLiving''s Integrations Team to first approve API access, sign an NDA and API Agreement, and issue application credentials.'

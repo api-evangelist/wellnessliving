@@ -1,0 +1,381 @@
+openapi: 3.0.3
+info:
+  title: WellnessLiving Appointments Locations API
+  description: Curated, representative subset of WellnessLiving's official production API (RESTful, JSON-over-HTTPS). WellnessLiving is business-management software for fitness studios, gyms, spas, and salons; this API is the same one its own web and mobile clients (Achieve, Elevate) call, and is published for approved partners via an official OpenAPI document at github.com/wellnessliving/openapi (324 paths across 45+ resource areas as of the 2026-06-20 build). Endpoints below are grounded in that official spec and in the public github.com/wellnessliving/wl-sdk (PHP) and wl-sdk-js SDKs; this file selects roughly four representative endpoints per logical API area rather than reproducing the full catalog. Every WellnessLiving API resource is a `.json`-suffixed endpoint whose path is derived deterministically from the SDK model class's namespace (e.g. the PHP class `WellnessLiving\Wl\Staff\StaffElementModel` serves `/Wl/Staff/StaffElement.json`). Legacy numbered variants of several endpoints exist for backward compatibility (e.g. `Finish47`, `ServiceList52`, `Purchase72`) and are omitted here in favor of their current unsuffixed counterpart.
+  version: 1.1.20260620071011
+  contact:
+    name: WellnessLiving Support
+    email: support@wellnessliving.com
+    url: https://www.wellnessliving.com/support
+  license:
+    name: Proprietary
+    url: https://www.wellnessliving.com/knowledge-sharing/terms-of-use/
+  termsOfService: https://www.wellnessliving.com/knowledge-sharing/terms-of-use/
+servers:
+- url: https://us.wellnessliving.com
+  description: Production - United States data center
+- url: https://au.wellnessliving.com
+  description: Production - Australia data center
+- url: https://staging.wellnessliving.com
+  description: Staging (pre-release QA branch)
+- url: https://demo.wellnessliving.com
+  description: Demo/trunk (active development branch)
+security:
+- BearerAuth: []
+tags:
+- name: Locations
+paths:
+  /Wl/Location/List.json:
+    get:
+      operationId: get_Wl_Location_List
+      summary: Retrieves a list of locations for the given business.
+      description: 'Accepts a single business key, a JSON-encoded list of business keys, or an array of business keys, and
+
+        returns location details including coordinates, address, timezone, directories, and logo URLs. For
+
+        franchisor businesses, automatically expands to include all franchisee locations.'
+      tags:
+      - Locations
+      parameters:
+      - $ref: '#/components/parameters/XErrorRules'
+      - name: a_business
+        in: query
+        required: true
+        schema:
+          type: array
+          items:
+            type: string
+        description: 'A list of business keys.
+
+          You can specify this instead of `k_business` to load data for many businesses in one call.'
+      - name: k_business
+        in: query
+        required: true
+        schema:
+          type: string
+        description: 'The business key used internally by WellnessLiving.
+
+
+          In case when passed regular or franchisee business returns only locations for requested business.'
+      - name: s_business
+        in: query
+        required: true
+        schema:
+          type: string
+        description: 'The primary keys of the selected businesses.
+
+          You can specify this instead of `k_business` to load data for many businesses in one call.
+
+
+          This is the s'
+      - name: show_remove
+        in: query
+        required: true
+        schema:
+          type: boolean
+        description: Determines whether removed locations should be returned.
+      responses:
+        '200':
+          description: Successful response.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  a_location:
+                    description: The `a_location` field.
+                    nullable: true
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '422':
+          $ref: '#/components/responses/ValidationError'
+        '500':
+          $ref: '#/components/responses/ServerError'
+  /Wl/Location/View/View.json:
+    get:
+      operationId: get_Wl_Location_View_View
+      summary: Returns detailed information about the specified location.
+      description: 'Returns the full profile of a location, including address, coordinates, timezone, contact information,
+
+        business hours, logo, slide images, amenities, social media links, and a description.'
+      tags:
+      - Locations
+      parameters:
+      - $ref: '#/components/parameters/XErrorRules'
+      - name: i_logo_height
+        in: query
+        required: true
+        schema:
+          type: integer
+        description: Maximum location image height.
+      - name: i_logo_width
+        in: query
+        required: true
+        schema:
+          type: integer
+        description: Maximum location image width.
+      - name: k_location
+        in: query
+        required: true
+        schema:
+          type: string
+        description: The location key.
+      responses:
+        '200':
+          description: Successful response.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  a_age:
+                    description: The `a_age` field.
+                    nullable: true
+                  a_amenities:
+                    description: The `a_amenities` field.
+                    nullable: true
+                  a_level:
+                    description: The `a_level` field.
+                    nullable: true
+                  a_logo:
+                    description: The `a_logo` field.
+                    nullable: true
+                  a_slide:
+                    description: The `a_slide` field.
+                    nullable: true
+                  a_work:
+                    description: The `a_work` field.
+                    nullable: true
+                  f_latitude:
+                    description: The `f_latitude` field.
+                    nullable: true
+                  f_longitude:
+                    description: The `f_longitude` field.
+                    nullable: true
+                  html_description_full:
+                    description: The `html_description_full` field.
+                    nullable: true
+                  html_description_preview:
+                    description: The `html_description_preview` field.
+                    nullable: true
+                  id_industry:
+                    description: The `id_industry` field.
+                    nullable: true
+                  is_phone:
+                    description: The `is_phone` field.
+                    nullable: true
+                  is_top_choice:
+                    description: The `is_top_choice` field.
+                    nullable: true
+                  k_business:
+                    description: The `k_business` field.
+                    nullable: true
+                  k_business_type:
+                    description: The `k_business_type` field.
+                    nullable: true
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '422':
+          $ref: '#/components/responses/ValidationError'
+        '500':
+          $ref: '#/components/responses/ServerError'
+  /Wl/Location/Location.json:
+    post:
+      operationId: post_Wl_Location_Location
+      summary: Creates new location or edits the existing location.
+      description: "When `k_location` is omitted, creates a new location requiring `k_city`,\n `text_address`, and `text_title`.\nWhen `k_location` is provided, updates only the supplied fields of the existing location.\n Returns the key of the created or updated location."
+      tags:
+      - Locations
+      parameters:
+      - $ref: '#/components/parameters/XErrorRules'
+      requestBody:
+        required: true
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+              properties:
+                k_business:
+                  description: The `k_business` field. See WellnessLiving developer portal for full field semantics.
+                  type: string
+                k_city:
+                  description: The `k_city` field. See WellnessLiving developer portal for full field semantics.
+                  type: string
+                k_location:
+                  description: The `k_location` field. See WellnessLiving developer portal for full field semantics.
+                  type: string
+                k_timezone:
+                  description: The `k_timezone` field. See WellnessLiving developer portal for full field semantics.
+                  type: string
+                text_address:
+                  description: The `text_address` field. See WellnessLiving developer portal for full field semantics.
+                  type: string
+                text_email:
+                  description: The `text_email` field. See WellnessLiving developer portal for full field semantics.
+                  type: string
+                text_phone:
+                  description: The `text_phone` field. See WellnessLiving developer portal for full field semantics.
+                  type: string
+                text_postal:
+                  description: The `text_postal` field. See WellnessLiving developer portal for full field semantics.
+                  type: string
+                text_title:
+                  description: The `text_title` field. See WellnessLiving developer portal for full field semantics.
+                  type: string
+              required:
+              - k_business
+      responses:
+        '200':
+          description: Successful response.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  k_location:
+                    description: The `k_location` field.
+                    nullable: true
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '422':
+          $ref: '#/components/responses/ValidationError'
+        '500':
+          $ref: '#/components/responses/ServerError'
+  /Wl/Location/WorkTime/LocationWorkTime.json:
+    post:
+      operationId: post_Wl_Location_WorkTime_LocationWorkTime
+      summary: Saves working hours of the location.
+      description: 'Accepts a list of day-and-time-range entries representing the weekly schedule and replaces all existing
+
+        working hours for the location. Days not present in the list are treated as non-working days.'
+      tags:
+      - Locations
+      parameters:
+      - $ref: '#/components/parameters/XErrorRules'
+      requestBody:
+        required: true
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+              properties:
+                a_work_time:
+                  description: The `a_work_time` field. See WellnessLiving developer portal for full field semantics.
+                  type: string
+                k_business:
+                  description: The `k_business` field. See WellnessLiving developer portal for full field semantics.
+                  type: string
+                k_location:
+                  description: The `k_location` field. See WellnessLiving developer portal for full field semantics.
+                  type: string
+              required:
+              - a_work_time
+              - k_business
+              - k_location
+      responses:
+        '200':
+          description: Successful response.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '422':
+          $ref: '#/components/responses/ValidationError'
+        '500':
+          $ref: '#/components/responses/ServerError'
+components:
+  parameters:
+    XErrorRules:
+      name: X-Error-Rules
+      in: header
+      required: false
+      schema:
+        type: string
+      description: Opt in to mapping internal API error statuses to real 4xx HTTP codes. By default the API always answers HTTP 200 even on error, with the failure encoded in the JSON body; setting this header (e.g. to `default`) makes the gateway translate matched error statuses to 400/403/404 responses instead.
+  responses:
+    ServerError:
+      description: Unexpected server error.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    ValidationError:
+      description: The request payload failed field-level validation.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    Unauthorized:
+      description: Missing, expired, or invalid Bearer token / session.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    BadRequest:
+      description: 'Client-side error: invalid input, failed validation, throttling, or other request error (only returned as an HTTP status when `X-Error-Rules` opts in; otherwise encoded in a 200 body).'
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    NotFound:
+      description: The requested resource does not exist.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    Forbidden:
+      description: Authenticated but not permitted to access this business, location, or resource.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+  schemas:
+    ErrorResponse:
+      type: object
+      description: Standard WellnessLiving API error response shape.
+      properties:
+        status:
+          type: string
+          description: Machine-readable status/error code string (e.g. `access-denied`, `not-found`).
+        text_message:
+          type: string
+          description: Human-readable error message.
+        a_field:
+          type: object
+          additionalProperties: true
+          description: Per-field validation errors, when the failure is a 422-style validation error.
+  securitySchemes:
+    BearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+      description: 'The officially published OpenAPI declares a JWT Bearer scheme: sign in via `POST /Core/Passport/Login/Enter/Enter.json`, then mint a token with `GET /Core/Passport/Enter/Jwt/JwtToken.json` and send it as `Authorization: Bearer <token>`. The underlying PHP/JS SDKs additionally support the legacy scheme: a registered Application ID + secret code sign a per-request HMAC (SHA3-based) placed in the `Authorization:` header alongside session cookies established by the `Notepad`/`Enter` model pair. Both schemes require WellnessLiving''s Integrations Team to first approve API access, sign an NDA and API Agreement, and issue application credentials.'

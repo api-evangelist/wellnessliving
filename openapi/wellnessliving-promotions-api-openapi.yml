@@ -1,0 +1,332 @@
+openapi: 3.0.3
+info:
+  title: WellnessLiving Appointments Promotions API
+  description: Curated, representative subset of WellnessLiving's official production API (RESTful, JSON-over-HTTPS). WellnessLiving is business-management software for fitness studios, gyms, spas, and salons; this API is the same one its own web and mobile clients (Achieve, Elevate) call, and is published for approved partners via an official OpenAPI document at github.com/wellnessliving/openapi (324 paths across 45+ resource areas as of the 2026-06-20 build). Endpoints below are grounded in that official spec and in the public github.com/wellnessliving/wl-sdk (PHP) and wl-sdk-js SDKs; this file selects roughly four representative endpoints per logical API area rather than reproducing the full catalog. Every WellnessLiving API resource is a `.json`-suffixed endpoint whose path is derived deterministically from the SDK model class's namespace (e.g. the PHP class `WellnessLiving\Wl\Staff\StaffElementModel` serves `/Wl/Staff/StaffElement.json`). Legacy numbered variants of several endpoints exist for backward compatibility (e.g. `Finish47`, `ServiceList52`, `Purchase72`) and are omitted here in favor of their current unsuffixed counterpart.
+  version: 1.1.20260620071011
+  contact:
+    name: WellnessLiving Support
+    email: support@wellnessliving.com
+    url: https://www.wellnessliving.com/support
+  license:
+    name: Proprietary
+    url: https://www.wellnessliving.com/knowledge-sharing/terms-of-use/
+  termsOfService: https://www.wellnessliving.com/knowledge-sharing/terms-of-use/
+servers:
+- url: https://us.wellnessliving.com
+  description: Production - United States data center
+- url: https://au.wellnessliving.com
+  description: Production - Australia data center
+- url: https://staging.wellnessliving.com
+  description: Staging (pre-release QA branch)
+- url: https://demo.wellnessliving.com
+  description: Demo/trunk (active development branch)
+security:
+- BearerAuth: []
+tags:
+- name: Promotions
+paths:
+  /Wl/Promotion/Index/PromotionIndex.json:
+    get:
+      operationId: get_Wl_Promotion_Index_PromotionIndex
+      summary: Gets a list of packages/passes/memberships.
+      description: 'Returns introductory promotion offers available at the specified location, optionally filtered by program type,
+
+        including pricing, duration, visit limits, and access information for each item.'
+      tags:
+      - Promotions
+      parameters:
+      - $ref: '#/components/parameters/XErrorRules'
+      - name: i_image_height
+        in: query
+        required: true
+        schema:
+          type: integer
+        description: 'Image height in pixels. Please specify this value if you need image to be returned in specific size.
+
+          In case this value is not specified returned imag'
+      - name: i_image_width
+        in: query
+        required: true
+        schema:
+          type: integer
+        description: 'Image width in pixels. Please specify this value if you need image to be returned in specific size.
+
+          In case this value is not specified returned image'
+      - name: id_program_type
+        in: query
+        required: true
+        schema:
+          type: string
+          description: Enumerated/coded value (see WellnessLiving *Sid constant classes).
+        description: 'The program type ID, which will be one of the [RsProgramTypeSid](#/components/schemas/RsProgramTypeSid) constants.
+
+
+          `0` to not filter Purchase Options'
+      - name: k_location
+        in: query
+        required: true
+        schema:
+          type: string
+        description: The location key.
+      responses:
+        '200':
+          description: Successful response.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  a_promotion:
+                    description: The `a_promotion` field.
+                    nullable: true
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '422':
+          $ref: '#/components/responses/ValidationError'
+        '500':
+          $ref: '#/components/responses/ServerError'
+  /Wl/Promotion/PromotionList.json:
+    get:
+      operationId: get_Wl_Promotion_PromotionList
+      summary: Returns promotion list of the specified business.
+      description: 'Returns all active promotions for the given business, with optional inclusion of Enterprise Location promotions
+
+        when the business is a franchisor and `is_franchise` is set to `true`.'
+      tags:
+      - Promotions
+      parameters:
+      - $ref: '#/components/parameters/XErrorRules'
+      - name: is_franchise
+        in: query
+        required: true
+        schema:
+          type: boolean
+        description: 'Determines whether to return promotions created by Enterprise Locations (for Enterprise Cloud businesses only).
+
+          If `true`, promotions created by Enter'
+      - name: k_business
+        in: query
+        required: true
+        schema:
+          type: string
+        description: The business key used to get the promotions.
+      responses:
+        '200':
+          description: Successful response.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  a_promotion:
+                    description: The `a_promotion` field.
+                    nullable: true
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '422':
+          $ref: '#/components/responses/ValidationError'
+        '500':
+          $ref: '#/components/responses/ServerError'
+  /Wl/Promotion/Promotion.json:
+    post:
+      operationId: post_Wl_Promotion_Promotion
+      summary: Saves promotion data.
+      description: 'Accepts the full promotion configuration including title, description, access rules, duration, tags, and guest
+
+        pass settings, then validates and persists the changes.'
+      tags:
+      - Promotions
+      parameters:
+      - $ref: '#/components/parameters/XErrorRules'
+      - name: k_business
+        in: query
+        required: true
+        schema:
+          type: string
+        description: The key of the business.
+      - name: k_promotion
+        in: query
+        required: true
+        schema:
+          type: string
+        description: The key of the promotion.
+      requestBody:
+        required: true
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+              properties:
+                a_promotion:
+                  description: The `a_promotion` field. See WellnessLiving developer portal for full field semantics.
+                  type: string
+                o_guest_settings:
+                  description: The `o_guest_settings` field. See WellnessLiving developer portal for full field semantics.
+                  type: string
+              required:
+              - a_promotion
+      responses:
+        '200':
+          description: Successful response.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '422':
+          $ref: '#/components/responses/ValidationError'
+        '500':
+          $ref: '#/components/responses/ServerError'
+  /Wl/Login/Promotion/GuestPass/GuestPassList.json:
+    get:
+      operationId: get_Wl_Login_Promotion_GuestPass_GuestPassList
+      summary: Retrieves guest passes for a specific client.
+      description: Returns all guest passes assigned to the given user, optionally filtered by class and location.
+      tags:
+      - Promotions
+      parameters:
+      - $ref: '#/components/parameters/XErrorRules'
+      - name: k_business
+        in: query
+        required: true
+        schema:
+          type: string
+        description: Business key.
+      - name: k_class
+        in: query
+        required: false
+        schema:
+          type: string
+          nullable: true
+        description: 'Class key to filter guest passes by.
+
+
+          `null` if guest passes should not be filtered by class.'
+      - name: k_location
+        in: query
+        required: false
+        schema:
+          type: string
+          nullable: true
+        description: 'Location key to filter guest passes by.
+
+
+          `null` if guest passes should not be filtered by location.'
+      - name: uid
+        in: query
+        required: true
+        schema:
+          type: string
+        description: User key.
+      responses:
+        '200':
+          description: Successful response.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  a_list:
+                    description: The `a_list` field.
+                    nullable: true
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '422':
+          $ref: '#/components/responses/ValidationError'
+        '500':
+          $ref: '#/components/responses/ServerError'
+components:
+  parameters:
+    XErrorRules:
+      name: X-Error-Rules
+      in: header
+      required: false
+      schema:
+        type: string
+      description: Opt in to mapping internal API error statuses to real 4xx HTTP codes. By default the API always answers HTTP 200 even on error, with the failure encoded in the JSON body; setting this header (e.g. to `default`) makes the gateway translate matched error statuses to 400/403/404 responses instead.
+  responses:
+    ServerError:
+      description: Unexpected server error.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    ValidationError:
+      description: The request payload failed field-level validation.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    Unauthorized:
+      description: Missing, expired, or invalid Bearer token / session.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    BadRequest:
+      description: 'Client-side error: invalid input, failed validation, throttling, or other request error (only returned as an HTTP status when `X-Error-Rules` opts in; otherwise encoded in a 200 body).'
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    NotFound:
+      description: The requested resource does not exist.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    Forbidden:
+      description: Authenticated but not permitted to access this business, location, or resource.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+  schemas:
+    ErrorResponse:
+      type: object
+      description: Standard WellnessLiving API error response shape.
+      properties:
+        status:
+          type: string
+          description: Machine-readable status/error code string (e.g. `access-denied`, `not-found`).
+        text_message:
+          type: string
+          description: Human-readable error message.
+        a_field:
+          type: object
+          additionalProperties: true
+          description: Per-field validation errors, when the failure is a 422-style validation error.
+  securitySchemes:
+    BearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+      description: 'The officially published OpenAPI declares a JWT Bearer scheme: sign in via `POST /Core/Passport/Login/Enter/Enter.json`, then mint a token with `GET /Core/Passport/Enter/Jwt/JwtToken.json` and send it as `Authorization: Bearer <token>`. The underlying PHP/JS SDKs additionally support the legacy scheme: a registered Application ID + secret code sign a per-request HMAC (SHA3-based) placed in the `Authorization:` header alongside session cookies established by the `Notepad`/`Enter` model pair. Both schemes require WellnessLiving''s Integrations Team to first approve API access, sign an NDA and API Agreement, and issue application credentials.'

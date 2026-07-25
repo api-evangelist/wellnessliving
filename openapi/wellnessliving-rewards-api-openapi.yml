@@ -1,0 +1,287 @@
+openapi: 3.0.3
+info:
+  title: WellnessLiving Appointments Rewards API
+  description: Curated, representative subset of WellnessLiving's official production API (RESTful, JSON-over-HTTPS). WellnessLiving is business-management software for fitness studios, gyms, spas, and salons; this API is the same one its own web and mobile clients (Achieve, Elevate) call, and is published for approved partners via an official OpenAPI document at github.com/wellnessliving/openapi (324 paths across 45+ resource areas as of the 2026-06-20 build). Endpoints below are grounded in that official spec and in the public github.com/wellnessliving/wl-sdk (PHP) and wl-sdk-js SDKs; this file selects roughly four representative endpoints per logical API area rather than reproducing the full catalog. Every WellnessLiving API resource is a `.json`-suffixed endpoint whose path is derived deterministically from the SDK model class's namespace (e.g. the PHP class `WellnessLiving\Wl\Staff\StaffElementModel` serves `/Wl/Staff/StaffElement.json`). Legacy numbered variants of several endpoints exist for backward compatibility (e.g. `Finish47`, `ServiceList52`, `Purchase72`) and are omitted here in favor of their current unsuffixed counterpart.
+  version: 1.1.20260620071011
+  contact:
+    name: WellnessLiving Support
+    email: support@wellnessliving.com
+    url: https://www.wellnessliving.com/support
+  license:
+    name: Proprietary
+    url: https://www.wellnessliving.com/knowledge-sharing/terms-of-use/
+  termsOfService: https://www.wellnessliving.com/knowledge-sharing/terms-of-use/
+servers:
+- url: https://us.wellnessliving.com
+  description: Production - United States data center
+- url: https://au.wellnessliving.com
+  description: Production - Australia data center
+- url: https://staging.wellnessliving.com
+  description: Staging (pre-release QA branch)
+- url: https://demo.wellnessliving.com
+  description: Demo/trunk (active development branch)
+security:
+- BearerAuth: []
+tags:
+- name: Rewards
+paths:
+  /Wl/Reward/Score/Current/Current.json:
+    get:
+      operationId: get_Wl_Reward_Score_Current_Current
+      summary: Retrieves information about current score in wellnessliving points.
+      description: 'Returns the user''s current reward point balance, their rank in the first available leaderboard, and the
+
+        leaderboard title for the specified business.'
+      tags:
+      - Rewards
+      parameters:
+      - $ref: '#/components/parameters/XErrorRules'
+      - name: k_business
+        in: query
+        required: true
+        schema:
+          type: string
+        description: ID of a business to show information for.
+      - name: uid
+        in: query
+        required: true
+        schema:
+          type: string
+        description: UID to retrieve information about.
+      responses:
+        '200':
+          description: Successful response.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  i_board_rank:
+                    description: The `i_board_rank` field.
+                    nullable: true
+                  i_score:
+                    description: The `i_score` field.
+                    nullable: true
+                  s_board_title:
+                    description: The `s_board_title` field.
+                    nullable: true
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '422':
+          $ref: '#/components/responses/ValidationError'
+        '500':
+          $ref: '#/components/responses/ServerError'
+  /Wl/Reward/Prize/Prize.json:
+    get:
+      operationId: get_Wl_Reward_Prize_Prize
+      summary: Retrieves a list of redeemable prizes.
+      description: 'Returns all active redeemable prizes for the specified business, ordered by point cost, including the prize key
+
+        and required score for each item.'
+      tags:
+      - Rewards
+      parameters:
+      - $ref: '#/components/parameters/XErrorRules'
+      - name: k_business
+        in: query
+        required: true
+        schema:
+          type: string
+        description: Key of current business.
+      responses:
+        '200':
+          description: Successful response.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  a_prize:
+                    description: The `a_prize` field.
+                    nullable: true
+                  a_score:
+                    description: The `a_score` field.
+                    nullable: true
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '422':
+          $ref: '#/components/responses/ValidationError'
+        '500':
+          $ref: '#/components/responses/ServerError'
+  /Wl/Reward/Action/Action.json:
+    get:
+      operationId: get_Wl_Reward_Action_Action
+      summary: Retrieves a list of available reward actions.
+      description: 'Returns all reward actions visible to the specified user in the given business, optionally filtered by category,
+
+        including the score value and request status for each action.'
+      tags:
+      - Rewards
+      parameters:
+      - $ref: '#/components/parameters/XErrorRules'
+      - name: k_business
+        in: query
+        required: true
+        schema:
+          type: string
+        description: Key of current business.
+      - name: k_reward_action_category
+        in: query
+        required: true
+        schema:
+          type: string
+        description: Key of reward action category.
+      - name: uid
+        in: query
+        required: true
+        schema:
+          type: string
+        description: Key of a user to show information for.
+      responses:
+        '200':
+          description: Successful response.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  a_reward_action:
+                    description: The `a_reward_action` field.
+                    nullable: true
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '422':
+          $ref: '#/components/responses/ValidationError'
+        '500':
+          $ref: '#/components/responses/ServerError'
+  /Wl/Reward/Board/List.json:
+    get:
+      operationId: get_Wl_Reward_Board_List
+      summary: Retrieves a list of reward board items to show.
+      description: 'Returns an ordered list of user IDs ranked by points for the specified reward board, up to the configured
+
+        maximum number of entries.'
+      tags:
+      - Rewards
+      parameters:
+      - $ref: '#/components/parameters/XErrorRules'
+      - name: k_business
+        in: query
+        required: true
+        schema:
+          type: string
+        description: ID of a business to show information for.
+      - name: k_reward_board
+        in: query
+        required: true
+        schema:
+          type: string
+        description: ID of reward board to show information for.
+      responses:
+        '200':
+          description: Successful response.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  a_uid:
+                    description: The `a_uid` field.
+                    nullable: true
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '422':
+          $ref: '#/components/responses/ValidationError'
+        '500':
+          $ref: '#/components/responses/ServerError'
+components:
+  parameters:
+    XErrorRules:
+      name: X-Error-Rules
+      in: header
+      required: false
+      schema:
+        type: string
+      description: Opt in to mapping internal API error statuses to real 4xx HTTP codes. By default the API always answers HTTP 200 even on error, with the failure encoded in the JSON body; setting this header (e.g. to `default`) makes the gateway translate matched error statuses to 400/403/404 responses instead.
+  responses:
+    ServerError:
+      description: Unexpected server error.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    ValidationError:
+      description: The request payload failed field-level validation.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    Unauthorized:
+      description: Missing, expired, or invalid Bearer token / session.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    BadRequest:
+      description: 'Client-side error: invalid input, failed validation, throttling, or other request error (only returned as an HTTP status when `X-Error-Rules` opts in; otherwise encoded in a 200 body).'
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    NotFound:
+      description: The requested resource does not exist.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    Forbidden:
+      description: Authenticated but not permitted to access this business, location, or resource.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+  schemas:
+    ErrorResponse:
+      type: object
+      description: Standard WellnessLiving API error response shape.
+      properties:
+        status:
+          type: string
+          description: Machine-readable status/error code string (e.g. `access-denied`, `not-found`).
+        text_message:
+          type: string
+          description: Human-readable error message.
+        a_field:
+          type: object
+          additionalProperties: true
+          description: Per-field validation errors, when the failure is a 422-style validation error.
+  securitySchemes:
+    BearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+      description: 'The officially published OpenAPI declares a JWT Bearer scheme: sign in via `POST /Core/Passport/Login/Enter/Enter.json`, then mint a token with `GET /Core/Passport/Enter/Jwt/JwtToken.json` and send it as `Authorization: Bearer <token>`. The underlying PHP/JS SDKs additionally support the legacy scheme: a registered Application ID + secret code sign a per-request HMAC (SHA3-based) placed in the `Authorization:` header alongside session cookies established by the `Notepad`/`Enter` model pair. Both schemes require WellnessLiving''s Integrations Team to first approve API access, sign an NDA and API Agreement, and issue application credentials.'

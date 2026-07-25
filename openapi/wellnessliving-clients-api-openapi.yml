@@ -1,0 +1,423 @@
+openapi: 3.0.3
+info:
+  title: WellnessLiving Appointments Clients API
+  description: Curated, representative subset of WellnessLiving's official production API (RESTful, JSON-over-HTTPS). WellnessLiving is business-management software for fitness studios, gyms, spas, and salons; this API is the same one its own web and mobile clients (Achieve, Elevate) call, and is published for approved partners via an official OpenAPI document at github.com/wellnessliving/openapi (324 paths across 45+ resource areas as of the 2026-06-20 build). Endpoints below are grounded in that official spec and in the public github.com/wellnessliving/wl-sdk (PHP) and wl-sdk-js SDKs; this file selects roughly four representative endpoints per logical API area rather than reproducing the full catalog. Every WellnessLiving API resource is a `.json`-suffixed endpoint whose path is derived deterministically from the SDK model class's namespace (e.g. the PHP class `WellnessLiving\Wl\Staff\StaffElementModel` serves `/Wl/Staff/StaffElement.json`). Legacy numbered variants of several endpoints exist for backward compatibility (e.g. `Finish47`, `ServiceList52`, `Purchase72`) and are omitted here in favor of their current unsuffixed counterpart.
+  version: 1.1.20260620071011
+  contact:
+    name: WellnessLiving Support
+    email: support@wellnessliving.com
+    url: https://www.wellnessliving.com/support
+  license:
+    name: Proprietary
+    url: https://www.wellnessliving.com/knowledge-sharing/terms-of-use/
+  termsOfService: https://www.wellnessliving.com/knowledge-sharing/terms-of-use/
+servers:
+- url: https://us.wellnessliving.com
+  description: Production - United States data center
+- url: https://au.wellnessliving.com
+  description: Production - Australia data center
+- url: https://staging.wellnessliving.com
+  description: Staging (pre-release QA branch)
+- url: https://demo.wellnessliving.com
+  description: Demo/trunk (active development branch)
+security:
+- BearerAuth: []
+tags:
+- name: Clients
+paths:
+  /Wl/Member/Info/Info.json:
+    get:
+      operationId: get_Wl_Member_Info_Info
+      summary: Returns information about specified member.
+      description: 'Supports both single-user and batch modes: when `$a_uid` is provided, returns a keyed list of user data in
+
+        `$a_result_list`; otherwise returns data for the single user identified by `$uid`. When `$is_full` is `true`,
+
+        additional profile details, group membership, visit history, and lifetime value are included.'
+      tags:
+      - Clients
+      parameters:
+      - $ref: '#/components/parameters/XErrorRules'
+      - name: a_uid
+        in: query
+        required: false
+        schema:
+          type: array
+          nullable: true
+          items:
+            type: string
+        description: 'Primary keys of users whose information must be returned.
+
+
+          `null` if data of a single user is requested.'
+      - name: a_uid_date
+        in: query
+        required: false
+        schema:
+          type: array
+          nullable: true
+          items:
+            type: string
+        description: 'List of dates for load additional information about users.
+
+
+          Key is UID of user. Value is date.
+
+
+          `null` if data of a single user is requested.'
+      - name: dt_date
+        in: query
+        required: true
+        schema:
+          type: string
+        description: Date of the session, if we show it on the appointment info window or on the attendance list.
+      - name: is_backend
+        in: query
+        required: true
+        schema:
+          type: boolean
+        description: '`true` - if API is being used from backend, `false` - otherwise.'
+      - name: is_full
+        in: query
+        required: true
+        schema:
+          type: boolean
+        description: If you need to return additional information set to `true` or `false` if not.
+      - name: k_business
+        in: query
+        required: true
+        schema:
+          type: string
+        description: 'The business ID required to access client information.
+
+
+          Specify this as `0` to retrieve the system-wide version of the information.'
+      - name: k_visit
+        in: query
+        required: true
+        schema:
+          type: string
+        description: ID of the visit, if we show icons on the attendance list and information that depends on visit is required.
+      - name: s_show
+        in: query
+        required: true
+        schema:
+          type: string
+        description: 'A list of icons with additional information about the business member.
+
+          If empty, all available icons will be displayed.
+
+          Comma separated values from [M'
+      - name: uid
+        in: query
+        required: true
+        schema:
+          type: string
+        description: ID of a user to retrieve member information for.
+      responses:
+        '200':
+          description: Successful response.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  a_info:
+                    description: The `a_info` field.
+                    nullable: true
+                  a_result_list:
+                    description: The `a_result_list` field.
+                    nullable: true
+                  a_visit_last:
+                    description: The `a_visit_last` field.
+                    nullable: true
+                  a_visit_next:
+                    description: The `a_visit_next` field.
+                    nullable: true
+                  i_lifetime_visit:
+                    description: The `i_lifetime_visit` field.
+                    nullable: true
+                  is_traveller:
+                    description: The `is_traveller` field.
+                    nullable: true
+                  m_lifetime_value:
+                    description: The `m_lifetime_value` field.
+                    nullable: true
+                  s_member:
+                    description: The `s_member` field.
+                    nullable: true
+                  text_first_name:
+                    description: The `text_first_name` field.
+                    nullable: true
+                  text_fullname:
+                    description: The `text_fullname` field.
+                    nullable: true
+                  url_barcode:
+                    description: The `url_barcode` field.
+                    nullable: true
+                  url_email:
+                    description: The `url_email` field.
+                    nullable: true
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '422':
+          $ref: '#/components/responses/ValidationError'
+        '500':
+          $ref: '#/components/responses/ServerError'
+  /Wl/Profile/Purchase/PurchaseList.json:
+    get:
+      operationId: get_Wl_Profile_Purchase_PurchaseList
+      summary: Retrieves a list of user's purchase items to show in user profile.
+      description: "Returns the complete purchase history for the client in the given business, covering all\n item types such as memberships, redemption codes, enrollments, products, appointments, and\n gift cards. Package components are resolved and included inline beside their parent item."
+      tags:
+      - Clients
+      parameters:
+      - $ref: '#/components/parameters/XErrorRules'
+      - name: k_business
+        in: query
+        required: true
+        schema:
+          type: string
+        description: The key of a business to show information for.
+      - name: uid
+        in: query
+        required: true
+        schema:
+          type: string
+        description: The key of a user to show information for.
+      responses:
+        '200':
+          description: Successful response.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  a_purchase:
+                    description: The `a_purchase` field.
+                    nullable: true
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '422':
+          $ref: '#/components/responses/ValidationError'
+        '500':
+          $ref: '#/components/responses/ServerError'
+  /Wl/Profile/ProfileCreate.json:
+    post:
+      operationId: post_Wl_Profile_ProfileCreate
+      summary: Creates a new client profile with the provided personal details in the specified business.
+      description: "Creates or retrieves a user account by email or phone, saves personal details such as name,\n address, phones, birthday, gender, and vaccination status, registers the user in the\n business, and optionally adds them to the lead report and sets intents."
+      tags:
+      - Clients
+      parameters:
+      - $ref: '#/components/parameters/XErrorRules'
+      requestBody:
+        required: true
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+              properties:
+                a_intents:
+                  description: The `a_intents` field. See WellnessLiving developer portal for full field semantics.
+                  type: string
+                dt_birthday:
+                  description: The `dt_birthday` field. See WellnessLiving developer portal for full field semantics.
+                  type: string
+                id_gender:
+                  description: The `id_gender` field. See WellnessLiving developer portal for full field semantics.
+                  type: string
+                id_lead_source:
+                  description: The `id_lead_source` field. See WellnessLiving developer portal for full field semantics.
+                  type: string
+                id_vaccination_status:
+                  description: The `id_vaccination_status` field. See WellnessLiving developer portal for full field semantics.
+                  type: string
+                is_lead:
+                  description: The `is_lead` field. See WellnessLiving developer portal for full field semantics.
+                  type: string
+                k_business:
+                  description: The `k_business` field. See WellnessLiving developer portal for full field semantics.
+                  type: string
+                k_lead_source:
+                  description: The `k_lead_source` field. See WellnessLiving developer portal for full field semantics.
+                  type: string
+                k_location_home:
+                  description: The `k_location_home` field. See WellnessLiving developer portal for full field semantics.
+                  type: string
+                text_address:
+                  description: The `text_address` field. See WellnessLiving developer portal for full field semantics.
+                  type: string
+                text_firstname:
+                  description: The `text_firstname` field. See WellnessLiving developer portal for full field semantics.
+                  type: string
+                text_lastname:
+                  description: The `text_lastname` field. See WellnessLiving developer portal for full field semantics.
+                  type: string
+                text_mail:
+                  description: The `text_mail` field. See WellnessLiving developer portal for full field semantics.
+                  type: string
+                text_phone:
+                  description: The `text_phone` field. See WellnessLiving developer portal for full field semantics.
+                  type: string
+                text_phone_home:
+                  description: The `text_phone_home` field. See WellnessLiving developer portal for full field semantics.
+                  type: string
+              required:
+              - a_intents
+              - dt_birthday
+              - id_gender
+              - id_lead_source
+              - id_vaccination_status
+              - is_lead
+              - k_business
+              - k_lead_source
+              - k_location_home
+              - text_address
+              - text_firstname
+              - text_lastname
+              - text_mail
+              - text_phone
+              - text_phone_home
+      responses:
+        '200':
+          description: Successful response.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  uid:
+                    description: The `uid` field.
+                    nullable: true
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '422':
+          $ref: '#/components/responses/ValidationError'
+        '500':
+          $ref: '#/components/responses/ServerError'
+  /Wl/Family/Relation/FamilyRelation.json:
+    get:
+      operationId: get_Wl_Family_Relation_FamilyRelation
+      summary: Gets relationships list.
+      description: 'Returns all relationship types enabled for the given business, or all system-defined relationship types if no
+
+        business key is provided.'
+      tags:
+      - Clients
+      parameters:
+      - $ref: '#/components/parameters/XErrorRules'
+      - name: k_business
+        in: query
+        required: true
+        schema:
+          type: string
+        description: The business key.
+      responses:
+        '200':
+          description: Successful response.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  a_business_relationships:
+                    description: The `a_business_relationships` field.
+                    nullable: true
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '422':
+          $ref: '#/components/responses/ValidationError'
+        '500':
+          $ref: '#/components/responses/ServerError'
+components:
+  parameters:
+    XErrorRules:
+      name: X-Error-Rules
+      in: header
+      required: false
+      schema:
+        type: string
+      description: Opt in to mapping internal API error statuses to real 4xx HTTP codes. By default the API always answers HTTP 200 even on error, with the failure encoded in the JSON body; setting this header (e.g. to `default`) makes the gateway translate matched error statuses to 400/403/404 responses instead.
+  responses:
+    ServerError:
+      description: Unexpected server error.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    ValidationError:
+      description: The request payload failed field-level validation.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    Unauthorized:
+      description: Missing, expired, or invalid Bearer token / session.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    BadRequest:
+      description: 'Client-side error: invalid input, failed validation, throttling, or other request error (only returned as an HTTP status when `X-Error-Rules` opts in; otherwise encoded in a 200 body).'
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    NotFound:
+      description: The requested resource does not exist.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    Forbidden:
+      description: Authenticated but not permitted to access this business, location, or resource.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+  schemas:
+    ErrorResponse:
+      type: object
+      description: Standard WellnessLiving API error response shape.
+      properties:
+        status:
+          type: string
+          description: Machine-readable status/error code string (e.g. `access-denied`, `not-found`).
+        text_message:
+          type: string
+          description: Human-readable error message.
+        a_field:
+          type: object
+          additionalProperties: true
+          description: Per-field validation errors, when the failure is a 422-style validation error.
+  securitySchemes:
+    BearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+      description: 'The officially published OpenAPI declares a JWT Bearer scheme: sign in via `POST /Core/Passport/Login/Enter/Enter.json`, then mint a token with `GET /Core/Passport/Enter/Jwt/JwtToken.json` and send it as `Authorization: Bearer <token>`. The underlying PHP/JS SDKs additionally support the legacy scheme: a registered Application ID + secret code sign a per-request HMAC (SHA3-based) placed in the `Authorization:` header alongside session cookies established by the `Notepad`/`Enter` model pair. Both schemes require WellnessLiving''s Integrations Team to first approve API access, sign an NDA and API Agreement, and issue application credentials.'

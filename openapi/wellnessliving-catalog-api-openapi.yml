@@ -1,0 +1,509 @@
+openapi: 3.0.3
+info:
+  title: WellnessLiving Appointments Catalog API
+  description: Curated, representative subset of WellnessLiving's official production API (RESTful, JSON-over-HTTPS). WellnessLiving is business-management software for fitness studios, gyms, spas, and salons; this API is the same one its own web and mobile clients (Achieve, Elevate) call, and is published for approved partners via an official OpenAPI document at github.com/wellnessliving/openapi (324 paths across 45+ resource areas as of the 2026-06-20 build). Endpoints below are grounded in that official spec and in the public github.com/wellnessliving/wl-sdk (PHP) and wl-sdk-js SDKs; this file selects roughly four representative endpoints per logical API area rather than reproducing the full catalog. Every WellnessLiving API resource is a `.json`-suffixed endpoint whose path is derived deterministically from the SDK model class's namespace (e.g. the PHP class `WellnessLiving\Wl\Staff\StaffElementModel` serves `/Wl/Staff/StaffElement.json`). Legacy numbered variants of several endpoints exist for backward compatibility (e.g. `Finish47`, `ServiceList52`, `Purchase72`) and are omitted here in favor of their current unsuffixed counterpart.
+  version: 1.1.20260620071011
+  contact:
+    name: WellnessLiving Support
+    email: support@wellnessliving.com
+    url: https://www.wellnessliving.com/support
+  license:
+    name: Proprietary
+    url: https://www.wellnessliving.com/knowledge-sharing/terms-of-use/
+  termsOfService: https://www.wellnessliving.com/knowledge-sharing/terms-of-use/
+servers:
+- url: https://us.wellnessliving.com
+  description: Production - United States data center
+- url: https://au.wellnessliving.com
+  description: Production - Australia data center
+- url: https://staging.wellnessliving.com
+  description: Staging (pre-release QA branch)
+- url: https://demo.wellnessliving.com
+  description: Demo/trunk (active development branch)
+security:
+- BearerAuth: []
+tags:
+- name: Catalog
+paths:
+  /Wl/Catalog/CatalogList/List.json:
+    get:
+      operationId: get_Wl_Catalog_CatalogList_List
+      summary: Retrieves a list of all sale items.
+      description: 'Used to render the full client-facing store catalog for a business. Returns all purchasable items -
+
+        promotions, products, events, and coupons - merged across the business''s categories. The separate
+
+        de-duplicated list and category list support both the flat and category-tabbed views.'
+      tags:
+      - Catalog
+      parameters:
+      - $ref: '#/components/parameters/XErrorRules'
+      - name: a_direct_link
+        in: query
+        required: true
+        schema:
+          type: object
+          additionalProperties: true
+        description: "Arguments from direct purchase link, which can give additional access to products, which are available\n  only by such link."
+      - name: is_credit_card_check
+        in: query
+        required: true
+        schema:
+          type: boolean
+        description: '`true` to consider the requirement to have a credit card for booking
+
+          (this requirement can be set in business settings)
+
+          `false` to ignore it.'
+      - name: k_business
+        in: query
+        required: true
+        schema:
+          type: string
+        description: The business key.
+      - name: k_location
+        in: query
+        required: true
+        schema:
+          type: string
+        description: The key of a location. If `0`, all products in the business are retrieved.
+      - name: uid
+        in: query
+        required: true
+        schema:
+          type: string
+        description: The key of user.
+      responses:
+        '200':
+          description: Successful response.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  a_product:
+                    description: The `a_product` field.
+                    nullable: true
+                  a_product_duplicate:
+                    description: The `a_product_duplicate` field.
+                    nullable: true
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '422':
+          $ref: '#/components/responses/ValidationError'
+        '500':
+          $ref: '#/components/responses/ServerError'
+  /Wl/Catalog/Cart/Cart.json:
+    get:
+      operationId: get_Wl_Catalog_Cart_Cart
+      summary: Gets purchase cost data.
+      description: 'Used in the client-facing checkout flow to show a live price summary before the client submits
+
+        payment. Calculates the full breakdown - subtotal, taxes, applied discounts, reward redemptions,
+
+        and tips - so the client can review the total before confirming.'
+      tags:
+      - Catalog
+      parameters:
+      - $ref: '#/components/parameters/XErrorRules'
+      - name: a_item
+        in: query
+        required: true
+        schema:
+          type: array
+          items:
+            type: string
+        description: The list of items in the cart.
+      - name: is_auto_apply_prize
+        in: query
+        required: true
+        schema:
+          type: boolean
+        description: Whether selected login prize should be auto applied to first applicable item.
+      - name: k_location
+        in: query
+        required: true
+        schema:
+          type: string
+        description: The location key.
+      - name: k_login_prize
+        in: query
+        required: true
+        schema:
+          type: string
+        description: The login prize key.
+      - name: text_discount_code
+        in: query
+        required: false
+        schema:
+          type: string
+          nullable: true
+        description: 'The discount code.
+
+
+          If `null`, the discount code has been reset.'
+      - name: uid
+        in: query
+        required: true
+        schema:
+          type: string
+        description: 'The user key.
+
+
+          This will be `0` for guests.'
+      responses:
+        '200':
+          description: Successful response.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  a_discount_item:
+                    description: The `a_discount_item` field.
+                    nullable: true
+                  a_item:
+                    description: The `a_item` field.
+                    nullable: true
+                  a_prize_propose:
+                    description: The `a_prize_propose` field.
+                    nullable: true
+                  a_reward_item:
+                    description: The `a_reward_item` field.
+                    nullable: true
+                  a_reward_propose:
+                    description: The `a_reward_propose` field.
+                    nullable: true
+                  a_tax_list:
+                    description: The `a_tax_list` field.
+                    nullable: true
+                  i_score:
+                    description: The `i_score` field.
+                    nullable: true
+                  m_discount:
+                    description: The `m_discount` field.
+                    nullable: true
+                  m_discount_total:
+                    description: The `m_discount_total` field.
+                    nullable: true
+                  m_subtotal:
+                    description: The `m_subtotal` field.
+                    nullable: true
+                  m_tax:
+                    description: The `m_tax` field.
+                    nullable: true
+                  m_tip_purchase:
+                    description: The `m_tip_purchase` field.
+                    nullable: true
+                  m_total:
+                    description: The `m_total` field.
+                    nullable: true
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '422':
+          $ref: '#/components/responses/ValidationError'
+        '500':
+          $ref: '#/components/responses/ServerError'
+  /Wl/Catalog/Payment/Payment.json:
+    post:
+      operationId: post_Wl_Catalog_Payment_Payment
+      summary: Allows to pay items for the client.
+      description: 'The checkout endpoint that finalizes a purchase in the client-facing store. Charges the client''s
+
+        selected payment method, applies any discounts and tips, and creates the purchase record. Returns
+
+        the resulting purchase key so the frontend can redirect to the confirmation page.'
+      tags:
+      - Catalog
+      parameters:
+      - $ref: '#/components/parameters/XErrorRules'
+      - name: a_commission
+        in: query
+        required: true
+        schema:
+          type: object
+          additionalProperties: true
+        description: 'The staff commission earned for this purchase. If this isn''t empty, it has the next fields:'
+      - name: id_mode
+        in: query
+        required: true
+        schema:
+          type: string
+          description: Enumerated/coded value (see WellnessLiving *Sid constant classes).
+        description: The WellnessLiving mode type (required). One of the [ModeSid](#/components/schemas/Wl.Mode.ModeSid) constants.
+      - name: is_guest
+        in: query
+        required: true
+        schema:
+          type: boolean
+        description: Determines if the payment owner is an anonymous user (optional).
+      - name: is_staff
+        in: query
+        required: true
+        schema:
+          type: boolean
+        description: Specify this if operations are performed by the staff member (optional).
+      - name: k_business
+        in: query
+        required: true
+        schema:
+          type: string
+        description: The business key (required).
+      - name: k_location
+        in: query
+        required: true
+        schema:
+          type: string
+        description: The location key (required).
+      - name: uid
+        in: query
+        required: true
+        schema:
+          type: string
+        description: The user's key (required).
+      requestBody:
+        required: true
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+              properties:
+                a_item:
+                  description: The `a_item` field. See WellnessLiving developer portal for full field semantics.
+                  type: string
+                a_pay_form:
+                  description: The `a_pay_form` field. See WellnessLiving developer portal for full field semantics.
+                  type: string
+                a_quiz_response:
+                  description: The `a_quiz_response` field. See WellnessLiving developer portal for full field semantics.
+                  type: string
+                f_discount_percent:
+                  description: The `f_discount_percent` field. See WellnessLiving developer portal for full field semantics.
+                  type: string
+                k_pay_installment_template:
+                  description: The `k_pay_installment_template` field. See WellnessLiving developer portal for full field semantics.
+                  type: string
+                k_visit:
+                  description: The `k_visit` field. See WellnessLiving developer portal for full field semantics.
+                  type: string
+                m_discount_flat:
+                  description: The `m_discount_flat` field. See WellnessLiving developer portal for full field semantics.
+                  type: string
+                m_surcharge:
+                  description: The `m_surcharge` field. See WellnessLiving developer portal for full field semantics.
+                  type: string
+                m_tip:
+                  description: The `m_tip` field. See WellnessLiving developer portal for full field semantics.
+                  type: string
+                text_discount_code:
+                  description: The `text_discount_code` field. See WellnessLiving developer portal for full field semantics.
+                  type: string
+                text_receipt_note:
+                  description: The `text_receipt_note` field. See WellnessLiving developer portal for full field semantics.
+                  type: string
+              required:
+              - a_item
+              - a_pay_form
+              - a_quiz_response
+              - f_discount_percent
+              - k_pay_installment_template
+              - k_visit
+              - m_discount_flat
+              - m_surcharge
+              - m_tip
+              - text_discount_code
+              - text_receipt_note
+      responses:
+        '200':
+          description: Successful response.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  k_login_activity:
+                    description: The `k_login_activity` field.
+                    nullable: true
+                  k_purchase:
+                    description: The `k_purchase` field.
+                    nullable: true
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '422':
+          $ref: '#/components/responses/ValidationError'
+        '500':
+          $ref: '#/components/responses/ServerError'
+  /Wl/Purchase/Receipt/PurchaseReceipt.json:
+    get:
+      operationId: get_Wl_Purchase_Receipt_PurchaseReceipt
+      summary: Gets purchase information.
+      description: 'Returns full receipt data for the specified purchase, including business details, customer information,
+
+        itemized purchase items, payment methods, pricing summary, and print URLs.'
+      tags:
+      - Catalog
+      parameters:
+      - $ref: '#/components/parameters/XErrorRules'
+      - name: is_url_public
+        in: query
+        required: true
+        schema:
+          type: boolean
+        description: 'Whether `url_print` and `url_print_receipt` require authentication.
+
+
+          If `true`, the URL contains a token that allows temporary access to the page with'
+      - name: k_purchase
+        in: query
+        required: false
+        schema:
+          type: string
+          nullable: true
+        description: The key of the purchase.
+      responses:
+        '200':
+          description: Successful response.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  a_account_rest:
+                    description: The `a_account_rest` field.
+                    nullable: true
+                  a_business:
+                    description: The `a_business` field.
+                    nullable: true
+                  a_card:
+                    description: The `a_card` field.
+                    nullable: true
+                  a_customer:
+                    description: The `a_customer` field.
+                    nullable: true
+                  a_pay_method:
+                    description: The `a_pay_method` field.
+                    nullable: true
+                  a_price:
+                    description: The `a_price` field.
+                    nullable: true
+                  a_purchase_item:
+                    description: The `a_purchase_item` field.
+                    nullable: true
+                  dtl_purchase:
+                    description: The `dtl_purchase` field.
+                    nullable: true
+                  has_signature:
+                    description: The `has_signature` field.
+                    nullable: true
+                  html_receipt:
+                    description: The `html_receipt` field.
+                    nullable: true
+                  text_purchase_id:
+                    description: The `text_purchase_id` field.
+                    nullable: true
+                  text_receipt:
+                    description: The `text_receipt` field.
+                    nullable: true
+                  url_print:
+                    description: The `url_print` field.
+                    nullable: true
+                  url_print_receipt:
+                    description: The `url_print_receipt` field.
+                    nullable: true
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '422':
+          $ref: '#/components/responses/ValidationError'
+        '500':
+          $ref: '#/components/responses/ServerError'
+components:
+  parameters:
+    XErrorRules:
+      name: X-Error-Rules
+      in: header
+      required: false
+      schema:
+        type: string
+      description: Opt in to mapping internal API error statuses to real 4xx HTTP codes. By default the API always answers HTTP 200 even on error, with the failure encoded in the JSON body; setting this header (e.g. to `default`) makes the gateway translate matched error statuses to 400/403/404 responses instead.
+  responses:
+    ServerError:
+      description: Unexpected server error.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    ValidationError:
+      description: The request payload failed field-level validation.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    Unauthorized:
+      description: Missing, expired, or invalid Bearer token / session.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    BadRequest:
+      description: 'Client-side error: invalid input, failed validation, throttling, or other request error (only returned as an HTTP status when `X-Error-Rules` opts in; otherwise encoded in a 200 body).'
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    NotFound:
+      description: The requested resource does not exist.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    Forbidden:
+      description: Authenticated but not permitted to access this business, location, or resource.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+  schemas:
+    ErrorResponse:
+      type: object
+      description: Standard WellnessLiving API error response shape.
+      properties:
+        status:
+          type: string
+          description: Machine-readable status/error code string (e.g. `access-denied`, `not-found`).
+        text_message:
+          type: string
+          description: Human-readable error message.
+        a_field:
+          type: object
+          additionalProperties: true
+          description: Per-field validation errors, when the failure is a 422-style validation error.
+  securitySchemes:
+    BearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+      description: 'The officially published OpenAPI declares a JWT Bearer scheme: sign in via `POST /Core/Passport/Login/Enter/Enter.json`, then mint a token with `GET /Core/Passport/Enter/Jwt/JwtToken.json` and send it as `Authorization: Bearer <token>`. The underlying PHP/JS SDKs additionally support the legacy scheme: a registered Application ID + secret code sign a per-request HMAC (SHA3-based) placed in the `Authorization:` header alongside session cookies established by the `Notepad`/`Enter` model pair. Both schemes require WellnessLiving''s Integrations Team to first approve API access, sign an NDA and API Agreement, and issue application credentials.'

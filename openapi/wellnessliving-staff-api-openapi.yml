@@ -1,0 +1,425 @@
+openapi: 3.0.3
+info:
+  title: WellnessLiving Appointments Staff API
+  description: Curated, representative subset of WellnessLiving's official production API (RESTful, JSON-over-HTTPS). WellnessLiving is business-management software for fitness studios, gyms, spas, and salons; this API is the same one its own web and mobile clients (Achieve, Elevate) call, and is published for approved partners via an official OpenAPI document at github.com/wellnessliving/openapi (324 paths across 45+ resource areas as of the 2026-06-20 build). Endpoints below are grounded in that official spec and in the public github.com/wellnessliving/wl-sdk (PHP) and wl-sdk-js SDKs; this file selects roughly four representative endpoints per logical API area rather than reproducing the full catalog. Every WellnessLiving API resource is a `.json`-suffixed endpoint whose path is derived deterministically from the SDK model class's namespace (e.g. the PHP class `WellnessLiving\Wl\Staff\StaffElementModel` serves `/Wl/Staff/StaffElement.json`). Legacy numbered variants of several endpoints exist for backward compatibility (e.g. `Finish47`, `ServiceList52`, `Purchase72`) and are omitted here in favor of their current unsuffixed counterpart.
+  version: 1.1.20260620071011
+  contact:
+    name: WellnessLiving Support
+    email: support@wellnessliving.com
+    url: https://www.wellnessliving.com/support
+  license:
+    name: Proprietary
+    url: https://www.wellnessliving.com/knowledge-sharing/terms-of-use/
+  termsOfService: https://www.wellnessliving.com/knowledge-sharing/terms-of-use/
+servers:
+- url: https://us.wellnessliving.com
+  description: Production - United States data center
+- url: https://au.wellnessliving.com
+  description: Production - Australia data center
+- url: https://staging.wellnessliving.com
+  description: Staging (pre-release QA branch)
+- url: https://demo.wellnessliving.com
+  description: Demo/trunk (active development branch)
+security:
+- BearerAuth: []
+tags:
+- name: Staff
+paths:
+  /Wl/Staff/StaffList/StaffList.json:
+    get:
+      operationId: get_Wl_Staff_StaffList_StaffList
+      summary: Returns the list of staff members for the given business.
+      description: 'Returns all active (or optionally inactive) staff members for the business, including
+
+        their name, role, assigned services, contact details, and location assignments. Can be
+
+        filtered to only staff who have a specific privilege, and whether access-level checks
+
+        should be applied when building the result.'
+      tags:
+      - Staff
+      parameters:
+      - $ref: '#/components/parameters/XErrorRules'
+      - name: a_privilege
+        in: query
+        required: true
+        schema:
+          type: array
+          items:
+            type: string
+        description: 'A list of privileges to filter staff members by.
+
+
+          This property acts as a filter.
+
+          Only staff members possessing all the privileges specified in this l'
+      - name: is_check_staff_access
+        in: query
+        required: true
+        schema:
+          type: boolean
+        description: "Determines that only staff members which the current user has access to should be retrieved.\n\n `true` if only staff members which the current user has"
+      - name: is_staff_inactive
+        in: query
+        required: true
+        schema:
+          type: boolean
+        description: 'Whether inactive and removed staff members are available.
+
+          If `true` inactive and removed staff members are available. `false` otherwise.'
+      - name: k_business
+        in: query
+        required: true
+        schema:
+          type: string
+        description: The key of the business to show information for.
+      responses:
+        '200':
+          description: Successful response.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  a_staff:
+                    description: The `a_staff` field.
+                    nullable: true
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '422':
+          $ref: '#/components/responses/ValidationError'
+        '500':
+          $ref: '#/components/responses/ServerError'
+  /Wl/Staff/StaffView/StaffView.json:
+    get:
+      operationId: get_Wl_Staff_StaffView_StaffView
+      summary: Retrieves information about staff.
+      description: 'This method can accept or one staff key `k_staff` or staff list
+
+        `a_staff_list` but not both (exception would be thrown).'
+      tags:
+      - Staff
+      parameters:
+      - $ref: '#/components/parameters/XErrorRules'
+      - name: a_staff_list
+        in: query
+        required: false
+        schema:
+          type: array
+          nullable: true
+          items:
+            type: string
+        description: A list of staff keys.
+      - name: a_uid_staff_list
+        in: query
+        required: false
+        schema:
+          type: array
+          nullable: true
+          items:
+            type: string
+        description: A list of staff user IDs.
+      - name: i_image_height
+        in: query
+        required: true
+        schema:
+          type: integer
+        description: 'Image height in pixels. Please specify this value if you need image to be returned in specific size.
+
+          In case this value is not specified returned imag'
+      - name: i_image_width
+        in: query
+        required: true
+        schema:
+          type: integer
+        description: 'Image width in pixels. Please specify this value if you need image to be returned in specific size.
+
+          In case this value is not specified returned image'
+      - name: k_business
+        in: query
+        required: true
+        schema:
+          type: string
+        description: The key of the business to show information for.
+      - name: k_staff
+        in: query
+        required: true
+        schema:
+          type: string
+        description: 'The staff member key.
+
+          A staff member can work for more than one business.
+
+          This key can be found using the [StaffListApi](/Wl/Staff/StaffList/StaffList'
+      - name: uid_staff
+        in: query
+        required: true
+        schema:
+          type: string
+        description: 'The staff member user ID.
+
+          A staff member can work for more than one business.
+
+          This key can be found using the [StaffListApi](/Wl/Staff/StaffList/Staff'
+      responses:
+        '200':
+          description: Successful response.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  a_class_day:
+                    description: The `a_class_day` field.
+                    nullable: true
+                  a_result_list:
+                    description: The `a_result_list` field.
+                    nullable: true
+                  a_staff:
+                    description: The `a_staff` field.
+                    nullable: true
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '422':
+          $ref: '#/components/responses/ValidationError'
+        '500':
+          $ref: '#/components/responses/ServerError'
+  /Wl/Staff/StaffElement.json:
+    post:
+      operationId: post_Wl_Staff_StaffElement
+      summary: Update or create staff.
+      description: 'Creates a new staff member or updates an existing one in the business. When creating,
+
+        a new user account is provisioned if no matching email exists. When updating, the target
+
+        staff member must already belong to the business. Role, location, contact details,
+
+        employment dates, and custom profile fields can all be set in a single call.'
+      tags:
+      - Staff
+      parameters:
+      - $ref: '#/components/parameters/XErrorRules'
+      - name: k_staff
+        in: query
+        required: false
+        schema:
+          type: string
+          nullable: true
+        description: 'The key of the staff member resolved and used internally by this API.
+
+
+          This property is populated from `uid_staff` in `post()` and
+
+          returned in API res'
+      requestBody:
+        required: true
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+              properties:
+                a_location:
+                  description: The `a_location` field. See WellnessLiving developer portal for full field semantics.
+                  type: string
+                dl_end:
+                  description: The `dl_end` field. See WellnessLiving developer portal for full field semantics.
+                  type: string
+                dl_start:
+                  description: The `dl_start` field. See WellnessLiving developer portal for full field semantics.
+                  type: string
+                id_gender:
+                  description: The `id_gender` field. See WellnessLiving developer portal for full field semantics.
+                  type: string
+                id_role:
+                  description: The `id_role` field. See WellnessLiving developer portal for full field semantics.
+                  type: string
+                is_employ:
+                  description: The `is_employ` field. See WellnessLiving developer portal for full field semantics.
+                  type: string
+                is_microsite:
+                  description: The `is_microsite` field. See WellnessLiving developer portal for full field semantics.
+                  type: string
+                is_password_set_disable:
+                  description: The `is_password_set_disable` field. See WellnessLiving developer portal for full field semantics.
+                  type: string
+                is_uid:
+                  description: The `is_uid` field. See WellnessLiving developer portal for full field semantics.
+                  type: string
+                k_business:
+                  description: The `k_business` field. See WellnessLiving developer portal for full field semantics.
+                  type: string
+                k_business_role:
+                  description: The `k_business_role` field. See WellnessLiving developer portal for full field semantics.
+                  type: string
+                k_city:
+                  description: The `k_city` field. See WellnessLiving developer portal for full field semantics.
+                  type: string
+                k_location:
+                  description: The `k_location` field. See WellnessLiving developer portal for full field semantics.
+                  type: string
+                text_address:
+                  description: The `text_address` field. See WellnessLiving developer portal for full field semantics.
+                  type: string
+                text_biography:
+                  description: The `text_biography` field. See WellnessLiving developer portal for full field semantics.
+                  type: string
+              required:
+              - is_password_set_disable
+              - is_uid
+              - k_business
+      responses:
+        '200':
+          description: Successful response.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  k_staff:
+                    description: The `k_staff` field.
+                    nullable: true
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '422':
+          $ref: '#/components/responses/ValidationError'
+        '500':
+          $ref: '#/components/responses/ServerError'
+  /Wl/Staff/Privilege/PrivilegeList.json:
+    get:
+      operationId: get_Wl_Staff_Privilege_PrivilegeList
+      summary: Returns the list of privileges for the current user in the given business.
+      description: 'Returns the complete access profile of the signed-in user for the given business: staff
+
+        privileges by ID, named admin privileges, and a flag indicating super-admin status. Can
+
+        only be called for the currently authenticated user, not on behalf of another user.'
+      tags:
+      - Staff
+      parameters:
+      - $ref: '#/components/parameters/XErrorRules'
+      - name: k_business
+        in: query
+        required: true
+        schema:
+          type: string
+        description: Key of business to get privileges for.
+      - name: uid
+        in: query
+        required: true
+        schema:
+          type: string
+        description: User key to get privileges for.
+      responses:
+        '200':
+          description: Successful response.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  a_privilege_passport:
+                    description: The `a_privilege_passport` field.
+                    nullable: true
+                  a_privilege_staff:
+                    description: The `a_privilege_staff` field.
+                    nullable: true
+                  is_admin:
+                    description: The `is_admin` field.
+                    nullable: true
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '422':
+          $ref: '#/components/responses/ValidationError'
+        '500':
+          $ref: '#/components/responses/ServerError'
+components:
+  parameters:
+    XErrorRules:
+      name: X-Error-Rules
+      in: header
+      required: false
+      schema:
+        type: string
+      description: Opt in to mapping internal API error statuses to real 4xx HTTP codes. By default the API always answers HTTP 200 even on error, with the failure encoded in the JSON body; setting this header (e.g. to `default`) makes the gateway translate matched error statuses to 400/403/404 responses instead.
+  responses:
+    ServerError:
+      description: Unexpected server error.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    ValidationError:
+      description: The request payload failed field-level validation.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    Unauthorized:
+      description: Missing, expired, or invalid Bearer token / session.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    BadRequest:
+      description: 'Client-side error: invalid input, failed validation, throttling, or other request error (only returned as an HTTP status when `X-Error-Rules` opts in; otherwise encoded in a 200 body).'
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    NotFound:
+      description: The requested resource does not exist.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    Forbidden:
+      description: Authenticated but not permitted to access this business, location, or resource.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+  schemas:
+    ErrorResponse:
+      type: object
+      description: Standard WellnessLiving API error response shape.
+      properties:
+        status:
+          type: string
+          description: Machine-readable status/error code string (e.g. `access-denied`, `not-found`).
+        text_message:
+          type: string
+          description: Human-readable error message.
+        a_field:
+          type: object
+          additionalProperties: true
+          description: Per-field validation errors, when the failure is a 422-style validation error.
+  securitySchemes:
+    BearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+      description: 'The officially published OpenAPI declares a JWT Bearer scheme: sign in via `POST /Core/Passport/Login/Enter/Enter.json`, then mint a token with `GET /Core/Passport/Enter/Jwt/JwtToken.json` and send it as `Authorization: Bearer <token>`. The underlying PHP/JS SDKs additionally support the legacy scheme: a registered Application ID + secret code sign a per-request HMAC (SHA3-based) placed in the `Authorization:` header alongside session cookies established by the `Notepad`/`Enter` model pair. Both schemes require WellnessLiving''s Integrations Team to first approve API access, sign an NDA and API Agreement, and issue application credentials.'

@@ -1,0 +1,615 @@
+openapi: 3.0.3
+info:
+  title: WellnessLiving Appointments Booking API
+  description: Curated, representative subset of WellnessLiving's official production API (RESTful, JSON-over-HTTPS). WellnessLiving is business-management software for fitness studios, gyms, spas, and salons; this API is the same one its own web and mobile clients (Achieve, Elevate) call, and is published for approved partners via an official OpenAPI document at github.com/wellnessliving/openapi (324 paths across 45+ resource areas as of the 2026-06-20 build). Endpoints below are grounded in that official spec and in the public github.com/wellnessliving/wl-sdk (PHP) and wl-sdk-js SDKs; this file selects roughly four representative endpoints per logical API area rather than reproducing the full catalog. Every WellnessLiving API resource is a `.json`-suffixed endpoint whose path is derived deterministically from the SDK model class's namespace (e.g. the PHP class `WellnessLiving\Wl\Staff\StaffElementModel` serves `/Wl/Staff/StaffElement.json`). Legacy numbered variants of several endpoints exist for backward compatibility (e.g. `Finish47`, `ServiceList52`, `Purchase72`) and are omitted here in favor of their current unsuffixed counterpart.
+  version: 1.1.20260620071011
+  contact:
+    name: WellnessLiving Support
+    email: support@wellnessliving.com
+    url: https://www.wellnessliving.com/support
+  license:
+    name: Proprietary
+    url: https://www.wellnessliving.com/knowledge-sharing/terms-of-use/
+  termsOfService: https://www.wellnessliving.com/knowledge-sharing/terms-of-use/
+servers:
+- url: https://us.wellnessliving.com
+  description: Production - United States data center
+- url: https://au.wellnessliving.com
+  description: Production - Australia data center
+- url: https://staging.wellnessliving.com
+  description: Staging (pre-release QA branch)
+- url: https://demo.wellnessliving.com
+  description: Demo/trunk (active development branch)
+security:
+- BearerAuth: []
+tags:
+- name: Booking
+paths:
+  /Wl/Book/Process/Process.json:
+    get:
+      operationId: get_Wl_Book_Process_Process
+      summary: Returns the ordered list of booking wizard steps for the given session and client.
+      description: 'Evaluates the session, user profile, payment requirements, asset selection, and subscription state to build
+
+        an ordered list of steps the client must complete to finish the booking. The first step in the list is marked
+
+        as current, and additional flags about event type, wait-list availability, and payment options are returned.'
+      tags:
+      - Booking
+      parameters:
+      - $ref: '#/components/parameters/XErrorRules'
+      - name: dt_date_gmt
+        in: query
+        required: true
+        schema:
+          type: string
+        description: Date/time to which session is booked.
+      - name: id_mode
+        in: query
+        required: true
+        schema:
+          type: string
+          description: Enumerated/coded value (see WellnessLiving *Sid constant classes).
+        description: The mode type. One of the [ModeSid](#/components/schemas/Wl.Mode.ModeSid) constants.
+      - name: is_backend
+        in: query
+        required: true
+        schema:
+          type: boolean
+        description: '`true` if action is performed as a staff member; `false` otherwise.
+
+
+          If `true` is sent, access to the business and to the client will be checked.
+
+          If `'
+      - name: is_credit_card_check
+        in: query
+        required: true
+        schema:
+          type: boolean
+        description: 'Checking whether the client has a credit card (if configured in the business) will be skipped if this flag is set to `false`.
+
+
+          Use this field with cau'
+      - name: k_class_period
+        in: query
+        required: true
+        schema:
+          type: string
+        description: Key of session which is booked.
+      - name: show_relation
+        in: query
+        required: true
+        schema:
+          type: boolean
+        description: '`true` to show "book for" option in booking wizard. `false` for default behavior.'
+      - name: uid
+        in: query
+        required: true
+        schema:
+          type: string
+        description: The client key for which the booking is being made.
+      responses:
+        '200':
+          description: Successful response.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  a_family_relation_login_allow:
+                    description: The `a_family_relation_login_allow` field.
+                    nullable: true
+                  a_path:
+                    description: The `a_path` field.
+                    nullable: true
+                  id_pay_require:
+                    description: The `id_pay_require` field.
+                    nullable: true
+                  is_age_require:
+                    description: The `is_age_require` field.
+                    nullable: true
+                  is_card_authorize:
+                    description: The `is_card_authorize` field.
+                    nullable: true
+                  is_event:
+                    description: The `is_event` field.
+                    nullable: true
+                  is_family_relation_book:
+                    description: The `is_family_relation_book` field.
+                    nullable: true
+                  is_free:
+                    description: The `is_free` field.
+                    nullable: true
+                  is_have_ach:
+                    description: The `is_have_ach` field.
+                    nullable: true
+                  is_have_credit_card:
+                    description: The `is_have_credit_card` field.
+                    nullable: true
+                  is_session:
+                    description: The `is_session` field.
+                    nullable: true
+                  is_wait:
+                    description: The `is_wait` field.
+                    nullable: true
+                  is_wait_list_unpaid:
+                    description: The `is_wait_list_unpaid` field.
+                    nullable: true
+                  k_location:
+                    description: The `k_location` field.
+                    nullable: true
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '422':
+          $ref: '#/components/responses/ValidationError'
+        '500':
+          $ref: '#/components/responses/ServerError'
+  /Wl/Book/Process/Payment/Payment.json:
+    post:
+      operationId: post_Wl_Book_Process_Payment_Payment
+      summary: Processes purchases and books sessions on the "Pay/Billing info" step of the booking wizard.
+      description: 'Accepts the selected purchase items, payment form, optional discount code, and installment template, then
+
+        collects payment, applies discounts and prizes, and creates the booking records. Returns visit keys, activity
+
+        keys, and purchase activity key upon success.'
+      tags:
+      - Booking
+      parameters:
+      - $ref: '#/components/parameters/XErrorRules'
+      - name: dt_date_gmt
+        in: query
+        required: true
+        schema:
+          type: string
+        description: Date/time to which session is booked.
+      - name: id_mode
+        in: query
+        required: true
+        schema:
+          type: string
+          description: Enumerated/coded value (see WellnessLiving *Sid constant classes).
+        description: The mode type. One of the [ModeSid](#/components/schemas/Wl.Mode.ModeSid) constants.
+      - name: is_backend
+        in: query
+        required: true
+        schema:
+          type: boolean
+        description: '`true` if action is performed as a staff member; `false` otherwise.
+
+
+          If `true` is sent, access to the business and to the client will be checked.
+
+          If `'
+      - name: is_credit_card_check
+        in: query
+        required: true
+        schema:
+          type: boolean
+        description: 'Checking whether the client has a credit card (if configured in the business) will be skipped if this flag is set to `false`.
+
+
+          Use this field with cau'
+      - name: k_class_period
+        in: query
+        required: true
+        schema:
+          type: string
+        description: Key of session which is booked.
+      - name: show_relation
+        in: query
+        required: true
+        schema:
+          type: boolean
+        description: '`true` to show "book for" option in booking wizard. `false` for default behavior.'
+      - name: uid
+        in: query
+        required: true
+        schema:
+          type: string
+        description: The client key for which the booking is being made.
+      requestBody:
+        required: true
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+              properties:
+                a_item:
+                  description: The `a_item` field. See WellnessLiving developer portal for full field semantics.
+                  type: string
+                a_pay_form:
+                  description: The `a_pay_form` field. See WellnessLiving developer portal for full field semantics.
+                  type: string
+                a_quiz_response:
+                  description: The `a_quiz_response` field. See WellnessLiving developer portal for full field semantics.
+                  type: string
+                a_repeat:
+                  description: The `a_repeat` field. See WellnessLiving developer portal for full field semantics.
+                  type: string
+                a_resource:
+                  description: The `a_resource` field. See WellnessLiving developer portal for full field semantics.
+                  type: string
+                a_session:
+                  description: The `a_session` field. See WellnessLiving developer portal for full field semantics.
+                  type: string
+                a_session_wait_list_unpaid:
+                  description: The `a_session_wait_list_unpaid` field. See WellnessLiving developer portal for full field semantics.
+                  type: string
+                can_book:
+                  description: The `can_book` field. See WellnessLiving developer portal for full field semantics.
+                  type: string
+                is_book_unpaid:
+                  description: The `is_book_unpaid` field. See WellnessLiving developer portal for full field semantics.
+                  type: string
+                is_card_authorize:
+                  description: The `is_card_authorize` field. See WellnessLiving developer portal for full field semantics.
+                  type: string
+                is_force_pay_later:
+                  description: The `is_force_pay_later` field. See WellnessLiving developer portal for full field semantics.
+                  type: string
+                k_login_promotion:
+                  description: The `k_login_promotion` field. See WellnessLiving developer portal for full field semantics.
+                  type: string
+                k_pay_installment_template:
+                  description: The `k_pay_installment_template` field. See WellnessLiving developer portal for full field semantics.
+                  type: string
+                k_session_pass:
+                  description: The `k_session_pass` field. See WellnessLiving developer portal for full field semantics.
+                  type: string
+                text_discount_code:
+                  description: The `text_discount_code` field. See WellnessLiving developer portal for full field semantics.
+                  type: string
+              required:
+              - a_item
+              - a_pay_form
+              - a_quiz_response
+              - a_resource
+              - a_session
+              - a_session_wait_list_unpaid
+              - can_book
+              - is_book_unpaid
+              - is_card_authorize
+              - is_force_pay_later
+              - k_login_promotion
+              - k_session_pass
+              - text_discount_code
+      responses:
+        '200':
+          description: Successful response.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  a_login_activity_book:
+                    description: The `a_login_activity_book` field.
+                    nullable: true
+                  a_visit:
+                    description: The `a_visit` field.
+                    nullable: true
+                  k_login_activity_purchase:
+                    description: The `k_login_activity_purchase` field.
+                    nullable: true
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '422':
+          $ref: '#/components/responses/ValidationError'
+        '500':
+          $ref: '#/components/responses/ServerError'
+  /Wl/Book/Process/Purchase/Purchase.json:
+    get:
+      operationId: get_Wl_Book_Process_Purchase_Purchase
+      summary: Returns available purchase options, existing client promotions, session passes, and prizes for the specified session.
+      description: 'Loads all purchase options that can be used to book the specified class period for the given user, including
+
+        existing login promotions with remaining session counts, new purchasable options, reward prizes, and login prizes.
+
+        Returns pricing, image, program category, and availability data for each option.'
+      tags:
+      - Booking
+      parameters:
+      - $ref: '#/components/parameters/XErrorRules'
+      - name: a_login_promotion_group
+        in: query
+        required: true
+        schema:
+          type: array
+          items:
+            type: string
+        description: 'A list of existing purchase options that were selected for previous clients (group).
+
+
+          Note:
+
+          * It makes sense if for all clients the list is loaded wit'
+      - name: a_session
+        in: query
+        required: true
+        schema:
+          type: array
+          items:
+            type: string
+        description: 'The list of sessions being booked.
+
+
+          Keys are class period keys.
+
+          Values are index arrays of date/time strings when the session occurred, in MySQL forma'
+      - name: a_session_wait_list_unpaid
+        in: query
+        required: true
+        schema:
+          type: array
+          items:
+            type: string
+        description: 'The selected sessions on the wait list that are unpaid.
+
+
+          Keys are class period keys.
+
+          Values are index arrays of date/time strings when the session occ'
+      - name: dt_date_gmt
+        in: query
+        required: true
+        schema:
+          type: string
+        description: Date/time to which session is booked.
+      - name: i_image_height
+        in: query
+        required: true
+        schema:
+          type: integer
+        description: 'The image height in pixels. Specify this value if you need image to be returned in specific size.
+
+          The returned image will have the default thumbnail s'
+      - name: i_image_width
+        in: query
+        required: true
+        schema:
+          type: integer
+        description: 'The image width in pixels. Specify this value if you need image to be returned in specific size.
+
+          The returned image will have the default thumbnail si'
+      - name: id_mode
+        in: query
+        required: true
+        schema:
+          type: string
+          description: Enumerated/coded value (see WellnessLiving *Sid constant classes).
+        description: The mode type. One of the [ModeSid](#/components/schemas/Wl.Mode.ModeSid) constants.
+      - name: is_backend
+        in: query
+        required: true
+        schema:
+          type: boolean
+        description: '`true` if action is performed as a staff member; `false` otherwise.
+
+
+          If `true` is sent, access to the business and to the client will be checked.
+
+          If `'
+      - name: is_card_authorize
+        in: query
+        required: true
+        schema:
+          type: boolean
+        description: Determines if the client must authorize the credit card.
+      - name: is_credit_card_check
+        in: query
+        required: true
+        schema:
+          type: boolean
+        description: 'Checking whether the client has a credit card (if configured in the business) will be skipped if this flag is set to `false`.
+
+
+          Use this field with cau'
+      - name: k_business
+        in: query
+        required: false
+        schema:
+          type: string
+          nullable: true
+        description: 'The business key.
+
+
+          `null` if business key was not passed.'
+      - name: k_class_period
+        in: query
+        required: true
+        schema:
+          type: string
+        description: Key of session which is booked.
+      - name: show_relation
+        in: query
+        required: true
+        schema:
+          type: boolean
+        description: '`true` to show "book for" option in booking wizard. `false` for default behavior.'
+      - name: uid
+        in: query
+        required: true
+        schema:
+          type: string
+        description: The client key for which the booking is being made.
+      responses:
+        '200':
+          description: Successful response.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  a_login_prize:
+                    description: The `a_login_prize` field.
+                    nullable: true
+                  a_login_promotion:
+                    description: The `a_login_promotion` field.
+                    nullable: true
+                  a_purchase:
+                    description: The `a_purchase` field.
+                    nullable: true
+                  a_reward_prize:
+                    description: The `a_reward_prize` field.
+                    nullable: true
+                  a_session_pass:
+                    description: The `a_session_pass` field.
+                    nullable: true
+                  is_single_default:
+                    description: The `is_single_default` field.
+                    nullable: true
+                  k_promotion_default:
+                    description: The `k_promotion_default` field.
+                    nullable: true
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '422':
+          $ref: '#/components/responses/ValidationError'
+        '500':
+          $ref: '#/components/responses/ServerError'
+  /Wl/Book/Cancel/CancelCan.json:
+    get:
+      operationId: get_Wl_Book_Cancel_CancelCan
+      summary: Returns information about whether the given user can cancel the booking and the expected consequences.
+      description: 'Accepts a business key and a visit key, validates access, and performs a dry-run cancellation to determine
+
+        whether the visit can be cancelled online, whether a late-cancel penalty applies, and whether the purchase
+
+        option credit would be refunded.'
+      tags:
+      - Booking
+      parameters:
+      - $ref: '#/components/parameters/XErrorRules'
+      - name: k_business
+        in: query
+        required: true
+        schema:
+          type: string
+        description: Key of the business within which the action is performed.
+      - name: k_visit
+        in: query
+        required: true
+        schema:
+          type: string
+        description: Visit key.
+      responses:
+        '200':
+          description: Successful response.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  a_penalty:
+                    description: The `a_penalty` field.
+                    nullable: true
+                  can_cancel:
+                    description: The `can_cancel` field.
+                    nullable: true
+                  is_flag:
+                    description: The `is_flag` field.
+                    nullable: true
+                  is_late:
+                    description: The `is_late` field.
+                    nullable: true
+                  is_refund:
+                    description: The `is_refund` field.
+                    nullable: true
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '422':
+          $ref: '#/components/responses/ValidationError'
+        '500':
+          $ref: '#/components/responses/ServerError'
+components:
+  parameters:
+    XErrorRules:
+      name: X-Error-Rules
+      in: header
+      required: false
+      schema:
+        type: string
+      description: Opt in to mapping internal API error statuses to real 4xx HTTP codes. By default the API always answers HTTP 200 even on error, with the failure encoded in the JSON body; setting this header (e.g. to `default`) makes the gateway translate matched error statuses to 400/403/404 responses instead.
+  responses:
+    ServerError:
+      description: Unexpected server error.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    ValidationError:
+      description: The request payload failed field-level validation.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    Unauthorized:
+      description: Missing, expired, or invalid Bearer token / session.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    BadRequest:
+      description: 'Client-side error: invalid input, failed validation, throttling, or other request error (only returned as an HTTP status when `X-Error-Rules` opts in; otherwise encoded in a 200 body).'
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    NotFound:
+      description: The requested resource does not exist.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    Forbidden:
+      description: Authenticated but not permitted to access this business, location, or resource.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+  schemas:
+    ErrorResponse:
+      type: object
+      description: Standard WellnessLiving API error response shape.
+      properties:
+        status:
+          type: string
+          description: Machine-readable status/error code string (e.g. `access-denied`, `not-found`).
+        text_message:
+          type: string
+          description: Human-readable error message.
+        a_field:
+          type: object
+          additionalProperties: true
+          description: Per-field validation errors, when the failure is a 422-style validation error.
+  securitySchemes:
+    BearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+      description: 'The officially published OpenAPI declares a JWT Bearer scheme: sign in via `POST /Core/Passport/Login/Enter/Enter.json`, then mint a token with `GET /Core/Passport/Enter/Jwt/JwtToken.json` and send it as `Authorization: Bearer <token>`. The underlying PHP/JS SDKs additionally support the legacy scheme: a registered Application ID + secret code sign a per-request HMAC (SHA3-based) placed in the `Authorization:` header alongside session cookies established by the `Notepad`/`Enter` model pair. Both schemes require WellnessLiving''s Integrations Team to first approve API access, sign an NDA and API Agreement, and issue application credentials.'

@@ -1,0 +1,408 @@
+openapi: 3.0.3
+info:
+  title: WellnessLiving Appointments Payments API
+  description: Curated, representative subset of WellnessLiving's official production API (RESTful, JSON-over-HTTPS). WellnessLiving is business-management software for fitness studios, gyms, spas, and salons; this API is the same one its own web and mobile clients (Achieve, Elevate) call, and is published for approved partners via an official OpenAPI document at github.com/wellnessliving/openapi (324 paths across 45+ resource areas as of the 2026-06-20 build). Endpoints below are grounded in that official spec and in the public github.com/wellnessliving/wl-sdk (PHP) and wl-sdk-js SDKs; this file selects roughly four representative endpoints per logical API area rather than reproducing the full catalog. Every WellnessLiving API resource is a `.json`-suffixed endpoint whose path is derived deterministically from the SDK model class's namespace (e.g. the PHP class `WellnessLiving\Wl\Staff\StaffElementModel` serves `/Wl/Staff/StaffElement.json`). Legacy numbered variants of several endpoints exist for backward compatibility (e.g. `Finish47`, `ServiceList52`, `Purchase72`) and are omitted here in favor of their current unsuffixed counterpart.
+  version: 1.1.20260620071011
+  contact:
+    name: WellnessLiving Support
+    email: support@wellnessliving.com
+    url: https://www.wellnessliving.com/support
+  license:
+    name: Proprietary
+    url: https://www.wellnessliving.com/knowledge-sharing/terms-of-use/
+  termsOfService: https://www.wellnessliving.com/knowledge-sharing/terms-of-use/
+servers:
+- url: https://us.wellnessliving.com
+  description: Production - United States data center
+- url: https://au.wellnessliving.com
+  description: Production - Australia data center
+- url: https://staging.wellnessliving.com
+  description: Staging (pre-release QA branch)
+- url: https://demo.wellnessliving.com
+  description: Demo/trunk (active development branch)
+security:
+- BearerAuth: []
+tags:
+- name: Payments
+paths:
+  /Thoth/WlPay/Account/Account.json:
+    get:
+      operationId: get_Thoth_WlPay_Account_Account
+      summary: Retrieves information about accounts of given user in given business.
+      description: Retrieves information about accounts of given user in given business.
+      tags:
+      - Payments
+      parameters:
+      - $ref: '#/components/parameters/XErrorRules'
+      - name: is_owner
+        in: query
+        required: true
+        schema:
+          type: boolean
+        description: 'If `true`, information for the account''s owner is returned. Clients can be configured to pay for a relative''s
+
+          expenses. For example, a parent can pay'
+      - name: k_business
+        in: query
+        required: true
+        schema:
+          type: string
+        description: The key of the business to show information for.
+      - name: uid
+        in: query
+        required: true
+        schema:
+          type: string
+        description: The key of the user to show information for.
+      responses:
+        '200':
+          description: Successful response.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  a_account:
+                    description: The `a_account` field.
+                    nullable: true
+                  a_account_nx:
+                    description: The `a_account_nx` field.
+                    nullable: true
+                  is_debtor:
+                    description: The `is_debtor` field.
+                    nullable: true
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '422':
+          $ref: '#/components/responses/ValidationError'
+        '500':
+          $ref: '#/components/responses/ServerError'
+  /Thoth/WlPay/Bank/Card/List.json:
+    get:
+      operationId: get_Thoth_WlPay_Bank_Card_List
+      summary: Retrieves information about user's bank cards.
+      description: Retrieves information about user's bank cards.
+      tags:
+      - Payments
+      parameters:
+      - $ref: '#/components/parameters/XErrorRules'
+      - name: k_business
+        in: query
+        required: true
+        schema:
+          type: string
+        description: ID of current business.
+      - name: k_location
+        in: query
+        required: true
+        schema:
+          type: string
+        description: 'Location to show information for.
+
+          Primary key in RsLocationSql table.
+
+
+          `0` to use user''s home location.'
+      - name: uid
+        in: query
+        required: true
+        schema:
+          type: string
+        description: ID of a user to show information for.
+      responses:
+        '200':
+          description: Successful response.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  a_bank_card:
+                    description: The `a_bank_card` field.
+                    nullable: true
+                  a_list:
+                    description: The `a_list` field.
+                    nullable: true
+                  can_add:
+                    description: The `can_add` field.
+                    nullable: true
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '422':
+          $ref: '#/components/responses/ValidationError'
+        '500':
+          $ref: '#/components/responses/ServerError'
+  /Thoth/WlPay/Account/Charge/Charge.json:
+    post:
+      operationId: post_Thoth_WlPay_Account_Charge_Charge
+      summary: Allows the user account to be filled with a specified payment, or to perform the reset change manually.
+      description: Allows the user account to be filled with a specified payment, or to perform the reset change manually.
+      tags:
+      - Payments
+      parameters:
+      - $ref: '#/components/parameters/XErrorRules'
+      - name: id_pay_account_charge
+        in: query
+        required: true
+        schema:
+          type: string
+          description: Enumerated/coded value (see WellnessLiving *Sid constant classes).
+        description: 'The account charge mode.
+
+
+          One of the [RsPayAccountChargeSid](#/components/schemas/RsPayAccountChargeSid) constants.'
+      - name: is_staff
+        in: query
+        required: true
+        schema:
+          type: boolean
+        description: If `true`, the account is filled by a staff member in the backend. Otherwise, this will be `false`.
+      - name: k_business
+        in: query
+        required: true
+        schema:
+          type: string
+        description: 'The ID of the business the user account belongs to.
+
+
+          This shouldn''t be passed if a user account has already been created.
+
+          In such cases, `k_pay_accoun'
+      - name: k_pay_account
+        in: query
+        required: true
+        schema:
+          type: string
+        description: 'The ID of the user account to refill.
+
+
+          This may be 0 if a user account hasn''t been created yet.
+
+          In such cases, `k_business` and `uid` should be passed'
+      - name: uid
+        in: query
+        required: true
+        schema:
+          type: string
+        description: 'The ID of the user whose account is being refilled.
+
+
+          This shouldn''t be passed if a user account has already been created.
+
+          In such cases, `k_pay_accoun'
+      requestBody:
+        required: true
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+              properties:
+                a_pay_form:
+                  description: The `a_pay_form` field. See WellnessLiving developer portal for full field semantics.
+                  type: string
+                id_mode:
+                  description: The `id_mode` field. See WellnessLiving developer portal for full field semantics.
+                  type: string
+                m_amount:
+                  description: The `m_amount` field. See WellnessLiving developer portal for full field semantics.
+                  type: string
+                s_comment:
+                  description: The `s_comment` field. See WellnessLiving developer portal for full field semantics.
+                  type: string
+              required:
+              - a_pay_form
+              - id_mode
+              - m_amount
+              - s_comment
+      responses:
+        '200':
+          description: Successful response.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '422':
+          $ref: '#/components/responses/ValidationError'
+        '500':
+          $ref: '#/components/responses/ServerError'
+  /Thoth/WlPay/Transaction/Report/TransactionAllPayment.json:
+    get:
+      operationId: get_Thoth_WlPay_Transaction_Report_TransactionAllPayment
+      summary: Gets the daily transaction data.
+      description: Gets the daily transaction data.
+      tags:
+      - Payments
+      parameters:
+      - $ref: '#/components/parameters/XErrorRules'
+      - name: dl_date_end
+        in: query
+        required: true
+        schema:
+          type: string
+        description: The end date in local time to retrieve transactions for.
+      - name: dl_date_start
+        in: query
+        required: true
+        schema:
+          type: string
+        description: The end date in local time to retrieve transactions for.
+      - name: i_page
+        in: query
+        required: true
+        schema:
+          type: integer
+        description: 'The page of the report, starting from 0.
+
+          Each page will contain a maximum of `LIMIT` rows.'
+      - name: is_refresh
+        in: query
+        required: true
+        schema:
+          type: boolean
+        description: 'Determines whether the report should be refreshed.
+
+
+          If `true`, this report should be refreshed. A report refresh can''t be requested while the report i'
+      - name: k_business
+        in: query
+        required: true
+        schema:
+          type: string
+        description: The key of the business for which report should be generated.
+      responses:
+        '200':
+          description: Successful response.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  a_field:
+                    description: The `a_field` field.
+                    nullable: true
+                  a_row:
+                    description: The `a_row` field.
+                    nullable: true
+                  a_warning:
+                    description: The `a_warning` field.
+                    nullable: true
+                  dtu_complete:
+                    description: The `dtu_complete` field.
+                    nullable: true
+                  dtu_queue:
+                    description: The `dtu_queue` field.
+                    nullable: true
+                  dtu_start:
+                    description: The `dtu_start` field.
+                    nullable: true
+                  id_report_status:
+                    description: The `id_report_status` field.
+                    nullable: true
+                  is_more:
+                    description: The `is_more` field.
+                    nullable: true
+                  is_report_complete:
+                    description: The `is_report_complete` field.
+                    nullable: true
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '422':
+          $ref: '#/components/responses/ValidationError'
+        '500':
+          $ref: '#/components/responses/ServerError'
+components:
+  parameters:
+    XErrorRules:
+      name: X-Error-Rules
+      in: header
+      required: false
+      schema:
+        type: string
+      description: Opt in to mapping internal API error statuses to real 4xx HTTP codes. By default the API always answers HTTP 200 even on error, with the failure encoded in the JSON body; setting this header (e.g. to `default`) makes the gateway translate matched error statuses to 400/403/404 responses instead.
+  responses:
+    ServerError:
+      description: Unexpected server error.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    ValidationError:
+      description: The request payload failed field-level validation.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    Unauthorized:
+      description: Missing, expired, or invalid Bearer token / session.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    BadRequest:
+      description: 'Client-side error: invalid input, failed validation, throttling, or other request error (only returned as an HTTP status when `X-Error-Rules` opts in; otherwise encoded in a 200 body).'
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    NotFound:
+      description: The requested resource does not exist.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    Forbidden:
+      description: Authenticated but not permitted to access this business, location, or resource.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+  schemas:
+    ErrorResponse:
+      type: object
+      description: Standard WellnessLiving API error response shape.
+      properties:
+        status:
+          type: string
+          description: Machine-readable status/error code string (e.g. `access-denied`, `not-found`).
+        text_message:
+          type: string
+          description: Human-readable error message.
+        a_field:
+          type: object
+          additionalProperties: true
+          description: Per-field validation errors, when the failure is a 422-style validation error.
+  securitySchemes:
+    BearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+      description: 'The officially published OpenAPI declares a JWT Bearer scheme: sign in via `POST /Core/Passport/Login/Enter/Enter.json`, then mint a token with `GET /Core/Passport/Enter/Jwt/JwtToken.json` and send it as `Authorization: Bearer <token>`. The underlying PHP/JS SDKs additionally support the legacy scheme: a registered Application ID + secret code sign a per-request HMAC (SHA3-based) placed in the `Authorization:` header alongside session cookies established by the `Notepad`/`Enter` model pair. Both schemes require WellnessLiving''s Integrations Team to first approve API access, sign an NDA and API Agreement, and issue application credentials.'
