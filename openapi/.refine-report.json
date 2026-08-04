@@ -1,0 +1,42 @@
+{
+  "provider": "wellnessliving",
+  "sources": [
+    "wellnessliving-appointments-api-openapi.yml",
+    "wellnessliving-authentication-api-openapi.yml",
+    "wellnessliving-booking-api-openapi.yml",
+    "wellnessliving-business-api-openapi.yml",
+    "wellnessliving-catalog-api-openapi.yml",
+    "wellnessliving-classes-api-openapi.yml",
+    "wellnessliving-clients-api-openapi.yml",
+    "wellnessliving-locations-api-openapi.yml",
+    "wellnessliving-payments-api-openapi.yml",
+    "wellnessliving-promotions-api-openapi.yml",
+    "wellnessliving-reports-api-openapi.yml",
+    "wellnessliving-reviews-api-openapi.yml",
+    "wellnessliving-rewards-api-openapi.yml",
+    "wellnessliving-staff-api-openapi.yml",
+    "wellnessliving-websocket-api-openapi.yml"
+  ],
+  "outputs": [
+    "wellnessliving-appointments-api-openapi.yml",
+    "wellnessliving-authentication-api-openapi.yml",
+    "wellnessliving-booking-api-openapi.yml",
+    "wellnessliving-business-api-openapi.yml",
+    "wellnessliving-catalog-api-openapi.yml",
+    "wellnessliving-classes-api-openapi.yml",
+    "wellnessliving-clients-api-openapi.yml",
+    "wellnessliving-locations-api-openapi.yml",
+    "wellnessliving-payments-api-openapi.yml",
+    "wellnessliving-promotions-api-openapi.yml",
+    "wellnessliving-reports-api-openapi.yml",
+    "wellnessliving-reviews-api-openapi.yml",
+    "wellnessliving-rewards-api-openapi.yml",
+    "wellnessliving-staff-api-openapi.yml",
+    "wellnessliving-websocket-api-openapi.yml"
+  ],
+  "archived": [],
+  "errors": [],
+  "warnings": [],
+  "notes": [],
+  "skipped": []
+}
