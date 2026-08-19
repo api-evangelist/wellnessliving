@@ -1,0 +1,316 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "WellnessLiving Appointments Classes API",
+    "version": "1.1.20260620071011"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Classes",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Returns list of classes and events in the business.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://us.wellnessliving.com/Wl/Classes/ClassList/List.json",
+            "headers": [
+              {
+                "name": "X-Error-Rules",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "a_class_tab",
+                "value": "",
+                "type": "query",
+                "description": "List of tabs keys.\nFiltering by Book Now Tab is not supported if `is_franchise` is `true`.\n\n`null` if no filtering by Book Now Tab is required."
+              },
+              {
+                "name": "id_class_tab",
+                "value": "",
+                "type": "query",
+                "description": "ID of book now tab. One of [TabSid](#/components/schemas/Wl.Classes.Tab.TabSid) constants.\nOnly [TabSid::TRAINING](#/components/schemas/Wl.Classes.Tab"
+              },
+              {
+                "name": "is_enrollment_block_all",
+                "value": "",
+                "type": "query",
+                "description": "Whether all events should be returned from same enrollment block.\n\n* `true` to return all events from same enrollment block.\n* `false` to return only"
+              },
+              {
+                "name": "is_enrollment_block_empty",
+                "value": "",
+                "type": "query",
+                "description": "Whether to include events without sessions.\nAn empty event is neither published nor unpublished. It simply has no sessions.\nSuch events can be useful"
+              },
+              {
+                "name": "is_event_include",
+                "value": "",
+                "type": "query",
+                "description": "Whether to include events in the result.\n\ntrue` to include both classes and events.\nfalse` to include only classes."
+              },
+              {
+                "name": "is_franchise",
+                "value": "",
+                "type": "query",
+                "description": "Whether to return franchisee-created classes (if business is franchisor).\n`true` to include franchisee-created classes."
+              },
+              {
+                "name": "k_business",
+                "value": "",
+                "type": "query",
+                "description": "Business key."
+              }
+            ]
+          },
+          "docs": "Used by import and integration tools to enumerate all classes and events offered by a business.\nIn franchise mode, classes from all franchisee locations are included. Results are sorted by title\nand start date."
+        },
+        {
+          "info": {
+            "name": "Returns class information including schedules, images, and booking settings for the specified business.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://us.wellnessliving.com/Wl/Classes/ClassView/Element.json",
+            "headers": [
+              {
+                "name": "X-Error-Rules",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "i_image_height",
+                "value": "",
+                "type": "query",
+                "description": "The image height in pixels. Specify this value if you need the image to be returned in a specific size.\nIf this value isn't specified, the returned im"
+              },
+              {
+                "name": "i_image_width",
+                "value": "",
+                "type": "query",
+                "description": "The image width in pixels. Specify this value if you need the image to be returned in a specific size.\nIf this value isn't specified, the returned ima"
+              },
+              {
+                "name": "k_business",
+                "value": "",
+                "type": "query",
+                "description": "The business key."
+              },
+              {
+                "name": "k_class",
+                "value": "",
+                "type": "query",
+                "description": "The class key used to get information for a specific class.\n\nAn empty value returns information for all classes of the business."
+              },
+              {
+                "name": "show_cancelled",
+                "value": "",
+                "type": "query",
+                "description": "Defines if canceled schedules should be included in the result.\n\nIf `true`, canceled schedules will be shown. Otherwise, this will be `false`."
+              }
+            ]
+          },
+          "docs": "Used by import tools to read the full class catalog for a business. Returns a map of all classes\n(or a single class) with the information needed to replicate class data in an external system:\nschedules, images, booking constraints, and descriptions."
+        },
+        {
+          "info": {
+            "name": "Retrieves a list of classes and class information for the given business and date range.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://us.wellnessliving.com/Wl/Schedule/ClassList/ClassList.json",
+            "headers": [
+              {
+                "name": "X-Error-Rules",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "a_class",
+                "value": "",
+                "type": "query",
+                "description": "The list of classes keys to filter.\nReturn sessions with matching class IDs.\n\nIf it's empty, all classes/events will be returned."
+              },
+              {
+                "name": "a_day",
+                "value": "",
+                "type": "query",
+                "description": "Class filter by day of the week.\nArray of number representing the days of the week.\nReturn sessions matching the given weekdays.\n(7 = Sunday, 1 = Mond"
+              },
+              {
+                "name": "a_location",
+                "value": "",
+                "type": "query",
+                "description": "The list of location keys to filter results.\nIf it's empty, schedule for all locations will be returned.\nAll given locations should be from the same b"
+              },
+              {
+                "name": "a_time",
+                "value": "",
+                "type": "query",
+                "description": "Class filter by time of day.\nList of arrays with start and end time in \"HH:MM\" format (24h).\nInclude sessions that start between the specified time ra"
+              },
+              {
+                "name": "dt_date",
+                "value": "",
+                "type": "query",
+                "description": "The list start date in UTC and in MySQL format."
+              },
+              {
+                "name": "dt_end",
+                "value": "",
+                "type": "query",
+                "description": "The list end date in UTC and in MySQL format."
+              },
+              {
+                "name": "is_response_short",
+                "value": "",
+                "type": "query",
+                "description": "`true` means to not generate `a_session` result.\nCan be used, if you do not need full information about existing classes and result in `a_calendar` is"
+              },
+              {
+                "name": "is_tab_all",
+                "value": "",
+                "type": "query",
+                "description": "If `true`, sessions from every class tab are returned. If `false`, use the\n`k_class_tab` value."
+              },
+              {
+                "name": "is_virtual",
+                "value": "",
+                "type": "query",
+                "description": "Class filter by type.\nThe class is virtual.\n\n`true`: Only virtual classes.\n`false`: Only in-person.\n`null` or not set: No filtering."
+              },
+              {
+                "name": "k_business",
+                "value": "",
+                "type": "query",
+                "description": "The business key."
+              },
+              {
+                "name": "k_class_tab",
+                "value": "",
+                "type": "query",
+                "description": "The category tab key.\n\nThis will be `null` if not set yet.\nThis will be ignored if `is_tab_all` is `true`."
+              },
+              {
+                "name": "s_staff",
+                "value": "",
+                "type": "query",
+                "description": "The list of staff members to filter.\nA comma separated list of staff keys."
+              },
+              {
+                "name": "s_staff_uid",
+                "value": "",
+                "type": "query",
+                "description": "The list of staff user keys to filter.\nA comma separated list of staff user keys."
+              },
+              {
+                "name": "show_cancel",
+                "value": "",
+                "type": "query",
+                "description": "If `true`, canceled sessions will be returned. If `false`, canceled sessions won't be returned."
+              },
+              {
+                "name": "show_class",
+                "value": "",
+                "type": "query",
+                "description": "If `true`, classes will be included in the response. `false` - otherwise."
+              },
+              {
+                "name": "show_event",
+                "value": "",
+                "type": "query",
+                "description": "If `true`, events are also returned. If `false`, only classes are returned."
+              },
+              {
+                "name": "uid",
+                "value": "",
+                "type": "query",
+                "description": "The user key."
+              }
+            ]
+          },
+          "docs": "Returns upcoming class sessions for a business, with optional filtering by location,\nday of week, time of day, staff member, and virtual or in-person mode. The result includes\nper-session details such as staff, capacity, booking counts, and virtual locations, as well as\na calendar map indicating which dates have at least one scheduled session."
+        },
+        {
+          "info": {
+            "name": "Cancels session for the client.\nThis method is an alias for partners using the API or SDK.",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://us.wellnessliving.com/Wl/Schedule/Cancel.json",
+            "headers": [
+              {
+                "name": "X-Error-Rules",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "dt_date",
+                "value": "",
+                "type": "query",
+                "description": "The date of the session in UTC."
+              },
+              {
+                "name": "is_backend",
+                "value": "",
+                "type": "query",
+                "description": "This will be `true` if the API is being used from the back end. Otherwise, this will be `false`.\nHere, the back end refers to either a staff member or"
+              },
+              {
+                "name": "is_late_cancel",
+                "value": "",
+                "type": "query",
+                "description": "`true` is late cancel, `false` reservation is not late cancel.\nThis is required to enable late cancel even if the user is staff."
+              },
+              {
+                "name": "k_appointment",
+                "value": "",
+                "type": "query",
+                "description": "The appointment key.\nThis will be `null` if not set yet or if a class or event is canceled."
+              },
+              {
+                "name": "k_business",
+                "value": "",
+                "type": "query",
+                "description": "Key of the business within which the action is performed."
+              },
+              {
+                "name": "k_class_period",
+                "value": "",
+                "type": "query",
+                "description": "The class period key.\nThis will be `null` if not set yet or if an appointment is canceled."
+              },
+              {
+                "name": "uid",
+                "value": "",
+                "type": "query",
+                "description": "The user key."
+              }
+            ]
+          },
+          "docs": "Identical in behavior to `get()`; exists as a POST alias for partner\nintegrations that cannot issue GET requests."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

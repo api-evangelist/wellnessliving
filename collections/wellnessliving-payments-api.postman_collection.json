@@ -1,0 +1,2586 @@
+{
+  "item": [
+    {
+      "id": "929ad8a1-a120-421a-8887-5d2d8e01ba6b",
+      "name": "Payments",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "434b9bca-1764-43b6-b238-e5450e38b98b",
+          "name": "Retrieves information about accounts of given user in given business.",
+          "request": {
+            "name": "Retrieves information about accounts of given user in given business.",
+            "description": {
+              "content": "Retrieves information about accounts of given user in given business.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "Thoth",
+                "WlPay",
+                "Account",
+                "Account.json"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "is_owner",
+                  "value": "<boolean>",
+                  "description": "(Required) If `true`, information for the account's owner is returned. Clients can be configured to pay for a relative's\nexpenses. For example, a parent can pay"
+                },
+                {
+                  "disabled": false,
+                  "key": "k_business",
+                  "value": "<string>",
+                  "description": "(Required) The key of the business to show information for."
+                },
+                {
+                  "disabled": false,
+                  "key": "uid",
+                  "value": "<string>",
+                  "description": "(Required) The key of the user to show information for."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "Opt in to mapping internal API error statuses to real 4xx HTTP codes. By default the API always answers HTTP 200 even on error, with the failure encoded in the JSON body; setting this header (e.g. to `default`) makes the gateway translate matched error statuses to 400/403/404 responses instead.",
+                "key": "X-Error-Rules",
+                "value": "<string>"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "87d2d522-bba7-4d57-8223-67bf6b03d736",
+              "name": "Successful response.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "Thoth",
+                    "WlPay",
+                    "Account",
+                    "Account.json"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "is_owner",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "k_business",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "uid",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Opt in to mapping internal API error statuses to real 4xx HTTP codes. By default the API always answers HTTP 200 even on error, with the failure encoded in the JSON body; setting this header (e.g. to `default`) makes the gateway translate matched error statuses to 400/403/404 responses instead.",
+                    "key": "X-Error-Rules",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"a_account\": {},\n  \"a_account_nx\": {},\n  \"is_debtor\": {}\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "21c43c8a-7e58-4bbc-a3d6-7cdb0ac2ef93",
+              "name": "Client-side error: invalid input, failed validation, throttling, or other request error (only returned as an HTTP status when `X-Error-Rules` opts in; otherwise encoded in a 200 body).",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "Thoth",
+                    "WlPay",
+                    "Account",
+                    "Account.json"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "is_owner",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "k_business",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "uid",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Opt in to mapping internal API error statuses to real 4xx HTTP codes. By default the API always answers HTTP 200 even on error, with the failure encoded in the JSON body; setting this header (e.g. to `default`) makes the gateway translate matched error statuses to 400/403/404 responses instead.",
+                    "key": "X-Error-Rules",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": \"string\",\n  \"text_message\": \"string\",\n  \"a_field\": {\n    \"key_0\": true,\n    \"key_1\": 7486\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "c91d8b2b-f710-4895-9273-0460606a6487",
+              "name": "Missing, expired, or invalid Bearer token / session.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "Thoth",
+                    "WlPay",
+                    "Account",
+                    "Account.json"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "is_owner",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "k_business",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "uid",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Opt in to mapping internal API error statuses to real 4xx HTTP codes. By default the API always answers HTTP 200 even on error, with the failure encoded in the JSON body; setting this header (e.g. to `default`) makes the gateway translate matched error statuses to 400/403/404 responses instead.",
+                    "key": "X-Error-Rules",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": \"string\",\n  \"text_message\": \"string\",\n  \"a_field\": {\n    \"key_0\": true,\n    \"key_1\": 7486\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "ea482c34-4fb2-4e43-bc9a-43c1ea1f2d5e",
+              "name": "Authenticated but not permitted to access this business, location, or resource.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "Thoth",
+                    "WlPay",
+                    "Account",
+                    "Account.json"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "is_owner",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "k_business",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "uid",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Opt in to mapping internal API error statuses to real 4xx HTTP codes. By default the API always answers HTTP 200 even on error, with the failure encoded in the JSON body; setting this header (e.g. to `default`) makes the gateway translate matched error statuses to 400/403/404 responses instead.",
+                    "key": "X-Error-Rules",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": \"string\",\n  \"text_message\": \"string\",\n  \"a_field\": {\n    \"key_0\": true,\n    \"key_1\": 7486\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "ebddb2cb-7e93-41a7-bd46-9a4f72fe37d1",
+              "name": "The requested resource does not exist.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "Thoth",
+                    "WlPay",
+                    "Account",
+                    "Account.json"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "is_owner",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "k_business",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "uid",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Opt in to mapping internal API error statuses to real 4xx HTTP codes. By default the API always answers HTTP 200 even on error, with the failure encoded in the JSON body; setting this header (e.g. to `default`) makes the gateway translate matched error statuses to 400/403/404 responses instead.",
+                    "key": "X-Error-Rules",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": \"string\",\n  \"text_message\": \"string\",\n  \"a_field\": {\n    \"key_0\": true,\n    \"key_1\": 7486\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "2fe6a678-bd0f-4f87-863e-66da4b606a0e",
+              "name": "The request payload failed field-level validation.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "Thoth",
+                    "WlPay",
+                    "Account",
+                    "Account.json"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "is_owner",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "k_business",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "uid",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Opt in to mapping internal API error statuses to real 4xx HTTP codes. By default the API always answers HTTP 200 even on error, with the failure encoded in the JSON body; setting this header (e.g. to `default`) makes the gateway translate matched error statuses to 400/403/404 responses instead.",
+                    "key": "X-Error-Rules",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": \"string\",\n  \"text_message\": \"string\",\n  \"a_field\": {\n    \"key_0\": true,\n    \"key_1\": 7486\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "5f29b995-d289-4bf7-87f0-6cf8520c9955",
+              "name": "Unexpected server error.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "Thoth",
+                    "WlPay",
+                    "Account",
+                    "Account.json"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "is_owner",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "k_business",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "uid",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Opt in to mapping internal API error statuses to real 4xx HTTP codes. By default the API always answers HTTP 200 even on error, with the failure encoded in the JSON body; setting this header (e.g. to `default`) makes the gateway translate matched error statuses to 400/403/404 responses instead.",
+                    "key": "X-Error-Rules",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": \"string\",\n  \"text_message\": \"string\",\n  \"a_field\": {\n    \"key_0\": true,\n    \"key_1\": 7486\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "59871946-4c78-4482-aa94-f95d71468f21",
+          "name": "Retrieves information about user's bank cards.",
+          "request": {
+            "name": "Retrieves information about user's bank cards.",
+            "description": {
+              "content": "Retrieves information about user's bank cards.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "Thoth",
+                "WlPay",
+                "Bank",
+                "Card",
+                "List.json"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "k_business",
+                  "value": "<string>",
+                  "description": "(Required) ID of current business."
+                },
+                {
+                  "disabled": false,
+                  "key": "k_location",
+                  "value": "<string>",
+                  "description": "(Required) Location to show information for.\nPrimary key in RsLocationSql table.\n\n`0` to use user's home location."
+                },
+                {
+                  "disabled": false,
+                  "key": "uid",
+                  "value": "<string>",
+                  "description": "(Required) ID of a user to show information for."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "Opt in to mapping internal API error statuses to real 4xx HTTP codes. By default the API always answers HTTP 200 even on error, with the failure encoded in the JSON body; setting this header (e.g. to `default`) makes the gateway translate matched error statuses to 400/403/404 responses instead.",
+                "key": "X-Error-Rules",
+                "value": "<string>"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "244212e6-5466-4060-b70d-f1c3f5df4313",
+              "name": "Successful response.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "Thoth",
+                    "WlPay",
+                    "Bank",
+                    "Card",
+                    "List.json"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "k_business",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "k_location",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "uid",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Opt in to mapping internal API error statuses to real 4xx HTTP codes. By default the API always answers HTTP 200 even on error, with the failure encoded in the JSON body; setting this header (e.g. to `default`) makes the gateway translate matched error statuses to 400/403/404 responses instead.",
+                    "key": "X-Error-Rules",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"a_bank_card\": {},\n  \"a_list\": {},\n  \"can_add\": {}\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "1cd23b1f-5193-4124-892b-78620297eb3d",
+              "name": "Client-side error: invalid input, failed validation, throttling, or other request error (only returned as an HTTP status when `X-Error-Rules` opts in; otherwise encoded in a 200 body).",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "Thoth",
+                    "WlPay",
+                    "Bank",
+                    "Card",
+                    "List.json"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "k_business",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "k_location",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "uid",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Opt in to mapping internal API error statuses to real 4xx HTTP codes. By default the API always answers HTTP 200 even on error, with the failure encoded in the JSON body; setting this header (e.g. to `default`) makes the gateway translate matched error statuses to 400/403/404 responses instead.",
+                    "key": "X-Error-Rules",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": \"string\",\n  \"text_message\": \"string\",\n  \"a_field\": {\n    \"key_0\": true,\n    \"key_1\": 7486\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "40cc18c9-79a8-4939-822f-65b4e448499a",
+              "name": "Missing, expired, or invalid Bearer token / session.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "Thoth",
+                    "WlPay",
+                    "Bank",
+                    "Card",
+                    "List.json"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "k_business",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "k_location",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "uid",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Opt in to mapping internal API error statuses to real 4xx HTTP codes. By default the API always answers HTTP 200 even on error, with the failure encoded in the JSON body; setting this header (e.g. to `default`) makes the gateway translate matched error statuses to 400/403/404 responses instead.",
+                    "key": "X-Error-Rules",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": \"string\",\n  \"text_message\": \"string\",\n  \"a_field\": {\n    \"key_0\": true,\n    \"key_1\": 7486\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "6fcdaffe-2789-4583-a11d-9104cacd7819",
+              "name": "Authenticated but not permitted to access this business, location, or resource.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "Thoth",
+                    "WlPay",
+                    "Bank",
+                    "Card",
+                    "List.json"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "k_business",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "k_location",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "uid",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Opt in to mapping internal API error statuses to real 4xx HTTP codes. By default the API always answers HTTP 200 even on error, with the failure encoded in the JSON body; setting this header (e.g. to `default`) makes the gateway translate matched error statuses to 400/403/404 responses instead.",
+                    "key": "X-Error-Rules",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": \"string\",\n  \"text_message\": \"string\",\n  \"a_field\": {\n    \"key_0\": true,\n    \"key_1\": 7486\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "fbc18129-d742-4c6a-9a96-98f1a17d9882",
+              "name": "The requested resource does not exist.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "Thoth",
+                    "WlPay",
+                    "Bank",
+                    "Card",
+                    "List.json"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "k_business",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "k_location",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "uid",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Opt in to mapping internal API error statuses to real 4xx HTTP codes. By default the API always answers HTTP 200 even on error, with the failure encoded in the JSON body; setting this header (e.g. to `default`) makes the gateway translate matched error statuses to 400/403/404 responses instead.",
+                    "key": "X-Error-Rules",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": \"string\",\n  \"text_message\": \"string\",\n  \"a_field\": {\n    \"key_0\": true,\n    \"key_1\": 7486\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "5af875dc-805a-499d-b5ca-68ff0f6dc2b8",
+              "name": "The request payload failed field-level validation.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "Thoth",
+                    "WlPay",
+                    "Bank",
+                    "Card",
+                    "List.json"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "k_business",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "k_location",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "uid",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Opt in to mapping internal API error statuses to real 4xx HTTP codes. By default the API always answers HTTP 200 even on error, with the failure encoded in the JSON body; setting this header (e.g. to `default`) makes the gateway translate matched error statuses to 400/403/404 responses instead.",
+                    "key": "X-Error-Rules",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": \"string\",\n  \"text_message\": \"string\",\n  \"a_field\": {\n    \"key_0\": true,\n    \"key_1\": 7486\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "b05f5c8e-a3de-4b71-9846-0cb243c2883b",
+              "name": "Unexpected server error.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "Thoth",
+                    "WlPay",
+                    "Bank",
+                    "Card",
+                    "List.json"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "k_business",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "k_location",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "uid",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Opt in to mapping internal API error statuses to real 4xx HTTP codes. By default the API always answers HTTP 200 even on error, with the failure encoded in the JSON body; setting this header (e.g. to `default`) makes the gateway translate matched error statuses to 400/403/404 responses instead.",
+                    "key": "X-Error-Rules",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": \"string\",\n  \"text_message\": \"string\",\n  \"a_field\": {\n    \"key_0\": true,\n    \"key_1\": 7486\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "12ae0eb5-dce4-4ea5-91b5-40c87eba6db2",
+          "name": "Allows the user account to be filled with a specified payment, or to perform the reset change manually.",
+          "request": {
+            "name": "Allows the user account to be filled with a specified payment, or to perform the reset change manually.",
+            "description": {
+              "content": "Allows the user account to be filled with a specified payment, or to perform the reset change manually.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "Thoth",
+                "WlPay",
+                "Account",
+                "Charge",
+                "Charge.json"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "id_pay_account_charge",
+                  "value": "<string>",
+                  "description": "(Required) The account charge mode.\n\nOne of the [RsPayAccountChargeSid](#/components/schemas/RsPayAccountChargeSid) constants."
+                },
+                {
+                  "disabled": false,
+                  "key": "is_staff",
+                  "value": "<boolean>",
+                  "description": "(Required) If `true`, the account is filled by a staff member in the backend. Otherwise, this will be `false`."
+                },
+                {
+                  "disabled": false,
+                  "key": "k_business",
+                  "value": "<string>",
+                  "description": "(Required) The ID of the business the user account belongs to.\n\nThis shouldn't be passed if a user account has already been created.\nIn such cases, `k_pay_accoun"
+                },
+                {
+                  "disabled": false,
+                  "key": "k_pay_account",
+                  "value": "<string>",
+                  "description": "(Required) The ID of the user account to refill.\n\nThis may be 0 if a user account hasn't been created yet.\nIn such cases, `k_business` and `uid` should be passed"
+                },
+                {
+                  "disabled": false,
+                  "key": "uid",
+                  "value": "<string>",
+                  "description": "(Required) The ID of the user whose account is being refilled.\n\nThis shouldn't be passed if a user account has already been created.\nIn such cases, `k_pay_accoun"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "Opt in to mapping internal API error statuses to real 4xx HTTP codes. By default the API always answers HTTP 200 even on error, with the failure encoded in the JSON body; setting this header (e.g. to `default`) makes the gateway translate matched error statuses to 400/403/404 responses instead.",
+                "key": "X-Error-Rules",
+                "value": "<string>"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/x-www-form-urlencoded"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "urlencoded",
+              "urlencoded": [
+                {
+                  "disabled": false,
+                  "key": "a_pay_form",
+                  "value": "<string>",
+                  "description": "(Required) The `a_pay_form` field. See WellnessLiving developer portal for full field semantics."
+                },
+                {
+                  "disabled": false,
+                  "key": "id_mode",
+                  "value": "<string>",
+                  "description": "(Required) The `id_mode` field. See WellnessLiving developer portal for full field semantics."
+                },
+                {
+                  "disabled": false,
+                  "key": "m_amount",
+                  "value": "<string>",
+                  "description": "(Required) The `m_amount` field. See WellnessLiving developer portal for full field semantics."
+                },
+                {
+                  "disabled": false,
+                  "key": "s_comment",
+                  "value": "<string>",
+                  "description": "(Required) The `s_comment` field. See WellnessLiving developer portal for full field semantics."
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "51a19ae8-858e-46e1-94c1-580ff3260709",
+              "name": "Successful response.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "Thoth",
+                    "WlPay",
+                    "Account",
+                    "Charge",
+                    "Charge.json"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "id_pay_account_charge",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "is_staff",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "k_business",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "k_pay_account",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "uid",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Opt in to mapping internal API error statuses to real 4xx HTTP codes. By default the API always answers HTTP 200 even on error, with the failure encoded in the JSON body; setting this header (e.g. to `default`) makes the gateway translate matched error statuses to 400/403/404 responses instead.",
+                    "key": "X-Error-Rules",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "urlencoded",
+                  "urlencoded": [
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) The `a_pay_form` field. See WellnessLiving developer portal for full field semantics.",
+                        "type": "text/plain"
+                      },
+                      "key": "a_pay_form",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) The `id_mode` field. See WellnessLiving developer portal for full field semantics.",
+                        "type": "text/plain"
+                      },
+                      "key": "id_mode",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) The `m_amount` field. See WellnessLiving developer portal for full field semantics.",
+                        "type": "text/plain"
+                      },
+                      "key": "m_amount",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) The `s_comment` field. See WellnessLiving developer portal for full field semantics.",
+                        "type": "text/plain"
+                      },
+                      "key": "s_comment",
+                      "value": "<string>"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "d120ccf2-2845-42a8-887d-49498c9f8a44",
+              "name": "Client-side error: invalid input, failed validation, throttling, or other request error (only returned as an HTTP status when `X-Error-Rules` opts in; otherwise encoded in a 200 body).",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "Thoth",
+                    "WlPay",
+                    "Account",
+                    "Charge",
+                    "Charge.json"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "id_pay_account_charge",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "is_staff",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "k_business",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "k_pay_account",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "uid",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Opt in to mapping internal API error statuses to real 4xx HTTP codes. By default the API always answers HTTP 200 even on error, with the failure encoded in the JSON body; setting this header (e.g. to `default`) makes the gateway translate matched error statuses to 400/403/404 responses instead.",
+                    "key": "X-Error-Rules",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "urlencoded",
+                  "urlencoded": [
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) The `a_pay_form` field. See WellnessLiving developer portal for full field semantics.",
+                        "type": "text/plain"
+                      },
+                      "key": "a_pay_form",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) The `id_mode` field. See WellnessLiving developer portal for full field semantics.",
+                        "type": "text/plain"
+                      },
+                      "key": "id_mode",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) The `m_amount` field. See WellnessLiving developer portal for full field semantics.",
+                        "type": "text/plain"
+                      },
+                      "key": "m_amount",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) The `s_comment` field. See WellnessLiving developer portal for full field semantics.",
+                        "type": "text/plain"
+                      },
+                      "key": "s_comment",
+                      "value": "<string>"
+                    }
+                  ]
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": \"string\",\n  \"text_message\": \"string\",\n  \"a_field\": {\n    \"key_0\": true,\n    \"key_1\": 7486\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "c6c8a22c-86db-4c4d-b560-73937ba623a5",
+              "name": "Missing, expired, or invalid Bearer token / session.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "Thoth",
+                    "WlPay",
+                    "Account",
+                    "Charge",
+                    "Charge.json"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "id_pay_account_charge",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "is_staff",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "k_business",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "k_pay_account",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "uid",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Opt in to mapping internal API error statuses to real 4xx HTTP codes. By default the API always answers HTTP 200 even on error, with the failure encoded in the JSON body; setting this header (e.g. to `default`) makes the gateway translate matched error statuses to 400/403/404 responses instead.",
+                    "key": "X-Error-Rules",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "urlencoded",
+                  "urlencoded": [
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) The `a_pay_form` field. See WellnessLiving developer portal for full field semantics.",
+                        "type": "text/plain"
+                      },
+                      "key": "a_pay_form",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) The `id_mode` field. See WellnessLiving developer portal for full field semantics.",
+                        "type": "text/plain"
+                      },
+                      "key": "id_mode",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) The `m_amount` field. See WellnessLiving developer portal for full field semantics.",
+                        "type": "text/plain"
+                      },
+                      "key": "m_amount",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) The `s_comment` field. See WellnessLiving developer portal for full field semantics.",
+                        "type": "text/plain"
+                      },
+                      "key": "s_comment",
+                      "value": "<string>"
+                    }
+                  ]
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": \"string\",\n  \"text_message\": \"string\",\n  \"a_field\": {\n    \"key_0\": true,\n    \"key_1\": 7486\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "36e3d8be-c6a3-4376-ad1d-ec9ab48cc75b",
+              "name": "Authenticated but not permitted to access this business, location, or resource.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "Thoth",
+                    "WlPay",
+                    "Account",
+                    "Charge",
+                    "Charge.json"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "id_pay_account_charge",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "is_staff",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "k_business",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "k_pay_account",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "uid",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Opt in to mapping internal API error statuses to real 4xx HTTP codes. By default the API always answers HTTP 200 even on error, with the failure encoded in the JSON body; setting this header (e.g. to `default`) makes the gateway translate matched error statuses to 400/403/404 responses instead.",
+                    "key": "X-Error-Rules",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "urlencoded",
+                  "urlencoded": [
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) The `a_pay_form` field. See WellnessLiving developer portal for full field semantics.",
+                        "type": "text/plain"
+                      },
+                      "key": "a_pay_form",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) The `id_mode` field. See WellnessLiving developer portal for full field semantics.",
+                        "type": "text/plain"
+                      },
+                      "key": "id_mode",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) The `m_amount` field. See WellnessLiving developer portal for full field semantics.",
+                        "type": "text/plain"
+                      },
+                      "key": "m_amount",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) The `s_comment` field. See WellnessLiving developer portal for full field semantics.",
+                        "type": "text/plain"
+                      },
+                      "key": "s_comment",
+                      "value": "<string>"
+                    }
+                  ]
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": \"string\",\n  \"text_message\": \"string\",\n  \"a_field\": {\n    \"key_0\": true,\n    \"key_1\": 7486\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "5c7e593b-b9e2-4cdd-a0e7-b8ead59f6844",
+              "name": "The requested resource does not exist.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "Thoth",
+                    "WlPay",
+                    "Account",
+                    "Charge",
+                    "Charge.json"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "id_pay_account_charge",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "is_staff",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "k_business",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "k_pay_account",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "uid",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Opt in to mapping internal API error statuses to real 4xx HTTP codes. By default the API always answers HTTP 200 even on error, with the failure encoded in the JSON body; setting this header (e.g. to `default`) makes the gateway translate matched error statuses to 400/403/404 responses instead.",
+                    "key": "X-Error-Rules",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "urlencoded",
+                  "urlencoded": [
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) The `a_pay_form` field. See WellnessLiving developer portal for full field semantics.",
+                        "type": "text/plain"
+                      },
+                      "key": "a_pay_form",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) The `id_mode` field. See WellnessLiving developer portal for full field semantics.",
+                        "type": "text/plain"
+                      },
+                      "key": "id_mode",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) The `m_amount` field. See WellnessLiving developer portal for full field semantics.",
+                        "type": "text/plain"
+                      },
+                      "key": "m_amount",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) The `s_comment` field. See WellnessLiving developer portal for full field semantics.",
+                        "type": "text/plain"
+                      },
+                      "key": "s_comment",
+                      "value": "<string>"
+                    }
+                  ]
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": \"string\",\n  \"text_message\": \"string\",\n  \"a_field\": {\n    \"key_0\": true,\n    \"key_1\": 7486\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "5274cd16-dce0-4b39-ba76-cd4db9cc9bb5",
+              "name": "The request payload failed field-level validation.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "Thoth",
+                    "WlPay",
+                    "Account",
+                    "Charge",
+                    "Charge.json"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "id_pay_account_charge",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "is_staff",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "k_business",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "k_pay_account",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "uid",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Opt in to mapping internal API error statuses to real 4xx HTTP codes. By default the API always answers HTTP 200 even on error, with the failure encoded in the JSON body; setting this header (e.g. to `default`) makes the gateway translate matched error statuses to 400/403/404 responses instead.",
+                    "key": "X-Error-Rules",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "urlencoded",
+                  "urlencoded": [
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) The `a_pay_form` field. See WellnessLiving developer portal for full field semantics.",
+                        "type": "text/plain"
+                      },
+                      "key": "a_pay_form",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) The `id_mode` field. See WellnessLiving developer portal for full field semantics.",
+                        "type": "text/plain"
+                      },
+                      "key": "id_mode",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) The `m_amount` field. See WellnessLiving developer portal for full field semantics.",
+                        "type": "text/plain"
+                      },
+                      "key": "m_amount",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) The `s_comment` field. See WellnessLiving developer portal for full field semantics.",
+                        "type": "text/plain"
+                      },
+                      "key": "s_comment",
+                      "value": "<string>"
+                    }
+                  ]
+                }
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": \"string\",\n  \"text_message\": \"string\",\n  \"a_field\": {\n    \"key_0\": true,\n    \"key_1\": 7486\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "8c84d496-3ce0-429f-a9b6-b71c55e0f7a1",
+              "name": "Unexpected server error.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "Thoth",
+                    "WlPay",
+                    "Account",
+                    "Charge",
+                    "Charge.json"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "id_pay_account_charge",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "is_staff",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "k_business",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "k_pay_account",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "uid",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Opt in to mapping internal API error statuses to real 4xx HTTP codes. By default the API always answers HTTP 200 even on error, with the failure encoded in the JSON body; setting this header (e.g. to `default`) makes the gateway translate matched error statuses to 400/403/404 responses instead.",
+                    "key": "X-Error-Rules",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "urlencoded",
+                  "urlencoded": [
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) The `a_pay_form` field. See WellnessLiving developer portal for full field semantics.",
+                        "type": "text/plain"
+                      },
+                      "key": "a_pay_form",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) The `id_mode` field. See WellnessLiving developer portal for full field semantics.",
+                        "type": "text/plain"
+                      },
+                      "key": "id_mode",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) The `m_amount` field. See WellnessLiving developer portal for full field semantics.",
+                        "type": "text/plain"
+                      },
+                      "key": "m_amount",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) The `s_comment` field. See WellnessLiving developer portal for full field semantics.",
+                        "type": "text/plain"
+                      },
+                      "key": "s_comment",
+                      "value": "<string>"
+                    }
+                  ]
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": \"string\",\n  \"text_message\": \"string\",\n  \"a_field\": {\n    \"key_0\": true,\n    \"key_1\": 7486\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "98bb7430-49e8-445e-b23c-faa9e5b7b0b7",
+          "name": "Gets the daily transaction data.",
+          "request": {
+            "name": "Gets the daily transaction data.",
+            "description": {
+              "content": "Gets the daily transaction data.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "Thoth",
+                "WlPay",
+                "Transaction",
+                "Report",
+                "TransactionAllPayment.json"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "dl_date_end",
+                  "value": "<string>",
+                  "description": "(Required) The end date in local time to retrieve transactions for."
+                },
+                {
+                  "disabled": false,
+                  "key": "dl_date_start",
+                  "value": "<string>",
+                  "description": "(Required) The end date in local time to retrieve transactions for."
+                },
+                {
+                  "disabled": false,
+                  "key": "i_page",
+                  "value": "<integer>",
+                  "description": "(Required) The page of the report, starting from 0.\nEach page will contain a maximum of `LIMIT` rows."
+                },
+                {
+                  "disabled": false,
+                  "key": "is_refresh",
+                  "value": "<boolean>",
+                  "description": "(Required) Determines whether the report should be refreshed.\n\nIf `true`, this report should be refreshed. A report refresh can't be requested while the report i"
+                },
+                {
+                  "disabled": false,
+                  "key": "k_business",
+                  "value": "<string>",
+                  "description": "(Required) The key of the business for which report should be generated."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "Opt in to mapping internal API error statuses to real 4xx HTTP codes. By default the API always answers HTTP 200 even on error, with the failure encoded in the JSON body; setting this header (e.g. to `default`) makes the gateway translate matched error statuses to 400/403/404 responses instead.",
+                "key": "X-Error-Rules",
+                "value": "<string>"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "cc32c048-bc24-4e7c-856a-76f7921caa66",
+              "name": "Successful response.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "Thoth",
+                    "WlPay",
+                    "Transaction",
+                    "Report",
+                    "TransactionAllPayment.json"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "dl_date_end",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "dl_date_start",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "i_page",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "is_refresh",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "k_business",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Opt in to mapping internal API error statuses to real 4xx HTTP codes. By default the API always answers HTTP 200 even on error, with the failure encoded in the JSON body; setting this header (e.g. to `default`) makes the gateway translate matched error statuses to 400/403/404 responses instead.",
+                    "key": "X-Error-Rules",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"a_field\": {},\n  \"a_row\": {},\n  \"a_warning\": {},\n  \"dtu_complete\": {},\n  \"dtu_queue\": {},\n  \"dtu_start\": {},\n  \"id_report_status\": {},\n  \"is_more\": {},\n  \"is_report_complete\": {}\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "b78d3071-4c15-47e6-998e-39c7c749d2d1",
+              "name": "Client-side error: invalid input, failed validation, throttling, or other request error (only returned as an HTTP status when `X-Error-Rules` opts in; otherwise encoded in a 200 body).",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "Thoth",
+                    "WlPay",
+                    "Transaction",
+                    "Report",
+                    "TransactionAllPayment.json"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "dl_date_end",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "dl_date_start",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "i_page",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "is_refresh",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "k_business",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Opt in to mapping internal API error statuses to real 4xx HTTP codes. By default the API always answers HTTP 200 even on error, with the failure encoded in the JSON body; setting this header (e.g. to `default`) makes the gateway translate matched error statuses to 400/403/404 responses instead.",
+                    "key": "X-Error-Rules",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": \"string\",\n  \"text_message\": \"string\",\n  \"a_field\": {\n    \"key_0\": true,\n    \"key_1\": 7486\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "8f760883-33ff-418c-bcd5-6e87a4388089",
+              "name": "Missing, expired, or invalid Bearer token / session.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "Thoth",
+                    "WlPay",
+                    "Transaction",
+                    "Report",
+                    "TransactionAllPayment.json"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "dl_date_end",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "dl_date_start",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "i_page",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "is_refresh",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "k_business",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Opt in to mapping internal API error statuses to real 4xx HTTP codes. By default the API always answers HTTP 200 even on error, with the failure encoded in the JSON body; setting this header (e.g. to `default`) makes the gateway translate matched error statuses to 400/403/404 responses instead.",
+                    "key": "X-Error-Rules",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": \"string\",\n  \"text_message\": \"string\",\n  \"a_field\": {\n    \"key_0\": true,\n    \"key_1\": 7486\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "8f1786f4-5690-40a6-b3e9-845c4cd6ed04",
+              "name": "Authenticated but not permitted to access this business, location, or resource.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "Thoth",
+                    "WlPay",
+                    "Transaction",
+                    "Report",
+                    "TransactionAllPayment.json"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "dl_date_end",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "dl_date_start",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "i_page",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "is_refresh",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "k_business",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Opt in to mapping internal API error statuses to real 4xx HTTP codes. By default the API always answers HTTP 200 even on error, with the failure encoded in the JSON body; setting this header (e.g. to `default`) makes the gateway translate matched error statuses to 400/403/404 responses instead.",
+                    "key": "X-Error-Rules",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": \"string\",\n  \"text_message\": \"string\",\n  \"a_field\": {\n    \"key_0\": true,\n    \"key_1\": 7486\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "6cb4911a-3de8-48a0-a813-5871808b4ad9",
+              "name": "The requested resource does not exist.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "Thoth",
+                    "WlPay",
+                    "Transaction",
+                    "Report",
+                    "TransactionAllPayment.json"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "dl_date_end",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "dl_date_start",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "i_page",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "is_refresh",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "k_business",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Opt in to mapping internal API error statuses to real 4xx HTTP codes. By default the API always answers HTTP 200 even on error, with the failure encoded in the JSON body; setting this header (e.g. to `default`) makes the gateway translate matched error statuses to 400/403/404 responses instead.",
+                    "key": "X-Error-Rules",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": \"string\",\n  \"text_message\": \"string\",\n  \"a_field\": {\n    \"key_0\": true,\n    \"key_1\": 7486\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "52b198a1-5a40-4577-973d-73468c471fef",
+              "name": "The request payload failed field-level validation.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "Thoth",
+                    "WlPay",
+                    "Transaction",
+                    "Report",
+                    "TransactionAllPayment.json"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "dl_date_end",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "dl_date_start",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "i_page",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "is_refresh",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "k_business",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Opt in to mapping internal API error statuses to real 4xx HTTP codes. By default the API always answers HTTP 200 even on error, with the failure encoded in the JSON body; setting this header (e.g. to `default`) makes the gateway translate matched error statuses to 400/403/404 responses instead.",
+                    "key": "X-Error-Rules",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": \"string\",\n  \"text_message\": \"string\",\n  \"a_field\": {\n    \"key_0\": true,\n    \"key_1\": 7486\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "97b39495-207a-403e-9c1d-4dee398ab658",
+              "name": "Unexpected server error.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "Thoth",
+                    "WlPay",
+                    "Transaction",
+                    "Report",
+                    "TransactionAllPayment.json"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "dl_date_end",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "dl_date_start",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "i_page",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "is_refresh",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "k_business",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Opt in to mapping internal API error statuses to real 4xx HTTP codes. By default the API always answers HTTP 200 even on error, with the failure encoded in the JSON body; setting this header (e.g. to `default`) makes the gateway translate matched error statuses to 400/403/404 responses instead.",
+                    "key": "X-Error-Rules",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": \"string\",\n  \"text_message\": \"string\",\n  \"a_field\": {\n    \"key_0\": true,\n    \"key_1\": 7486\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://us.wellnessliving.com",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "dfdadc6c-0387-4df7-846a-11a0544f5c72",
+    "name": "WellnessLiving Appointments Payments API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Curated, representative subset of WellnessLiving's official production API (RESTful, JSON-over-HTTPS). WellnessLiving is business-management software for fitness studios, gyms, spas, and salons; this API is the same one its own web and mobile clients (Achieve, Elevate) call, and is published for approved partners via an official OpenAPI document at github.com/wellnessliving/openapi (324 paths across 45+ resource areas as of the 2026-06-20 build). Endpoints below are grounded in that official spec and in the public github.com/wellnessliving/wl-sdk (PHP) and wl-sdk-js SDKs; this file selects roughly four representative endpoints per logical API area rather than reproducing the full catalog. Every WellnessLiving API resource is a `.json`-suffixed endpoint whose path is derived deterministically from the SDK model class's namespace (e.g. the PHP class `WellnessLiving\\Wl\\Staff\\StaffElementModel` serves `/Wl/Staff/StaffElement.json`). Legacy numbered variants of several endpoints exist for backward compatibility (e.g. `Finish47`, `ServiceList52`, `Purchase72`) and are omitted here in favor of their current unsuffixed counterpart.\n\nContact Support:\n Name: WellnessLiving Support\n Email: support@wellnessliving.com",
+      "type": "text/plain"
+    }
+  }
+}

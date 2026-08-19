@@ -1,0 +1,197 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "WellnessLiving Appointments Business API",
+    "version": "1.1.20260620071011"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Business",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Returns detailed information about the specified business, including locale, franchise status, services, tips, social URLs, and logo.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://us.wellnessliving.com/Wl/Business/Data.json",
+            "headers": [
+              {
+                "name": "X-Error-Rules",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "i_logo_height",
+                "value": "",
+                "type": "query",
+                "description": "The maximum height of the business image (in pixels)."
+              },
+              {
+                "name": "i_logo_width",
+                "value": "",
+                "type": "query",
+                "description": "The maximum width of the business image (in pixels)."
+              },
+              {
+                "name": "k_business",
+                "value": "",
+                "type": "query",
+                "description": "The business key."
+              },
+              {
+                "name": "text_token",
+                "value": "",
+                "type": "query",
+                "description": "The authorization token.\nThis may be used instead of `k_business` to\nidentify a business."
+              }
+            ]
+          },
+          "docs": "Used to bootstrap client-facing pages and widgets that need to know the full business profile: which\nservices are enabled, tip and progress log settings, franchise relationship, social media links, and\ndeep links to the schedule, catalog, and sign-up pages. Accepts either a business key or a location\nrequest token for widget contexts where the key is not available."
+        },
+        {
+          "info": {
+            "name": "Gets information about a business config.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://us.wellnessliving.com/Wl/Business/Config/BusinessConfig.json",
+            "headers": [
+              {
+                "name": "X-Error-Rules",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "k_business",
+                "value": "",
+                "type": "query",
+                "description": "The business key."
+              }
+            ]
+          },
+          "docs": "Used by the booking widget and checkout flow to know the rules governing client interactions: which\nfamily member relations are allowed, whether clients or staff must select a location at checkout,\nwhat cancellation penalties apply, and whether white-label mode is active."
+        },
+        {
+          "info": {
+            "name": "Gets information about subscription.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://us.wellnessliving.com/Wl/Business/Account/Subscription/SubscriptionInfo.json",
+            "headers": [
+              {
+                "name": "X-Error-Rules",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "cid_subscription",
+                "value": "",
+                "type": "query",
+                "description": "CID of the subscription information of which is requested."
+              },
+              {
+                "name": "k_business",
+                "value": "",
+                "type": "query",
+                "description": "Business key for which subscription information is requested."
+              }
+            ]
+          },
+          "docs": "Used in the backend settings UI to read the current state of a business subscription (e.g., Achieve or\nanother product). Returns whether the subscription is active, the current plan tier, and the business\nlocale. Requires backend access to the business."
+        },
+        {
+          "info": {
+            "name": "Creates new business.",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://us.wellnessliving.com/Wl/Business/Business.json",
+            "headers": [
+              {
+                "name": "X-Error-Rules",
+                "value": ""
+              }
+            ],
+            "body": {
+              "type": "form-urlencoded",
+              "data": [
+                {
+                  "name": "a_staff_member",
+                  "value": ""
+                },
+                {
+                  "name": "id_locale",
+                  "value": ""
+                },
+                {
+                  "name": "is_location_create",
+                  "value": ""
+                },
+                {
+                  "name": "is_mail_send",
+                  "value": ""
+                },
+                {
+                  "name": "k_business_type",
+                  "value": ""
+                },
+                {
+                  "name": "k_office_city",
+                  "value": ""
+                },
+                {
+                  "name": "s_clarity_session_id",
+                  "value": ""
+                },
+                {
+                  "name": "text_mail",
+                  "value": ""
+                },
+                {
+                  "name": "text_office_address",
+                  "value": ""
+                },
+                {
+                  "name": "text_office_postal",
+                  "value": ""
+                },
+                {
+                  "name": "text_phone",
+                  "value": ""
+                },
+                {
+                  "name": "text_title",
+                  "value": ""
+                },
+                {
+                  "name": "url_site",
+                  "value": ""
+                }
+              ]
+            }
+          },
+          "docs": "Used during the self-onboarding flow when a new client signs up for WellnessLiving. Creates the business\nwith its default integrations, optional first location, default service categories, and an optional owner\nstaff account - all in a single transaction. Rate-limited per IP and globally to prevent abuse."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

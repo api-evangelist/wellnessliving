@@ -1,0 +1,196 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "WellnessLiving Appointments Locations API",
+    "version": "1.1.20260620071011"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Locations",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Retrieves a list of locations for the given business.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://us.wellnessliving.com/Wl/Location/List.json",
+            "headers": [
+              {
+                "name": "X-Error-Rules",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "a_business",
+                "value": "",
+                "type": "query",
+                "description": "A list of business keys.\nYou can specify this instead of `k_business` to load data for many businesses in one call."
+              },
+              {
+                "name": "k_business",
+                "value": "",
+                "type": "query",
+                "description": "The business key used internally by WellnessLiving.\n\nIn case when passed regular or franchisee business returns only locations for requested business."
+              },
+              {
+                "name": "s_business",
+                "value": "",
+                "type": "query",
+                "description": "The primary keys of the selected businesses.\nYou can specify this instead of `k_business` to load data for many businesses in one call.\n\nThis is the s"
+              },
+              {
+                "name": "show_remove",
+                "value": "",
+                "type": "query",
+                "description": "Determines whether removed locations should be returned."
+              }
+            ]
+          },
+          "docs": "Accepts a single business key, a JSON-encoded list of business keys, or an array of business keys, and\nreturns location details including coordinates, address, timezone, directories, and logo URLs. For\nfranchisor businesses, automatically expands to include all franchisee locations."
+        },
+        {
+          "info": {
+            "name": "Returns detailed information about the specified location.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://us.wellnessliving.com/Wl/Location/View/View.json",
+            "headers": [
+              {
+                "name": "X-Error-Rules",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "i_logo_height",
+                "value": "",
+                "type": "query",
+                "description": "Maximum location image height."
+              },
+              {
+                "name": "i_logo_width",
+                "value": "",
+                "type": "query",
+                "description": "Maximum location image width."
+              },
+              {
+                "name": "k_location",
+                "value": "",
+                "type": "query",
+                "description": "The location key."
+              }
+            ]
+          },
+          "docs": "Returns the full profile of a location, including address, coordinates, timezone, contact information,\nbusiness hours, logo, slide images, amenities, social media links, and a description."
+        },
+        {
+          "info": {
+            "name": "Creates new location or edits the existing location.",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://us.wellnessliving.com/Wl/Location/Location.json",
+            "headers": [
+              {
+                "name": "X-Error-Rules",
+                "value": ""
+              }
+            ],
+            "body": {
+              "type": "form-urlencoded",
+              "data": [
+                {
+                  "name": "k_business",
+                  "value": ""
+                },
+                {
+                  "name": "k_city",
+                  "value": ""
+                },
+                {
+                  "name": "k_location",
+                  "value": ""
+                },
+                {
+                  "name": "k_timezone",
+                  "value": ""
+                },
+                {
+                  "name": "text_address",
+                  "value": ""
+                },
+                {
+                  "name": "text_email",
+                  "value": ""
+                },
+                {
+                  "name": "text_phone",
+                  "value": ""
+                },
+                {
+                  "name": "text_postal",
+                  "value": ""
+                },
+                {
+                  "name": "text_title",
+                  "value": ""
+                }
+              ]
+            }
+          },
+          "docs": "When `k_location` is omitted, creates a new location requiring `k_city`,\n `text_address`, and `text_title`.\nWhen `k_location` is provided, updates only the supplied fields of the existing location.\n Returns the key of the created or updated location."
+        },
+        {
+          "info": {
+            "name": "Saves working hours of the location.",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://us.wellnessliving.com/Wl/Location/WorkTime/LocationWorkTime.json",
+            "headers": [
+              {
+                "name": "X-Error-Rules",
+                "value": ""
+              }
+            ],
+            "body": {
+              "type": "form-urlencoded",
+              "data": [
+                {
+                  "name": "a_work_time",
+                  "value": ""
+                },
+                {
+                  "name": "k_business",
+                  "value": ""
+                },
+                {
+                  "name": "k_location",
+                  "value": ""
+                }
+              ]
+            }
+          },
+          "docs": "Accepts a list of day-and-time-range entries representing the weekly schedule and replaces all existing\nworking hours for the location. Days not present in the list are treated as non-working days."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

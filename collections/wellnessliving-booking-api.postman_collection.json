@@ -1,0 +1,3915 @@
+{
+  "item": [
+    {
+      "id": "fb05488b-04ed-4d5b-b3ca-a0231796b5df",
+      "name": "Booking",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "731c7475-dcd7-40d6-9991-ee11bb20fa94",
+          "name": "Returns the ordered list of booking wizard steps for the given session and client.",
+          "request": {
+            "name": "Returns the ordered list of booking wizard steps for the given session and client.",
+            "description": {
+              "content": "Evaluates the session, user profile, payment requirements, asset selection, and subscription state to build\nan ordered list of steps the client must complete to finish the booking. The first step in the list is marked\nas current, and additional flags about event type, wait-list availability, and payment options are returned.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "Wl",
+                "Book",
+                "Process",
+                "Process.json"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "dt_date_gmt",
+                  "value": "<string>",
+                  "description": "(Required) Date/time to which session is booked."
+                },
+                {
+                  "disabled": false,
+                  "key": "id_mode",
+                  "value": "<string>",
+                  "description": "(Required) The mode type. One of the [ModeSid](#/components/schemas/Wl.Mode.ModeSid) constants."
+                },
+                {
+                  "disabled": false,
+                  "key": "is_backend",
+                  "value": "<boolean>",
+                  "description": "(Required) `true` if action is performed as a staff member; `false` otherwise.\n\nIf `true` is sent, access to the business and to the client will be checked.\nIf `"
+                },
+                {
+                  "disabled": false,
+                  "key": "is_credit_card_check",
+                  "value": "<boolean>",
+                  "description": "(Required) Checking whether the client has a credit card (if configured in the business) will be skipped if this flag is set to `false`.\n\nUse this field with cau"
+                },
+                {
+                  "disabled": false,
+                  "key": "k_class_period",
+                  "value": "<string>",
+                  "description": "(Required) Key of session which is booked."
+                },
+                {
+                  "disabled": false,
+                  "key": "show_relation",
+                  "value": "<boolean>",
+                  "description": "(Required) `true` to show \"book for\" option in booking wizard. `false` for default behavior."
+                },
+                {
+                  "disabled": false,
+                  "key": "uid",
+                  "value": "<string>",
+                  "description": "(Required) The client key for which the booking is being made."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "Opt in to mapping internal API error statuses to real 4xx HTTP codes. By default the API always answers HTTP 200 even on error, with the failure encoded in the JSON body; setting this header (e.g. to `default`) makes the gateway translate matched error statuses to 400/403/404 responses instead.",
+                "key": "X-Error-Rules",
+                "value": "<string>"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "97346a0c-8ade-474b-9de2-c389e4bf5f21",
+              "name": "Successful response.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "Wl",
+                    "Book",
+                    "Process",
+                    "Process.json"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "dt_date_gmt",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "id_mode",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "is_backend",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "is_credit_card_check",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "k_class_period",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "show_relation",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "uid",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Opt in to mapping internal API error statuses to real 4xx HTTP codes. By default the API always answers HTTP 200 even on error, with the failure encoded in the JSON body; setting this header (e.g. to `default`) makes the gateway translate matched error statuses to 400/403/404 responses instead.",
+                    "key": "X-Error-Rules",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"a_family_relation_login_allow\": {},\n  \"a_path\": {},\n  \"id_pay_require\": {},\n  \"is_age_require\": {},\n  \"is_card_authorize\": {},\n  \"is_event\": {},\n  \"is_family_relation_book\": {},\n  \"is_free\": {},\n  \"is_have_ach\": {},\n  \"is_have_credit_card\": {},\n  \"is_session\": {},\n  \"is_wait\": {},\n  \"is_wait_list_unpaid\": {},\n  \"k_location\": {}\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "d19c19c6-e171-4478-acd1-b293513a4bde",
+              "name": "Client-side error: invalid input, failed validation, throttling, or other request error (only returned as an HTTP status when `X-Error-Rules` opts in; otherwise encoded in a 200 body).",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "Wl",
+                    "Book",
+                    "Process",
+                    "Process.json"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "dt_date_gmt",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "id_mode",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "is_backend",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "is_credit_card_check",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "k_class_period",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "show_relation",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "uid",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Opt in to mapping internal API error statuses to real 4xx HTTP codes. By default the API always answers HTTP 200 even on error, with the failure encoded in the JSON body; setting this header (e.g. to `default`) makes the gateway translate matched error statuses to 400/403/404 responses instead.",
+                    "key": "X-Error-Rules",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": \"string\",\n  \"text_message\": \"string\",\n  \"a_field\": {\n    \"key_0\": 2249,\n    \"key_1\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "e1634406-de86-4323-bf81-2d18217e70a5",
+              "name": "Missing, expired, or invalid Bearer token / session.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "Wl",
+                    "Book",
+                    "Process",
+                    "Process.json"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "dt_date_gmt",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "id_mode",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "is_backend",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "is_credit_card_check",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "k_class_period",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "show_relation",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "uid",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Opt in to mapping internal API error statuses to real 4xx HTTP codes. By default the API always answers HTTP 200 even on error, with the failure encoded in the JSON body; setting this header (e.g. to `default`) makes the gateway translate matched error statuses to 400/403/404 responses instead.",
+                    "key": "X-Error-Rules",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": \"string\",\n  \"text_message\": \"string\",\n  \"a_field\": {\n    \"key_0\": 2249,\n    \"key_1\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "569fd9e2-f71b-40f3-8576-44a632e736f2",
+              "name": "Authenticated but not permitted to access this business, location, or resource.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "Wl",
+                    "Book",
+                    "Process",
+                    "Process.json"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "dt_date_gmt",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "id_mode",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "is_backend",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "is_credit_card_check",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "k_class_period",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "show_relation",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "uid",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Opt in to mapping internal API error statuses to real 4xx HTTP codes. By default the API always answers HTTP 200 even on error, with the failure encoded in the JSON body; setting this header (e.g. to `default`) makes the gateway translate matched error statuses to 400/403/404 responses instead.",
+                    "key": "X-Error-Rules",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": \"string\",\n  \"text_message\": \"string\",\n  \"a_field\": {\n    \"key_0\": 2249,\n    \"key_1\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "b5810294-1b2e-433c-80a0-29d0470ce6fe",
+              "name": "The requested resource does not exist.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "Wl",
+                    "Book",
+                    "Process",
+                    "Process.json"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "dt_date_gmt",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "id_mode",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "is_backend",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "is_credit_card_check",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "k_class_period",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "show_relation",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "uid",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Opt in to mapping internal API error statuses to real 4xx HTTP codes. By default the API always answers HTTP 200 even on error, with the failure encoded in the JSON body; setting this header (e.g. to `default`) makes the gateway translate matched error statuses to 400/403/404 responses instead.",
+                    "key": "X-Error-Rules",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": \"string\",\n  \"text_message\": \"string\",\n  \"a_field\": {\n    \"key_0\": 2249,\n    \"key_1\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "3529c0ea-6b9b-4eba-8d64-1aaa069d8a4b",
+              "name": "The request payload failed field-level validation.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "Wl",
+                    "Book",
+                    "Process",
+                    "Process.json"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "dt_date_gmt",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "id_mode",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "is_backend",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "is_credit_card_check",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "k_class_period",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "show_relation",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "uid",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Opt in to mapping internal API error statuses to real 4xx HTTP codes. By default the API always answers HTTP 200 even on error, with the failure encoded in the JSON body; setting this header (e.g. to `default`) makes the gateway translate matched error statuses to 400/403/404 responses instead.",
+                    "key": "X-Error-Rules",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": \"string\",\n  \"text_message\": \"string\",\n  \"a_field\": {\n    \"key_0\": 2249,\n    \"key_1\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "7cc5d10d-f484-4fbe-bef9-9b3f2791ee3a",
+              "name": "Unexpected server error.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "Wl",
+                    "Book",
+                    "Process",
+                    "Process.json"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "dt_date_gmt",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "id_mode",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "is_backend",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "is_credit_card_check",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "k_class_period",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "show_relation",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "uid",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Opt in to mapping internal API error statuses to real 4xx HTTP codes. By default the API always answers HTTP 200 even on error, with the failure encoded in the JSON body; setting this header (e.g. to `default`) makes the gateway translate matched error statuses to 400/403/404 responses instead.",
+                    "key": "X-Error-Rules",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": \"string\",\n  \"text_message\": \"string\",\n  \"a_field\": {\n    \"key_0\": 2249,\n    \"key_1\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "8db38d5a-d84f-4a3f-bb33-2b982cdb1208",
+          "name": "Processes purchases and books sessions on the \"Pay/Billing info\" step of the booking wizard.",
+          "request": {
+            "name": "Processes purchases and books sessions on the \"Pay/Billing info\" step of the booking wizard.",
+            "description": {
+              "content": "Accepts the selected purchase items, payment form, optional discount code, and installment template, then\ncollects payment, applies discounts and prizes, and creates the booking records. Returns visit keys, activity\nkeys, and purchase activity key upon success.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "Wl",
+                "Book",
+                "Process",
+                "Payment",
+                "Payment.json"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "dt_date_gmt",
+                  "value": "<string>",
+                  "description": "(Required) Date/time to which session is booked."
+                },
+                {
+                  "disabled": false,
+                  "key": "id_mode",
+                  "value": "<string>",
+                  "description": "(Required) The mode type. One of the [ModeSid](#/components/schemas/Wl.Mode.ModeSid) constants."
+                },
+                {
+                  "disabled": false,
+                  "key": "is_backend",
+                  "value": "<boolean>",
+                  "description": "(Required) `true` if action is performed as a staff member; `false` otherwise.\n\nIf `true` is sent, access to the business and to the client will be checked.\nIf `"
+                },
+                {
+                  "disabled": false,
+                  "key": "is_credit_card_check",
+                  "value": "<boolean>",
+                  "description": "(Required) Checking whether the client has a credit card (if configured in the business) will be skipped if this flag is set to `false`.\n\nUse this field with cau"
+                },
+                {
+                  "disabled": false,
+                  "key": "k_class_period",
+                  "value": "<string>",
+                  "description": "(Required) Key of session which is booked."
+                },
+                {
+                  "disabled": false,
+                  "key": "show_relation",
+                  "value": "<boolean>",
+                  "description": "(Required) `true` to show \"book for\" option in booking wizard. `false` for default behavior."
+                },
+                {
+                  "disabled": false,
+                  "key": "uid",
+                  "value": "<string>",
+                  "description": "(Required) The client key for which the booking is being made."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "Opt in to mapping internal API error statuses to real 4xx HTTP codes. By default the API always answers HTTP 200 even on error, with the failure encoded in the JSON body; setting this header (e.g. to `default`) makes the gateway translate matched error statuses to 400/403/404 responses instead.",
+                "key": "X-Error-Rules",
+                "value": "<string>"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/x-www-form-urlencoded"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "urlencoded",
+              "urlencoded": [
+                {
+                  "disabled": false,
+                  "key": "a_item",
+                  "value": "<string>",
+                  "description": "(Required) The `a_item` field. See WellnessLiving developer portal for full field semantics."
+                },
+                {
+                  "disabled": false,
+                  "key": "a_pay_form",
+                  "value": "<string>",
+                  "description": "(Required) The `a_pay_form` field. See WellnessLiving developer portal for full field semantics."
+                },
+                {
+                  "disabled": false,
+                  "key": "a_quiz_response",
+                  "value": "<string>",
+                  "description": "(Required) The `a_quiz_response` field. See WellnessLiving developer portal for full field semantics."
+                },
+                {
+                  "disabled": false,
+                  "key": "a_resource",
+                  "value": "<string>",
+                  "description": "(Required) The `a_resource` field. See WellnessLiving developer portal for full field semantics."
+                },
+                {
+                  "disabled": false,
+                  "key": "a_session",
+                  "value": "<string>",
+                  "description": "(Required) The `a_session` field. See WellnessLiving developer portal for full field semantics."
+                },
+                {
+                  "disabled": false,
+                  "key": "a_session_wait_list_unpaid",
+                  "value": "<string>",
+                  "description": "(Required) The `a_session_wait_list_unpaid` field. See WellnessLiving developer portal for full field semantics."
+                },
+                {
+                  "disabled": false,
+                  "key": "can_book",
+                  "value": "<string>",
+                  "description": "(Required) The `can_book` field. See WellnessLiving developer portal for full field semantics."
+                },
+                {
+                  "disabled": false,
+                  "key": "is_book_unpaid",
+                  "value": "<string>",
+                  "description": "(Required) The `is_book_unpaid` field. See WellnessLiving developer portal for full field semantics."
+                },
+                {
+                  "disabled": false,
+                  "key": "is_card_authorize",
+                  "value": "<string>",
+                  "description": "(Required) The `is_card_authorize` field. See WellnessLiving developer portal for full field semantics."
+                },
+                {
+                  "disabled": false,
+                  "key": "is_force_pay_later",
+                  "value": "<string>",
+                  "description": "(Required) The `is_force_pay_later` field. See WellnessLiving developer portal for full field semantics."
+                },
+                {
+                  "disabled": false,
+                  "key": "k_login_promotion",
+                  "value": "<string>",
+                  "description": "(Required) The `k_login_promotion` field. See WellnessLiving developer portal for full field semantics."
+                },
+                {
+                  "disabled": false,
+                  "key": "k_session_pass",
+                  "value": "<string>",
+                  "description": "(Required) The `k_session_pass` field. See WellnessLiving developer portal for full field semantics."
+                },
+                {
+                  "disabled": false,
+                  "key": "text_discount_code",
+                  "value": "<string>",
+                  "description": "(Required) The `text_discount_code` field. See WellnessLiving developer portal for full field semantics."
+                },
+                {
+                  "disabled": false,
+                  "key": "a_repeat",
+                  "value": "<string>",
+                  "description": "The `a_repeat` field. See WellnessLiving developer portal for full field semantics."
+                },
+                {
+                  "disabled": false,
+                  "key": "k_pay_installment_template",
+                  "value": "<string>",
+                  "description": "The `k_pay_installment_template` field. See WellnessLiving developer portal for full field semantics."
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "f96f30ca-3f10-4e78-bfd7-cea2e1706f73",
+              "name": "Successful response.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "Wl",
+                    "Book",
+                    "Process",
+                    "Payment",
+                    "Payment.json"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "dt_date_gmt",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "id_mode",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "is_backend",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "is_credit_card_check",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "k_class_period",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "show_relation",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "uid",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Opt in to mapping internal API error statuses to real 4xx HTTP codes. By default the API always answers HTTP 200 even on error, with the failure encoded in the JSON body; setting this header (e.g. to `default`) makes the gateway translate matched error statuses to 400/403/404 responses instead.",
+                    "key": "X-Error-Rules",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "urlencoded",
+                  "urlencoded": [
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) The `a_item` field. See WellnessLiving developer portal for full field semantics.",
+                        "type": "text/plain"
+                      },
+                      "key": "a_item",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) The `a_pay_form` field. See WellnessLiving developer portal for full field semantics.",
+                        "type": "text/plain"
+                      },
+                      "key": "a_pay_form",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) The `a_quiz_response` field. See WellnessLiving developer portal for full field semantics.",
+                        "type": "text/plain"
+                      },
+                      "key": "a_quiz_response",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) The `a_resource` field. See WellnessLiving developer portal for full field semantics.",
+                        "type": "text/plain"
+                      },
+                      "key": "a_resource",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) The `a_session` field. See WellnessLiving developer portal for full field semantics.",
+                        "type": "text/plain"
+                      },
+                      "key": "a_session",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) The `a_session_wait_list_unpaid` field. See WellnessLiving developer portal for full field semantics.",
+                        "type": "text/plain"
+                      },
+                      "key": "a_session_wait_list_unpaid",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) The `can_book` field. See WellnessLiving developer portal for full field semantics.",
+                        "type": "text/plain"
+                      },
+                      "key": "can_book",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) The `is_book_unpaid` field. See WellnessLiving developer portal for full field semantics.",
+                        "type": "text/plain"
+                      },
+                      "key": "is_book_unpaid",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) The `is_card_authorize` field. See WellnessLiving developer portal for full field semantics.",
+                        "type": "text/plain"
+                      },
+                      "key": "is_card_authorize",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) The `is_force_pay_later` field. See WellnessLiving developer portal for full field semantics.",
+                        "type": "text/plain"
+                      },
+                      "key": "is_force_pay_later",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) The `k_login_promotion` field. See WellnessLiving developer portal for full field semantics.",
+                        "type": "text/plain"
+                      },
+                      "key": "k_login_promotion",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) The `k_session_pass` field. See WellnessLiving developer portal for full field semantics.",
+                        "type": "text/plain"
+                      },
+                      "key": "k_session_pass",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) The `text_discount_code` field. See WellnessLiving developer portal for full field semantics.",
+                        "type": "text/plain"
+                      },
+                      "key": "text_discount_code",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "The `a_repeat` field. See WellnessLiving developer portal for full field semantics.",
+                        "type": "text/plain"
+                      },
+                      "key": "a_repeat",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "The `k_pay_installment_template` field. See WellnessLiving developer portal for full field semantics.",
+                        "type": "text/plain"
+                      },
+                      "key": "k_pay_installment_template",
+                      "value": "<string>"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"a_login_activity_book\": {},\n  \"a_visit\": {},\n  \"k_login_activity_purchase\": {}\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "b48b2c08-1d83-4f02-9ce2-51dff7f755e5",
+              "name": "Client-side error: invalid input, failed validation, throttling, or other request error (only returned as an HTTP status when `X-Error-Rules` opts in; otherwise encoded in a 200 body).",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "Wl",
+                    "Book",
+                    "Process",
+                    "Payment",
+                    "Payment.json"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "dt_date_gmt",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "id_mode",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "is_backend",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "is_credit_card_check",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "k_class_period",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "show_relation",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "uid",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Opt in to mapping internal API error statuses to real 4xx HTTP codes. By default the API always answers HTTP 200 even on error, with the failure encoded in the JSON body; setting this header (e.g. to `default`) makes the gateway translate matched error statuses to 400/403/404 responses instead.",
+                    "key": "X-Error-Rules",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "urlencoded",
+                  "urlencoded": [
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) The `a_item` field. See WellnessLiving developer portal for full field semantics.",
+                        "type": "text/plain"
+                      },
+                      "key": "a_item",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) The `a_pay_form` field. See WellnessLiving developer portal for full field semantics.",
+                        "type": "text/plain"
+                      },
+                      "key": "a_pay_form",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) The `a_quiz_response` field. See WellnessLiving developer portal for full field semantics.",
+                        "type": "text/plain"
+                      },
+                      "key": "a_quiz_response",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) The `a_resource` field. See WellnessLiving developer portal for full field semantics.",
+                        "type": "text/plain"
+                      },
+                      "key": "a_resource",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) The `a_session` field. See WellnessLiving developer portal for full field semantics.",
+                        "type": "text/plain"
+                      },
+                      "key": "a_session",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) The `a_session_wait_list_unpaid` field. See WellnessLiving developer portal for full field semantics.",
+                        "type": "text/plain"
+                      },
+                      "key": "a_session_wait_list_unpaid",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) The `can_book` field. See WellnessLiving developer portal for full field semantics.",
+                        "type": "text/plain"
+                      },
+                      "key": "can_book",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) The `is_book_unpaid` field. See WellnessLiving developer portal for full field semantics.",
+                        "type": "text/plain"
+                      },
+                      "key": "is_book_unpaid",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) The `is_card_authorize` field. See WellnessLiving developer portal for full field semantics.",
+                        "type": "text/plain"
+                      },
+                      "key": "is_card_authorize",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) The `is_force_pay_later` field. See WellnessLiving developer portal for full field semantics.",
+                        "type": "text/plain"
+                      },
+                      "key": "is_force_pay_later",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) The `k_login_promotion` field. See WellnessLiving developer portal for full field semantics.",
+                        "type": "text/plain"
+                      },
+                      "key": "k_login_promotion",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) The `k_session_pass` field. See WellnessLiving developer portal for full field semantics.",
+                        "type": "text/plain"
+                      },
+                      "key": "k_session_pass",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) The `text_discount_code` field. See WellnessLiving developer portal for full field semantics.",
+                        "type": "text/plain"
+                      },
+                      "key": "text_discount_code",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "The `a_repeat` field. See WellnessLiving developer portal for full field semantics.",
+                        "type": "text/plain"
+                      },
+                      "key": "a_repeat",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "The `k_pay_installment_template` field. See WellnessLiving developer portal for full field semantics.",
+                        "type": "text/plain"
+                      },
+                      "key": "k_pay_installment_template",
+                      "value": "<string>"
+                    }
+                  ]
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": \"string\",\n  \"text_message\": \"string\",\n  \"a_field\": {\n    \"key_0\": 2249,\n    \"key_1\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "d7eaf98e-573f-4e7b-a554-741ac5b52095",
+              "name": "Missing, expired, or invalid Bearer token / session.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "Wl",
+                    "Book",
+                    "Process",
+                    "Payment",
+                    "Payment.json"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "dt_date_gmt",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "id_mode",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "is_backend",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "is_credit_card_check",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "k_class_period",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "show_relation",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "uid",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Opt in to mapping internal API error statuses to real 4xx HTTP codes. By default the API always answers HTTP 200 even on error, with the failure encoded in the JSON body; setting this header (e.g. to `default`) makes the gateway translate matched error statuses to 400/403/404 responses instead.",
+                    "key": "X-Error-Rules",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "urlencoded",
+                  "urlencoded": [
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) The `a_item` field. See WellnessLiving developer portal for full field semantics.",
+                        "type": "text/plain"
+                      },
+                      "key": "a_item",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) The `a_pay_form` field. See WellnessLiving developer portal for full field semantics.",
+                        "type": "text/plain"
+                      },
+                      "key": "a_pay_form",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) The `a_quiz_response` field. See WellnessLiving developer portal for full field semantics.",
+                        "type": "text/plain"
+                      },
+                      "key": "a_quiz_response",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) The `a_resource` field. See WellnessLiving developer portal for full field semantics.",
+                        "type": "text/plain"
+                      },
+                      "key": "a_resource",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) The `a_session` field. See WellnessLiving developer portal for full field semantics.",
+                        "type": "text/plain"
+                      },
+                      "key": "a_session",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) The `a_session_wait_list_unpaid` field. See WellnessLiving developer portal for full field semantics.",
+                        "type": "text/plain"
+                      },
+                      "key": "a_session_wait_list_unpaid",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) The `can_book` field. See WellnessLiving developer portal for full field semantics.",
+                        "type": "text/plain"
+                      },
+                      "key": "can_book",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) The `is_book_unpaid` field. See WellnessLiving developer portal for full field semantics.",
+                        "type": "text/plain"
+                      },
+                      "key": "is_book_unpaid",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) The `is_card_authorize` field. See WellnessLiving developer portal for full field semantics.",
+                        "type": "text/plain"
+                      },
+                      "key": "is_card_authorize",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) The `is_force_pay_later` field. See WellnessLiving developer portal for full field semantics.",
+                        "type": "text/plain"
+                      },
+                      "key": "is_force_pay_later",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) The `k_login_promotion` field. See WellnessLiving developer portal for full field semantics.",
+                        "type": "text/plain"
+                      },
+                      "key": "k_login_promotion",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) The `k_session_pass` field. See WellnessLiving developer portal for full field semantics.",
+                        "type": "text/plain"
+                      },
+                      "key": "k_session_pass",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) The `text_discount_code` field. See WellnessLiving developer portal for full field semantics.",
+                        "type": "text/plain"
+                      },
+                      "key": "text_discount_code",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "The `a_repeat` field. See WellnessLiving developer portal for full field semantics.",
+                        "type": "text/plain"
+                      },
+                      "key": "a_repeat",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "The `k_pay_installment_template` field. See WellnessLiving developer portal for full field semantics.",
+                        "type": "text/plain"
+                      },
+                      "key": "k_pay_installment_template",
+                      "value": "<string>"
+                    }
+                  ]
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": \"string\",\n  \"text_message\": \"string\",\n  \"a_field\": {\n    \"key_0\": 2249,\n    \"key_1\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "6bc1518d-dad4-4d10-8779-67bb145ed4fe",
+              "name": "Authenticated but not permitted to access this business, location, or resource.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "Wl",
+                    "Book",
+                    "Process",
+                    "Payment",
+                    "Payment.json"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "dt_date_gmt",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "id_mode",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "is_backend",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "is_credit_card_check",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "k_class_period",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "show_relation",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "uid",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Opt in to mapping internal API error statuses to real 4xx HTTP codes. By default the API always answers HTTP 200 even on error, with the failure encoded in the JSON body; setting this header (e.g. to `default`) makes the gateway translate matched error statuses to 400/403/404 responses instead.",
+                    "key": "X-Error-Rules",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "urlencoded",
+                  "urlencoded": [
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) The `a_item` field. See WellnessLiving developer portal for full field semantics.",
+                        "type": "text/plain"
+                      },
+                      "key": "a_item",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) The `a_pay_form` field. See WellnessLiving developer portal for full field semantics.",
+                        "type": "text/plain"
+                      },
+                      "key": "a_pay_form",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) The `a_quiz_response` field. See WellnessLiving developer portal for full field semantics.",
+                        "type": "text/plain"
+                      },
+                      "key": "a_quiz_response",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) The `a_resource` field. See WellnessLiving developer portal for full field semantics.",
+                        "type": "text/plain"
+                      },
+                      "key": "a_resource",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) The `a_session` field. See WellnessLiving developer portal for full field semantics.",
+                        "type": "text/plain"
+                      },
+                      "key": "a_session",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) The `a_session_wait_list_unpaid` field. See WellnessLiving developer portal for full field semantics.",
+                        "type": "text/plain"
+                      },
+                      "key": "a_session_wait_list_unpaid",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) The `can_book` field. See WellnessLiving developer portal for full field semantics.",
+                        "type": "text/plain"
+                      },
+                      "key": "can_book",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) The `is_book_unpaid` field. See WellnessLiving developer portal for full field semantics.",
+                        "type": "text/plain"
+                      },
+                      "key": "is_book_unpaid",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) The `is_card_authorize` field. See WellnessLiving developer portal for full field semantics.",
+                        "type": "text/plain"
+                      },
+                      "key": "is_card_authorize",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) The `is_force_pay_later` field. See WellnessLiving developer portal for full field semantics.",
+                        "type": "text/plain"
+                      },
+                      "key": "is_force_pay_later",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) The `k_login_promotion` field. See WellnessLiving developer portal for full field semantics.",
+                        "type": "text/plain"
+                      },
+                      "key": "k_login_promotion",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) The `k_session_pass` field. See WellnessLiving developer portal for full field semantics.",
+                        "type": "text/plain"
+                      },
+                      "key": "k_session_pass",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) The `text_discount_code` field. See WellnessLiving developer portal for full field semantics.",
+                        "type": "text/plain"
+                      },
+                      "key": "text_discount_code",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "The `a_repeat` field. See WellnessLiving developer portal for full field semantics.",
+                        "type": "text/plain"
+                      },
+                      "key": "a_repeat",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "The `k_pay_installment_template` field. See WellnessLiving developer portal for full field semantics.",
+                        "type": "text/plain"
+                      },
+                      "key": "k_pay_installment_template",
+                      "value": "<string>"
+                    }
+                  ]
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": \"string\",\n  \"text_message\": \"string\",\n  \"a_field\": {\n    \"key_0\": 2249,\n    \"key_1\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "8ddf9f0b-a915-4ce6-a9d4-62feb2d4f877",
+              "name": "The requested resource does not exist.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "Wl",
+                    "Book",
+                    "Process",
+                    "Payment",
+                    "Payment.json"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "dt_date_gmt",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "id_mode",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "is_backend",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "is_credit_card_check",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "k_class_period",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "show_relation",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "uid",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Opt in to mapping internal API error statuses to real 4xx HTTP codes. By default the API always answers HTTP 200 even on error, with the failure encoded in the JSON body; setting this header (e.g. to `default`) makes the gateway translate matched error statuses to 400/403/404 responses instead.",
+                    "key": "X-Error-Rules",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "urlencoded",
+                  "urlencoded": [
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) The `a_item` field. See WellnessLiving developer portal for full field semantics.",
+                        "type": "text/plain"
+                      },
+                      "key": "a_item",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) The `a_pay_form` field. See WellnessLiving developer portal for full field semantics.",
+                        "type": "text/plain"
+                      },
+                      "key": "a_pay_form",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) The `a_quiz_response` field. See WellnessLiving developer portal for full field semantics.",
+                        "type": "text/plain"
+                      },
+                      "key": "a_quiz_response",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) The `a_resource` field. See WellnessLiving developer portal for full field semantics.",
+                        "type": "text/plain"
+                      },
+                      "key": "a_resource",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) The `a_session` field. See WellnessLiving developer portal for full field semantics.",
+                        "type": "text/plain"
+                      },
+                      "key": "a_session",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) The `a_session_wait_list_unpaid` field. See WellnessLiving developer portal for full field semantics.",
+                        "type": "text/plain"
+                      },
+                      "key": "a_session_wait_list_unpaid",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) The `can_book` field. See WellnessLiving developer portal for full field semantics.",
+                        "type": "text/plain"
+                      },
+                      "key": "can_book",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) The `is_book_unpaid` field. See WellnessLiving developer portal for full field semantics.",
+                        "type": "text/plain"
+                      },
+                      "key": "is_book_unpaid",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) The `is_card_authorize` field. See WellnessLiving developer portal for full field semantics.",
+                        "type": "text/plain"
+                      },
+                      "key": "is_card_authorize",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) The `is_force_pay_later` field. See WellnessLiving developer portal for full field semantics.",
+                        "type": "text/plain"
+                      },
+                      "key": "is_force_pay_later",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) The `k_login_promotion` field. See WellnessLiving developer portal for full field semantics.",
+                        "type": "text/plain"
+                      },
+                      "key": "k_login_promotion",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) The `k_session_pass` field. See WellnessLiving developer portal for full field semantics.",
+                        "type": "text/plain"
+                      },
+                      "key": "k_session_pass",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) The `text_discount_code` field. See WellnessLiving developer portal for full field semantics.",
+                        "type": "text/plain"
+                      },
+                      "key": "text_discount_code",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "The `a_repeat` field. See WellnessLiving developer portal for full field semantics.",
+                        "type": "text/plain"
+                      },
+                      "key": "a_repeat",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "The `k_pay_installment_template` field. See WellnessLiving developer portal for full field semantics.",
+                        "type": "text/plain"
+                      },
+                      "key": "k_pay_installment_template",
+                      "value": "<string>"
+                    }
+                  ]
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": \"string\",\n  \"text_message\": \"string\",\n  \"a_field\": {\n    \"key_0\": 2249,\n    \"key_1\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "c10a72d2-432c-42c9-9fdc-9a815e69c414",
+              "name": "The request payload failed field-level validation.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "Wl",
+                    "Book",
+                    "Process",
+                    "Payment",
+                    "Payment.json"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "dt_date_gmt",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "id_mode",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "is_backend",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "is_credit_card_check",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "k_class_period",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "show_relation",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "uid",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Opt in to mapping internal API error statuses to real 4xx HTTP codes. By default the API always answers HTTP 200 even on error, with the failure encoded in the JSON body; setting this header (e.g. to `default`) makes the gateway translate matched error statuses to 400/403/404 responses instead.",
+                    "key": "X-Error-Rules",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "urlencoded",
+                  "urlencoded": [
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) The `a_item` field. See WellnessLiving developer portal for full field semantics.",
+                        "type": "text/plain"
+                      },
+                      "key": "a_item",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) The `a_pay_form` field. See WellnessLiving developer portal for full field semantics.",
+                        "type": "text/plain"
+                      },
+                      "key": "a_pay_form",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) The `a_quiz_response` field. See WellnessLiving developer portal for full field semantics.",
+                        "type": "text/plain"
+                      },
+                      "key": "a_quiz_response",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) The `a_resource` field. See WellnessLiving developer portal for full field semantics.",
+                        "type": "text/plain"
+                      },
+                      "key": "a_resource",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) The `a_session` field. See WellnessLiving developer portal for full field semantics.",
+                        "type": "text/plain"
+                      },
+                      "key": "a_session",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) The `a_session_wait_list_unpaid` field. See WellnessLiving developer portal for full field semantics.",
+                        "type": "text/plain"
+                      },
+                      "key": "a_session_wait_list_unpaid",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) The `can_book` field. See WellnessLiving developer portal for full field semantics.",
+                        "type": "text/plain"
+                      },
+                      "key": "can_book",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) The `is_book_unpaid` field. See WellnessLiving developer portal for full field semantics.",
+                        "type": "text/plain"
+                      },
+                      "key": "is_book_unpaid",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) The `is_card_authorize` field. See WellnessLiving developer portal for full field semantics.",
+                        "type": "text/plain"
+                      },
+                      "key": "is_card_authorize",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) The `is_force_pay_later` field. See WellnessLiving developer portal for full field semantics.",
+                        "type": "text/plain"
+                      },
+                      "key": "is_force_pay_later",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) The `k_login_promotion` field. See WellnessLiving developer portal for full field semantics.",
+                        "type": "text/plain"
+                      },
+                      "key": "k_login_promotion",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) The `k_session_pass` field. See WellnessLiving developer portal for full field semantics.",
+                        "type": "text/plain"
+                      },
+                      "key": "k_session_pass",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) The `text_discount_code` field. See WellnessLiving developer portal for full field semantics.",
+                        "type": "text/plain"
+                      },
+                      "key": "text_discount_code",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "The `a_repeat` field. See WellnessLiving developer portal for full field semantics.",
+                        "type": "text/plain"
+                      },
+                      "key": "a_repeat",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "The `k_pay_installment_template` field. See WellnessLiving developer portal for full field semantics.",
+                        "type": "text/plain"
+                      },
+                      "key": "k_pay_installment_template",
+                      "value": "<string>"
+                    }
+                  ]
+                }
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": \"string\",\n  \"text_message\": \"string\",\n  \"a_field\": {\n    \"key_0\": 2249,\n    \"key_1\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "93b9e313-b0cf-41c9-beed-2f851501f513",
+              "name": "Unexpected server error.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "Wl",
+                    "Book",
+                    "Process",
+                    "Payment",
+                    "Payment.json"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "dt_date_gmt",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "id_mode",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "is_backend",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "is_credit_card_check",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "k_class_period",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "show_relation",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "uid",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Opt in to mapping internal API error statuses to real 4xx HTTP codes. By default the API always answers HTTP 200 even on error, with the failure encoded in the JSON body; setting this header (e.g. to `default`) makes the gateway translate matched error statuses to 400/403/404 responses instead.",
+                    "key": "X-Error-Rules",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "urlencoded",
+                  "urlencoded": [
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) The `a_item` field. See WellnessLiving developer portal for full field semantics.",
+                        "type": "text/plain"
+                      },
+                      "key": "a_item",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) The `a_pay_form` field. See WellnessLiving developer portal for full field semantics.",
+                        "type": "text/plain"
+                      },
+                      "key": "a_pay_form",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) The `a_quiz_response` field. See WellnessLiving developer portal for full field semantics.",
+                        "type": "text/plain"
+                      },
+                      "key": "a_quiz_response",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) The `a_resource` field. See WellnessLiving developer portal for full field semantics.",
+                        "type": "text/plain"
+                      },
+                      "key": "a_resource",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) The `a_session` field. See WellnessLiving developer portal for full field semantics.",
+                        "type": "text/plain"
+                      },
+                      "key": "a_session",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) The `a_session_wait_list_unpaid` field. See WellnessLiving developer portal for full field semantics.",
+                        "type": "text/plain"
+                      },
+                      "key": "a_session_wait_list_unpaid",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) The `can_book` field. See WellnessLiving developer portal for full field semantics.",
+                        "type": "text/plain"
+                      },
+                      "key": "can_book",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) The `is_book_unpaid` field. See WellnessLiving developer portal for full field semantics.",
+                        "type": "text/plain"
+                      },
+                      "key": "is_book_unpaid",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) The `is_card_authorize` field. See WellnessLiving developer portal for full field semantics.",
+                        "type": "text/plain"
+                      },
+                      "key": "is_card_authorize",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) The `is_force_pay_later` field. See WellnessLiving developer portal for full field semantics.",
+                        "type": "text/plain"
+                      },
+                      "key": "is_force_pay_later",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) The `k_login_promotion` field. See WellnessLiving developer portal for full field semantics.",
+                        "type": "text/plain"
+                      },
+                      "key": "k_login_promotion",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) The `k_session_pass` field. See WellnessLiving developer portal for full field semantics.",
+                        "type": "text/plain"
+                      },
+                      "key": "k_session_pass",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) The `text_discount_code` field. See WellnessLiving developer portal for full field semantics.",
+                        "type": "text/plain"
+                      },
+                      "key": "text_discount_code",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "The `a_repeat` field. See WellnessLiving developer portal for full field semantics.",
+                        "type": "text/plain"
+                      },
+                      "key": "a_repeat",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "The `k_pay_installment_template` field. See WellnessLiving developer portal for full field semantics.",
+                        "type": "text/plain"
+                      },
+                      "key": "k_pay_installment_template",
+                      "value": "<string>"
+                    }
+                  ]
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": \"string\",\n  \"text_message\": \"string\",\n  \"a_field\": {\n    \"key_0\": 2249,\n    \"key_1\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "926b9112-5919-41b7-950d-9f7863a9b05d",
+          "name": "Returns available purchase options, existing client promotions, session passes, and prizes for the specified session.",
+          "request": {
+            "name": "Returns available purchase options, existing client promotions, session passes, and prizes for the specified session.",
+            "description": {
+              "content": "Loads all purchase options that can be used to book the specified class period for the given user, including\nexisting login promotions with remaining session counts, new purchasable options, reward prizes, and login prizes.\nReturns pricing, image, program category, and availability data for each option.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "Wl",
+                "Book",
+                "Process",
+                "Purchase",
+                "Purchase.json"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "a_login_promotion_group",
+                  "value": "<string>",
+                  "description": "(Required) A list of existing purchase options that were selected for previous clients (group).\n\nNote:\n* It makes sense if for all clients the list is loaded wit"
+                },
+                {
+                  "disabled": false,
+                  "key": "a_login_promotion_group",
+                  "value": "<string>",
+                  "description": "(Required) A list of existing purchase options that were selected for previous clients (group).\n\nNote:\n* It makes sense if for all clients the list is loaded wit"
+                },
+                {
+                  "disabled": false,
+                  "key": "a_session",
+                  "value": "<string>",
+                  "description": "(Required) The list of sessions being booked.\n\nKeys are class period keys.\nValues are index arrays of date/time strings when the session occurred, in MySQL forma"
+                },
+                {
+                  "disabled": false,
+                  "key": "a_session",
+                  "value": "<string>",
+                  "description": "(Required) The list of sessions being booked.\n\nKeys are class period keys.\nValues are index arrays of date/time strings when the session occurred, in MySQL forma"
+                },
+                {
+                  "disabled": false,
+                  "key": "a_session_wait_list_unpaid",
+                  "value": "<string>",
+                  "description": "(Required) The selected sessions on the wait list that are unpaid.\n\nKeys are class period keys.\nValues are index arrays of date/time strings when the session occ"
+                },
+                {
+                  "disabled": false,
+                  "key": "a_session_wait_list_unpaid",
+                  "value": "<string>",
+                  "description": "(Required) The selected sessions on the wait list that are unpaid.\n\nKeys are class period keys.\nValues are index arrays of date/time strings when the session occ"
+                },
+                {
+                  "disabled": false,
+                  "key": "dt_date_gmt",
+                  "value": "<string>",
+                  "description": "(Required) Date/time to which session is booked."
+                },
+                {
+                  "disabled": false,
+                  "key": "i_image_height",
+                  "value": "<integer>",
+                  "description": "(Required) The image height in pixels. Specify this value if you need image to be returned in specific size.\nThe returned image will have the default thumbnail s"
+                },
+                {
+                  "disabled": false,
+                  "key": "i_image_width",
+                  "value": "<integer>",
+                  "description": "(Required) The image width in pixels. Specify this value if you need image to be returned in specific size.\nThe returned image will have the default thumbnail si"
+                },
+                {
+                  "disabled": false,
+                  "key": "id_mode",
+                  "value": "<string>",
+                  "description": "(Required) The mode type. One of the [ModeSid](#/components/schemas/Wl.Mode.ModeSid) constants."
+                },
+                {
+                  "disabled": false,
+                  "key": "is_backend",
+                  "value": "<boolean>",
+                  "description": "(Required) `true` if action is performed as a staff member; `false` otherwise.\n\nIf `true` is sent, access to the business and to the client will be checked.\nIf `"
+                },
+                {
+                  "disabled": false,
+                  "key": "is_card_authorize",
+                  "value": "<boolean>",
+                  "description": "(Required) Determines if the client must authorize the credit card."
+                },
+                {
+                  "disabled": false,
+                  "key": "is_credit_card_check",
+                  "value": "<boolean>",
+                  "description": "(Required) Checking whether the client has a credit card (if configured in the business) will be skipped if this flag is set to `false`.\n\nUse this field with cau"
+                },
+                {
+                  "disabled": false,
+                  "key": "k_business",
+                  "value": "<string>",
+                  "description": "The business key.\n\n`null` if business key was not passed."
+                },
+                {
+                  "disabled": false,
+                  "key": "k_class_period",
+                  "value": "<string>",
+                  "description": "(Required) Key of session which is booked."
+                },
+                {
+                  "disabled": false,
+                  "key": "show_relation",
+                  "value": "<boolean>",
+                  "description": "(Required) `true` to show \"book for\" option in booking wizard. `false` for default behavior."
+                },
+                {
+                  "disabled": false,
+                  "key": "uid",
+                  "value": "<string>",
+                  "description": "(Required) The client key for which the booking is being made."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "Opt in to mapping internal API error statuses to real 4xx HTTP codes. By default the API always answers HTTP 200 even on error, with the failure encoded in the JSON body; setting this header (e.g. to `default`) makes the gateway translate matched error statuses to 400/403/404 responses instead.",
+                "key": "X-Error-Rules",
+                "value": "<string>"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "3a9b29db-5552-4207-9a24-2cc6617b2714",
+              "name": "Successful response.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "Wl",
+                    "Book",
+                    "Process",
+                    "Purchase",
+                    "Purchase.json"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "a_login_promotion_group",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "a_login_promotion_group",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "a_session",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "a_session",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "a_session_wait_list_unpaid",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "a_session_wait_list_unpaid",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "dt_date_gmt",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "i_image_height",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "i_image_width",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "id_mode",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "is_backend",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "is_card_authorize",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "is_credit_card_check",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "k_business",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "k_class_period",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "show_relation",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "uid",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Opt in to mapping internal API error statuses to real 4xx HTTP codes. By default the API always answers HTTP 200 even on error, with the failure encoded in the JSON body; setting this header (e.g. to `default`) makes the gateway translate matched error statuses to 400/403/404 responses instead.",
+                    "key": "X-Error-Rules",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"a_login_prize\": {},\n  \"a_login_promotion\": {},\n  \"a_purchase\": {},\n  \"a_reward_prize\": {},\n  \"a_session_pass\": {},\n  \"is_single_default\": {},\n  \"k_promotion_default\": {}\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "2f0a1da5-391f-4626-8daf-b88c63333d9f",
+              "name": "Client-side error: invalid input, failed validation, throttling, or other request error (only returned as an HTTP status when `X-Error-Rules` opts in; otherwise encoded in a 200 body).",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "Wl",
+                    "Book",
+                    "Process",
+                    "Purchase",
+                    "Purchase.json"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "a_login_promotion_group",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "a_login_promotion_group",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "a_session",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "a_session",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "a_session_wait_list_unpaid",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "a_session_wait_list_unpaid",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "dt_date_gmt",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "i_image_height",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "i_image_width",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "id_mode",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "is_backend",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "is_card_authorize",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "is_credit_card_check",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "k_business",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "k_class_period",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "show_relation",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "uid",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Opt in to mapping internal API error statuses to real 4xx HTTP codes. By default the API always answers HTTP 200 even on error, with the failure encoded in the JSON body; setting this header (e.g. to `default`) makes the gateway translate matched error statuses to 400/403/404 responses instead.",
+                    "key": "X-Error-Rules",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": \"string\",\n  \"text_message\": \"string\",\n  \"a_field\": {\n    \"key_0\": 2249,\n    \"key_1\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "f3420879-d258-4d63-9617-8dde92ae3469",
+              "name": "Missing, expired, or invalid Bearer token / session.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "Wl",
+                    "Book",
+                    "Process",
+                    "Purchase",
+                    "Purchase.json"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "a_login_promotion_group",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "a_login_promotion_group",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "a_session",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "a_session",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "a_session_wait_list_unpaid",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "a_session_wait_list_unpaid",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "dt_date_gmt",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "i_image_height",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "i_image_width",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "id_mode",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "is_backend",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "is_card_authorize",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "is_credit_card_check",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "k_business",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "k_class_period",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "show_relation",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "uid",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Opt in to mapping internal API error statuses to real 4xx HTTP codes. By default the API always answers HTTP 200 even on error, with the failure encoded in the JSON body; setting this header (e.g. to `default`) makes the gateway translate matched error statuses to 400/403/404 responses instead.",
+                    "key": "X-Error-Rules",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": \"string\",\n  \"text_message\": \"string\",\n  \"a_field\": {\n    \"key_0\": 2249,\n    \"key_1\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "2bfbf5a6-b736-48bc-be21-eea3f3dcf7ab",
+              "name": "Authenticated but not permitted to access this business, location, or resource.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "Wl",
+                    "Book",
+                    "Process",
+                    "Purchase",
+                    "Purchase.json"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "a_login_promotion_group",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "a_login_promotion_group",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "a_session",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "a_session",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "a_session_wait_list_unpaid",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "a_session_wait_list_unpaid",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "dt_date_gmt",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "i_image_height",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "i_image_width",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "id_mode",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "is_backend",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "is_card_authorize",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "is_credit_card_check",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "k_business",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "k_class_period",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "show_relation",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "uid",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Opt in to mapping internal API error statuses to real 4xx HTTP codes. By default the API always answers HTTP 200 even on error, with the failure encoded in the JSON body; setting this header (e.g. to `default`) makes the gateway translate matched error statuses to 400/403/404 responses instead.",
+                    "key": "X-Error-Rules",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": \"string\",\n  \"text_message\": \"string\",\n  \"a_field\": {\n    \"key_0\": 2249,\n    \"key_1\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "b3327326-21c0-4fec-9f7a-35b1d61807a4",
+              "name": "The requested resource does not exist.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "Wl",
+                    "Book",
+                    "Process",
+                    "Purchase",
+                    "Purchase.json"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "a_login_promotion_group",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "a_login_promotion_group",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "a_session",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "a_session",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "a_session_wait_list_unpaid",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "a_session_wait_list_unpaid",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "dt_date_gmt",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "i_image_height",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "i_image_width",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "id_mode",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "is_backend",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "is_card_authorize",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "is_credit_card_check",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "k_business",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "k_class_period",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "show_relation",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "uid",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Opt in to mapping internal API error statuses to real 4xx HTTP codes. By default the API always answers HTTP 200 even on error, with the failure encoded in the JSON body; setting this header (e.g. to `default`) makes the gateway translate matched error statuses to 400/403/404 responses instead.",
+                    "key": "X-Error-Rules",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": \"string\",\n  \"text_message\": \"string\",\n  \"a_field\": {\n    \"key_0\": 2249,\n    \"key_1\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "1de106cc-7317-493e-b506-bcf051717309",
+              "name": "The request payload failed field-level validation.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "Wl",
+                    "Book",
+                    "Process",
+                    "Purchase",
+                    "Purchase.json"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "a_login_promotion_group",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "a_login_promotion_group",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "a_session",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "a_session",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "a_session_wait_list_unpaid",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "a_session_wait_list_unpaid",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "dt_date_gmt",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "i_image_height",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "i_image_width",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "id_mode",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "is_backend",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "is_card_authorize",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "is_credit_card_check",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "k_business",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "k_class_period",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "show_relation",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "uid",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Opt in to mapping internal API error statuses to real 4xx HTTP codes. By default the API always answers HTTP 200 even on error, with the failure encoded in the JSON body; setting this header (e.g. to `default`) makes the gateway translate matched error statuses to 400/403/404 responses instead.",
+                    "key": "X-Error-Rules",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": \"string\",\n  \"text_message\": \"string\",\n  \"a_field\": {\n    \"key_0\": 2249,\n    \"key_1\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "7c70b4c2-4f68-4d80-a259-95d542ed8fc3",
+              "name": "Unexpected server error.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "Wl",
+                    "Book",
+                    "Process",
+                    "Purchase",
+                    "Purchase.json"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "a_login_promotion_group",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "a_login_promotion_group",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "a_session",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "a_session",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "a_session_wait_list_unpaid",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "a_session_wait_list_unpaid",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "dt_date_gmt",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "i_image_height",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "i_image_width",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "id_mode",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "is_backend",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "is_card_authorize",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "is_credit_card_check",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "k_business",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "k_class_period",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "show_relation",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "uid",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Opt in to mapping internal API error statuses to real 4xx HTTP codes. By default the API always answers HTTP 200 even on error, with the failure encoded in the JSON body; setting this header (e.g. to `default`) makes the gateway translate matched error statuses to 400/403/404 responses instead.",
+                    "key": "X-Error-Rules",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": \"string\",\n  \"text_message\": \"string\",\n  \"a_field\": {\n    \"key_0\": 2249,\n    \"key_1\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "d125899f-0aa4-4f5f-80ea-445ba90fb4e6",
+          "name": "Returns information about whether the given user can cancel the booking and the expected consequences.",
+          "request": {
+            "name": "Returns information about whether the given user can cancel the booking and the expected consequences.",
+            "description": {
+              "content": "Accepts a business key and a visit key, validates access, and performs a dry-run cancellation to determine\nwhether the visit can be cancelled online, whether a late-cancel penalty applies, and whether the purchase\noption credit would be refunded.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "Wl",
+                "Book",
+                "Cancel",
+                "CancelCan.json"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "k_business",
+                  "value": "<string>",
+                  "description": "(Required) Key of the business within which the action is performed."
+                },
+                {
+                  "disabled": false,
+                  "key": "k_visit",
+                  "value": "<string>",
+                  "description": "(Required) Visit key."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "Opt in to mapping internal API error statuses to real 4xx HTTP codes. By default the API always answers HTTP 200 even on error, with the failure encoded in the JSON body; setting this header (e.g. to `default`) makes the gateway translate matched error statuses to 400/403/404 responses instead.",
+                "key": "X-Error-Rules",
+                "value": "<string>"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "82225133-fbf5-42ce-89e6-3f6ecd1719ab",
+              "name": "Successful response.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "Wl",
+                    "Book",
+                    "Cancel",
+                    "CancelCan.json"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "k_business",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "k_visit",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Opt in to mapping internal API error statuses to real 4xx HTTP codes. By default the API always answers HTTP 200 even on error, with the failure encoded in the JSON body; setting this header (e.g. to `default`) makes the gateway translate matched error statuses to 400/403/404 responses instead.",
+                    "key": "X-Error-Rules",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"a_penalty\": {},\n  \"can_cancel\": {},\n  \"is_flag\": {},\n  \"is_late\": {},\n  \"is_refund\": {}\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "cd3269e5-d76e-43af-b665-ca5535cec932",
+              "name": "Client-side error: invalid input, failed validation, throttling, or other request error (only returned as an HTTP status when `X-Error-Rules` opts in; otherwise encoded in a 200 body).",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "Wl",
+                    "Book",
+                    "Cancel",
+                    "CancelCan.json"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "k_business",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "k_visit",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Opt in to mapping internal API error statuses to real 4xx HTTP codes. By default the API always answers HTTP 200 even on error, with the failure encoded in the JSON body; setting this header (e.g. to `default`) makes the gateway translate matched error statuses to 400/403/404 responses instead.",
+                    "key": "X-Error-Rules",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": \"string\",\n  \"text_message\": \"string\",\n  \"a_field\": {\n    \"key_0\": 2249,\n    \"key_1\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "8823cb3e-f2b0-4eb5-abb2-be63b1c91418",
+              "name": "Missing, expired, or invalid Bearer token / session.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "Wl",
+                    "Book",
+                    "Cancel",
+                    "CancelCan.json"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "k_business",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "k_visit",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Opt in to mapping internal API error statuses to real 4xx HTTP codes. By default the API always answers HTTP 200 even on error, with the failure encoded in the JSON body; setting this header (e.g. to `default`) makes the gateway translate matched error statuses to 400/403/404 responses instead.",
+                    "key": "X-Error-Rules",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": \"string\",\n  \"text_message\": \"string\",\n  \"a_field\": {\n    \"key_0\": 2249,\n    \"key_1\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "95ad8a09-6788-480d-a9e3-196aa8b0f5a4",
+              "name": "Authenticated but not permitted to access this business, location, or resource.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "Wl",
+                    "Book",
+                    "Cancel",
+                    "CancelCan.json"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "k_business",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "k_visit",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Opt in to mapping internal API error statuses to real 4xx HTTP codes. By default the API always answers HTTP 200 even on error, with the failure encoded in the JSON body; setting this header (e.g. to `default`) makes the gateway translate matched error statuses to 400/403/404 responses instead.",
+                    "key": "X-Error-Rules",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": \"string\",\n  \"text_message\": \"string\",\n  \"a_field\": {\n    \"key_0\": 2249,\n    \"key_1\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "ccdb6cea-a730-4fcb-8e87-9b2aa32d60a4",
+              "name": "The requested resource does not exist.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "Wl",
+                    "Book",
+                    "Cancel",
+                    "CancelCan.json"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "k_business",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "k_visit",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Opt in to mapping internal API error statuses to real 4xx HTTP codes. By default the API always answers HTTP 200 even on error, with the failure encoded in the JSON body; setting this header (e.g. to `default`) makes the gateway translate matched error statuses to 400/403/404 responses instead.",
+                    "key": "X-Error-Rules",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": \"string\",\n  \"text_message\": \"string\",\n  \"a_field\": {\n    \"key_0\": 2249,\n    \"key_1\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "22675496-87e4-4097-a256-473ea278d0b0",
+              "name": "The request payload failed field-level validation.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "Wl",
+                    "Book",
+                    "Cancel",
+                    "CancelCan.json"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "k_business",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "k_visit",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Opt in to mapping internal API error statuses to real 4xx HTTP codes. By default the API always answers HTTP 200 even on error, with the failure encoded in the JSON body; setting this header (e.g. to `default`) makes the gateway translate matched error statuses to 400/403/404 responses instead.",
+                    "key": "X-Error-Rules",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": \"string\",\n  \"text_message\": \"string\",\n  \"a_field\": {\n    \"key_0\": 2249,\n    \"key_1\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "4fedb341-4b9c-483b-a8ca-7b8aa5dad5e5",
+              "name": "Unexpected server error.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "Wl",
+                    "Book",
+                    "Cancel",
+                    "CancelCan.json"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "k_business",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "k_visit",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Opt in to mapping internal API error statuses to real 4xx HTTP codes. By default the API always answers HTTP 200 even on error, with the failure encoded in the JSON body; setting this header (e.g. to `default`) makes the gateway translate matched error statuses to 400/403/404 responses instead.",
+                    "key": "X-Error-Rules",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": \"string\",\n  \"text_message\": \"string\",\n  \"a_field\": {\n    \"key_0\": 2249,\n    \"key_1\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://us.wellnessliving.com",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "b7f8cdc7-511a-4f25-8fef-dedb07c0a6d2",
+    "name": "WellnessLiving Appointments Booking API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Curated, representative subset of WellnessLiving's official production API (RESTful, JSON-over-HTTPS). WellnessLiving is business-management software for fitness studios, gyms, spas, and salons; this API is the same one its own web and mobile clients (Achieve, Elevate) call, and is published for approved partners via an official OpenAPI document at github.com/wellnessliving/openapi (324 paths across 45+ resource areas as of the 2026-06-20 build). Endpoints below are grounded in that official spec and in the public github.com/wellnessliving/wl-sdk (PHP) and wl-sdk-js SDKs; this file selects roughly four representative endpoints per logical API area rather than reproducing the full catalog. Every WellnessLiving API resource is a `.json`-suffixed endpoint whose path is derived deterministically from the SDK model class's namespace (e.g. the PHP class `WellnessLiving\\Wl\\Staff\\StaffElementModel` serves `/Wl/Staff/StaffElement.json`). Legacy numbered variants of several endpoints exist for backward compatibility (e.g. `Finish47`, `ServiceList52`, `Purchase72`) and are omitted here in favor of their current unsuffixed counterpart.\n\nContact Support:\n Name: WellnessLiving Support\n Email: support@wellnessliving.com",
+      "type": "text/plain"
+    }
+  }
+}

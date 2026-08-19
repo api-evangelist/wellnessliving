@@ -1,0 +1,62 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "WellnessLiving Appointments WebSocket API",
+    "version": "1.1.20260620071011"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "WebSocket",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Checks whether a listener can subscribe to specified channel.\nSubscribes in a case of positive result.",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://us.wellnessliving.com/Core/WebSocket/Subscribe.json",
+            "headers": [
+              {
+                "name": "X-Error-Rules",
+                "value": ""
+              }
+            ],
+            "body": {
+              "type": "form-urlencoded",
+              "data": [
+                {
+                  "name": "a_key",
+                  "value": ""
+                },
+                {
+                  "name": "cid_channel",
+                  "value": ""
+                },
+                {
+                  "name": "s_password",
+                  "value": ""
+                },
+                {
+                  "name": "s_token",
+                  "value": ""
+                }
+              ]
+            }
+          },
+          "docs": "Called by the WebSocket client immediately after a connection is established, to register interest in\na specific channel (identified by CID and key fields). If the current user is not permitted to receive\nevents on that channel, the subscription is rejected. On success, any messages already queued for the\nchannel are returned so the client does not miss events that arrived before the subscription was set up."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

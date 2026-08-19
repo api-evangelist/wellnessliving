@@ -1,0 +1,269 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "WellnessLiving Appointments Catalog API",
+    "version": "1.1.20260620071011"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Catalog",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Retrieves a list of all sale items.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://us.wellnessliving.com/Wl/Catalog/CatalogList/List.json",
+            "headers": [
+              {
+                "name": "X-Error-Rules",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "a_direct_link",
+                "value": "",
+                "type": "query",
+                "description": "Arguments from direct purchase link, which can give additional access to products, which are available\n  only by such link."
+              },
+              {
+                "name": "is_credit_card_check",
+                "value": "",
+                "type": "query",
+                "description": "`true` to consider the requirement to have a credit card for booking\n(this requirement can be set in business settings)\n`false` to ignore it."
+              },
+              {
+                "name": "k_business",
+                "value": "",
+                "type": "query",
+                "description": "The business key."
+              },
+              {
+                "name": "k_location",
+                "value": "",
+                "type": "query",
+                "description": "The key of a location. If `0`, all products in the business are retrieved."
+              },
+              {
+                "name": "uid",
+                "value": "",
+                "type": "query",
+                "description": "The key of user."
+              }
+            ]
+          },
+          "docs": "Used to render the full client-facing store catalog for a business. Returns all purchasable items -\npromotions, products, events, and coupons - merged across the business's categories. The separate\nde-duplicated list and category list support both the flat and category-tabbed views."
+        },
+        {
+          "info": {
+            "name": "Gets purchase cost data.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://us.wellnessliving.com/Wl/Catalog/Cart/Cart.json",
+            "headers": [
+              {
+                "name": "X-Error-Rules",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "a_item",
+                "value": "",
+                "type": "query",
+                "description": "The list of items in the cart."
+              },
+              {
+                "name": "is_auto_apply_prize",
+                "value": "",
+                "type": "query",
+                "description": "Whether selected login prize should be auto applied to first applicable item."
+              },
+              {
+                "name": "k_location",
+                "value": "",
+                "type": "query",
+                "description": "The location key."
+              },
+              {
+                "name": "k_login_prize",
+                "value": "",
+                "type": "query",
+                "description": "The login prize key."
+              },
+              {
+                "name": "text_discount_code",
+                "value": "",
+                "type": "query",
+                "description": "The discount code.\n\nIf `null`, the discount code has been reset."
+              },
+              {
+                "name": "uid",
+                "value": "",
+                "type": "query",
+                "description": "The user key.\n\nThis will be `0` for guests."
+              }
+            ]
+          },
+          "docs": "Used in the client-facing checkout flow to show a live price summary before the client submits\npayment. Calculates the full breakdown - subtotal, taxes, applied discounts, reward redemptions,\nand tips - so the client can review the total before confirming."
+        },
+        {
+          "info": {
+            "name": "Allows to pay items for the client.",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://us.wellnessliving.com/Wl/Catalog/Payment/Payment.json",
+            "headers": [
+              {
+                "name": "X-Error-Rules",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "a_commission",
+                "value": "",
+                "type": "query",
+                "description": "The staff commission earned for this purchase. If this isn't empty, it has the next fields:"
+              },
+              {
+                "name": "id_mode",
+                "value": "",
+                "type": "query",
+                "description": "The WellnessLiving mode type (required). One of the [ModeSid](#/components/schemas/Wl.Mode.ModeSid) constants."
+              },
+              {
+                "name": "is_guest",
+                "value": "",
+                "type": "query",
+                "description": "Determines if the payment owner is an anonymous user (optional)."
+              },
+              {
+                "name": "is_staff",
+                "value": "",
+                "type": "query",
+                "description": "Specify this if operations are performed by the staff member (optional)."
+              },
+              {
+                "name": "k_business",
+                "value": "",
+                "type": "query",
+                "description": "The business key (required)."
+              },
+              {
+                "name": "k_location",
+                "value": "",
+                "type": "query",
+                "description": "The location key (required)."
+              },
+              {
+                "name": "uid",
+                "value": "",
+                "type": "query",
+                "description": "The user's key (required)."
+              }
+            ],
+            "body": {
+              "type": "form-urlencoded",
+              "data": [
+                {
+                  "name": "a_item",
+                  "value": ""
+                },
+                {
+                  "name": "a_pay_form",
+                  "value": ""
+                },
+                {
+                  "name": "a_quiz_response",
+                  "value": ""
+                },
+                {
+                  "name": "f_discount_percent",
+                  "value": ""
+                },
+                {
+                  "name": "k_pay_installment_template",
+                  "value": ""
+                },
+                {
+                  "name": "k_visit",
+                  "value": ""
+                },
+                {
+                  "name": "m_discount_flat",
+                  "value": ""
+                },
+                {
+                  "name": "m_surcharge",
+                  "value": ""
+                },
+                {
+                  "name": "m_tip",
+                  "value": ""
+                },
+                {
+                  "name": "text_discount_code",
+                  "value": ""
+                },
+                {
+                  "name": "text_receipt_note",
+                  "value": ""
+                }
+              ]
+            }
+          },
+          "docs": "The checkout endpoint that finalizes a purchase in the client-facing store. Charges the client's\nselected payment method, applies any discounts and tips, and creates the purchase record. Returns\nthe resulting purchase key so the frontend can redirect to the confirmation page."
+        },
+        {
+          "info": {
+            "name": "Gets purchase information.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://us.wellnessliving.com/Wl/Purchase/Receipt/PurchaseReceipt.json",
+            "headers": [
+              {
+                "name": "X-Error-Rules",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "is_url_public",
+                "value": "",
+                "type": "query",
+                "description": "Whether `url_print` and `url_print_receipt` require authentication.\n\nIf `true`, the URL contains a token that allows temporary access to the page with"
+              },
+              {
+                "name": "k_purchase",
+                "value": "",
+                "type": "query",
+                "description": "The key of the purchase."
+              }
+            ]
+          },
+          "docs": "Returns full receipt data for the specified purchase, including business details, customer information,\nitemized purchase items, payment methods, pricing summary, and print URLs."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

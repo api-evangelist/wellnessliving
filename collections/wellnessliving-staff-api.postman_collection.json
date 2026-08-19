@@ -1,0 +1,3347 @@
+{
+  "item": [
+    {
+      "id": "0ae2a448-d61e-4eba-82af-4e7ab7d25c70",
+      "name": "Staff",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "5342f156-b31e-415d-90d2-79a4b9406405",
+          "name": "Returns the list of staff members for the given business.",
+          "request": {
+            "name": "Returns the list of staff members for the given business.",
+            "description": {
+              "content": "Returns all active (or optionally inactive) staff members for the business, including\ntheir name, role, assigned services, contact details, and location assignments. Can be\nfiltered to only staff who have a specific privilege, and whether access-level checks\nshould be applied when building the result.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "Wl",
+                "Staff",
+                "StaffList",
+                "StaffList.json"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "a_privilege",
+                  "value": "<string>",
+                  "description": "(Required) A list of privileges to filter staff members by.\n\nThis property acts as a filter.\nOnly staff members possessing all the privileges specified in this l"
+                },
+                {
+                  "disabled": false,
+                  "key": "a_privilege",
+                  "value": "<string>",
+                  "description": "(Required) A list of privileges to filter staff members by.\n\nThis property acts as a filter.\nOnly staff members possessing all the privileges specified in this l"
+                },
+                {
+                  "disabled": false,
+                  "key": "is_check_staff_access",
+                  "value": "<boolean>",
+                  "description": "(Required) Determines that only staff members which the current user has access to should be retrieved.\n\n `true` if only staff members which the current user has"
+                },
+                {
+                  "disabled": false,
+                  "key": "is_staff_inactive",
+                  "value": "<boolean>",
+                  "description": "(Required) Whether inactive and removed staff members are available.\nIf `true` inactive and removed staff members are available. `false` otherwise."
+                },
+                {
+                  "disabled": false,
+                  "key": "k_business",
+                  "value": "<string>",
+                  "description": "(Required) The key of the business to show information for."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "Opt in to mapping internal API error statuses to real 4xx HTTP codes. By default the API always answers HTTP 200 even on error, with the failure encoded in the JSON body; setting this header (e.g. to `default`) makes the gateway translate matched error statuses to 400/403/404 responses instead.",
+                "key": "X-Error-Rules",
+                "value": "<string>"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "95f0478f-0dec-4481-9c83-7d69b2a4ef5d",
+              "name": "Successful response.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "Wl",
+                    "Staff",
+                    "StaffList",
+                    "StaffList.json"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "a_privilege",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "a_privilege",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "is_check_staff_access",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "is_staff_inactive",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "k_business",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Opt in to mapping internal API error statuses to real 4xx HTTP codes. By default the API always answers HTTP 200 even on error, with the failure encoded in the JSON body; setting this header (e.g. to `default`) makes the gateway translate matched error statuses to 400/403/404 responses instead.",
+                    "key": "X-Error-Rules",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"a_staff\": {}\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "9dbb203f-aac4-4a8f-aa92-3b366ec77fd6",
+              "name": "Client-side error: invalid input, failed validation, throttling, or other request error (only returned as an HTTP status when `X-Error-Rules` opts in; otherwise encoded in a 200 body).",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "Wl",
+                    "Staff",
+                    "StaffList",
+                    "StaffList.json"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "a_privilege",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "a_privilege",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "is_check_staff_access",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "is_staff_inactive",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "k_business",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Opt in to mapping internal API error statuses to real 4xx HTTP codes. By default the API always answers HTTP 200 even on error, with the failure encoded in the JSON body; setting this header (e.g. to `default`) makes the gateway translate matched error statuses to 400/403/404 responses instead.",
+                    "key": "X-Error-Rules",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": \"string\",\n  \"text_message\": \"string\",\n  \"a_field\": {\n    \"key_0\": true,\n    \"key_1\": 377\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "038c474d-bd5a-4238-8dc6-8fd470e66fc6",
+              "name": "Missing, expired, or invalid Bearer token / session.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "Wl",
+                    "Staff",
+                    "StaffList",
+                    "StaffList.json"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "a_privilege",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "a_privilege",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "is_check_staff_access",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "is_staff_inactive",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "k_business",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Opt in to mapping internal API error statuses to real 4xx HTTP codes. By default the API always answers HTTP 200 even on error, with the failure encoded in the JSON body; setting this header (e.g. to `default`) makes the gateway translate matched error statuses to 400/403/404 responses instead.",
+                    "key": "X-Error-Rules",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": \"string\",\n  \"text_message\": \"string\",\n  \"a_field\": {\n    \"key_0\": true,\n    \"key_1\": 377\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "bcb8c1f9-2775-44ad-8466-54c31c42bc5b",
+              "name": "Authenticated but not permitted to access this business, location, or resource.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "Wl",
+                    "Staff",
+                    "StaffList",
+                    "StaffList.json"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "a_privilege",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "a_privilege",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "is_check_staff_access",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "is_staff_inactive",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "k_business",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Opt in to mapping internal API error statuses to real 4xx HTTP codes. By default the API always answers HTTP 200 even on error, with the failure encoded in the JSON body; setting this header (e.g. to `default`) makes the gateway translate matched error statuses to 400/403/404 responses instead.",
+                    "key": "X-Error-Rules",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": \"string\",\n  \"text_message\": \"string\",\n  \"a_field\": {\n    \"key_0\": true,\n    \"key_1\": 377\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "25ec5e65-535d-4543-ace1-f1cb0c4879d3",
+              "name": "The requested resource does not exist.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "Wl",
+                    "Staff",
+                    "StaffList",
+                    "StaffList.json"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "a_privilege",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "a_privilege",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "is_check_staff_access",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "is_staff_inactive",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "k_business",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Opt in to mapping internal API error statuses to real 4xx HTTP codes. By default the API always answers HTTP 200 even on error, with the failure encoded in the JSON body; setting this header (e.g. to `default`) makes the gateway translate matched error statuses to 400/403/404 responses instead.",
+                    "key": "X-Error-Rules",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": \"string\",\n  \"text_message\": \"string\",\n  \"a_field\": {\n    \"key_0\": true,\n    \"key_1\": 377\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "074e2d46-581d-4122-a7c5-eae3e3d409c5",
+              "name": "The request payload failed field-level validation.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "Wl",
+                    "Staff",
+                    "StaffList",
+                    "StaffList.json"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "a_privilege",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "a_privilege",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "is_check_staff_access",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "is_staff_inactive",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "k_business",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Opt in to mapping internal API error statuses to real 4xx HTTP codes. By default the API always answers HTTP 200 even on error, with the failure encoded in the JSON body; setting this header (e.g. to `default`) makes the gateway translate matched error statuses to 400/403/404 responses instead.",
+                    "key": "X-Error-Rules",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": \"string\",\n  \"text_message\": \"string\",\n  \"a_field\": {\n    \"key_0\": true,\n    \"key_1\": 377\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "d09436ce-102f-4bdc-8bfe-ad4b0becbb7f",
+              "name": "Unexpected server error.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "Wl",
+                    "Staff",
+                    "StaffList",
+                    "StaffList.json"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "a_privilege",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "a_privilege",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "is_check_staff_access",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "is_staff_inactive",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "k_business",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Opt in to mapping internal API error statuses to real 4xx HTTP codes. By default the API always answers HTTP 200 even on error, with the failure encoded in the JSON body; setting this header (e.g. to `default`) makes the gateway translate matched error statuses to 400/403/404 responses instead.",
+                    "key": "X-Error-Rules",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": \"string\",\n  \"text_message\": \"string\",\n  \"a_field\": {\n    \"key_0\": true,\n    \"key_1\": 377\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "59f2cfc5-be5f-4a38-8079-1be08868d331",
+          "name": "Retrieves information about staff.",
+          "request": {
+            "name": "Retrieves information about staff.",
+            "description": {
+              "content": "This method can accept or one staff key `k_staff` or staff list\n`a_staff_list` but not both (exception would be thrown).",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "Wl",
+                "Staff",
+                "StaffView",
+                "StaffView.json"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "a_staff_list",
+                  "value": "<string>",
+                  "description": "A list of staff keys."
+                },
+                {
+                  "disabled": false,
+                  "key": "a_staff_list",
+                  "value": "<string>",
+                  "description": "A list of staff keys."
+                },
+                {
+                  "disabled": false,
+                  "key": "a_uid_staff_list",
+                  "value": "<string>",
+                  "description": "A list of staff user IDs."
+                },
+                {
+                  "disabled": false,
+                  "key": "a_uid_staff_list",
+                  "value": "<string>",
+                  "description": "A list of staff user IDs."
+                },
+                {
+                  "disabled": false,
+                  "key": "i_image_height",
+                  "value": "<integer>",
+                  "description": "(Required) Image height in pixels. Please specify this value if you need image to be returned in specific size.\nIn case this value is not specified returned imag"
+                },
+                {
+                  "disabled": false,
+                  "key": "i_image_width",
+                  "value": "<integer>",
+                  "description": "(Required) Image width in pixels. Please specify this value if you need image to be returned in specific size.\nIn case this value is not specified returned image"
+                },
+                {
+                  "disabled": false,
+                  "key": "k_business",
+                  "value": "<string>",
+                  "description": "(Required) The key of the business to show information for."
+                },
+                {
+                  "disabled": false,
+                  "key": "k_staff",
+                  "value": "<string>",
+                  "description": "(Required) The staff member key.\nA staff member can work for more than one business.\nThis key can be found using the [StaffListApi](/Wl/Staff/StaffList/StaffList"
+                },
+                {
+                  "disabled": false,
+                  "key": "uid_staff",
+                  "value": "<string>",
+                  "description": "(Required) The staff member user ID.\nA staff member can work for more than one business.\nThis key can be found using the [StaffListApi](/Wl/Staff/StaffList/Staff"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "Opt in to mapping internal API error statuses to real 4xx HTTP codes. By default the API always answers HTTP 200 even on error, with the failure encoded in the JSON body; setting this header (e.g. to `default`) makes the gateway translate matched error statuses to 400/403/404 responses instead.",
+                "key": "X-Error-Rules",
+                "value": "<string>"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "19401b43-0992-4c95-8035-dae08e2b8d5d",
+              "name": "Successful response.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "Wl",
+                    "Staff",
+                    "StaffView",
+                    "StaffView.json"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "a_staff_list",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "a_staff_list",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "a_uid_staff_list",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "a_uid_staff_list",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "i_image_height",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "i_image_width",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "k_business",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "k_staff",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "uid_staff",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Opt in to mapping internal API error statuses to real 4xx HTTP codes. By default the API always answers HTTP 200 even on error, with the failure encoded in the JSON body; setting this header (e.g. to `default`) makes the gateway translate matched error statuses to 400/403/404 responses instead.",
+                    "key": "X-Error-Rules",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"a_class_day\": {},\n  \"a_result_list\": {},\n  \"a_staff\": {}\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "7ad47504-0368-44c1-af36-0443bcb57f6a",
+              "name": "Client-side error: invalid input, failed validation, throttling, or other request error (only returned as an HTTP status when `X-Error-Rules` opts in; otherwise encoded in a 200 body).",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "Wl",
+                    "Staff",
+                    "StaffView",
+                    "StaffView.json"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "a_staff_list",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "a_staff_list",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "a_uid_staff_list",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "a_uid_staff_list",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "i_image_height",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "i_image_width",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "k_business",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "k_staff",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "uid_staff",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Opt in to mapping internal API error statuses to real 4xx HTTP codes. By default the API always answers HTTP 200 even on error, with the failure encoded in the JSON body; setting this header (e.g. to `default`) makes the gateway translate matched error statuses to 400/403/404 responses instead.",
+                    "key": "X-Error-Rules",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": \"string\",\n  \"text_message\": \"string\",\n  \"a_field\": {\n    \"key_0\": true,\n    \"key_1\": 377\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "b6287eb2-f6e9-40c6-952d-0432c8424b1b",
+              "name": "Missing, expired, or invalid Bearer token / session.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "Wl",
+                    "Staff",
+                    "StaffView",
+                    "StaffView.json"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "a_staff_list",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "a_staff_list",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "a_uid_staff_list",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "a_uid_staff_list",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "i_image_height",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "i_image_width",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "k_business",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "k_staff",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "uid_staff",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Opt in to mapping internal API error statuses to real 4xx HTTP codes. By default the API always answers HTTP 200 even on error, with the failure encoded in the JSON body; setting this header (e.g. to `default`) makes the gateway translate matched error statuses to 400/403/404 responses instead.",
+                    "key": "X-Error-Rules",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": \"string\",\n  \"text_message\": \"string\",\n  \"a_field\": {\n    \"key_0\": true,\n    \"key_1\": 377\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "66b00623-b3f4-42bf-8ffb-565585f7433f",
+              "name": "Authenticated but not permitted to access this business, location, or resource.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "Wl",
+                    "Staff",
+                    "StaffView",
+                    "StaffView.json"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "a_staff_list",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "a_staff_list",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "a_uid_staff_list",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "a_uid_staff_list",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "i_image_height",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "i_image_width",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "k_business",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "k_staff",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "uid_staff",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Opt in to mapping internal API error statuses to real 4xx HTTP codes. By default the API always answers HTTP 200 even on error, with the failure encoded in the JSON body; setting this header (e.g. to `default`) makes the gateway translate matched error statuses to 400/403/404 responses instead.",
+                    "key": "X-Error-Rules",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": \"string\",\n  \"text_message\": \"string\",\n  \"a_field\": {\n    \"key_0\": true,\n    \"key_1\": 377\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "b848f34b-712c-409d-add8-38e2f93af7c9",
+              "name": "The requested resource does not exist.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "Wl",
+                    "Staff",
+                    "StaffView",
+                    "StaffView.json"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "a_staff_list",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "a_staff_list",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "a_uid_staff_list",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "a_uid_staff_list",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "i_image_height",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "i_image_width",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "k_business",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "k_staff",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "uid_staff",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Opt in to mapping internal API error statuses to real 4xx HTTP codes. By default the API always answers HTTP 200 even on error, with the failure encoded in the JSON body; setting this header (e.g. to `default`) makes the gateway translate matched error statuses to 400/403/404 responses instead.",
+                    "key": "X-Error-Rules",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": \"string\",\n  \"text_message\": \"string\",\n  \"a_field\": {\n    \"key_0\": true,\n    \"key_1\": 377\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "07726514-a95b-4199-a38a-0ea135c1d7f2",
+              "name": "The request payload failed field-level validation.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "Wl",
+                    "Staff",
+                    "StaffView",
+                    "StaffView.json"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "a_staff_list",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "a_staff_list",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "a_uid_staff_list",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "a_uid_staff_list",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "i_image_height",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "i_image_width",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "k_business",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "k_staff",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "uid_staff",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Opt in to mapping internal API error statuses to real 4xx HTTP codes. By default the API always answers HTTP 200 even on error, with the failure encoded in the JSON body; setting this header (e.g. to `default`) makes the gateway translate matched error statuses to 400/403/404 responses instead.",
+                    "key": "X-Error-Rules",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": \"string\",\n  \"text_message\": \"string\",\n  \"a_field\": {\n    \"key_0\": true,\n    \"key_1\": 377\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "21b876d8-0769-41ff-ba53-2109e6f596c3",
+              "name": "Unexpected server error.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "Wl",
+                    "Staff",
+                    "StaffView",
+                    "StaffView.json"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "a_staff_list",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "a_staff_list",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "a_uid_staff_list",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "a_uid_staff_list",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "i_image_height",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "i_image_width",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "k_business",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "k_staff",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "uid_staff",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Opt in to mapping internal API error statuses to real 4xx HTTP codes. By default the API always answers HTTP 200 even on error, with the failure encoded in the JSON body; setting this header (e.g. to `default`) makes the gateway translate matched error statuses to 400/403/404 responses instead.",
+                    "key": "X-Error-Rules",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": \"string\",\n  \"text_message\": \"string\",\n  \"a_field\": {\n    \"key_0\": true,\n    \"key_1\": 377\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "ed8c0c5c-57e9-406a-bb91-0c96ced6a9da",
+          "name": "Update or create staff.",
+          "request": {
+            "name": "Update or create staff.",
+            "description": {
+              "content": "Creates a new staff member or updates an existing one in the business. When creating,\na new user account is provisioned if no matching email exists. When updating, the target\nstaff member must already belong to the business. Role, location, contact details,\nemployment dates, and custom profile fields can all be set in a single call.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "Wl",
+                "Staff",
+                "StaffElement.json"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "k_staff",
+                  "value": "<string>",
+                  "description": "The key of the staff member resolved and used internally by this API.\n\nThis property is populated from `uid_staff` in `post()` and\nreturned in API res"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "Opt in to mapping internal API error statuses to real 4xx HTTP codes. By default the API always answers HTTP 200 even on error, with the failure encoded in the JSON body; setting this header (e.g. to `default`) makes the gateway translate matched error statuses to 400/403/404 responses instead.",
+                "key": "X-Error-Rules",
+                "value": "<string>"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/x-www-form-urlencoded"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "urlencoded",
+              "urlencoded": [
+                {
+                  "disabled": false,
+                  "key": "is_password_set_disable",
+                  "value": "<string>",
+                  "description": "(Required) The `is_password_set_disable` field. See WellnessLiving developer portal for full field semantics."
+                },
+                {
+                  "disabled": false,
+                  "key": "is_uid",
+                  "value": "<string>",
+                  "description": "(Required) The `is_uid` field. See WellnessLiving developer portal for full field semantics."
+                },
+                {
+                  "disabled": false,
+                  "key": "k_business",
+                  "value": "<string>",
+                  "description": "(Required) The `k_business` field. See WellnessLiving developer portal for full field semantics."
+                },
+                {
+                  "disabled": false,
+                  "key": "a_location",
+                  "value": "<string>",
+                  "description": "The `a_location` field. See WellnessLiving developer portal for full field semantics."
+                },
+                {
+                  "disabled": false,
+                  "key": "dl_end",
+                  "value": "<string>",
+                  "description": "The `dl_end` field. See WellnessLiving developer portal for full field semantics."
+                },
+                {
+                  "disabled": false,
+                  "key": "dl_start",
+                  "value": "<string>",
+                  "description": "The `dl_start` field. See WellnessLiving developer portal for full field semantics."
+                },
+                {
+                  "disabled": false,
+                  "key": "id_gender",
+                  "value": "<string>",
+                  "description": "The `id_gender` field. See WellnessLiving developer portal for full field semantics."
+                },
+                {
+                  "disabled": false,
+                  "key": "id_role",
+                  "value": "<string>",
+                  "description": "The `id_role` field. See WellnessLiving developer portal for full field semantics."
+                },
+                {
+                  "disabled": false,
+                  "key": "is_employ",
+                  "value": "<string>",
+                  "description": "The `is_employ` field. See WellnessLiving developer portal for full field semantics."
+                },
+                {
+                  "disabled": false,
+                  "key": "is_microsite",
+                  "value": "<string>",
+                  "description": "The `is_microsite` field. See WellnessLiving developer portal for full field semantics."
+                },
+                {
+                  "disabled": false,
+                  "key": "k_business_role",
+                  "value": "<string>",
+                  "description": "The `k_business_role` field. See WellnessLiving developer portal for full field semantics."
+                },
+                {
+                  "disabled": false,
+                  "key": "k_city",
+                  "value": "<string>",
+                  "description": "The `k_city` field. See WellnessLiving developer portal for full field semantics."
+                },
+                {
+                  "disabled": false,
+                  "key": "k_location",
+                  "value": "<string>",
+                  "description": "The `k_location` field. See WellnessLiving developer portal for full field semantics."
+                },
+                {
+                  "disabled": false,
+                  "key": "text_address",
+                  "value": "<string>",
+                  "description": "The `text_address` field. See WellnessLiving developer portal for full field semantics."
+                },
+                {
+                  "disabled": false,
+                  "key": "text_biography",
+                  "value": "<string>",
+                  "description": "The `text_biography` field. See WellnessLiving developer portal for full field semantics."
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "61a75834-7132-42fd-b1a9-4e8968a682fb",
+              "name": "Successful response.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "Wl",
+                    "Staff",
+                    "StaffElement.json"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "k_staff",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Opt in to mapping internal API error statuses to real 4xx HTTP codes. By default the API always answers HTTP 200 even on error, with the failure encoded in the JSON body; setting this header (e.g. to `default`) makes the gateway translate matched error statuses to 400/403/404 responses instead.",
+                    "key": "X-Error-Rules",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "urlencoded",
+                  "urlencoded": [
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) The `is_password_set_disable` field. See WellnessLiving developer portal for full field semantics.",
+                        "type": "text/plain"
+                      },
+                      "key": "is_password_set_disable",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) The `is_uid` field. See WellnessLiving developer portal for full field semantics.",
+                        "type": "text/plain"
+                      },
+                      "key": "is_uid",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) The `k_business` field. See WellnessLiving developer portal for full field semantics.",
+                        "type": "text/plain"
+                      },
+                      "key": "k_business",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "The `a_location` field. See WellnessLiving developer portal for full field semantics.",
+                        "type": "text/plain"
+                      },
+                      "key": "a_location",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "The `dl_end` field. See WellnessLiving developer portal for full field semantics.",
+                        "type": "text/plain"
+                      },
+                      "key": "dl_end",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "The `dl_start` field. See WellnessLiving developer portal for full field semantics.",
+                        "type": "text/plain"
+                      },
+                      "key": "dl_start",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "The `id_gender` field. See WellnessLiving developer portal for full field semantics.",
+                        "type": "text/plain"
+                      },
+                      "key": "id_gender",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "The `id_role` field. See WellnessLiving developer portal for full field semantics.",
+                        "type": "text/plain"
+                      },
+                      "key": "id_role",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "The `is_employ` field. See WellnessLiving developer portal for full field semantics.",
+                        "type": "text/plain"
+                      },
+                      "key": "is_employ",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "The `is_microsite` field. See WellnessLiving developer portal for full field semantics.",
+                        "type": "text/plain"
+                      },
+                      "key": "is_microsite",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "The `k_business_role` field. See WellnessLiving developer portal for full field semantics.",
+                        "type": "text/plain"
+                      },
+                      "key": "k_business_role",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "The `k_city` field. See WellnessLiving developer portal for full field semantics.",
+                        "type": "text/plain"
+                      },
+                      "key": "k_city",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "The `k_location` field. See WellnessLiving developer portal for full field semantics.",
+                        "type": "text/plain"
+                      },
+                      "key": "k_location",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "The `text_address` field. See WellnessLiving developer portal for full field semantics.",
+                        "type": "text/plain"
+                      },
+                      "key": "text_address",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "The `text_biography` field. See WellnessLiving developer portal for full field semantics.",
+                        "type": "text/plain"
+                      },
+                      "key": "text_biography",
+                      "value": "<string>"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"k_staff\": {}\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "d8582b30-da12-4e86-a1ba-78010a351026",
+              "name": "Client-side error: invalid input, failed validation, throttling, or other request error (only returned as an HTTP status when `X-Error-Rules` opts in; otherwise encoded in a 200 body).",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "Wl",
+                    "Staff",
+                    "StaffElement.json"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "k_staff",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Opt in to mapping internal API error statuses to real 4xx HTTP codes. By default the API always answers HTTP 200 even on error, with the failure encoded in the JSON body; setting this header (e.g. to `default`) makes the gateway translate matched error statuses to 400/403/404 responses instead.",
+                    "key": "X-Error-Rules",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "urlencoded",
+                  "urlencoded": [
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) The `is_password_set_disable` field. See WellnessLiving developer portal for full field semantics.",
+                        "type": "text/plain"
+                      },
+                      "key": "is_password_set_disable",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) The `is_uid` field. See WellnessLiving developer portal for full field semantics.",
+                        "type": "text/plain"
+                      },
+                      "key": "is_uid",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) The `k_business` field. See WellnessLiving developer portal for full field semantics.",
+                        "type": "text/plain"
+                      },
+                      "key": "k_business",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "The `a_location` field. See WellnessLiving developer portal for full field semantics.",
+                        "type": "text/plain"
+                      },
+                      "key": "a_location",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "The `dl_end` field. See WellnessLiving developer portal for full field semantics.",
+                        "type": "text/plain"
+                      },
+                      "key": "dl_end",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "The `dl_start` field. See WellnessLiving developer portal for full field semantics.",
+                        "type": "text/plain"
+                      },
+                      "key": "dl_start",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "The `id_gender` field. See WellnessLiving developer portal for full field semantics.",
+                        "type": "text/plain"
+                      },
+                      "key": "id_gender",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "The `id_role` field. See WellnessLiving developer portal for full field semantics.",
+                        "type": "text/plain"
+                      },
+                      "key": "id_role",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "The `is_employ` field. See WellnessLiving developer portal for full field semantics.",
+                        "type": "text/plain"
+                      },
+                      "key": "is_employ",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "The `is_microsite` field. See WellnessLiving developer portal for full field semantics.",
+                        "type": "text/plain"
+                      },
+                      "key": "is_microsite",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "The `k_business_role` field. See WellnessLiving developer portal for full field semantics.",
+                        "type": "text/plain"
+                      },
+                      "key": "k_business_role",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "The `k_city` field. See WellnessLiving developer portal for full field semantics.",
+                        "type": "text/plain"
+                      },
+                      "key": "k_city",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "The `k_location` field. See WellnessLiving developer portal for full field semantics.",
+                        "type": "text/plain"
+                      },
+                      "key": "k_location",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "The `text_address` field. See WellnessLiving developer portal for full field semantics.",
+                        "type": "text/plain"
+                      },
+                      "key": "text_address",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "The `text_biography` field. See WellnessLiving developer portal for full field semantics.",
+                        "type": "text/plain"
+                      },
+                      "key": "text_biography",
+                      "value": "<string>"
+                    }
+                  ]
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": \"string\",\n  \"text_message\": \"string\",\n  \"a_field\": {\n    \"key_0\": true,\n    \"key_1\": 377\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "312fa754-a4bc-4122-88ea-6db389cc18ca",
+              "name": "Missing, expired, or invalid Bearer token / session.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "Wl",
+                    "Staff",
+                    "StaffElement.json"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "k_staff",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Opt in to mapping internal API error statuses to real 4xx HTTP codes. By default the API always answers HTTP 200 even on error, with the failure encoded in the JSON body; setting this header (e.g. to `default`) makes the gateway translate matched error statuses to 400/403/404 responses instead.",
+                    "key": "X-Error-Rules",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "urlencoded",
+                  "urlencoded": [
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) The `is_password_set_disable` field. See WellnessLiving developer portal for full field semantics.",
+                        "type": "text/plain"
+                      },
+                      "key": "is_password_set_disable",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) The `is_uid` field. See WellnessLiving developer portal for full field semantics.",
+                        "type": "text/plain"
+                      },
+                      "key": "is_uid",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) The `k_business` field. See WellnessLiving developer portal for full field semantics.",
+                        "type": "text/plain"
+                      },
+                      "key": "k_business",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "The `a_location` field. See WellnessLiving developer portal for full field semantics.",
+                        "type": "text/plain"
+                      },
+                      "key": "a_location",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "The `dl_end` field. See WellnessLiving developer portal for full field semantics.",
+                        "type": "text/plain"
+                      },
+                      "key": "dl_end",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "The `dl_start` field. See WellnessLiving developer portal for full field semantics.",
+                        "type": "text/plain"
+                      },
+                      "key": "dl_start",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "The `id_gender` field. See WellnessLiving developer portal for full field semantics.",
+                        "type": "text/plain"
+                      },
+                      "key": "id_gender",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "The `id_role` field. See WellnessLiving developer portal for full field semantics.",
+                        "type": "text/plain"
+                      },
+                      "key": "id_role",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "The `is_employ` field. See WellnessLiving developer portal for full field semantics.",
+                        "type": "text/plain"
+                      },
+                      "key": "is_employ",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "The `is_microsite` field. See WellnessLiving developer portal for full field semantics.",
+                        "type": "text/plain"
+                      },
+                      "key": "is_microsite",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "The `k_business_role` field. See WellnessLiving developer portal for full field semantics.",
+                        "type": "text/plain"
+                      },
+                      "key": "k_business_role",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "The `k_city` field. See WellnessLiving developer portal for full field semantics.",
+                        "type": "text/plain"
+                      },
+                      "key": "k_city",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "The `k_location` field. See WellnessLiving developer portal for full field semantics.",
+                        "type": "text/plain"
+                      },
+                      "key": "k_location",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "The `text_address` field. See WellnessLiving developer portal for full field semantics.",
+                        "type": "text/plain"
+                      },
+                      "key": "text_address",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "The `text_biography` field. See WellnessLiving developer portal for full field semantics.",
+                        "type": "text/plain"
+                      },
+                      "key": "text_biography",
+                      "value": "<string>"
+                    }
+                  ]
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": \"string\",\n  \"text_message\": \"string\",\n  \"a_field\": {\n    \"key_0\": true,\n    \"key_1\": 377\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "d9e75b4f-b668-45c9-bfd2-e88ebd33a3dd",
+              "name": "Authenticated but not permitted to access this business, location, or resource.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "Wl",
+                    "Staff",
+                    "StaffElement.json"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "k_staff",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Opt in to mapping internal API error statuses to real 4xx HTTP codes. By default the API always answers HTTP 200 even on error, with the failure encoded in the JSON body; setting this header (e.g. to `default`) makes the gateway translate matched error statuses to 400/403/404 responses instead.",
+                    "key": "X-Error-Rules",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "urlencoded",
+                  "urlencoded": [
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) The `is_password_set_disable` field. See WellnessLiving developer portal for full field semantics.",
+                        "type": "text/plain"
+                      },
+                      "key": "is_password_set_disable",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) The `is_uid` field. See WellnessLiving developer portal for full field semantics.",
+                        "type": "text/plain"
+                      },
+                      "key": "is_uid",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) The `k_business` field. See WellnessLiving developer portal for full field semantics.",
+                        "type": "text/plain"
+                      },
+                      "key": "k_business",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "The `a_location` field. See WellnessLiving developer portal for full field semantics.",
+                        "type": "text/plain"
+                      },
+                      "key": "a_location",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "The `dl_end` field. See WellnessLiving developer portal for full field semantics.",
+                        "type": "text/plain"
+                      },
+                      "key": "dl_end",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "The `dl_start` field. See WellnessLiving developer portal for full field semantics.",
+                        "type": "text/plain"
+                      },
+                      "key": "dl_start",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "The `id_gender` field. See WellnessLiving developer portal for full field semantics.",
+                        "type": "text/plain"
+                      },
+                      "key": "id_gender",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "The `id_role` field. See WellnessLiving developer portal for full field semantics.",
+                        "type": "text/plain"
+                      },
+                      "key": "id_role",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "The `is_employ` field. See WellnessLiving developer portal for full field semantics.",
+                        "type": "text/plain"
+                      },
+                      "key": "is_employ",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "The `is_microsite` field. See WellnessLiving developer portal for full field semantics.",
+                        "type": "text/plain"
+                      },
+                      "key": "is_microsite",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "The `k_business_role` field. See WellnessLiving developer portal for full field semantics.",
+                        "type": "text/plain"
+                      },
+                      "key": "k_business_role",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "The `k_city` field. See WellnessLiving developer portal for full field semantics.",
+                        "type": "text/plain"
+                      },
+                      "key": "k_city",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "The `k_location` field. See WellnessLiving developer portal for full field semantics.",
+                        "type": "text/plain"
+                      },
+                      "key": "k_location",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "The `text_address` field. See WellnessLiving developer portal for full field semantics.",
+                        "type": "text/plain"
+                      },
+                      "key": "text_address",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "The `text_biography` field. See WellnessLiving developer portal for full field semantics.",
+                        "type": "text/plain"
+                      },
+                      "key": "text_biography",
+                      "value": "<string>"
+                    }
+                  ]
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": \"string\",\n  \"text_message\": \"string\",\n  \"a_field\": {\n    \"key_0\": true,\n    \"key_1\": 377\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "88548e82-6595-426f-86e4-44b110bbee8c",
+              "name": "The requested resource does not exist.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "Wl",
+                    "Staff",
+                    "StaffElement.json"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "k_staff",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Opt in to mapping internal API error statuses to real 4xx HTTP codes. By default the API always answers HTTP 200 even on error, with the failure encoded in the JSON body; setting this header (e.g. to `default`) makes the gateway translate matched error statuses to 400/403/404 responses instead.",
+                    "key": "X-Error-Rules",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "urlencoded",
+                  "urlencoded": [
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) The `is_password_set_disable` field. See WellnessLiving developer portal for full field semantics.",
+                        "type": "text/plain"
+                      },
+                      "key": "is_password_set_disable",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) The `is_uid` field. See WellnessLiving developer portal for full field semantics.",
+                        "type": "text/plain"
+                      },
+                      "key": "is_uid",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) The `k_business` field. See WellnessLiving developer portal for full field semantics.",
+                        "type": "text/plain"
+                      },
+                      "key": "k_business",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "The `a_location` field. See WellnessLiving developer portal for full field semantics.",
+                        "type": "text/plain"
+                      },
+                      "key": "a_location",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "The `dl_end` field. See WellnessLiving developer portal for full field semantics.",
+                        "type": "text/plain"
+                      },
+                      "key": "dl_end",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "The `dl_start` field. See WellnessLiving developer portal for full field semantics.",
+                        "type": "text/plain"
+                      },
+                      "key": "dl_start",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "The `id_gender` field. See WellnessLiving developer portal for full field semantics.",
+                        "type": "text/plain"
+                      },
+                      "key": "id_gender",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "The `id_role` field. See WellnessLiving developer portal for full field semantics.",
+                        "type": "text/plain"
+                      },
+                      "key": "id_role",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "The `is_employ` field. See WellnessLiving developer portal for full field semantics.",
+                        "type": "text/plain"
+                      },
+                      "key": "is_employ",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "The `is_microsite` field. See WellnessLiving developer portal for full field semantics.",
+                        "type": "text/plain"
+                      },
+                      "key": "is_microsite",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "The `k_business_role` field. See WellnessLiving developer portal for full field semantics.",
+                        "type": "text/plain"
+                      },
+                      "key": "k_business_role",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "The `k_city` field. See WellnessLiving developer portal for full field semantics.",
+                        "type": "text/plain"
+                      },
+                      "key": "k_city",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "The `k_location` field. See WellnessLiving developer portal for full field semantics.",
+                        "type": "text/plain"
+                      },
+                      "key": "k_location",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "The `text_address` field. See WellnessLiving developer portal for full field semantics.",
+                        "type": "text/plain"
+                      },
+                      "key": "text_address",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "The `text_biography` field. See WellnessLiving developer portal for full field semantics.",
+                        "type": "text/plain"
+                      },
+                      "key": "text_biography",
+                      "value": "<string>"
+                    }
+                  ]
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": \"string\",\n  \"text_message\": \"string\",\n  \"a_field\": {\n    \"key_0\": true,\n    \"key_1\": 377\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "c0d275b5-4dc8-4c58-9194-6535813d23fb",
+              "name": "The request payload failed field-level validation.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "Wl",
+                    "Staff",
+                    "StaffElement.json"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "k_staff",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Opt in to mapping internal API error statuses to real 4xx HTTP codes. By default the API always answers HTTP 200 even on error, with the failure encoded in the JSON body; setting this header (e.g. to `default`) makes the gateway translate matched error statuses to 400/403/404 responses instead.",
+                    "key": "X-Error-Rules",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "urlencoded",
+                  "urlencoded": [
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) The `is_password_set_disable` field. See WellnessLiving developer portal for full field semantics.",
+                        "type": "text/plain"
+                      },
+                      "key": "is_password_set_disable",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) The `is_uid` field. See WellnessLiving developer portal for full field semantics.",
+                        "type": "text/plain"
+                      },
+                      "key": "is_uid",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) The `k_business` field. See WellnessLiving developer portal for full field semantics.",
+                        "type": "text/plain"
+                      },
+                      "key": "k_business",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "The `a_location` field. See WellnessLiving developer portal for full field semantics.",
+                        "type": "text/plain"
+                      },
+                      "key": "a_location",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "The `dl_end` field. See WellnessLiving developer portal for full field semantics.",
+                        "type": "text/plain"
+                      },
+                      "key": "dl_end",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "The `dl_start` field. See WellnessLiving developer portal for full field semantics.",
+                        "type": "text/plain"
+                      },
+                      "key": "dl_start",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "The `id_gender` field. See WellnessLiving developer portal for full field semantics.",
+                        "type": "text/plain"
+                      },
+                      "key": "id_gender",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "The `id_role` field. See WellnessLiving developer portal for full field semantics.",
+                        "type": "text/plain"
+                      },
+                      "key": "id_role",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "The `is_employ` field. See WellnessLiving developer portal for full field semantics.",
+                        "type": "text/plain"
+                      },
+                      "key": "is_employ",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "The `is_microsite` field. See WellnessLiving developer portal for full field semantics.",
+                        "type": "text/plain"
+                      },
+                      "key": "is_microsite",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "The `k_business_role` field. See WellnessLiving developer portal for full field semantics.",
+                        "type": "text/plain"
+                      },
+                      "key": "k_business_role",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "The `k_city` field. See WellnessLiving developer portal for full field semantics.",
+                        "type": "text/plain"
+                      },
+                      "key": "k_city",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "The `k_location` field. See WellnessLiving developer portal for full field semantics.",
+                        "type": "text/plain"
+                      },
+                      "key": "k_location",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "The `text_address` field. See WellnessLiving developer portal for full field semantics.",
+                        "type": "text/plain"
+                      },
+                      "key": "text_address",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "The `text_biography` field. See WellnessLiving developer portal for full field semantics.",
+                        "type": "text/plain"
+                      },
+                      "key": "text_biography",
+                      "value": "<string>"
+                    }
+                  ]
+                }
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": \"string\",\n  \"text_message\": \"string\",\n  \"a_field\": {\n    \"key_0\": true,\n    \"key_1\": 377\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "1eaddc8a-6cc4-4f12-94b9-5cd0905ee632",
+              "name": "Unexpected server error.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "Wl",
+                    "Staff",
+                    "StaffElement.json"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "k_staff",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Opt in to mapping internal API error statuses to real 4xx HTTP codes. By default the API always answers HTTP 200 even on error, with the failure encoded in the JSON body; setting this header (e.g. to `default`) makes the gateway translate matched error statuses to 400/403/404 responses instead.",
+                    "key": "X-Error-Rules",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "urlencoded",
+                  "urlencoded": [
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) The `is_password_set_disable` field. See WellnessLiving developer portal for full field semantics.",
+                        "type": "text/plain"
+                      },
+                      "key": "is_password_set_disable",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) The `is_uid` field. See WellnessLiving developer portal for full field semantics.",
+                        "type": "text/plain"
+                      },
+                      "key": "is_uid",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) The `k_business` field. See WellnessLiving developer portal for full field semantics.",
+                        "type": "text/plain"
+                      },
+                      "key": "k_business",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "The `a_location` field. See WellnessLiving developer portal for full field semantics.",
+                        "type": "text/plain"
+                      },
+                      "key": "a_location",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "The `dl_end` field. See WellnessLiving developer portal for full field semantics.",
+                        "type": "text/plain"
+                      },
+                      "key": "dl_end",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "The `dl_start` field. See WellnessLiving developer portal for full field semantics.",
+                        "type": "text/plain"
+                      },
+                      "key": "dl_start",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "The `id_gender` field. See WellnessLiving developer portal for full field semantics.",
+                        "type": "text/plain"
+                      },
+                      "key": "id_gender",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "The `id_role` field. See WellnessLiving developer portal for full field semantics.",
+                        "type": "text/plain"
+                      },
+                      "key": "id_role",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "The `is_employ` field. See WellnessLiving developer portal for full field semantics.",
+                        "type": "text/plain"
+                      },
+                      "key": "is_employ",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "The `is_microsite` field. See WellnessLiving developer portal for full field semantics.",
+                        "type": "text/plain"
+                      },
+                      "key": "is_microsite",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "The `k_business_role` field. See WellnessLiving developer portal for full field semantics.",
+                        "type": "text/plain"
+                      },
+                      "key": "k_business_role",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "The `k_city` field. See WellnessLiving developer portal for full field semantics.",
+                        "type": "text/plain"
+                      },
+                      "key": "k_city",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "The `k_location` field. See WellnessLiving developer portal for full field semantics.",
+                        "type": "text/plain"
+                      },
+                      "key": "k_location",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "The `text_address` field. See WellnessLiving developer portal for full field semantics.",
+                        "type": "text/plain"
+                      },
+                      "key": "text_address",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "The `text_biography` field. See WellnessLiving developer portal for full field semantics.",
+                        "type": "text/plain"
+                      },
+                      "key": "text_biography",
+                      "value": "<string>"
+                    }
+                  ]
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": \"string\",\n  \"text_message\": \"string\",\n  \"a_field\": {\n    \"key_0\": true,\n    \"key_1\": 377\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "4e1291bc-0cda-40ef-abf7-6d4f69b113e0",
+          "name": "Returns the list of privileges for the current user in the given business.",
+          "request": {
+            "name": "Returns the list of privileges for the current user in the given business.",
+            "description": {
+              "content": "Returns the complete access profile of the signed-in user for the given business: staff\nprivileges by ID, named admin privileges, and a flag indicating super-admin status. Can\nonly be called for the currently authenticated user, not on behalf of another user.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "Wl",
+                "Staff",
+                "Privilege",
+                "PrivilegeList.json"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "k_business",
+                  "value": "<string>",
+                  "description": "(Required) Key of business to get privileges for."
+                },
+                {
+                  "disabled": false,
+                  "key": "uid",
+                  "value": "<string>",
+                  "description": "(Required) User key to get privileges for."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "Opt in to mapping internal API error statuses to real 4xx HTTP codes. By default the API always answers HTTP 200 even on error, with the failure encoded in the JSON body; setting this header (e.g. to `default`) makes the gateway translate matched error statuses to 400/403/404 responses instead.",
+                "key": "X-Error-Rules",
+                "value": "<string>"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "abdb3369-f7b2-4381-bf1c-73c41e5616a4",
+              "name": "Successful response.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "Wl",
+                    "Staff",
+                    "Privilege",
+                    "PrivilegeList.json"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "k_business",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "uid",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Opt in to mapping internal API error statuses to real 4xx HTTP codes. By default the API always answers HTTP 200 even on error, with the failure encoded in the JSON body; setting this header (e.g. to `default`) makes the gateway translate matched error statuses to 400/403/404 responses instead.",
+                    "key": "X-Error-Rules",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"a_privilege_passport\": {},\n  \"a_privilege_staff\": {},\n  \"is_admin\": {}\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "6ed05914-d71e-4b87-a6a9-244e0092b539",
+              "name": "Client-side error: invalid input, failed validation, throttling, or other request error (only returned as an HTTP status when `X-Error-Rules` opts in; otherwise encoded in a 200 body).",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "Wl",
+                    "Staff",
+                    "Privilege",
+                    "PrivilegeList.json"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "k_business",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "uid",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Opt in to mapping internal API error statuses to real 4xx HTTP codes. By default the API always answers HTTP 200 even on error, with the failure encoded in the JSON body; setting this header (e.g. to `default`) makes the gateway translate matched error statuses to 400/403/404 responses instead.",
+                    "key": "X-Error-Rules",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": \"string\",\n  \"text_message\": \"string\",\n  \"a_field\": {\n    \"key_0\": true,\n    \"key_1\": 377\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "90a3ad2c-d25c-4172-87a6-eebc922fd40a",
+              "name": "Missing, expired, or invalid Bearer token / session.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "Wl",
+                    "Staff",
+                    "Privilege",
+                    "PrivilegeList.json"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "k_business",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "uid",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Opt in to mapping internal API error statuses to real 4xx HTTP codes. By default the API always answers HTTP 200 even on error, with the failure encoded in the JSON body; setting this header (e.g. to `default`) makes the gateway translate matched error statuses to 400/403/404 responses instead.",
+                    "key": "X-Error-Rules",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": \"string\",\n  \"text_message\": \"string\",\n  \"a_field\": {\n    \"key_0\": true,\n    \"key_1\": 377\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "1f8b6456-a74b-4b2c-8a32-51d7b8303c30",
+              "name": "Authenticated but not permitted to access this business, location, or resource.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "Wl",
+                    "Staff",
+                    "Privilege",
+                    "PrivilegeList.json"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "k_business",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "uid",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Opt in to mapping internal API error statuses to real 4xx HTTP codes. By default the API always answers HTTP 200 even on error, with the failure encoded in the JSON body; setting this header (e.g. to `default`) makes the gateway translate matched error statuses to 400/403/404 responses instead.",
+                    "key": "X-Error-Rules",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": \"string\",\n  \"text_message\": \"string\",\n  \"a_field\": {\n    \"key_0\": true,\n    \"key_1\": 377\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "039d5aa0-52f1-4648-a877-ececf37aae5f",
+              "name": "The requested resource does not exist.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "Wl",
+                    "Staff",
+                    "Privilege",
+                    "PrivilegeList.json"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "k_business",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "uid",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Opt in to mapping internal API error statuses to real 4xx HTTP codes. By default the API always answers HTTP 200 even on error, with the failure encoded in the JSON body; setting this header (e.g. to `default`) makes the gateway translate matched error statuses to 400/403/404 responses instead.",
+                    "key": "X-Error-Rules",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": \"string\",\n  \"text_message\": \"string\",\n  \"a_field\": {\n    \"key_0\": true,\n    \"key_1\": 377\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "b7afcac3-ffc8-42fb-bdb3-893a91f1f465",
+              "name": "The request payload failed field-level validation.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "Wl",
+                    "Staff",
+                    "Privilege",
+                    "PrivilegeList.json"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "k_business",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "uid",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Opt in to mapping internal API error statuses to real 4xx HTTP codes. By default the API always answers HTTP 200 even on error, with the failure encoded in the JSON body; setting this header (e.g. to `default`) makes the gateway translate matched error statuses to 400/403/404 responses instead.",
+                    "key": "X-Error-Rules",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": \"string\",\n  \"text_message\": \"string\",\n  \"a_field\": {\n    \"key_0\": true,\n    \"key_1\": 377\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "6ad77f2a-a7aa-4ad8-9db1-67b370e5bda6",
+              "name": "Unexpected server error.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "Wl",
+                    "Staff",
+                    "Privilege",
+                    "PrivilegeList.json"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "k_business",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "uid",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Opt in to mapping internal API error statuses to real 4xx HTTP codes. By default the API always answers HTTP 200 even on error, with the failure encoded in the JSON body; setting this header (e.g. to `default`) makes the gateway translate matched error statuses to 400/403/404 responses instead.",
+                    "key": "X-Error-Rules",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": \"string\",\n  \"text_message\": \"string\",\n  \"a_field\": {\n    \"key_0\": true,\n    \"key_1\": 377\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://us.wellnessliving.com",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "3bbf201d-4146-43e9-b654-7d63b093088b",
+    "name": "WellnessLiving Appointments Staff API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Curated, representative subset of WellnessLiving's official production API (RESTful, JSON-over-HTTPS). WellnessLiving is business-management software for fitness studios, gyms, spas, and salons; this API is the same one its own web and mobile clients (Achieve, Elevate) call, and is published for approved partners via an official OpenAPI document at github.com/wellnessliving/openapi (324 paths across 45+ resource areas as of the 2026-06-20 build). Endpoints below are grounded in that official spec and in the public github.com/wellnessliving/wl-sdk (PHP) and wl-sdk-js SDKs; this file selects roughly four representative endpoints per logical API area rather than reproducing the full catalog. Every WellnessLiving API resource is a `.json`-suffixed endpoint whose path is derived deterministically from the SDK model class's namespace (e.g. the PHP class `WellnessLiving\\Wl\\Staff\\StaffElementModel` serves `/Wl/Staff/StaffElement.json`). Legacy numbered variants of several endpoints exist for backward compatibility (e.g. `Finish47`, `ServiceList52`, `Purchase72`) and are omitted here in favor of their current unsuffixed counterpart.\n\nContact Support:\n Name: WellnessLiving Support\n Email: support@wellnessliving.com",
+      "type": "text/plain"
+    }
+  }
+}

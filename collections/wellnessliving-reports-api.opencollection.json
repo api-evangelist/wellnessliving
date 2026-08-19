@@ -1,0 +1,189 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "WellnessLiving Appointments Reports API",
+    "version": "1.1.20260620071011"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Reports",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Gets data of required report.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://us.wellnessliving.com/Wl/Report/Data.json",
+            "headers": [
+              {
+                "name": "X-Error-Rules",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "i_page",
+                "value": "",
+                "type": "query",
+                "description": "The page of results to show, starting at zero. The API will return 256 results per page."
+              },
+              {
+                "name": "id_report",
+                "value": "",
+                "type": "query",
+                "description": "The report ID.\nThe following reports are currently available via the API:\n<ul>\n    <li>[RsReportSid::LOGIN_LIST](#/components/schemas/RsReportSid) - A"
+              },
+              {
+                "name": "id_report_group",
+                "value": "",
+                "type": "query",
+                "description": "The report group ID."
+              },
+              {
+                "name": "id_report_page",
+                "value": "",
+                "type": "query",
+                "description": "The report page ID. One of the [RsReportPageSid](#/components/schemas/RsReportPageSid) constants.\nIf set, the collection of that page will be used, ot"
+              },
+              {
+                "name": "id_report_view",
+                "value": "",
+                "type": "query",
+                "description": "The report view ID. One of the [RsReportChartViewSid](#/components/schemas/RsReportChartViewSid) constants."
+              },
+              {
+                "name": "k_business",
+                "value": "",
+                "type": "query",
+                "description": "The key of business for which the report must be generated."
+              },
+              {
+                "name": "s_filter",
+                "value": "",
+                "type": "query",
+                "description": "Filter settings in encoded format."
+              },
+              {
+                "name": "s_sort",
+                "value": "",
+                "type": "query",
+                "description": "The field to use for sorting report data."
+              }
+            ]
+          },
+          "docs": "Loads the specified report for the given business, applying filter, sort, and pagination parameters,\nand returns the report rows and totals."
+        },
+        {
+          "info": {
+            "name": "Gets data of required report collection.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://us.wellnessliving.com/Wl/Report/PageData.json",
+            "headers": [
+              {
+                "name": "X-Error-Rules",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "a_page",
+                "value": "",
+                "type": "query",
+                "description": "The page of results to show for each report in collection, starting at zero (set by default). The API will return\n256 results per page. Key is report"
+              },
+              {
+                "name": "id_report_group",
+                "value": "",
+                "type": "query",
+                "description": "The report group ID. One of the [RsReportGroupSid](#/components/schemas/RsReportGroupSid) constants that describes the time\nperiod (day, week, month,"
+              },
+              {
+                "name": "id_report_page",
+                "value": "",
+                "type": "query",
+                "description": "The report page ID. One of the [RsReportPageSid](#/components/schemas/RsReportPageSid) constants.\nThe collection of that page will be used to get list"
+              },
+              {
+                "name": "id_report_view",
+                "value": "",
+                "type": "query",
+                "description": "The report view ID. One of the [RsReportChartViewSid](#/components/schemas/RsReportChartViewSid) constants."
+              },
+              {
+                "name": "k_business",
+                "value": "",
+                "type": "query",
+                "description": "The key of business for which the report collection must be generated."
+              },
+              {
+                "name": "s_filter",
+                "value": "",
+                "type": "query",
+                "description": "Filter settings in encoded format."
+              },
+              {
+                "name": "s_sort",
+                "value": "",
+                "type": "query",
+                "description": "The field to use for sorting report data."
+              }
+            ]
+          },
+          "docs": "Loads all reports belonging to the specified report page collection for the given business, applying shared\nfilter, sort, group, and view parameters, and returns the data for each report keyed by report ID."
+        },
+        {
+          "info": {
+            "name": "Checks access to given report.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://us.wellnessliving.com/Wl/Report/Access.json",
+            "headers": [
+              {
+                "name": "X-Error-Rules",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "cid_report",
+                "value": "",
+                "type": "query",
+                "description": "Report CID.\n\nIt's used mostly for second generation reports.\nFor first generation reports use `id_report` instead.\n\nOnly one of these two fields shoul"
+              },
+              {
+                "name": "id_report",
+                "value": "",
+                "type": "query",
+                "description": "Report ID.\n\nIt's used mostly for first generation reports.\nFor second generation reports use `cid_report` instead.\n\nOnly one of these two fields shoul"
+              },
+              {
+                "name": "k_business",
+                "value": "",
+                "type": "query",
+                "description": "ID of business for which access must be checked."
+              }
+            ]
+          },
+          "docs": "Accepts either `id_report` (first-generation reports) or `cid_report` (second-generation reports), but not both,\nand returns `has_access` indicating whether the current user may view the report in the given business."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

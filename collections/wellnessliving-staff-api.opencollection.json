@@ -1,0 +1,249 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "WellnessLiving Appointments Staff API",
+    "version": "1.1.20260620071011"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Staff",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Returns the list of staff members for the given business.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://us.wellnessliving.com/Wl/Staff/StaffList/StaffList.json",
+            "headers": [
+              {
+                "name": "X-Error-Rules",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "a_privilege",
+                "value": "",
+                "type": "query",
+                "description": "A list of privileges to filter staff members by.\n\nThis property acts as a filter.\nOnly staff members possessing all the privileges specified in this l"
+              },
+              {
+                "name": "is_check_staff_access",
+                "value": "",
+                "type": "query",
+                "description": "Determines that only staff members which the current user has access to should be retrieved.\n\n `true` if only staff members which the current user has"
+              },
+              {
+                "name": "is_staff_inactive",
+                "value": "",
+                "type": "query",
+                "description": "Whether inactive and removed staff members are available.\nIf `true` inactive and removed staff members are available. `false` otherwise."
+              },
+              {
+                "name": "k_business",
+                "value": "",
+                "type": "query",
+                "description": "The key of the business to show information for."
+              }
+            ]
+          },
+          "docs": "Returns all active (or optionally inactive) staff members for the business, including\ntheir name, role, assigned services, contact details, and location assignments. Can be\nfiltered to only staff who have a specific privilege, and whether access-level checks\nshould be applied when building the result."
+        },
+        {
+          "info": {
+            "name": "Retrieves information about staff.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://us.wellnessliving.com/Wl/Staff/StaffView/StaffView.json",
+            "headers": [
+              {
+                "name": "X-Error-Rules",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "a_staff_list",
+                "value": "",
+                "type": "query",
+                "description": "A list of staff keys."
+              },
+              {
+                "name": "a_uid_staff_list",
+                "value": "",
+                "type": "query",
+                "description": "A list of staff user IDs."
+              },
+              {
+                "name": "i_image_height",
+                "value": "",
+                "type": "query",
+                "description": "Image height in pixels. Please specify this value if you need image to be returned in specific size.\nIn case this value is not specified returned imag"
+              },
+              {
+                "name": "i_image_width",
+                "value": "",
+                "type": "query",
+                "description": "Image width in pixels. Please specify this value if you need image to be returned in specific size.\nIn case this value is not specified returned image"
+              },
+              {
+                "name": "k_business",
+                "value": "",
+                "type": "query",
+                "description": "The key of the business to show information for."
+              },
+              {
+                "name": "k_staff",
+                "value": "",
+                "type": "query",
+                "description": "The staff member key.\nA staff member can work for more than one business.\nThis key can be found using the [StaffListApi](/Wl/Staff/StaffList/StaffList"
+              },
+              {
+                "name": "uid_staff",
+                "value": "",
+                "type": "query",
+                "description": "The staff member user ID.\nA staff member can work for more than one business.\nThis key can be found using the [StaffListApi](/Wl/Staff/StaffList/Staff"
+              }
+            ]
+          },
+          "docs": "This method can accept or one staff key `k_staff` or staff list\n`a_staff_list` but not both (exception would be thrown)."
+        },
+        {
+          "info": {
+            "name": "Update or create staff.",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://us.wellnessliving.com/Wl/Staff/StaffElement.json",
+            "headers": [
+              {
+                "name": "X-Error-Rules",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "k_staff",
+                "value": "",
+                "type": "query",
+                "description": "The key of the staff member resolved and used internally by this API.\n\nThis property is populated from `uid_staff` in `post()` and\nreturned in API res"
+              }
+            ],
+            "body": {
+              "type": "form-urlencoded",
+              "data": [
+                {
+                  "name": "a_location",
+                  "value": ""
+                },
+                {
+                  "name": "dl_end",
+                  "value": ""
+                },
+                {
+                  "name": "dl_start",
+                  "value": ""
+                },
+                {
+                  "name": "id_gender",
+                  "value": ""
+                },
+                {
+                  "name": "id_role",
+                  "value": ""
+                },
+                {
+                  "name": "is_employ",
+                  "value": ""
+                },
+                {
+                  "name": "is_microsite",
+                  "value": ""
+                },
+                {
+                  "name": "is_password_set_disable",
+                  "value": ""
+                },
+                {
+                  "name": "is_uid",
+                  "value": ""
+                },
+                {
+                  "name": "k_business",
+                  "value": ""
+                },
+                {
+                  "name": "k_business_role",
+                  "value": ""
+                },
+                {
+                  "name": "k_city",
+                  "value": ""
+                },
+                {
+                  "name": "k_location",
+                  "value": ""
+                },
+                {
+                  "name": "text_address",
+                  "value": ""
+                },
+                {
+                  "name": "text_biography",
+                  "value": ""
+                }
+              ]
+            }
+          },
+          "docs": "Creates a new staff member or updates an existing one in the business. When creating,\na new user account is provisioned if no matching email exists. When updating, the target\nstaff member must already belong to the business. Role, location, contact details,\nemployment dates, and custom profile fields can all be set in a single call."
+        },
+        {
+          "info": {
+            "name": "Returns the list of privileges for the current user in the given business.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://us.wellnessliving.com/Wl/Staff/Privilege/PrivilegeList.json",
+            "headers": [
+              {
+                "name": "X-Error-Rules",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "k_business",
+                "value": "",
+                "type": "query",
+                "description": "Key of business to get privileges for."
+              },
+              {
+                "name": "uid",
+                "value": "",
+                "type": "query",
+                "description": "User key to get privileges for."
+              }
+            ]
+          },
+          "docs": "Returns the complete access profile of the signed-in user for the given business: staff\nprivileges by ID, named admin privileges, and a flag indicating super-admin status. Can\nonly be called for the currently authenticated user, not on behalf of another user."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

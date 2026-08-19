@@ -1,0 +1,151 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "WellnessLiving Appointments Authentication API",
+    "version": "1.1.20260620071011"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Authentication",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Signs the user in using their login and hashed password.",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://us.wellnessliving.com/Core/Passport/Login/Enter/Enter.json",
+            "headers": [
+              {
+                "name": "X-Error-Rules",
+                "value": ""
+              }
+            ],
+            "body": {
+              "type": "form-urlencoded",
+              "data": [
+                {
+                  "name": "json_data",
+                  "value": ""
+                },
+                {
+                  "name": "s_captcha",
+                  "value": ""
+                },
+                {
+                  "name": "s_login",
+                  "value": ""
+                },
+                {
+                  "name": "s_notepad",
+                  "value": ""
+                },
+                {
+                  "name": "s_password",
+                  "value": ""
+                },
+                {
+                  "name": "s_remember",
+                  "value": ""
+                },
+                {
+                  "name": "url_return",
+                  "value": ""
+                }
+              ]
+            }
+          },
+          "docs": "Accepts the user login, a password hash derived using the notepad obtained from [NotepadApi](/Core/Passport/Login/Enter/Notepad.json),\nand an optional remember preference. Validates credentials, enforces CAPTCHA when too many failed\nattempts have occurred, starts a session for the user, and returns a redirect URL if applicable."
+        },
+        {
+          "info": {
+            "name": "Returns a jwt token that can be used to log user.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://us.wellnessliving.com/Core/Passport/Enter/Jwt/JwtToken.json",
+            "headers": [
+              {
+                "name": "X-Error-Rules",
+                "value": ""
+              }
+            ]
+          },
+          "docs": "Requires the user to be signed in. Generates a signed JWT token tied to the current authorization\nheader and user ID that can be passed to other services to authenticate the user without sharing session cookies."
+        },
+        {
+          "info": {
+            "name": "Signs user out.",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://us.wellnessliving.com/Core/Passport/Login/SignOut/SignOut.json",
+            "headers": [
+              {
+                "name": "X-Error-Rules",
+                "value": ""
+              }
+            ]
+          },
+          "docs": "Requires the user to be signed in, fires a before-logout event allowing listeners to intercept or\nhandle the logout, then clears the current session. Throws an error if the user is authenticated\nvia SAML SSO, as API-based logout is not supported in that case."
+        },
+        {
+          "info": {
+            "name": "Retrieves information about user.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://us.wellnessliving.com/Wl/Login/Login.json",
+            "headers": [
+              {
+                "name": "X-Error-Rules",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "i_photo_height",
+                "value": "",
+                "type": "query",
+                "description": "The height of the requested photo."
+              },
+              {
+                "name": "i_photo_width",
+                "value": "",
+                "type": "query",
+                "description": "The width of the requested photo."
+              },
+              {
+                "name": "k_business",
+                "value": "",
+                "type": "query",
+                "description": "The key of the business. Users can be in multiple businesses.\nThis can be left as `null` to retrieve system-wide information."
+              },
+              {
+                "name": "uid",
+                "value": "",
+                "type": "query",
+                "description": "The key of the user.\n\n`null` on case when is walk-in client."
+              }
+            ]
+          },
+          "docs": "Returns name, gender, photo URL, email, and staff details for the specified user within the given business.\nPublic staff information is returned even without profile access; full client details require access to the\nuser's profile."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

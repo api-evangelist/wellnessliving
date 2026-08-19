@@ -1,0 +1,235 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "WellnessLiving Appointments Clients API",
+    "version": "1.1.20260620071011"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Clients",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Returns information about specified member.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://us.wellnessliving.com/Wl/Member/Info/Info.json",
+            "headers": [
+              {
+                "name": "X-Error-Rules",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "a_uid",
+                "value": "",
+                "type": "query",
+                "description": "Primary keys of users whose information must be returned.\n\n`null` if data of a single user is requested."
+              },
+              {
+                "name": "a_uid_date",
+                "value": "",
+                "type": "query",
+                "description": "List of dates for load additional information about users.\n\nKey is UID of user. Value is date.\n\n`null` if data of a single user is requested."
+              },
+              {
+                "name": "dt_date",
+                "value": "",
+                "type": "query",
+                "description": "Date of the session, if we show it on the appointment info window or on the attendance list."
+              },
+              {
+                "name": "is_backend",
+                "value": "",
+                "type": "query",
+                "description": "`true` - if API is being used from backend, `false` - otherwise."
+              },
+              {
+                "name": "is_full",
+                "value": "",
+                "type": "query",
+                "description": "If you need to return additional information set to `true` or `false` if not."
+              },
+              {
+                "name": "k_business",
+                "value": "",
+                "type": "query",
+                "description": "The business ID required to access client information.\n\nSpecify this as `0` to retrieve the system-wide version of the information."
+              },
+              {
+                "name": "k_visit",
+                "value": "",
+                "type": "query",
+                "description": "ID of the visit, if we show icons on the attendance list and information that depends on visit is required."
+              },
+              {
+                "name": "s_show",
+                "value": "",
+                "type": "query",
+                "description": "A list of icons with additional information about the business member.\nIf empty, all available icons will be displayed.\nComma separated values from [M"
+              },
+              {
+                "name": "uid",
+                "value": "",
+                "type": "query",
+                "description": "ID of a user to retrieve member information for."
+              }
+            ]
+          },
+          "docs": "Supports both single-user and batch modes: when `$a_uid` is provided, returns a keyed list of user data in\n`$a_result_list`; otherwise returns data for the single user identified by `$uid`. When `$is_full` is `true`,\nadditional profile details, group membership, visit history, and lifetime value are included."
+        },
+        {
+          "info": {
+            "name": "Retrieves a list of user's purchase items to show in user profile.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://us.wellnessliving.com/Wl/Profile/Purchase/PurchaseList.json",
+            "headers": [
+              {
+                "name": "X-Error-Rules",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "k_business",
+                "value": "",
+                "type": "query",
+                "description": "The key of a business to show information for."
+              },
+              {
+                "name": "uid",
+                "value": "",
+                "type": "query",
+                "description": "The key of a user to show information for."
+              }
+            ]
+          },
+          "docs": "Returns the complete purchase history for the client in the given business, covering all\n item types such as memberships, redemption codes, enrollments, products, appointments, and\n gift cards. Package components are resolved and included inline beside their parent item."
+        },
+        {
+          "info": {
+            "name": "Creates a new client profile with the provided personal details in the specified business.",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://us.wellnessliving.com/Wl/Profile/ProfileCreate.json",
+            "headers": [
+              {
+                "name": "X-Error-Rules",
+                "value": ""
+              }
+            ],
+            "body": {
+              "type": "form-urlencoded",
+              "data": [
+                {
+                  "name": "a_intents",
+                  "value": ""
+                },
+                {
+                  "name": "dt_birthday",
+                  "value": ""
+                },
+                {
+                  "name": "id_gender",
+                  "value": ""
+                },
+                {
+                  "name": "id_lead_source",
+                  "value": ""
+                },
+                {
+                  "name": "id_vaccination_status",
+                  "value": ""
+                },
+                {
+                  "name": "is_lead",
+                  "value": ""
+                },
+                {
+                  "name": "k_business",
+                  "value": ""
+                },
+                {
+                  "name": "k_lead_source",
+                  "value": ""
+                },
+                {
+                  "name": "k_location_home",
+                  "value": ""
+                },
+                {
+                  "name": "text_address",
+                  "value": ""
+                },
+                {
+                  "name": "text_firstname",
+                  "value": ""
+                },
+                {
+                  "name": "text_lastname",
+                  "value": ""
+                },
+                {
+                  "name": "text_mail",
+                  "value": ""
+                },
+                {
+                  "name": "text_phone",
+                  "value": ""
+                },
+                {
+                  "name": "text_phone_home",
+                  "value": ""
+                }
+              ]
+            }
+          },
+          "docs": "Creates or retrieves a user account by email or phone, saves personal details such as name,\n address, phones, birthday, gender, and vaccination status, registers the user in the\n business, and optionally adds them to the lead report and sets intents."
+        },
+        {
+          "info": {
+            "name": "Gets relationships list.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://us.wellnessliving.com/Wl/Family/Relation/FamilyRelation.json",
+            "headers": [
+              {
+                "name": "X-Error-Rules",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "k_business",
+                "value": "",
+                "type": "query",
+                "description": "The business key."
+              }
+            ]
+          },
+          "docs": "Returns all relationship types enabled for the given business, or all system-defined relationship types if no\nbusiness key is provided."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

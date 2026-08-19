@@ -1,0 +1,3091 @@
+{
+  "item": [
+    {
+      "id": "21bbed3c-a991-4efa-a45b-8e78090f73b1",
+      "name": "Classes",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "fb8114b5-d6d9-48e2-8f8e-6becc4feab9e",
+          "name": "Returns list of classes and events in the business.",
+          "request": {
+            "name": "Returns list of classes and events in the business.",
+            "description": {
+              "content": "Used by import and integration tools to enumerate all classes and events offered by a business.\nIn franchise mode, classes from all franchisee locations are included. Results are sorted by title\nand start date.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "Wl",
+                "Classes",
+                "ClassList",
+                "List.json"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "a_class_tab",
+                  "value": "<string>",
+                  "description": "List of tabs keys.\nFiltering by Book Now Tab is not supported if `is_franchise` is `true`.\n\n`null` if no filtering by Book Now Tab is required."
+                },
+                {
+                  "disabled": false,
+                  "key": "a_class_tab",
+                  "value": "<string>",
+                  "description": "List of tabs keys.\nFiltering by Book Now Tab is not supported if `is_franchise` is `true`.\n\n`null` if no filtering by Book Now Tab is required."
+                },
+                {
+                  "disabled": false,
+                  "key": "id_class_tab",
+                  "value": "<string>",
+                  "description": "ID of book now tab. One of [TabSid](#/components/schemas/Wl.Classes.Tab.TabSid) constants.\nOnly [TabSid::TRAINING](#/components/schemas/Wl.Classes.Tab"
+                },
+                {
+                  "disabled": false,
+                  "key": "is_enrollment_block_all",
+                  "value": "<boolean>",
+                  "description": "(Required) Whether all events should be returned from same enrollment block.\n\n* `true` to return all events from same enrollment block.\n* `false` to return only"
+                },
+                {
+                  "disabled": false,
+                  "key": "is_enrollment_block_empty",
+                  "value": "<boolean>",
+                  "description": "(Required) Whether to include events without sessions.\nAn empty event is neither published nor unpublished. It simply has no sessions.\nSuch events can be useful"
+                },
+                {
+                  "disabled": false,
+                  "key": "is_event_include",
+                  "value": "<boolean>",
+                  "description": "(Required) Whether to include events in the result.\n\ntrue` to include both classes and events.\nfalse` to include only classes."
+                },
+                {
+                  "disabled": false,
+                  "key": "is_franchise",
+                  "value": "<boolean>",
+                  "description": "(Required) Whether to return franchisee-created classes (if business is franchisor).\n`true` to include franchisee-created classes."
+                },
+                {
+                  "disabled": false,
+                  "key": "k_business",
+                  "value": "<string>",
+                  "description": "(Required) Business key."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "Opt in to mapping internal API error statuses to real 4xx HTTP codes. By default the API always answers HTTP 200 even on error, with the failure encoded in the JSON body; setting this header (e.g. to `default`) makes the gateway translate matched error statuses to 400/403/404 responses instead.",
+                "key": "X-Error-Rules",
+                "value": "<string>"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "16d2f724-cce3-4cf2-be0b-bc31effb5b88",
+              "name": "Successful response.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "Wl",
+                    "Classes",
+                    "ClassList",
+                    "List.json"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "a_class_tab",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "a_class_tab",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "id_class_tab",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "is_enrollment_block_all",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "is_enrollment_block_empty",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "is_event_include",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "is_franchise",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "k_business",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Opt in to mapping internal API error statuses to real 4xx HTTP codes. By default the API always answers HTTP 200 even on error, with the failure encoded in the JSON body; setting this header (e.g. to `default`) makes the gateway translate matched error statuses to 400/403/404 responses instead.",
+                    "key": "X-Error-Rules",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"a_class\": {}\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "8fbc8172-daa0-4379-a370-9e02f77c40fc",
+              "name": "Client-side error: invalid input, failed validation, throttling, or other request error (only returned as an HTTP status when `X-Error-Rules` opts in; otherwise encoded in a 200 body).",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "Wl",
+                    "Classes",
+                    "ClassList",
+                    "List.json"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "a_class_tab",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "a_class_tab",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "id_class_tab",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "is_enrollment_block_all",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "is_enrollment_block_empty",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "is_event_include",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "is_franchise",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "k_business",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Opt in to mapping internal API error statuses to real 4xx HTTP codes. By default the API always answers HTTP 200 even on error, with the failure encoded in the JSON body; setting this header (e.g. to `default`) makes the gateway translate matched error statuses to 400/403/404 responses instead.",
+                    "key": "X-Error-Rules",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": \"string\",\n  \"text_message\": \"string\",\n  \"a_field\": {\n    \"key_0\": 3327.053924018457,\n    \"key_1\": false,\n    \"key_2\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "a5e121c6-b52b-4e14-8f9d-0ac38be1ae09",
+              "name": "Missing, expired, or invalid Bearer token / session.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "Wl",
+                    "Classes",
+                    "ClassList",
+                    "List.json"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "a_class_tab",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "a_class_tab",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "id_class_tab",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "is_enrollment_block_all",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "is_enrollment_block_empty",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "is_event_include",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "is_franchise",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "k_business",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Opt in to mapping internal API error statuses to real 4xx HTTP codes. By default the API always answers HTTP 200 even on error, with the failure encoded in the JSON body; setting this header (e.g. to `default`) makes the gateway translate matched error statuses to 400/403/404 responses instead.",
+                    "key": "X-Error-Rules",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": \"string\",\n  \"text_message\": \"string\",\n  \"a_field\": {\n    \"key_0\": 3327.053924018457,\n    \"key_1\": false,\n    \"key_2\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "9a8bd113-89e3-4b8c-b9f7-35c673523bf7",
+              "name": "Authenticated but not permitted to access this business, location, or resource.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "Wl",
+                    "Classes",
+                    "ClassList",
+                    "List.json"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "a_class_tab",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "a_class_tab",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "id_class_tab",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "is_enrollment_block_all",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "is_enrollment_block_empty",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "is_event_include",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "is_franchise",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "k_business",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Opt in to mapping internal API error statuses to real 4xx HTTP codes. By default the API always answers HTTP 200 even on error, with the failure encoded in the JSON body; setting this header (e.g. to `default`) makes the gateway translate matched error statuses to 400/403/404 responses instead.",
+                    "key": "X-Error-Rules",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": \"string\",\n  \"text_message\": \"string\",\n  \"a_field\": {\n    \"key_0\": 3327.053924018457,\n    \"key_1\": false,\n    \"key_2\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "1ffe8daa-e1d1-44f4-86bc-570edcd39ecd",
+              "name": "The requested resource does not exist.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "Wl",
+                    "Classes",
+                    "ClassList",
+                    "List.json"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "a_class_tab",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "a_class_tab",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "id_class_tab",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "is_enrollment_block_all",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "is_enrollment_block_empty",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "is_event_include",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "is_franchise",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "k_business",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Opt in to mapping internal API error statuses to real 4xx HTTP codes. By default the API always answers HTTP 200 even on error, with the failure encoded in the JSON body; setting this header (e.g. to `default`) makes the gateway translate matched error statuses to 400/403/404 responses instead.",
+                    "key": "X-Error-Rules",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": \"string\",\n  \"text_message\": \"string\",\n  \"a_field\": {\n    \"key_0\": 3327.053924018457,\n    \"key_1\": false,\n    \"key_2\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "f6772e89-d034-4326-b33d-ff7f600f5cc3",
+              "name": "The request payload failed field-level validation.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "Wl",
+                    "Classes",
+                    "ClassList",
+                    "List.json"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "a_class_tab",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "a_class_tab",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "id_class_tab",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "is_enrollment_block_all",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "is_enrollment_block_empty",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "is_event_include",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "is_franchise",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "k_business",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Opt in to mapping internal API error statuses to real 4xx HTTP codes. By default the API always answers HTTP 200 even on error, with the failure encoded in the JSON body; setting this header (e.g. to `default`) makes the gateway translate matched error statuses to 400/403/404 responses instead.",
+                    "key": "X-Error-Rules",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": \"string\",\n  \"text_message\": \"string\",\n  \"a_field\": {\n    \"key_0\": 3327.053924018457,\n    \"key_1\": false,\n    \"key_2\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "6eb70273-55cb-4b19-8516-e69dc5b33d03",
+              "name": "Unexpected server error.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "Wl",
+                    "Classes",
+                    "ClassList",
+                    "List.json"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "a_class_tab",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "a_class_tab",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "id_class_tab",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "is_enrollment_block_all",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "is_enrollment_block_empty",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "is_event_include",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "is_franchise",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "k_business",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Opt in to mapping internal API error statuses to real 4xx HTTP codes. By default the API always answers HTTP 200 even on error, with the failure encoded in the JSON body; setting this header (e.g. to `default`) makes the gateway translate matched error statuses to 400/403/404 responses instead.",
+                    "key": "X-Error-Rules",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": \"string\",\n  \"text_message\": \"string\",\n  \"a_field\": {\n    \"key_0\": 3327.053924018457,\n    \"key_1\": false,\n    \"key_2\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "b0b67500-db7b-441d-81ff-11065956cb93",
+          "name": "Returns class information including schedules, images, and booking settings for the specified business.",
+          "request": {
+            "name": "Returns class information including schedules, images, and booking settings for the specified business.",
+            "description": {
+              "content": "Used by import tools to read the full class catalog for a business. Returns a map of all classes\n(or a single class) with the information needed to replicate class data in an external system:\nschedules, images, booking constraints, and descriptions.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "Wl",
+                "Classes",
+                "ClassView",
+                "Element.json"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "i_image_height",
+                  "value": "<integer>",
+                  "description": "(Required) The image height in pixels. Specify this value if you need the image to be returned in a specific size.\nIf this value isn't specified, the returned im"
+                },
+                {
+                  "disabled": false,
+                  "key": "i_image_width",
+                  "value": "<integer>",
+                  "description": "(Required) The image width in pixels. Specify this value if you need the image to be returned in a specific size.\nIf this value isn't specified, the returned ima"
+                },
+                {
+                  "disabled": false,
+                  "key": "k_business",
+                  "value": "<string>",
+                  "description": "(Required) The business key."
+                },
+                {
+                  "disabled": false,
+                  "key": "k_class",
+                  "value": "<string>",
+                  "description": "(Required) The class key used to get information for a specific class.\n\nAn empty value returns information for all classes of the business."
+                },
+                {
+                  "disabled": false,
+                  "key": "show_cancelled",
+                  "value": "<boolean>",
+                  "description": "(Required) Defines if canceled schedules should be included in the result.\n\nIf `true`, canceled schedules will be shown. Otherwise, this will be `false`."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "Opt in to mapping internal API error statuses to real 4xx HTTP codes. By default the API always answers HTTP 200 even on error, with the failure encoded in the JSON body; setting this header (e.g. to `default`) makes the gateway translate matched error statuses to 400/403/404 responses instead.",
+                "key": "X-Error-Rules",
+                "value": "<string>"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "ffd41ccc-b144-4142-a417-935bfff1573b",
+              "name": "Successful response.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "Wl",
+                    "Classes",
+                    "ClassView",
+                    "Element.json"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "i_image_height",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "i_image_width",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "k_business",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "k_class",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "show_cancelled",
+                      "value": "<boolean>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Opt in to mapping internal API error statuses to real 4xx HTTP codes. By default the API always answers HTTP 200 even on error, with the failure encoded in the JSON body; setting this header (e.g. to `default`) makes the gateway translate matched error statuses to 400/403/404 responses instead.",
+                    "key": "X-Error-Rules",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"a_class_list\": {}\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "b6c69b13-fc74-4c65-b590-8fb8f3cc4e5c",
+              "name": "Client-side error: invalid input, failed validation, throttling, or other request error (only returned as an HTTP status when `X-Error-Rules` opts in; otherwise encoded in a 200 body).",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "Wl",
+                    "Classes",
+                    "ClassView",
+                    "Element.json"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "i_image_height",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "i_image_width",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "k_business",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "k_class",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "show_cancelled",
+                      "value": "<boolean>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Opt in to mapping internal API error statuses to real 4xx HTTP codes. By default the API always answers HTTP 200 even on error, with the failure encoded in the JSON body; setting this header (e.g. to `default`) makes the gateway translate matched error statuses to 400/403/404 responses instead.",
+                    "key": "X-Error-Rules",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": \"string\",\n  \"text_message\": \"string\",\n  \"a_field\": {\n    \"key_0\": 3327.053924018457,\n    \"key_1\": false,\n    \"key_2\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "16706940-5a13-4218-8827-52c2f142c655",
+              "name": "Missing, expired, or invalid Bearer token / session.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "Wl",
+                    "Classes",
+                    "ClassView",
+                    "Element.json"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "i_image_height",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "i_image_width",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "k_business",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "k_class",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "show_cancelled",
+                      "value": "<boolean>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Opt in to mapping internal API error statuses to real 4xx HTTP codes. By default the API always answers HTTP 200 even on error, with the failure encoded in the JSON body; setting this header (e.g. to `default`) makes the gateway translate matched error statuses to 400/403/404 responses instead.",
+                    "key": "X-Error-Rules",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": \"string\",\n  \"text_message\": \"string\",\n  \"a_field\": {\n    \"key_0\": 3327.053924018457,\n    \"key_1\": false,\n    \"key_2\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "310a8faf-e315-42ac-bb93-3675008f7046",
+              "name": "Authenticated but not permitted to access this business, location, or resource.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "Wl",
+                    "Classes",
+                    "ClassView",
+                    "Element.json"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "i_image_height",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "i_image_width",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "k_business",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "k_class",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "show_cancelled",
+                      "value": "<boolean>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Opt in to mapping internal API error statuses to real 4xx HTTP codes. By default the API always answers HTTP 200 even on error, with the failure encoded in the JSON body; setting this header (e.g. to `default`) makes the gateway translate matched error statuses to 400/403/404 responses instead.",
+                    "key": "X-Error-Rules",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": \"string\",\n  \"text_message\": \"string\",\n  \"a_field\": {\n    \"key_0\": 3327.053924018457,\n    \"key_1\": false,\n    \"key_2\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "36735617-643d-4bc4-a117-2a6f156b1468",
+              "name": "The requested resource does not exist.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "Wl",
+                    "Classes",
+                    "ClassView",
+                    "Element.json"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "i_image_height",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "i_image_width",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "k_business",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "k_class",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "show_cancelled",
+                      "value": "<boolean>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Opt in to mapping internal API error statuses to real 4xx HTTP codes. By default the API always answers HTTP 200 even on error, with the failure encoded in the JSON body; setting this header (e.g. to `default`) makes the gateway translate matched error statuses to 400/403/404 responses instead.",
+                    "key": "X-Error-Rules",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": \"string\",\n  \"text_message\": \"string\",\n  \"a_field\": {\n    \"key_0\": 3327.053924018457,\n    \"key_1\": false,\n    \"key_2\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "a1479ffe-0252-469c-b86f-f102bdb21ac2",
+              "name": "The request payload failed field-level validation.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "Wl",
+                    "Classes",
+                    "ClassView",
+                    "Element.json"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "i_image_height",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "i_image_width",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "k_business",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "k_class",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "show_cancelled",
+                      "value": "<boolean>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Opt in to mapping internal API error statuses to real 4xx HTTP codes. By default the API always answers HTTP 200 even on error, with the failure encoded in the JSON body; setting this header (e.g. to `default`) makes the gateway translate matched error statuses to 400/403/404 responses instead.",
+                    "key": "X-Error-Rules",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": \"string\",\n  \"text_message\": \"string\",\n  \"a_field\": {\n    \"key_0\": 3327.053924018457,\n    \"key_1\": false,\n    \"key_2\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "97403b89-29cb-4b20-8138-aa1b0e268b33",
+              "name": "Unexpected server error.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "Wl",
+                    "Classes",
+                    "ClassView",
+                    "Element.json"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "i_image_height",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "i_image_width",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "k_business",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "k_class",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "show_cancelled",
+                      "value": "<boolean>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Opt in to mapping internal API error statuses to real 4xx HTTP codes. By default the API always answers HTTP 200 even on error, with the failure encoded in the JSON body; setting this header (e.g. to `default`) makes the gateway translate matched error statuses to 400/403/404 responses instead.",
+                    "key": "X-Error-Rules",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": \"string\",\n  \"text_message\": \"string\",\n  \"a_field\": {\n    \"key_0\": 3327.053924018457,\n    \"key_1\": false,\n    \"key_2\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "5aea0a9a-3f81-4574-b0e6-6098c898d0d4",
+          "name": "Retrieves a list of classes and class information for the given business and date range.",
+          "request": {
+            "name": "Retrieves a list of classes and class information for the given business and date range.",
+            "description": {
+              "content": "Returns upcoming class sessions for a business, with optional filtering by location,\nday of week, time of day, staff member, and virtual or in-person mode. The result includes\nper-session details such as staff, capacity, booking counts, and virtual locations, as well as\na calendar map indicating which dates have at least one scheduled session.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "Wl",
+                "Schedule",
+                "ClassList",
+                "ClassList.json"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "a_class",
+                  "value": "<string>",
+                  "description": "(Required) The list of classes keys to filter.\nReturn sessions with matching class IDs.\n\nIf it's empty, all classes/events will be returned."
+                },
+                {
+                  "disabled": false,
+                  "key": "a_class",
+                  "value": "<string>",
+                  "description": "(Required) The list of classes keys to filter.\nReturn sessions with matching class IDs.\n\nIf it's empty, all classes/events will be returned."
+                },
+                {
+                  "disabled": false,
+                  "key": "a_day",
+                  "value": "<string>",
+                  "description": "(Required) Class filter by day of the week.\nArray of number representing the days of the week.\nReturn sessions matching the given weekdays.\n(7 = Sunday, 1 = Mond"
+                },
+                {
+                  "disabled": false,
+                  "key": "a_day",
+                  "value": "<string>",
+                  "description": "(Required) Class filter by day of the week.\nArray of number representing the days of the week.\nReturn sessions matching the given weekdays.\n(7 = Sunday, 1 = Mond"
+                },
+                {
+                  "disabled": false,
+                  "key": "a_location",
+                  "value": "<string>",
+                  "description": "(Required) The list of location keys to filter results.\nIf it's empty, schedule for all locations will be returned.\nAll given locations should be from the same b"
+                },
+                {
+                  "disabled": false,
+                  "key": "a_location",
+                  "value": "<string>",
+                  "description": "(Required) The list of location keys to filter results.\nIf it's empty, schedule for all locations will be returned.\nAll given locations should be from the same b"
+                },
+                {
+                  "disabled": false,
+                  "key": "a_time",
+                  "value": "<string>",
+                  "description": "(Required) Class filter by time of day.\nList of arrays with start and end time in \"HH:MM\" format (24h).\nInclude sessions that start between the specified time ra"
+                },
+                {
+                  "disabled": false,
+                  "key": "a_time",
+                  "value": "<string>",
+                  "description": "(Required) Class filter by time of day.\nList of arrays with start and end time in \"HH:MM\" format (24h).\nInclude sessions that start between the specified time ra"
+                },
+                {
+                  "disabled": false,
+                  "key": "dt_date",
+                  "value": "<string>",
+                  "description": "(Required) The list start date in UTC and in MySQL format."
+                },
+                {
+                  "disabled": false,
+                  "key": "dt_end",
+                  "value": "<string>",
+                  "description": "(Required) The list end date in UTC and in MySQL format."
+                },
+                {
+                  "disabled": false,
+                  "key": "is_response_short",
+                  "value": "<boolean>",
+                  "description": "(Required) `true` means to not generate `a_session` result.\nCan be used, if you do not need full information about existing classes and result in `a_calendar` is"
+                },
+                {
+                  "disabled": false,
+                  "key": "is_tab_all",
+                  "value": "<boolean>",
+                  "description": "(Required) If `true`, sessions from every class tab are returned. If `false`, use the\n`k_class_tab` value."
+                },
+                {
+                  "disabled": false,
+                  "key": "is_virtual",
+                  "value": "<boolean>",
+                  "description": "Class filter by type.\nThe class is virtual.\n\n`true`: Only virtual classes.\n`false`: Only in-person.\n`null` or not set: No filtering."
+                },
+                {
+                  "disabled": false,
+                  "key": "k_business",
+                  "value": "<string>",
+                  "description": "(Required) The business key."
+                },
+                {
+                  "disabled": false,
+                  "key": "k_class_tab",
+                  "value": "<string>",
+                  "description": "(Required) The category tab key.\n\nThis will be `null` if not set yet.\nThis will be ignored if `is_tab_all` is `true`."
+                },
+                {
+                  "disabled": false,
+                  "key": "s_staff",
+                  "value": "<string>",
+                  "description": "(Required) The list of staff members to filter.\nA comma separated list of staff keys."
+                },
+                {
+                  "disabled": false,
+                  "key": "s_staff_uid",
+                  "value": "<string>",
+                  "description": "(Required) The list of staff user keys to filter.\nA comma separated list of staff user keys."
+                },
+                {
+                  "disabled": false,
+                  "key": "show_cancel",
+                  "value": "<boolean>",
+                  "description": "(Required) If `true`, canceled sessions will be returned. If `false`, canceled sessions won't be returned."
+                },
+                {
+                  "disabled": false,
+                  "key": "show_class",
+                  "value": "<boolean>",
+                  "description": "(Required) If `true`, classes will be included in the response. `false` - otherwise."
+                },
+                {
+                  "disabled": false,
+                  "key": "show_event",
+                  "value": "<boolean>",
+                  "description": "(Required) If `true`, events are also returned. If `false`, only classes are returned."
+                },
+                {
+                  "disabled": false,
+                  "key": "uid",
+                  "value": "<string>",
+                  "description": "(Required) The user key."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "Opt in to mapping internal API error statuses to real 4xx HTTP codes. By default the API always answers HTTP 200 even on error, with the failure encoded in the JSON body; setting this header (e.g. to `default`) makes the gateway translate matched error statuses to 400/403/404 responses instead.",
+                "key": "X-Error-Rules",
+                "value": "<string>"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "879956c3-b1d2-4793-9727-0368a0140344",
+              "name": "Successful response.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "Wl",
+                    "Schedule",
+                    "ClassList",
+                    "ClassList.json"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "a_class",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "a_class",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "a_day",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "a_day",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "a_location",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "a_location",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "a_time",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "a_time",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "dt_date",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "dt_end",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "is_response_short",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "is_tab_all",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "is_virtual",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "k_business",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "k_class_tab",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "s_staff",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "s_staff_uid",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "show_cancel",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "show_class",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "show_event",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "uid",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Opt in to mapping internal API error statuses to real 4xx HTTP codes. By default the API always answers HTTP 200 even on error, with the failure encoded in the JSON body; setting this header (e.g. to `default`) makes the gateway translate matched error statuses to 400/403/404 responses instead.",
+                    "key": "X-Error-Rules",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"a_calendar\": {},\n  \"a_session\": {},\n  \"is_timezone_different\": {},\n  \"is_virtual_service\": {}\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "5c84d3c3-e9c3-4b58-a96e-d5eb150d1d3f",
+              "name": "Client-side error: invalid input, failed validation, throttling, or other request error (only returned as an HTTP status when `X-Error-Rules` opts in; otherwise encoded in a 200 body).",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "Wl",
+                    "Schedule",
+                    "ClassList",
+                    "ClassList.json"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "a_class",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "a_class",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "a_day",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "a_day",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "a_location",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "a_location",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "a_time",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "a_time",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "dt_date",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "dt_end",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "is_response_short",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "is_tab_all",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "is_virtual",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "k_business",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "k_class_tab",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "s_staff",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "s_staff_uid",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "show_cancel",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "show_class",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "show_event",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "uid",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Opt in to mapping internal API error statuses to real 4xx HTTP codes. By default the API always answers HTTP 200 even on error, with the failure encoded in the JSON body; setting this header (e.g. to `default`) makes the gateway translate matched error statuses to 400/403/404 responses instead.",
+                    "key": "X-Error-Rules",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": \"string\",\n  \"text_message\": \"string\",\n  \"a_field\": {\n    \"key_0\": 3327.053924018457,\n    \"key_1\": false,\n    \"key_2\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "2271f4e2-a4d2-49e0-b32c-f944f37d3925",
+              "name": "Missing, expired, or invalid Bearer token / session.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "Wl",
+                    "Schedule",
+                    "ClassList",
+                    "ClassList.json"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "a_class",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "a_class",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "a_day",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "a_day",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "a_location",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "a_location",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "a_time",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "a_time",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "dt_date",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "dt_end",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "is_response_short",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "is_tab_all",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "is_virtual",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "k_business",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "k_class_tab",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "s_staff",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "s_staff_uid",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "show_cancel",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "show_class",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "show_event",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "uid",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Opt in to mapping internal API error statuses to real 4xx HTTP codes. By default the API always answers HTTP 200 even on error, with the failure encoded in the JSON body; setting this header (e.g. to `default`) makes the gateway translate matched error statuses to 400/403/404 responses instead.",
+                    "key": "X-Error-Rules",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": \"string\",\n  \"text_message\": \"string\",\n  \"a_field\": {\n    \"key_0\": 3327.053924018457,\n    \"key_1\": false,\n    \"key_2\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "d9fb7514-7220-408d-a873-577e78ee22d2",
+              "name": "Authenticated but not permitted to access this business, location, or resource.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "Wl",
+                    "Schedule",
+                    "ClassList",
+                    "ClassList.json"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "a_class",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "a_class",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "a_day",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "a_day",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "a_location",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "a_location",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "a_time",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "a_time",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "dt_date",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "dt_end",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "is_response_short",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "is_tab_all",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "is_virtual",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "k_business",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "k_class_tab",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "s_staff",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "s_staff_uid",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "show_cancel",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "show_class",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "show_event",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "uid",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Opt in to mapping internal API error statuses to real 4xx HTTP codes. By default the API always answers HTTP 200 even on error, with the failure encoded in the JSON body; setting this header (e.g. to `default`) makes the gateway translate matched error statuses to 400/403/404 responses instead.",
+                    "key": "X-Error-Rules",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": \"string\",\n  \"text_message\": \"string\",\n  \"a_field\": {\n    \"key_0\": 3327.053924018457,\n    \"key_1\": false,\n    \"key_2\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "333c848b-a1b4-48ce-9bb0-226be6f41d36",
+              "name": "The requested resource does not exist.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "Wl",
+                    "Schedule",
+                    "ClassList",
+                    "ClassList.json"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "a_class",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "a_class",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "a_day",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "a_day",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "a_location",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "a_location",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "a_time",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "a_time",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "dt_date",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "dt_end",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "is_response_short",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "is_tab_all",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "is_virtual",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "k_business",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "k_class_tab",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "s_staff",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "s_staff_uid",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "show_cancel",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "show_class",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "show_event",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "uid",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Opt in to mapping internal API error statuses to real 4xx HTTP codes. By default the API always answers HTTP 200 even on error, with the failure encoded in the JSON body; setting this header (e.g. to `default`) makes the gateway translate matched error statuses to 400/403/404 responses instead.",
+                    "key": "X-Error-Rules",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": \"string\",\n  \"text_message\": \"string\",\n  \"a_field\": {\n    \"key_0\": 3327.053924018457,\n    \"key_1\": false,\n    \"key_2\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "70af7a96-5b96-43c1-8478-fed86c26edb1",
+              "name": "The request payload failed field-level validation.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "Wl",
+                    "Schedule",
+                    "ClassList",
+                    "ClassList.json"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "a_class",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "a_class",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "a_day",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "a_day",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "a_location",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "a_location",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "a_time",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "a_time",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "dt_date",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "dt_end",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "is_response_short",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "is_tab_all",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "is_virtual",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "k_business",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "k_class_tab",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "s_staff",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "s_staff_uid",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "show_cancel",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "show_class",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "show_event",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "uid",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Opt in to mapping internal API error statuses to real 4xx HTTP codes. By default the API always answers HTTP 200 even on error, with the failure encoded in the JSON body; setting this header (e.g. to `default`) makes the gateway translate matched error statuses to 400/403/404 responses instead.",
+                    "key": "X-Error-Rules",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": \"string\",\n  \"text_message\": \"string\",\n  \"a_field\": {\n    \"key_0\": 3327.053924018457,\n    \"key_1\": false,\n    \"key_2\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "0b01b097-c893-43d8-861d-2ea3dac3ad55",
+              "name": "Unexpected server error.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "Wl",
+                    "Schedule",
+                    "ClassList",
+                    "ClassList.json"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "a_class",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "a_class",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "a_day",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "a_day",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "a_location",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "a_location",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "a_time",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "a_time",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "dt_date",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "dt_end",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "is_response_short",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "is_tab_all",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "is_virtual",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "k_business",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "k_class_tab",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "s_staff",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "s_staff_uid",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "show_cancel",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "show_class",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "show_event",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "uid",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Opt in to mapping internal API error statuses to real 4xx HTTP codes. By default the API always answers HTTP 200 even on error, with the failure encoded in the JSON body; setting this header (e.g. to `default`) makes the gateway translate matched error statuses to 400/403/404 responses instead.",
+                    "key": "X-Error-Rules",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": \"string\",\n  \"text_message\": \"string\",\n  \"a_field\": {\n    \"key_0\": 3327.053924018457,\n    \"key_1\": false,\n    \"key_2\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "cfff524b-f3d6-4557-94b5-3dab82b775eb",
+          "name": "Cancels session for the client.\nThis method is an alias for partners using the API or SDK.",
+          "request": {
+            "name": "Cancels session for the client.\nThis method is an alias for partners using the API or SDK.",
+            "description": {
+              "content": "Identical in behavior to `get()`; exists as a POST alias for partner\nintegrations that cannot issue GET requests.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "Wl",
+                "Schedule",
+                "Cancel.json"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "dt_date",
+                  "value": "<string>",
+                  "description": "(Required) The date of the session in UTC."
+                },
+                {
+                  "disabled": false,
+                  "key": "is_backend",
+                  "value": "<boolean>",
+                  "description": "(Required) This will be `true` if the API is being used from the back end. Otherwise, this will be `false`.\nHere, the back end refers to either a staff member or"
+                },
+                {
+                  "disabled": false,
+                  "key": "is_late_cancel",
+                  "value": "<boolean>",
+                  "description": "(Required) `true` is late cancel, `false` reservation is not late cancel.\nThis is required to enable late cancel even if the user is staff."
+                },
+                {
+                  "disabled": false,
+                  "key": "k_appointment",
+                  "value": "<string>",
+                  "description": "The appointment key.\nThis will be `null` if not set yet or if a class or event is canceled."
+                },
+                {
+                  "disabled": false,
+                  "key": "k_business",
+                  "value": "<string>",
+                  "description": "(Required) Key of the business within which the action is performed."
+                },
+                {
+                  "disabled": false,
+                  "key": "k_class_period",
+                  "value": "<string>",
+                  "description": "The class period key.\nThis will be `null` if not set yet or if an appointment is canceled."
+                },
+                {
+                  "disabled": false,
+                  "key": "uid",
+                  "value": "<string>",
+                  "description": "(Required) The user key."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "Opt in to mapping internal API error statuses to real 4xx HTTP codes. By default the API always answers HTTP 200 even on error, with the failure encoded in the JSON body; setting this header (e.g. to `default`) makes the gateway translate matched error statuses to 400/403/404 responses instead.",
+                "key": "X-Error-Rules",
+                "value": "<string>"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "12c29154-d208-4f01-b191-03b302538bc6",
+              "name": "Successful response.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "Wl",
+                    "Schedule",
+                    "Cancel.json"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "dt_date",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "is_backend",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "is_late_cancel",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "k_appointment",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "k_business",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "k_class_period",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "uid",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Opt in to mapping internal API error statuses to real 4xx HTTP codes. By default the API always answers HTTP 200 even on error, with the failure encoded in the JSON body; setting this header (e.g. to `default`) makes the gateway translate matched error statuses to 400/403/404 responses instead.",
+                    "key": "X-Error-Rules",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "ff89cbc4-ce71-4b75-91d8-8b75a8705bcc",
+              "name": "Client-side error: invalid input, failed validation, throttling, or other request error (only returned as an HTTP status when `X-Error-Rules` opts in; otherwise encoded in a 200 body).",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "Wl",
+                    "Schedule",
+                    "Cancel.json"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "dt_date",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "is_backend",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "is_late_cancel",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "k_appointment",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "k_business",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "k_class_period",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "uid",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Opt in to mapping internal API error statuses to real 4xx HTTP codes. By default the API always answers HTTP 200 even on error, with the failure encoded in the JSON body; setting this header (e.g. to `default`) makes the gateway translate matched error statuses to 400/403/404 responses instead.",
+                    "key": "X-Error-Rules",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": \"string\",\n  \"text_message\": \"string\",\n  \"a_field\": {\n    \"key_0\": 3327.053924018457,\n    \"key_1\": false,\n    \"key_2\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "56a9240e-43d6-4887-baae-ca4fb08bce9f",
+              "name": "Missing, expired, or invalid Bearer token / session.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "Wl",
+                    "Schedule",
+                    "Cancel.json"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "dt_date",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "is_backend",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "is_late_cancel",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "k_appointment",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "k_business",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "k_class_period",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "uid",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Opt in to mapping internal API error statuses to real 4xx HTTP codes. By default the API always answers HTTP 200 even on error, with the failure encoded in the JSON body; setting this header (e.g. to `default`) makes the gateway translate matched error statuses to 400/403/404 responses instead.",
+                    "key": "X-Error-Rules",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": \"string\",\n  \"text_message\": \"string\",\n  \"a_field\": {\n    \"key_0\": 3327.053924018457,\n    \"key_1\": false,\n    \"key_2\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "8ea8e3cc-50ef-4ad3-b588-5daaba73ce64",
+              "name": "Authenticated but not permitted to access this business, location, or resource.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "Wl",
+                    "Schedule",
+                    "Cancel.json"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "dt_date",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "is_backend",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "is_late_cancel",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "k_appointment",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "k_business",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "k_class_period",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "uid",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Opt in to mapping internal API error statuses to real 4xx HTTP codes. By default the API always answers HTTP 200 even on error, with the failure encoded in the JSON body; setting this header (e.g. to `default`) makes the gateway translate matched error statuses to 400/403/404 responses instead.",
+                    "key": "X-Error-Rules",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": \"string\",\n  \"text_message\": \"string\",\n  \"a_field\": {\n    \"key_0\": 3327.053924018457,\n    \"key_1\": false,\n    \"key_2\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "0c7c3d97-b0d6-4694-83ab-7b9be473b2a3",
+              "name": "The requested resource does not exist.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "Wl",
+                    "Schedule",
+                    "Cancel.json"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "dt_date",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "is_backend",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "is_late_cancel",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "k_appointment",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "k_business",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "k_class_period",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "uid",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Opt in to mapping internal API error statuses to real 4xx HTTP codes. By default the API always answers HTTP 200 even on error, with the failure encoded in the JSON body; setting this header (e.g. to `default`) makes the gateway translate matched error statuses to 400/403/404 responses instead.",
+                    "key": "X-Error-Rules",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": \"string\",\n  \"text_message\": \"string\",\n  \"a_field\": {\n    \"key_0\": 3327.053924018457,\n    \"key_1\": false,\n    \"key_2\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "44741563-b9e2-4c43-b1d2-8a3c9c3527fc",
+              "name": "The request payload failed field-level validation.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "Wl",
+                    "Schedule",
+                    "Cancel.json"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "dt_date",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "is_backend",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "is_late_cancel",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "k_appointment",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "k_business",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "k_class_period",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "uid",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Opt in to mapping internal API error statuses to real 4xx HTTP codes. By default the API always answers HTTP 200 even on error, with the failure encoded in the JSON body; setting this header (e.g. to `default`) makes the gateway translate matched error statuses to 400/403/404 responses instead.",
+                    "key": "X-Error-Rules",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": \"string\",\n  \"text_message\": \"string\",\n  \"a_field\": {\n    \"key_0\": 3327.053924018457,\n    \"key_1\": false,\n    \"key_2\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "416c729e-b4e3-44ef-8bb6-8332a6535258",
+              "name": "Unexpected server error.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "Wl",
+                    "Schedule",
+                    "Cancel.json"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "dt_date",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "is_backend",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "is_late_cancel",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "k_appointment",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "k_business",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "k_class_period",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "uid",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Opt in to mapping internal API error statuses to real 4xx HTTP codes. By default the API always answers HTTP 200 even on error, with the failure encoded in the JSON body; setting this header (e.g. to `default`) makes the gateway translate matched error statuses to 400/403/404 responses instead.",
+                    "key": "X-Error-Rules",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": \"string\",\n  \"text_message\": \"string\",\n  \"a_field\": {\n    \"key_0\": 3327.053924018457,\n    \"key_1\": false,\n    \"key_2\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://us.wellnessliving.com",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "1ca290b7-c7a0-425b-a784-be788de22918",
+    "name": "WellnessLiving Appointments Classes API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Curated, representative subset of WellnessLiving's official production API (RESTful, JSON-over-HTTPS). WellnessLiving is business-management software for fitness studios, gyms, spas, and salons; this API is the same one its own web and mobile clients (Achieve, Elevate) call, and is published for approved partners via an official OpenAPI document at github.com/wellnessliving/openapi (324 paths across 45+ resource areas as of the 2026-06-20 build). Endpoints below are grounded in that official spec and in the public github.com/wellnessliving/wl-sdk (PHP) and wl-sdk-js SDKs; this file selects roughly four representative endpoints per logical API area rather than reproducing the full catalog. Every WellnessLiving API resource is a `.json`-suffixed endpoint whose path is derived deterministically from the SDK model class's namespace (e.g. the PHP class `WellnessLiving\\Wl\\Staff\\StaffElementModel` serves `/Wl/Staff/StaffElement.json`). Legacy numbered variants of several endpoints exist for backward compatibility (e.g. `Finish47`, `ServiceList52`, `Purchase72`) and are omitted here in favor of their current unsuffixed counterpart.\n\nContact Support:\n Name: WellnessLiving Support\n Email: support@wellnessliving.com",
+      "type": "text/plain"
+    }
+  }
+}

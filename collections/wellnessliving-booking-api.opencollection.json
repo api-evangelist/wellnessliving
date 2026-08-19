@@ -1,0 +1,345 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "WellnessLiving Appointments Booking API",
+    "version": "1.1.20260620071011"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Booking",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Returns the ordered list of booking wizard steps for the given session and client.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://us.wellnessliving.com/Wl/Book/Process/Process.json",
+            "headers": [
+              {
+                "name": "X-Error-Rules",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "dt_date_gmt",
+                "value": "",
+                "type": "query",
+                "description": "Date/time to which session is booked."
+              },
+              {
+                "name": "id_mode",
+                "value": "",
+                "type": "query",
+                "description": "The mode type. One of the [ModeSid](#/components/schemas/Wl.Mode.ModeSid) constants."
+              },
+              {
+                "name": "is_backend",
+                "value": "",
+                "type": "query",
+                "description": "`true` if action is performed as a staff member; `false` otherwise.\n\nIf `true` is sent, access to the business and to the client will be checked.\nIf `"
+              },
+              {
+                "name": "is_credit_card_check",
+                "value": "",
+                "type": "query",
+                "description": "Checking whether the client has a credit card (if configured in the business) will be skipped if this flag is set to `false`.\n\nUse this field with cau"
+              },
+              {
+                "name": "k_class_period",
+                "value": "",
+                "type": "query",
+                "description": "Key of session which is booked."
+              },
+              {
+                "name": "show_relation",
+                "value": "",
+                "type": "query",
+                "description": "`true` to show \"book for\" option in booking wizard. `false` for default behavior."
+              },
+              {
+                "name": "uid",
+                "value": "",
+                "type": "query",
+                "description": "The client key for which the booking is being made."
+              }
+            ]
+          },
+          "docs": "Evaluates the session, user profile, payment requirements, asset selection, and subscription state to build\nan ordered list of steps the client must complete to finish the booking. The first step in the list is marked\nas current, and additional flags about event type, wait-list availability, and payment options are returned."
+        },
+        {
+          "info": {
+            "name": "Processes purchases and books sessions on the \"Pay/Billing info\" step of the booking wizard.",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://us.wellnessliving.com/Wl/Book/Process/Payment/Payment.json",
+            "headers": [
+              {
+                "name": "X-Error-Rules",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "dt_date_gmt",
+                "value": "",
+                "type": "query",
+                "description": "Date/time to which session is booked."
+              },
+              {
+                "name": "id_mode",
+                "value": "",
+                "type": "query",
+                "description": "The mode type. One of the [ModeSid](#/components/schemas/Wl.Mode.ModeSid) constants."
+              },
+              {
+                "name": "is_backend",
+                "value": "",
+                "type": "query",
+                "description": "`true` if action is performed as a staff member; `false` otherwise.\n\nIf `true` is sent, access to the business and to the client will be checked.\nIf `"
+              },
+              {
+                "name": "is_credit_card_check",
+                "value": "",
+                "type": "query",
+                "description": "Checking whether the client has a credit card (if configured in the business) will be skipped if this flag is set to `false`.\n\nUse this field with cau"
+              },
+              {
+                "name": "k_class_period",
+                "value": "",
+                "type": "query",
+                "description": "Key of session which is booked."
+              },
+              {
+                "name": "show_relation",
+                "value": "",
+                "type": "query",
+                "description": "`true` to show \"book for\" option in booking wizard. `false` for default behavior."
+              },
+              {
+                "name": "uid",
+                "value": "",
+                "type": "query",
+                "description": "The client key for which the booking is being made."
+              }
+            ],
+            "body": {
+              "type": "form-urlencoded",
+              "data": [
+                {
+                  "name": "a_item",
+                  "value": ""
+                },
+                {
+                  "name": "a_pay_form",
+                  "value": ""
+                },
+                {
+                  "name": "a_quiz_response",
+                  "value": ""
+                },
+                {
+                  "name": "a_repeat",
+                  "value": ""
+                },
+                {
+                  "name": "a_resource",
+                  "value": ""
+                },
+                {
+                  "name": "a_session",
+                  "value": ""
+                },
+                {
+                  "name": "a_session_wait_list_unpaid",
+                  "value": ""
+                },
+                {
+                  "name": "can_book",
+                  "value": ""
+                },
+                {
+                  "name": "is_book_unpaid",
+                  "value": ""
+                },
+                {
+                  "name": "is_card_authorize",
+                  "value": ""
+                },
+                {
+                  "name": "is_force_pay_later",
+                  "value": ""
+                },
+                {
+                  "name": "k_login_promotion",
+                  "value": ""
+                },
+                {
+                  "name": "k_pay_installment_template",
+                  "value": ""
+                },
+                {
+                  "name": "k_session_pass",
+                  "value": ""
+                },
+                {
+                  "name": "text_discount_code",
+                  "value": ""
+                }
+              ]
+            }
+          },
+          "docs": "Accepts the selected purchase items, payment form, optional discount code, and installment template, then\ncollects payment, applies discounts and prizes, and creates the booking records. Returns visit keys, activity\nkeys, and purchase activity key upon success."
+        },
+        {
+          "info": {
+            "name": "Returns available purchase options, existing client promotions, session passes, and prizes for the specified session.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://us.wellnessliving.com/Wl/Book/Process/Purchase/Purchase.json",
+            "headers": [
+              {
+                "name": "X-Error-Rules",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "a_login_promotion_group",
+                "value": "",
+                "type": "query",
+                "description": "A list of existing purchase options that were selected for previous clients (group).\n\nNote:\n* It makes sense if for all clients the list is loaded wit"
+              },
+              {
+                "name": "a_session",
+                "value": "",
+                "type": "query",
+                "description": "The list of sessions being booked.\n\nKeys are class period keys.\nValues are index arrays of date/time strings when the session occurred, in MySQL forma"
+              },
+              {
+                "name": "a_session_wait_list_unpaid",
+                "value": "",
+                "type": "query",
+                "description": "The selected sessions on the wait list that are unpaid.\n\nKeys are class period keys.\nValues are index arrays of date/time strings when the session occ"
+              },
+              {
+                "name": "dt_date_gmt",
+                "value": "",
+                "type": "query",
+                "description": "Date/time to which session is booked."
+              },
+              {
+                "name": "i_image_height",
+                "value": "",
+                "type": "query",
+                "description": "The image height in pixels. Specify this value if you need image to be returned in specific size.\nThe returned image will have the default thumbnail s"
+              },
+              {
+                "name": "i_image_width",
+                "value": "",
+                "type": "query",
+                "description": "The image width in pixels. Specify this value if you need image to be returned in specific size.\nThe returned image will have the default thumbnail si"
+              },
+              {
+                "name": "id_mode",
+                "value": "",
+                "type": "query",
+                "description": "The mode type. One of the [ModeSid](#/components/schemas/Wl.Mode.ModeSid) constants."
+              },
+              {
+                "name": "is_backend",
+                "value": "",
+                "type": "query",
+                "description": "`true` if action is performed as a staff member; `false` otherwise.\n\nIf `true` is sent, access to the business and to the client will be checked.\nIf `"
+              },
+              {
+                "name": "is_card_authorize",
+                "value": "",
+                "type": "query",
+                "description": "Determines if the client must authorize the credit card."
+              },
+              {
+                "name": "is_credit_card_check",
+                "value": "",
+                "type": "query",
+                "description": "Checking whether the client has a credit card (if configured in the business) will be skipped if this flag is set to `false`.\n\nUse this field with cau"
+              },
+              {
+                "name": "k_business",
+                "value": "",
+                "type": "query",
+                "description": "The business key.\n\n`null` if business key was not passed."
+              },
+              {
+                "name": "k_class_period",
+                "value": "",
+                "type": "query",
+                "description": "Key of session which is booked."
+              },
+              {
+                "name": "show_relation",
+                "value": "",
+                "type": "query",
+                "description": "`true` to show \"book for\" option in booking wizard. `false` for default behavior."
+              },
+              {
+                "name": "uid",
+                "value": "",
+                "type": "query",
+                "description": "The client key for which the booking is being made."
+              }
+            ]
+          },
+          "docs": "Loads all purchase options that can be used to book the specified class period for the given user, including\nexisting login promotions with remaining session counts, new purchasable options, reward prizes, and login prizes.\nReturns pricing, image, program category, and availability data for each option."
+        },
+        {
+          "info": {
+            "name": "Returns information about whether the given user can cancel the booking and the expected consequences.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://us.wellnessliving.com/Wl/Book/Cancel/CancelCan.json",
+            "headers": [
+              {
+                "name": "X-Error-Rules",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "k_business",
+                "value": "",
+                "type": "query",
+                "description": "Key of the business within which the action is performed."
+              },
+              {
+                "name": "k_visit",
+                "value": "",
+                "type": "query",
+                "description": "Visit key."
+              }
+            ]
+          },
+          "docs": "Accepts a business key and a visit key, validates access, and performs a dry-run cancellation to determine\nwhether the visit can be cancelled online, whether a late-cancel penalty applies, and whether the purchase\noption credit would be refunded."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

@@ -1,0 +1,185 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "WellnessLiving Appointments Promotions API",
+    "version": "1.1.20260620071011"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Promotions",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Gets a list of packages/passes/memberships.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://us.wellnessliving.com/Wl/Promotion/Index/PromotionIndex.json",
+            "headers": [
+              {
+                "name": "X-Error-Rules",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "i_image_height",
+                "value": "",
+                "type": "query",
+                "description": "Image height in pixels. Please specify this value if you need image to be returned in specific size.\nIn case this value is not specified returned imag"
+              },
+              {
+                "name": "i_image_width",
+                "value": "",
+                "type": "query",
+                "description": "Image width in pixels. Please specify this value if you need image to be returned in specific size.\nIn case this value is not specified returned image"
+              },
+              {
+                "name": "id_program_type",
+                "value": "",
+                "type": "query",
+                "description": "The program type ID, which will be one of the [RsProgramTypeSid](#/components/schemas/RsProgramTypeSid) constants.\n\n`0` to not filter Purchase Options"
+              },
+              {
+                "name": "k_location",
+                "value": "",
+                "type": "query",
+                "description": "The location key."
+              }
+            ]
+          },
+          "docs": "Returns introductory promotion offers available at the specified location, optionally filtered by program type,\nincluding pricing, duration, visit limits, and access information for each item."
+        },
+        {
+          "info": {
+            "name": "Returns promotion list of the specified business.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://us.wellnessliving.com/Wl/Promotion/PromotionList.json",
+            "headers": [
+              {
+                "name": "X-Error-Rules",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "is_franchise",
+                "value": "",
+                "type": "query",
+                "description": "Determines whether to return promotions created by Enterprise Locations (for Enterprise Cloud businesses only).\nIf `true`, promotions created by Enter"
+              },
+              {
+                "name": "k_business",
+                "value": "",
+                "type": "query",
+                "description": "The business key used to get the promotions."
+              }
+            ]
+          },
+          "docs": "Returns all active promotions for the given business, with optional inclusion of Enterprise Location promotions\nwhen the business is a franchisor and `is_franchise` is set to `true`."
+        },
+        {
+          "info": {
+            "name": "Saves promotion data.",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://us.wellnessliving.com/Wl/Promotion/Promotion.json",
+            "headers": [
+              {
+                "name": "X-Error-Rules",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "k_business",
+                "value": "",
+                "type": "query",
+                "description": "The key of the business."
+              },
+              {
+                "name": "k_promotion",
+                "value": "",
+                "type": "query",
+                "description": "The key of the promotion."
+              }
+            ],
+            "body": {
+              "type": "form-urlencoded",
+              "data": [
+                {
+                  "name": "a_promotion",
+                  "value": ""
+                },
+                {
+                  "name": "o_guest_settings",
+                  "value": ""
+                }
+              ]
+            }
+          },
+          "docs": "Accepts the full promotion configuration including title, description, access rules, duration, tags, and guest\npass settings, then validates and persists the changes."
+        },
+        {
+          "info": {
+            "name": "Retrieves guest passes for a specific client.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://us.wellnessliving.com/Wl/Login/Promotion/GuestPass/GuestPassList.json",
+            "headers": [
+              {
+                "name": "X-Error-Rules",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "k_business",
+                "value": "",
+                "type": "query",
+                "description": "Business key."
+              },
+              {
+                "name": "k_class",
+                "value": "",
+                "type": "query",
+                "description": "Class key to filter guest passes by.\n\n`null` if guest passes should not be filtered by class."
+              },
+              {
+                "name": "k_location",
+                "value": "",
+                "type": "query",
+                "description": "Location key to filter guest passes by.\n\n`null` if guest passes should not be filtered by location."
+              },
+              {
+                "name": "uid",
+                "value": "",
+                "type": "query",
+                "description": "User key."
+              }
+            ]
+          },
+          "docs": "Returns all guest passes assigned to the given user, optionally filtered by class and location."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

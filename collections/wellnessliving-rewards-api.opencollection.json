@@ -1,0 +1,148 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "WellnessLiving Appointments Rewards API",
+    "version": "1.1.20260620071011"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Rewards",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Retrieves information about current score in wellnessliving points.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://us.wellnessliving.com/Wl/Reward/Score/Current/Current.json",
+            "headers": [
+              {
+                "name": "X-Error-Rules",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "k_business",
+                "value": "",
+                "type": "query",
+                "description": "ID of a business to show information for."
+              },
+              {
+                "name": "uid",
+                "value": "",
+                "type": "query",
+                "description": "UID to retrieve information about."
+              }
+            ]
+          },
+          "docs": "Returns the user's current reward point balance, their rank in the first available leaderboard, and the\nleaderboard title for the specified business."
+        },
+        {
+          "info": {
+            "name": "Retrieves a list of redeemable prizes.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://us.wellnessliving.com/Wl/Reward/Prize/Prize.json",
+            "headers": [
+              {
+                "name": "X-Error-Rules",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "k_business",
+                "value": "",
+                "type": "query",
+                "description": "Key of current business."
+              }
+            ]
+          },
+          "docs": "Returns all active redeemable prizes for the specified business, ordered by point cost, including the prize key\nand required score for each item."
+        },
+        {
+          "info": {
+            "name": "Retrieves a list of available reward actions.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://us.wellnessliving.com/Wl/Reward/Action/Action.json",
+            "headers": [
+              {
+                "name": "X-Error-Rules",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "k_business",
+                "value": "",
+                "type": "query",
+                "description": "Key of current business."
+              },
+              {
+                "name": "k_reward_action_category",
+                "value": "",
+                "type": "query",
+                "description": "Key of reward action category."
+              },
+              {
+                "name": "uid",
+                "value": "",
+                "type": "query",
+                "description": "Key of a user to show information for."
+              }
+            ]
+          },
+          "docs": "Returns all reward actions visible to the specified user in the given business, optionally filtered by category,\nincluding the score value and request status for each action."
+        },
+        {
+          "info": {
+            "name": "Retrieves a list of reward board items to show.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://us.wellnessliving.com/Wl/Reward/Board/List.json",
+            "headers": [
+              {
+                "name": "X-Error-Rules",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "k_business",
+                "value": "",
+                "type": "query",
+                "description": "ID of a business to show information for."
+              },
+              {
+                "name": "k_reward_board",
+                "value": "",
+                "type": "query",
+                "description": "ID of reward board to show information for."
+              }
+            ]
+          },
+          "docs": "Returns an ordered list of user IDs ranked by points for the specified reward board, up to the configured\nmaximum number of entries."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

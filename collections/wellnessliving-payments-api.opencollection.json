@@ -1,0 +1,217 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "WellnessLiving Appointments Payments API",
+    "version": "1.1.20260620071011"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Payments",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Retrieves information about accounts of given user in given business.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://us.wellnessliving.com/Thoth/WlPay/Account/Account.json",
+            "headers": [
+              {
+                "name": "X-Error-Rules",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "is_owner",
+                "value": "",
+                "type": "query",
+                "description": "If `true`, information for the account's owner is returned. Clients can be configured to pay for a relative's\nexpenses. For example, a parent can pay"
+              },
+              {
+                "name": "k_business",
+                "value": "",
+                "type": "query",
+                "description": "The key of the business to show information for."
+              },
+              {
+                "name": "uid",
+                "value": "",
+                "type": "query",
+                "description": "The key of the user to show information for."
+              }
+            ]
+          },
+          "docs": "Retrieves information about accounts of given user in given business."
+        },
+        {
+          "info": {
+            "name": "Retrieves information about user's bank cards.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://us.wellnessliving.com/Thoth/WlPay/Bank/Card/List.json",
+            "headers": [
+              {
+                "name": "X-Error-Rules",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "k_business",
+                "value": "",
+                "type": "query",
+                "description": "ID of current business."
+              },
+              {
+                "name": "k_location",
+                "value": "",
+                "type": "query",
+                "description": "Location to show information for.\nPrimary key in RsLocationSql table.\n\n`0` to use user's home location."
+              },
+              {
+                "name": "uid",
+                "value": "",
+                "type": "query",
+                "description": "ID of a user to show information for."
+              }
+            ]
+          },
+          "docs": "Retrieves information about user's bank cards."
+        },
+        {
+          "info": {
+            "name": "Allows the user account to be filled with a specified payment, or to perform the reset change manually.",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://us.wellnessliving.com/Thoth/WlPay/Account/Charge/Charge.json",
+            "headers": [
+              {
+                "name": "X-Error-Rules",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "id_pay_account_charge",
+                "value": "",
+                "type": "query",
+                "description": "The account charge mode.\n\nOne of the [RsPayAccountChargeSid](#/components/schemas/RsPayAccountChargeSid) constants."
+              },
+              {
+                "name": "is_staff",
+                "value": "",
+                "type": "query",
+                "description": "If `true`, the account is filled by a staff member in the backend. Otherwise, this will be `false`."
+              },
+              {
+                "name": "k_business",
+                "value": "",
+                "type": "query",
+                "description": "The ID of the business the user account belongs to.\n\nThis shouldn't be passed if a user account has already been created.\nIn such cases, `k_pay_accoun"
+              },
+              {
+                "name": "k_pay_account",
+                "value": "",
+                "type": "query",
+                "description": "The ID of the user account to refill.\n\nThis may be 0 if a user account hasn't been created yet.\nIn such cases, `k_business` and `uid` should be passed"
+              },
+              {
+                "name": "uid",
+                "value": "",
+                "type": "query",
+                "description": "The ID of the user whose account is being refilled.\n\nThis shouldn't be passed if a user account has already been created.\nIn such cases, `k_pay_accoun"
+              }
+            ],
+            "body": {
+              "type": "form-urlencoded",
+              "data": [
+                {
+                  "name": "a_pay_form",
+                  "value": ""
+                },
+                {
+                  "name": "id_mode",
+                  "value": ""
+                },
+                {
+                  "name": "m_amount",
+                  "value": ""
+                },
+                {
+                  "name": "s_comment",
+                  "value": ""
+                }
+              ]
+            }
+          },
+          "docs": "Allows the user account to be filled with a specified payment, or to perform the reset change manually."
+        },
+        {
+          "info": {
+            "name": "Gets the daily transaction data.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://us.wellnessliving.com/Thoth/WlPay/Transaction/Report/TransactionAllPayment.json",
+            "headers": [
+              {
+                "name": "X-Error-Rules",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "dl_date_end",
+                "value": "",
+                "type": "query",
+                "description": "The end date in local time to retrieve transactions for."
+              },
+              {
+                "name": "dl_date_start",
+                "value": "",
+                "type": "query",
+                "description": "The end date in local time to retrieve transactions for."
+              },
+              {
+                "name": "i_page",
+                "value": "",
+                "type": "query",
+                "description": "The page of the report, starting from 0.\nEach page will contain a maximum of `LIMIT` rows."
+              },
+              {
+                "name": "is_refresh",
+                "value": "",
+                "type": "query",
+                "description": "Determines whether the report should be refreshed.\n\nIf `true`, this report should be refreshed. A report refresh can't be requested while the report i"
+              },
+              {
+                "name": "k_business",
+                "value": "",
+                "type": "query",
+                "description": "The key of the business for which report should be generated."
+              }
+            ]
+          },
+          "docs": "Gets the daily transaction data."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}
