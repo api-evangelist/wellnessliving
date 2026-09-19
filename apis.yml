@@ -48,7 +48,7 @@ tags:
 - Spa
 - Business Management
 - Scheduling
-- Memberships
+- Membership
 - Point-of-Sale
 tags_raw:
 - Fitness
@@ -265,6 +265,8 @@ apis:
     https://help.wellnessliving.com/en/articles/10697645-getting-started-with-the-wellnessliving-api
   baseURL: https://us.wellnessliving.com
   tags:
+  - Location
+  tags_raw:
   - Locations
   properties:
   - type: OpenAPI
