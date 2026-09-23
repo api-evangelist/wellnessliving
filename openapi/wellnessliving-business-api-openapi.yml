@@ -1,7 +1,7 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
-  title: WellnessLiving Appointments Business API
-  description: Curated, representative subset of WellnessLiving's official production API (RESTful, JSON-over-HTTPS). WellnessLiving is business-management software for fitness studios, gyms, spas, and salons; this API is the same one its own web and mobile clients (Achieve, Elevate) call, and is published for approved partners via an official OpenAPI document at github.com/wellnessliving/openapi (324 paths across 45+ resource areas as of the 2026-06-20 build). Endpoints below are grounded in that official spec and in the public github.com/wellnessliving/wl-sdk (PHP) and wl-sdk-js SDKs; this file selects roughly four representative endpoints per logical API area rather than reproducing the full catalog. Every WellnessLiving API resource is a `.json`-suffixed endpoint whose path is derived deterministically from the SDK model class's namespace (e.g. the PHP class `WellnessLiving\Wl\Staff\StaffElementModel` serves `/Wl/Staff/StaffElement.json`). Legacy numbered variants of several endpoints exist for backward compatibility (e.g. `Finish47`, `ServiceList52`, `Purchase72`) and are omitted here in favor of their current unsuffixed counterpart.
+  title: WellnessLiving Business API
+  description: Curated, representative subset of WellnessLiving's official production API (RESTful, JSON-over-HTTPS).
   version: 1.1.20260620071011
   contact:
     name: WellnessLiving Support
@@ -28,7 +28,7 @@ paths:
   /Wl/Business/Data.json:
     get:
       operationId: get_Wl_Business_Data
-      summary: Returns detailed information about the specified business, including locale, franchise status, services, tips, social URLs, and logo.
+      summary: Returns detailed information about the specified business, including locale…
       description: 'Used to bootstrap client-facing pages and widgets that need to know the full business profile: which
 
         services are enabled, tip and progress log settings, franchise relationship, social media links, and
@@ -78,49 +78,34 @@ paths:
                 properties:
                   a_service_list:
                     description: The `a_service_list` field.
-                    nullable: true
                   a_tip_predefine:
                     description: The `a_tip_predefine` field.
-                    nullable: true
                   id_category:
                     description: The `id_category` field.
-                    nullable: true
                   id_claim_status:
                     description: The `id_claim_status` field.
-                    nullable: true
                   id_currency:
                     description: The `id_currency` field.
-                    nullable: true
                   id_locale:
                     description: The `id_locale` field.
-                    nullable: true
                   id_rank_type:
                     description: The `id_rank_type` field.
-                    nullable: true
                   id_region:
                     description: The `id_region` field.
-                    nullable: true
                   is_apply_surcharge:
                     description: The `is_apply_surcharge` field.
-                    nullable: true
                   is_franchise:
                     description: The `is_franchise` field.
-                    nullable: true
                   is_location_multiple:
                     description: The `is_location_multiple` field.
-                    nullable: true
                   is_profile_timezone:
                     description: The `is_profile_timezone` field.
-                    nullable: true
                   is_progress_client:
                     description: The `is_progress_client` field.
-                    nullable: true
                   is_progress_verify:
                     description: The `is_progress_verify` field.
-                    nullable: true
                   is_quiz_available:
                     description: The `is_quiz_available` field.
-                    nullable: true
         '400':
           $ref: '#/components/responses/BadRequest'
         '401':
@@ -136,7 +121,7 @@ paths:
   /Wl/Business/Config/BusinessConfig.json:
     get:
       operationId: get_Wl_Business_Config_BusinessConfig
-      summary: Gets information about a business config.
+      summary: Gets information about a business config
       description: 'Used by the booking widget and checkout flow to know the rules governing client interactions: which
 
         family member relations are allowed, whether clients or staff must select a location at checkout,
@@ -162,19 +147,14 @@ paths:
                 properties:
                   a_business_policy:
                     description: The `a_business_policy` field.
-                    nullable: true
                   a_penalty:
                     description: The `a_penalty` field.
-                    nullable: true
                   is_location_client_select:
                     description: The `is_location_client_select` field.
-                    nullable: true
                   is_location_select:
                     description: The `is_location_select` field.
-                    nullable: true
                   is_white_label:
                     description: The `is_white_label` field.
-                    nullable: true
         '400':
           $ref: '#/components/responses/BadRequest'
         '401':
@@ -190,7 +170,7 @@ paths:
   /Wl/Business/Account/Subscription/SubscriptionInfo.json:
     get:
       operationId: get_Wl_Business_Account_Subscription_SubscriptionInfo
-      summary: Gets information about subscription.
+      summary: Gets information about subscription
       description: 'Used in the backend settings UI to read the current state of a business subscription (e.g., Achieve or
 
         another product). Returns whether the subscription is active, the current plan tier, and the business
@@ -223,13 +203,10 @@ paths:
                 properties:
                   id_locale:
                     description: The `id_locale` field.
-                    nullable: true
                   id_plan:
                     description: The `id_plan` field.
-                    nullable: true
                   is_active:
                     description: The `is_active` field.
-                    nullable: true
         '400':
           $ref: '#/components/responses/BadRequest'
         '401':
@@ -245,7 +222,7 @@ paths:
   /Wl/Business/Business.json:
     post:
       operationId: post_Wl_Business_Business
-      summary: Creates new business.
+      summary: Creates new business
       description: 'Used during the self-onboarding flow when a new client signs up for WellnessLiving. Creates the business
 
         with its default integrations, optional first location, default service categories, and an optional owner
@@ -325,16 +302,12 @@ paths:
                 properties:
                   k_business:
                     description: The `k_business` field.
-                    nullable: true
                   k_location:
                     description: The `k_location` field.
-                    nullable: true
                   uid:
                     description: The `uid` field.
-                    nullable: true
                   url_password_change:
                     description: The `url_password_change` field.
-                    nullable: true
         '400':
           $ref: '#/components/responses/BadRequest'
         '401':
@@ -348,29 +321,15 @@ paths:
         '500':
           $ref: '#/components/responses/ServerError'
 components:
-  parameters:
-    XErrorRules:
-      name: X-Error-Rules
-      in: header
-      required: false
-      schema:
-        type: string
-      description: Opt in to mapping internal API error statuses to real 4xx HTTP codes. By default the API always answers HTTP 200 even on error, with the failure encoded in the JSON body; setting this header (e.g. to `default`) makes the gateway translate matched error statuses to 400/403/404 responses instead.
   responses:
-    ServerError:
-      description: Unexpected server error.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorResponse'
-    ValidationError:
-      description: The request payload failed field-level validation.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorResponse'
     Unauthorized:
       description: Missing, expired, or invalid Bearer token / session.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    Forbidden:
+      description: Authenticated but not permitted to access this business, location, or resource.
       content:
         application/json:
           schema:
@@ -387,12 +346,26 @@ components:
         application/json:
           schema:
             $ref: '#/components/schemas/ErrorResponse'
-    Forbidden:
-      description: Authenticated but not permitted to access this business, location, or resource.
+    ServerError:
+      description: Unexpected server error.
       content:
         application/json:
           schema:
             $ref: '#/components/schemas/ErrorResponse'
+    ValidationError:
+      description: The request payload failed field-level validation.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+  parameters:
+    XErrorRules:
+      name: X-Error-Rules
+      in: header
+      required: false
+      schema:
+        type: string
+      description: Opt in to mapping internal API error statuses to real 4xx HTTP codes. By default the API always answers HTTP 200 even on error, with the failure encoded in the JSON body; setting this header (e.g. to `default`) makes the gateway translate matched error statuses to 400/403/404 responses instead.
   schemas:
     ErrorResponse:
       type: object

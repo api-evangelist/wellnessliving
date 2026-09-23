@@ -1,7 +1,7 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
   title: WellnessLiving Appointments API
-  description: Curated, representative subset of WellnessLiving's official production API (RESTful, JSON-over-HTTPS). WellnessLiving is business-management software for fitness studios, gyms, spas, and salons; this API is the same one its own web and mobile clients (Achieve, Elevate) call, and is published for approved partners via an official OpenAPI document at github.com/wellnessliving/openapi (324 paths across 45+ resource areas as of the 2026-06-20 build). Endpoints below are grounded in that official spec and in the public github.com/wellnessliving/wl-sdk (PHP) and wl-sdk-js SDKs; this file selects roughly four representative endpoints per logical API area rather than reproducing the full catalog. Every WellnessLiving API resource is a `.json`-suffixed endpoint whose path is derived deterministically from the SDK model class's namespace (e.g. the PHP class `WellnessLiving\Wl\Staff\StaffElementModel` serves `/Wl/Staff/StaffElement.json`). Legacy numbered variants of several endpoints exist for backward compatibility (e.g. `Finish47`, `ServiceList52`, `Purchase72`) and are omitted here in favor of their current unsuffixed counterpart.
+  description: Curated, representative subset of WellnessLiving's official production API (RESTful, JSON-over-HTTPS).
   version: 1.1.20260620071011
   contact:
     name: WellnessLiving Support
@@ -28,8 +28,12 @@ paths:
   /Wl/Appointment/Info/Info.json:
     get:
       operationId: get_Wl_Appointment_Info_Info
-      summary: Gets information about appointment.
-      description: "Returns detailed information about the specified appointment, including service details, staff member,\n date and time in the location's timezone, booking status, client information, and any associated\n assets or add-ons. Access is validated against the current user's permissions."
+      summary: Gets information about appointment
+      description: 'Returns detailed information about the specified appointment, including service details, staff member,
+
+        date and time in the location''s timezone, booking status, client information, and any associated
+
+        assets or add-ons. Access is validated against the current user''s permissions.'
       tags:
       - Appointments
       parameters:
@@ -50,49 +54,34 @@ paths:
                 properties:
                   a_next:
                     description: The `a_next` field.
-                    nullable: true
                   a_previous:
                     description: The `a_previous` field.
-                    nullable: true
                   a_question:
                     description: The `a_question` field.
-                    nullable: true
                   a_resource:
                     description: The `a_resource` field.
-                    nullable: true
                   a_shop_product_option:
                     description: The `a_shop_product_option` field.
-                    nullable: true
                   dt_date_local:
                     description: The `dt_date_local` field.
-                    nullable: true
                   i_duration:
                     description: The `i_duration` field.
-                    nullable: true
                   i_index:
                     description: The `i_index` field.
-                    nullable: true
                   id_appointment_pay:
                     description: The `id_appointment_pay` field.
-                    nullable: true
                   k_location:
                     description: The `k_location` field.
-                    nullable: true
                   k_login_promotion:
                     description: The `k_login_promotion` field.
-                    nullable: true
                   k_resource:
                     description: The `k_resource` field.
-                    nullable: true
                   k_resource_type:
                     description: The `k_resource_type` field.
-                    nullable: true
                   k_service:
                     description: The `k_service` field.
-                    nullable: true
                   k_service_category:
                     description: The `k_service_category` field.
-                    nullable: true
         '400':
           $ref: '#/components/responses/BadRequest'
         '401':
@@ -108,8 +97,12 @@ paths:
   /Wl/Appointment/Book/Schedule/Calendar.json:
     get:
       operationId: get_Wl_Appointment_Book_Schedule_Calendar
-      summary: Retrieves a list with all calendar days in specified period with available and unavailable appointment booking schedule.
-      description: "Returns each day in the requested month marked as available or unavailable for booking the given\n service at the given location. Availability is determined by the business schedule, holidays,\n and staff availability for the selected date range."
+      summary: Retrieves a list with all calendar days in specified period with available and…
+      description: 'Returns each day in the requested month marked as available or unavailable for booking the given
+
+        service at the given location. Availability is determined by the business schedule, holidays,
+
+        and staff availability for the selected date range.'
       tags:
       - Appointments
       parameters:
@@ -204,8 +197,9 @@ paths:
         in: query
         required: false
         schema:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
         description: 'Current booking tab.
 
           Only used for asset booking with "Allow clients to select a date and time, then the available asset" booking policy enabled.
@@ -248,8 +242,9 @@ paths:
         in: query
         required: false
         schema:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
         description: 'Key of timezone.
 
 
@@ -301,40 +296,28 @@ paths:
                 properties:
                   a_date:
                     description: The `a_date` field.
-                    nullable: true
                   a_time:
                     description: The `a_time` field.
-                    nullable: true
                   a_timezone_data:
                     description: The `a_timezone_data` field.
-                    nullable: true
                   a_week_name:
                     description: The `a_week_name` field.
-                    nullable: true
                   can_backwards:
                     description: The `can_backwards` field.
-                    nullable: true
                   dt_date:
                     description: The `dt_date` field.
-                    nullable: true
                   i_capacity:
                     description: The `i_capacity` field.
-                    nullable: true
                   i_capacity_waitlist:
                     description: The `i_capacity_waitlist` field.
-                    nullable: true
                   i_week_end:
                     description: The `i_week_end` field.
-                    nullable: true
                   i_week_start:
                     description: The `i_week_start` field.
-                    nullable: true
                   is_waitlist:
                     description: The `is_waitlist` field.
-                    nullable: true
                   k_location:
                     description: The `k_location` field.
-                    nullable: true
         '400':
           $ref: '#/components/responses/BadRequest'
         '401':
@@ -350,8 +333,12 @@ paths:
   /Wl/Appointment/Book/Staff/List.json:
     get:
       operationId: get_Wl_Appointment_Book_Staff_List
-      summary: Retrieves an information about staff members for the current service.
-      description: "Returns the list of staff members who can perform the specified service at the given location\n on the specified date and time. Each entry includes the staff member's name, image, gender,\n and availability. An 'any staff' option is included when the service allows random staff assignment."
+      summary: Retrieves an information about staff members for the current service
+      description: 'Returns the list of staff members who can perform the specified service at the given location
+
+        on the specified date and time. Each entry includes the staff member''s name, image, gender,
+
+        and availability. An ''any staff'' option is included when the service allows random staff assignment.'
       tags:
       - Appointments
       parameters:
@@ -366,8 +353,9 @@ paths:
         in: query
         required: false
         schema:
-          type: integer
-          nullable: true
+          type:
+          - integer
+          - 'null'
         description: 'Custom appointment duration in minutes.
 
 
@@ -411,8 +399,9 @@ paths:
         in: query
         required: false
         schema:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
         description: 'User''s timezone.
 
 
@@ -421,8 +410,9 @@ paths:
         in: query
         required: false
         schema:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
         description: 'The user key for whom the service is booking.
 
 
@@ -437,19 +427,14 @@ paths:
                 properties:
                   a_staff:
                     description: The `a_staff` field.
-                    nullable: true
                   can_book_unavailable_staff:
                     description: The `can_book_unavailable_staff` field.
-                    nullable: true
                   has_gender:
                     description: The `has_gender` field.
-                    nullable: true
                   has_staff:
                     description: The `has_staff` field.
-                    nullable: true
                   is_gender_different:
                     description: The `is_gender_different` field.
-                    nullable: true
         '400':
           $ref: '#/components/responses/BadRequest'
         '401':
@@ -465,8 +450,14 @@ paths:
   /Wl/Appointment/Book/Finish/FinishMultiple.json:
     post:
       operationId: post_Wl_Appointment_Book_Finish_FinishMultiple
-      summary: Completes the appointment booking for one or more providers, optionally creating a new client.
-      description: "Accepts booking details for one or more providers in `a_book_data`,\n processes payment using the selected Purchase Option, creates appointment records, and sends\n booking confirmation notifications. A new client account can be created by supplying user\n details in `a_user` when no UID is provided."
+      summary: Completes the appointment booking for one or more providers, optionally…
+      description: 'Accepts booking details for one or more providers in `a_book_data`,
+
+        processes payment using the selected Purchase Option, creates appointment records, and sends
+
+        booking confirmation notifications. A new client account can be created by supplying user
+
+        details in `a_user` when no UID is provided.'
       tags:
       - Appointments
       parameters:
@@ -607,16 +598,12 @@ paths:
                 properties:
                   a_appointment:
                     description: The `a_appointment` field.
-                    nullable: true
                   a_login_activity_visit:
                     description: The `a_login_activity_visit` field.
-                    nullable: true
                   a_visit:
                     description: The `a_visit` field.
-                    nullable: true
                   a_visit_provider:
                     description: The `a_visit_provider` field.
-                    nullable: true
         '400':
           $ref: '#/components/responses/BadRequest'
         '401':
@@ -630,29 +617,15 @@ paths:
         '500':
           $ref: '#/components/responses/ServerError'
 components:
-  parameters:
-    XErrorRules:
-      name: X-Error-Rules
-      in: header
-      required: false
-      schema:
-        type: string
-      description: Opt in to mapping internal API error statuses to real 4xx HTTP codes. By default the API always answers HTTP 200 even on error, with the failure encoded in the JSON body; setting this header (e.g. to `default`) makes the gateway translate matched error statuses to 400/403/404 responses instead.
   responses:
-    ServerError:
-      description: Unexpected server error.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorResponse'
-    ValidationError:
-      description: The request payload failed field-level validation.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorResponse'
     Unauthorized:
       description: Missing, expired, or invalid Bearer token / session.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    Forbidden:
+      description: Authenticated but not permitted to access this business, location, or resource.
       content:
         application/json:
           schema:
@@ -669,12 +642,26 @@ components:
         application/json:
           schema:
             $ref: '#/components/schemas/ErrorResponse'
-    Forbidden:
-      description: Authenticated but not permitted to access this business, location, or resource.
+    ServerError:
+      description: Unexpected server error.
       content:
         application/json:
           schema:
             $ref: '#/components/schemas/ErrorResponse'
+    ValidationError:
+      description: The request payload failed field-level validation.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+  parameters:
+    XErrorRules:
+      name: X-Error-Rules
+      in: header
+      required: false
+      schema:
+        type: string
+      description: Opt in to mapping internal API error statuses to real 4xx HTTP codes. By default the API always answers HTTP 200 even on error, with the failure encoded in the JSON body; setting this header (e.g. to `default`) makes the gateway translate matched error statuses to 400/403/404 responses instead.
   schemas:
     ErrorResponse:
       type: object

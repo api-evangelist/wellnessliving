@@ -1,7 +1,7 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
-  title: WellnessLiving Appointments Staff API
-  description: Curated, representative subset of WellnessLiving's official production API (RESTful, JSON-over-HTTPS). WellnessLiving is business-management software for fitness studios, gyms, spas, and salons; this API is the same one its own web and mobile clients (Achieve, Elevate) call, and is published for approved partners via an official OpenAPI document at github.com/wellnessliving/openapi (324 paths across 45+ resource areas as of the 2026-06-20 build). Endpoints below are grounded in that official spec and in the public github.com/wellnessliving/wl-sdk (PHP) and wl-sdk-js SDKs; this file selects roughly four representative endpoints per logical API area rather than reproducing the full catalog. Every WellnessLiving API resource is a `.json`-suffixed endpoint whose path is derived deterministically from the SDK model class's namespace (e.g. the PHP class `WellnessLiving\Wl\Staff\StaffElementModel` serves `/Wl/Staff/StaffElement.json`). Legacy numbered variants of several endpoints exist for backward compatibility (e.g. `Finish47`, `ServiceList52`, `Purchase72`) and are omitted here in favor of their current unsuffixed counterpart.
+  title: WellnessLiving Staff API
+  description: Curated, representative subset of WellnessLiving's official production API (RESTful, JSON-over-HTTPS).
   version: 1.1.20260620071011
   contact:
     name: WellnessLiving Support
@@ -28,7 +28,7 @@ paths:
   /Wl/Staff/StaffList/StaffList.json:
     get:
       operationId: get_Wl_Staff_StaffList_StaffList
-      summary: Returns the list of staff members for the given business.
+      summary: Returns the list of staff members for the given business
       description: 'Returns all active (or optionally inactive) staff members for the business, including
 
         their name, role, assigned services, contact details, and location assignments. Can be
@@ -83,7 +83,6 @@ paths:
                 properties:
                   a_staff:
                     description: The `a_staff` field.
-                    nullable: true
         '400':
           $ref: '#/components/responses/BadRequest'
         '401':
@@ -99,7 +98,7 @@ paths:
   /Wl/Staff/StaffView/StaffView.json:
     get:
       operationId: get_Wl_Staff_StaffView_StaffView
-      summary: Retrieves information about staff.
+      summary: Retrieves information about staff
       description: 'This method can accept or one staff key `k_staff` or staff list
 
         `a_staff_list` but not both (exception would be thrown).'
@@ -111,8 +110,9 @@ paths:
         in: query
         required: false
         schema:
-          type: array
-          nullable: true
+          type:
+          - array
+          - 'null'
           items:
             type: string
         description: A list of staff keys.
@@ -120,8 +120,9 @@ paths:
         in: query
         required: false
         schema:
-          type: array
-          nullable: true
+          type:
+          - array
+          - 'null'
           items:
             type: string
         description: A list of staff user IDs.
@@ -177,13 +178,10 @@ paths:
                 properties:
                   a_class_day:
                     description: The `a_class_day` field.
-                    nullable: true
                   a_result_list:
                     description: The `a_result_list` field.
-                    nullable: true
                   a_staff:
                     description: The `a_staff` field.
-                    nullable: true
         '400':
           $ref: '#/components/responses/BadRequest'
         '401':
@@ -199,7 +197,7 @@ paths:
   /Wl/Staff/StaffElement.json:
     post:
       operationId: post_Wl_Staff_StaffElement
-      summary: Update or create staff.
+      summary: Update or create staff
       description: 'Creates a new staff member or updates an existing one in the business. When creating,
 
         a new user account is provisioned if no matching email exists. When updating, the target
@@ -215,8 +213,9 @@ paths:
         in: query
         required: false
         schema:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
         description: 'The key of the staff member resolved and used internally by this API.
 
 
@@ -289,7 +288,6 @@ paths:
                 properties:
                   k_staff:
                     description: The `k_staff` field.
-                    nullable: true
         '400':
           $ref: '#/components/responses/BadRequest'
         '401':
@@ -305,7 +303,7 @@ paths:
   /Wl/Staff/Privilege/PrivilegeList.json:
     get:
       operationId: get_Wl_Staff_Privilege_PrivilegeList
-      summary: Returns the list of privileges for the current user in the given business.
+      summary: Returns the list of privileges for the current user in the given business
       description: 'Returns the complete access profile of the signed-in user for the given business: staff
 
         privileges by ID, named admin privileges, and a flag indicating super-admin status. Can
@@ -337,13 +335,10 @@ paths:
                 properties:
                   a_privilege_passport:
                     description: The `a_privilege_passport` field.
-                    nullable: true
                   a_privilege_staff:
                     description: The `a_privilege_staff` field.
-                    nullable: true
                   is_admin:
                     description: The `is_admin` field.
-                    nullable: true
         '400':
           $ref: '#/components/responses/BadRequest'
         '401':
@@ -357,29 +352,15 @@ paths:
         '500':
           $ref: '#/components/responses/ServerError'
 components:
-  parameters:
-    XErrorRules:
-      name: X-Error-Rules
-      in: header
-      required: false
-      schema:
-        type: string
-      description: Opt in to mapping internal API error statuses to real 4xx HTTP codes. By default the API always answers HTTP 200 even on error, with the failure encoded in the JSON body; setting this header (e.g. to `default`) makes the gateway translate matched error statuses to 400/403/404 responses instead.
   responses:
-    ServerError:
-      description: Unexpected server error.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorResponse'
-    ValidationError:
-      description: The request payload failed field-level validation.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorResponse'
     Unauthorized:
       description: Missing, expired, or invalid Bearer token / session.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    Forbidden:
+      description: Authenticated but not permitted to access this business, location, or resource.
       content:
         application/json:
           schema:
@@ -396,12 +377,26 @@ components:
         application/json:
           schema:
             $ref: '#/components/schemas/ErrorResponse'
-    Forbidden:
-      description: Authenticated but not permitted to access this business, location, or resource.
+    ServerError:
+      description: Unexpected server error.
       content:
         application/json:
           schema:
             $ref: '#/components/schemas/ErrorResponse'
+    ValidationError:
+      description: The request payload failed field-level validation.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+  parameters:
+    XErrorRules:
+      name: X-Error-Rules
+      in: header
+      required: false
+      schema:
+        type: string
+      description: Opt in to mapping internal API error statuses to real 4xx HTTP codes. By default the API always answers HTTP 200 even on error, with the failure encoded in the JSON body; setting this header (e.g. to `default`) makes the gateway translate matched error statuses to 400/403/404 responses instead.
   schemas:
     ErrorResponse:
       type: object

@@ -1,7 +1,7 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
-  title: WellnessLiving Appointments Reports API
-  description: Curated, representative subset of WellnessLiving's official production API (RESTful, JSON-over-HTTPS). WellnessLiving is business-management software for fitness studios, gyms, spas, and salons; this API is the same one its own web and mobile clients (Achieve, Elevate) call, and is published for approved partners via an official OpenAPI document at github.com/wellnessliving/openapi (324 paths across 45+ resource areas as of the 2026-06-20 build). Endpoints below are grounded in that official spec and in the public github.com/wellnessliving/wl-sdk (PHP) and wl-sdk-js SDKs; this file selects roughly four representative endpoints per logical API area rather than reproducing the full catalog. Every WellnessLiving API resource is a `.json`-suffixed endpoint whose path is derived deterministically from the SDK model class's namespace (e.g. the PHP class `WellnessLiving\Wl\Staff\StaffElementModel` serves `/Wl/Staff/StaffElement.json`). Legacy numbered variants of several endpoints exist for backward compatibility (e.g. `Finish47`, `ServiceList52`, `Purchase72`) and are omitted here in favor of their current unsuffixed counterpart.
+  title: WellnessLiving Reports API
+  description: Curated, representative subset of WellnessLiving's official production API (RESTful, JSON-over-HTTPS).
   version: 1.1.20260620071011
   contact:
     name: WellnessLiving Support
@@ -28,7 +28,7 @@ paths:
   /Wl/Report/Data.json:
     get:
       operationId: get_Wl_Report_Data
-      summary: Gets data of required report.
+      summary: Gets data of required report
       description: 'Loads the specified report for the given business, applying filter, sort, and pagination parameters,
 
         and returns the report rows and totals.'
@@ -100,10 +100,8 @@ paths:
                 properties:
                   a_data:
                     description: The `a_data` field.
-                    nullable: true
                   a_total:
                     description: The `a_total` field.
-                    nullable: true
         '400':
           $ref: '#/components/responses/BadRequest'
         '401':
@@ -119,7 +117,7 @@ paths:
   /Wl/Report/PageData.json:
     get:
       operationId: get_Wl_Report_PageData
-      summary: Gets data of required report collection.
+      summary: Gets data of required report collection
       description: 'Loads all reports belonging to the specified report page collection for the given business, applying shared
 
         filter, sort, group, and view parameters, and returns the data for each report keyed by report ID.'
@@ -190,7 +188,6 @@ paths:
                 properties:
                   a_data:
                     description: The `a_data` field.
-                    nullable: true
         '400':
           $ref: '#/components/responses/BadRequest'
         '401':
@@ -206,7 +203,7 @@ paths:
   /Wl/Report/Access.json:
     get:
       operationId: get_Wl_Report_Access
-      summary: Checks access to given report.
+      summary: Checks access to given report
       description: 'Accepts either `id_report` (first-generation reports) or `cid_report` (second-generation reports), but not both,
 
         and returns `has_access` indicating whether the current user may view the report in the given business.'
@@ -260,7 +257,6 @@ paths:
                 properties:
                   has_access:
                     description: The `has_access` field.
-                    nullable: true
         '400':
           $ref: '#/components/responses/BadRequest'
         '401':
@@ -274,29 +270,15 @@ paths:
         '500':
           $ref: '#/components/responses/ServerError'
 components:
-  parameters:
-    XErrorRules:
-      name: X-Error-Rules
-      in: header
-      required: false
-      schema:
-        type: string
-      description: Opt in to mapping internal API error statuses to real 4xx HTTP codes. By default the API always answers HTTP 200 even on error, with the failure encoded in the JSON body; setting this header (e.g. to `default`) makes the gateway translate matched error statuses to 400/403/404 responses instead.
   responses:
-    ServerError:
-      description: Unexpected server error.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorResponse'
-    ValidationError:
-      description: The request payload failed field-level validation.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorResponse'
     Unauthorized:
       description: Missing, expired, or invalid Bearer token / session.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    Forbidden:
+      description: Authenticated but not permitted to access this business, location, or resource.
       content:
         application/json:
           schema:
@@ -313,12 +295,26 @@ components:
         application/json:
           schema:
             $ref: '#/components/schemas/ErrorResponse'
-    Forbidden:
-      description: Authenticated but not permitted to access this business, location, or resource.
+    ServerError:
+      description: Unexpected server error.
       content:
         application/json:
           schema:
             $ref: '#/components/schemas/ErrorResponse'
+    ValidationError:
+      description: The request payload failed field-level validation.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+  parameters:
+    XErrorRules:
+      name: X-Error-Rules
+      in: header
+      required: false
+      schema:
+        type: string
+      description: Opt in to mapping internal API error statuses to real 4xx HTTP codes. By default the API always answers HTTP 200 even on error, with the failure encoded in the JSON body; setting this header (e.g. to `default`) makes the gateway translate matched error statuses to 400/403/404 responses instead.
   schemas:
     ErrorResponse:
       type: object

@@ -1,7 +1,7 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
-  title: WellnessLiving Appointments Promotions API
-  description: Curated, representative subset of WellnessLiving's official production API (RESTful, JSON-over-HTTPS). WellnessLiving is business-management software for fitness studios, gyms, spas, and salons; this API is the same one its own web and mobile clients (Achieve, Elevate) call, and is published for approved partners via an official OpenAPI document at github.com/wellnessliving/openapi (324 paths across 45+ resource areas as of the 2026-06-20 build). Endpoints below are grounded in that official spec and in the public github.com/wellnessliving/wl-sdk (PHP) and wl-sdk-js SDKs; this file selects roughly four representative endpoints per logical API area rather than reproducing the full catalog. Every WellnessLiving API resource is a `.json`-suffixed endpoint whose path is derived deterministically from the SDK model class's namespace (e.g. the PHP class `WellnessLiving\Wl\Staff\StaffElementModel` serves `/Wl/Staff/StaffElement.json`). Legacy numbered variants of several endpoints exist for backward compatibility (e.g. `Finish47`, `ServiceList52`, `Purchase72`) and are omitted here in favor of their current unsuffixed counterpart.
+  title: WellnessLiving Promotions API
+  description: Curated, representative subset of WellnessLiving's official production API (RESTful, JSON-over-HTTPS).
   version: 1.1.20260620071011
   contact:
     name: WellnessLiving Support
@@ -28,7 +28,7 @@ paths:
   /Wl/Promotion/Index/PromotionIndex.json:
     get:
       operationId: get_Wl_Promotion_Index_PromotionIndex
-      summary: Gets a list of packages/passes/memberships.
+      summary: Gets a list of packages/passes/memberships
       description: 'Returns introductory promotion offers available at the specified location, optionally filtered by program type,
 
         including pricing, duration, visit limits, and access information for each item.'
@@ -78,7 +78,6 @@ paths:
                 properties:
                   a_promotion:
                     description: The `a_promotion` field.
-                    nullable: true
         '400':
           $ref: '#/components/responses/BadRequest'
         '401':
@@ -94,7 +93,7 @@ paths:
   /Wl/Promotion/PromotionList.json:
     get:
       operationId: get_Wl_Promotion_PromotionList
-      summary: Returns promotion list of the specified business.
+      summary: Returns promotion list of the specified business
       description: 'Returns all active promotions for the given business, with optional inclusion of Enterprise Location promotions
 
         when the business is a franchisor and `is_franchise` is set to `true`.'
@@ -126,7 +125,6 @@ paths:
                 properties:
                   a_promotion:
                     description: The `a_promotion` field.
-                    nullable: true
         '400':
           $ref: '#/components/responses/BadRequest'
         '401':
@@ -142,7 +140,7 @@ paths:
   /Wl/Promotion/Promotion.json:
     post:
       operationId: post_Wl_Promotion_Promotion
-      summary: Saves promotion data.
+      summary: Saves promotion data
       description: 'Accepts the full promotion configuration including title, description, access rules, duration, tags, and guest
 
         pass settings, then validates and persists the changes.'
@@ -202,7 +200,7 @@ paths:
   /Wl/Login/Promotion/GuestPass/GuestPassList.json:
     get:
       operationId: get_Wl_Login_Promotion_GuestPass_GuestPassList
-      summary: Retrieves guest passes for a specific client.
+      summary: Retrieves guest passes for a specific client
       description: Returns all guest passes assigned to the given user, optionally filtered by class and location.
       tags:
       - Promotions
@@ -218,8 +216,9 @@ paths:
         in: query
         required: false
         schema:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
         description: 'Class key to filter guest passes by.
 
 
@@ -228,8 +227,9 @@ paths:
         in: query
         required: false
         schema:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
         description: 'Location key to filter guest passes by.
 
 
@@ -250,7 +250,6 @@ paths:
                 properties:
                   a_list:
                     description: The `a_list` field.
-                    nullable: true
         '400':
           $ref: '#/components/responses/BadRequest'
         '401':
@@ -264,29 +263,15 @@ paths:
         '500':
           $ref: '#/components/responses/ServerError'
 components:
-  parameters:
-    XErrorRules:
-      name: X-Error-Rules
-      in: header
-      required: false
-      schema:
-        type: string
-      description: Opt in to mapping internal API error statuses to real 4xx HTTP codes. By default the API always answers HTTP 200 even on error, with the failure encoded in the JSON body; setting this header (e.g. to `default`) makes the gateway translate matched error statuses to 400/403/404 responses instead.
   responses:
-    ServerError:
-      description: Unexpected server error.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorResponse'
-    ValidationError:
-      description: The request payload failed field-level validation.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorResponse'
     Unauthorized:
       description: Missing, expired, or invalid Bearer token / session.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    Forbidden:
+      description: Authenticated but not permitted to access this business, location, or resource.
       content:
         application/json:
           schema:
@@ -303,12 +288,26 @@ components:
         application/json:
           schema:
             $ref: '#/components/schemas/ErrorResponse'
-    Forbidden:
-      description: Authenticated but not permitted to access this business, location, or resource.
+    ServerError:
+      description: Unexpected server error.
       content:
         application/json:
           schema:
             $ref: '#/components/schemas/ErrorResponse'
+    ValidationError:
+      description: The request payload failed field-level validation.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+  parameters:
+    XErrorRules:
+      name: X-Error-Rules
+      in: header
+      required: false
+      schema:
+        type: string
+      description: Opt in to mapping internal API error statuses to real 4xx HTTP codes. By default the API always answers HTTP 200 even on error, with the failure encoded in the JSON body; setting this header (e.g. to `default`) makes the gateway translate matched error statuses to 400/403/404 responses instead.
   schemas:
     ErrorResponse:
       type: object

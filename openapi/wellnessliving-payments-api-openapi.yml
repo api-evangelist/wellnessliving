@@ -1,7 +1,7 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
-  title: WellnessLiving Appointments Payments API
-  description: Curated, representative subset of WellnessLiving's official production API (RESTful, JSON-over-HTTPS). WellnessLiving is business-management software for fitness studios, gyms, spas, and salons; this API is the same one its own web and mobile clients (Achieve, Elevate) call, and is published for approved partners via an official OpenAPI document at github.com/wellnessliving/openapi (324 paths across 45+ resource areas as of the 2026-06-20 build). Endpoints below are grounded in that official spec and in the public github.com/wellnessliving/wl-sdk (PHP) and wl-sdk-js SDKs; this file selects roughly four representative endpoints per logical API area rather than reproducing the full catalog. Every WellnessLiving API resource is a `.json`-suffixed endpoint whose path is derived deterministically from the SDK model class's namespace (e.g. the PHP class `WellnessLiving\Wl\Staff\StaffElementModel` serves `/Wl/Staff/StaffElement.json`). Legacy numbered variants of several endpoints exist for backward compatibility (e.g. `Finish47`, `ServiceList52`, `Purchase72`) and are omitted here in favor of their current unsuffixed counterpart.
+  title: WellnessLiving Payments API
+  description: Curated, representative subset of WellnessLiving's official production API (RESTful, JSON-over-HTTPS).
   version: 1.1.20260620071011
   contact:
     name: WellnessLiving Support
@@ -28,7 +28,7 @@ paths:
   /Thoth/WlPay/Account/Account.json:
     get:
       operationId: get_Thoth_WlPay_Account_Account
-      summary: Retrieves information about accounts of given user in given business.
+      summary: Retrieves information about accounts of given user in given business
       description: Retrieves information about accounts of given user in given business.
       tags:
       - Payments
@@ -64,13 +64,10 @@ paths:
                 properties:
                   a_account:
                     description: The `a_account` field.
-                    nullable: true
                   a_account_nx:
                     description: The `a_account_nx` field.
-                    nullable: true
                   is_debtor:
                     description: The `is_debtor` field.
-                    nullable: true
         '400':
           $ref: '#/components/responses/BadRequest'
         '401':
@@ -86,7 +83,7 @@ paths:
   /Thoth/WlPay/Bank/Card/List.json:
     get:
       operationId: get_Thoth_WlPay_Bank_Card_List
-      summary: Retrieves information about user's bank cards.
+      summary: Retrieves information about user's bank cards
       description: Retrieves information about user's bank cards.
       tags:
       - Payments
@@ -125,13 +122,10 @@ paths:
                 properties:
                   a_bank_card:
                     description: The `a_bank_card` field.
-                    nullable: true
                   a_list:
                     description: The `a_list` field.
-                    nullable: true
                   can_add:
                     description: The `can_add` field.
-                    nullable: true
         '400':
           $ref: '#/components/responses/BadRequest'
         '401':
@@ -147,7 +141,7 @@ paths:
   /Thoth/WlPay/Account/Charge/Charge.json:
     post:
       operationId: post_Thoth_WlPay_Account_Charge_Charge
-      summary: Allows the user account to be filled with a specified payment, or to perform the reset change manually.
+      summary: Allows the user account to be filled with a specified payment, or to perform…
       description: Allows the user account to be filled with a specified payment, or to perform the reset change manually.
       tags:
       - Payments
@@ -251,7 +245,7 @@ paths:
   /Thoth/WlPay/Transaction/Report/TransactionAllPayment.json:
     get:
       operationId: get_Thoth_WlPay_Transaction_Report_TransactionAllPayment
-      summary: Gets the daily transaction data.
+      summary: Gets the daily transaction data
       description: Gets the daily transaction data.
       tags:
       - Payments
@@ -302,31 +296,22 @@ paths:
                 properties:
                   a_field:
                     description: The `a_field` field.
-                    nullable: true
                   a_row:
                     description: The `a_row` field.
-                    nullable: true
                   a_warning:
                     description: The `a_warning` field.
-                    nullable: true
                   dtu_complete:
                     description: The `dtu_complete` field.
-                    nullable: true
                   dtu_queue:
                     description: The `dtu_queue` field.
-                    nullable: true
                   dtu_start:
                     description: The `dtu_start` field.
-                    nullable: true
                   id_report_status:
                     description: The `id_report_status` field.
-                    nullable: true
                   is_more:
                     description: The `is_more` field.
-                    nullable: true
                   is_report_complete:
                     description: The `is_report_complete` field.
-                    nullable: true
         '400':
           $ref: '#/components/responses/BadRequest'
         '401':
@@ -340,29 +325,15 @@ paths:
         '500':
           $ref: '#/components/responses/ServerError'
 components:
-  parameters:
-    XErrorRules:
-      name: X-Error-Rules
-      in: header
-      required: false
-      schema:
-        type: string
-      description: Opt in to mapping internal API error statuses to real 4xx HTTP codes. By default the API always answers HTTP 200 even on error, with the failure encoded in the JSON body; setting this header (e.g. to `default`) makes the gateway translate matched error statuses to 400/403/404 responses instead.
   responses:
-    ServerError:
-      description: Unexpected server error.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorResponse'
-    ValidationError:
-      description: The request payload failed field-level validation.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorResponse'
     Unauthorized:
       description: Missing, expired, or invalid Bearer token / session.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    Forbidden:
+      description: Authenticated but not permitted to access this business, location, or resource.
       content:
         application/json:
           schema:
@@ -379,12 +350,26 @@ components:
         application/json:
           schema:
             $ref: '#/components/schemas/ErrorResponse'
-    Forbidden:
-      description: Authenticated but not permitted to access this business, location, or resource.
+    ServerError:
+      description: Unexpected server error.
       content:
         application/json:
           schema:
             $ref: '#/components/schemas/ErrorResponse'
+    ValidationError:
+      description: The request payload failed field-level validation.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+  parameters:
+    XErrorRules:
+      name: X-Error-Rules
+      in: header
+      required: false
+      schema:
+        type: string
+      description: Opt in to mapping internal API error statuses to real 4xx HTTP codes. By default the API always answers HTTP 200 even on error, with the failure encoded in the JSON body; setting this header (e.g. to `default`) makes the gateway translate matched error statuses to 400/403/404 responses instead.
   schemas:
     ErrorResponse:
       type: object

@@ -1,7 +1,7 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
-  title: WellnessLiving Appointments Booking API
-  description: Curated, representative subset of WellnessLiving's official production API (RESTful, JSON-over-HTTPS). WellnessLiving is business-management software for fitness studios, gyms, spas, and salons; this API is the same one its own web and mobile clients (Achieve, Elevate) call, and is published for approved partners via an official OpenAPI document at github.com/wellnessliving/openapi (324 paths across 45+ resource areas as of the 2026-06-20 build). Endpoints below are grounded in that official spec and in the public github.com/wellnessliving/wl-sdk (PHP) and wl-sdk-js SDKs; this file selects roughly four representative endpoints per logical API area rather than reproducing the full catalog. Every WellnessLiving API resource is a `.json`-suffixed endpoint whose path is derived deterministically from the SDK model class's namespace (e.g. the PHP class `WellnessLiving\Wl\Staff\StaffElementModel` serves `/Wl/Staff/StaffElement.json`). Legacy numbered variants of several endpoints exist for backward compatibility (e.g. `Finish47`, `ServiceList52`, `Purchase72`) and are omitted here in favor of their current unsuffixed counterpart.
+  title: WellnessLiving Booking API
+  description: Curated, representative subset of WellnessLiving's official production API (RESTful, JSON-over-HTTPS).
   version: 1.1.20260620071011
   contact:
     name: WellnessLiving Support
@@ -28,7 +28,7 @@ paths:
   /Wl/Book/Process/Process.json:
     get:
       operationId: get_Wl_Book_Process_Process
-      summary: Returns the ordered list of booking wizard steps for the given session and client.
+      summary: Returns the ordered list of booking wizard steps for the given session and…
       description: 'Evaluates the session, user profile, payment requirements, asset selection, and subscription state to build
 
         an ordered list of steps the client must complete to finish the booking. The first step in the list is marked
@@ -99,46 +99,32 @@ paths:
                 properties:
                   a_family_relation_login_allow:
                     description: The `a_family_relation_login_allow` field.
-                    nullable: true
                   a_path:
                     description: The `a_path` field.
-                    nullable: true
                   id_pay_require:
                     description: The `id_pay_require` field.
-                    nullable: true
                   is_age_require:
                     description: The `is_age_require` field.
-                    nullable: true
                   is_card_authorize:
                     description: The `is_card_authorize` field.
-                    nullable: true
                   is_event:
                     description: The `is_event` field.
-                    nullable: true
                   is_family_relation_book:
                     description: The `is_family_relation_book` field.
-                    nullable: true
                   is_free:
                     description: The `is_free` field.
-                    nullable: true
                   is_have_ach:
                     description: The `is_have_ach` field.
-                    nullable: true
                   is_have_credit_card:
                     description: The `is_have_credit_card` field.
-                    nullable: true
                   is_session:
                     description: The `is_session` field.
-                    nullable: true
                   is_wait:
                     description: The `is_wait` field.
-                    nullable: true
                   is_wait_list_unpaid:
                     description: The `is_wait_list_unpaid` field.
-                    nullable: true
                   k_location:
                     description: The `k_location` field.
-                    nullable: true
         '400':
           $ref: '#/components/responses/BadRequest'
         '401':
@@ -154,7 +140,7 @@ paths:
   /Wl/Book/Process/Payment/Payment.json:
     post:
       operationId: post_Wl_Book_Process_Payment_Payment
-      summary: Processes purchases and books sessions on the "Pay/Billing info" step of the booking wizard.
+      summary: Processes purchases and books sessions on the "Pay/Billing info" step of the…
       description: 'Accepts the selected purchase items, payment form, optional discount code, and installment template, then
 
         collects payment, applies discounts and prizes, and creates the booking records. Returns visit keys, activity
@@ -291,13 +277,10 @@ paths:
                 properties:
                   a_login_activity_book:
                     description: The `a_login_activity_book` field.
-                    nullable: true
                   a_visit:
                     description: The `a_visit` field.
-                    nullable: true
                   k_login_activity_purchase:
                     description: The `k_login_activity_purchase` field.
-                    nullable: true
         '400':
           $ref: '#/components/responses/BadRequest'
         '401':
@@ -313,7 +296,7 @@ paths:
   /Wl/Book/Process/Purchase/Purchase.json:
     get:
       operationId: get_Wl_Book_Process_Purchase_Purchase
-      summary: Returns available purchase options, existing client promotions, session passes, and prizes for the specified session.
+      summary: Returns available purchase options, existing client promotions, session passes…
       description: 'Loads all purchase options that can be used to book the specified class period for the given user, including
 
         existing login promotions with remaining session counts, new purchasable options, reward prizes, and login prizes.
@@ -421,8 +404,9 @@ paths:
         in: query
         required: false
         schema:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
         description: 'The business key.
 
 
@@ -455,25 +439,18 @@ paths:
                 properties:
                   a_login_prize:
                     description: The `a_login_prize` field.
-                    nullable: true
                   a_login_promotion:
                     description: The `a_login_promotion` field.
-                    nullable: true
                   a_purchase:
                     description: The `a_purchase` field.
-                    nullable: true
                   a_reward_prize:
                     description: The `a_reward_prize` field.
-                    nullable: true
                   a_session_pass:
                     description: The `a_session_pass` field.
-                    nullable: true
                   is_single_default:
                     description: The `is_single_default` field.
-                    nullable: true
                   k_promotion_default:
                     description: The `k_promotion_default` field.
-                    nullable: true
         '400':
           $ref: '#/components/responses/BadRequest'
         '401':
@@ -489,7 +466,7 @@ paths:
   /Wl/Book/Cancel/CancelCan.json:
     get:
       operationId: get_Wl_Book_Cancel_CancelCan
-      summary: Returns information about whether the given user can cancel the booking and the expected consequences.
+      summary: Returns information about whether the given user can cancel the booking and the…
       description: 'Accepts a business key and a visit key, validates access, and performs a dry-run cancellation to determine
 
         whether the visit can be cancelled online, whether a late-cancel penalty applies, and whether the purchase
@@ -521,19 +498,14 @@ paths:
                 properties:
                   a_penalty:
                     description: The `a_penalty` field.
-                    nullable: true
                   can_cancel:
                     description: The `can_cancel` field.
-                    nullable: true
                   is_flag:
                     description: The `is_flag` field.
-                    nullable: true
                   is_late:
                     description: The `is_late` field.
-                    nullable: true
                   is_refund:
                     description: The `is_refund` field.
-                    nullable: true
         '400':
           $ref: '#/components/responses/BadRequest'
         '401':
@@ -547,29 +519,15 @@ paths:
         '500':
           $ref: '#/components/responses/ServerError'
 components:
-  parameters:
-    XErrorRules:
-      name: X-Error-Rules
-      in: header
-      required: false
-      schema:
-        type: string
-      description: Opt in to mapping internal API error statuses to real 4xx HTTP codes. By default the API always answers HTTP 200 even on error, with the failure encoded in the JSON body; setting this header (e.g. to `default`) makes the gateway translate matched error statuses to 400/403/404 responses instead.
   responses:
-    ServerError:
-      description: Unexpected server error.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorResponse'
-    ValidationError:
-      description: The request payload failed field-level validation.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorResponse'
     Unauthorized:
       description: Missing, expired, or invalid Bearer token / session.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    Forbidden:
+      description: Authenticated but not permitted to access this business, location, or resource.
       content:
         application/json:
           schema:
@@ -586,12 +544,26 @@ components:
         application/json:
           schema:
             $ref: '#/components/schemas/ErrorResponse'
-    Forbidden:
-      description: Authenticated but not permitted to access this business, location, or resource.
+    ServerError:
+      description: Unexpected server error.
       content:
         application/json:
           schema:
             $ref: '#/components/schemas/ErrorResponse'
+    ValidationError:
+      description: The request payload failed field-level validation.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+  parameters:
+    XErrorRules:
+      name: X-Error-Rules
+      in: header
+      required: false
+      schema:
+        type: string
+      description: Opt in to mapping internal API error statuses to real 4xx HTTP codes. By default the API always answers HTTP 200 even on error, with the failure encoded in the JSON body; setting this header (e.g. to `default`) makes the gateway translate matched error statuses to 400/403/404 responses instead.
   schemas:
     ErrorResponse:
       type: object

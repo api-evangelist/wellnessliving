@@ -1,7 +1,7 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
-  title: WellnessLiving Appointments Reviews API
-  description: Curated, representative subset of WellnessLiving's official production API (RESTful, JSON-over-HTTPS). WellnessLiving is business-management software for fitness studios, gyms, spas, and salons; this API is the same one its own web and mobile clients (Achieve, Elevate) call, and is published for approved partners via an official OpenAPI document at github.com/wellnessliving/openapi (324 paths across 45+ resource areas as of the 2026-06-20 build). Endpoints below are grounded in that official spec and in the public github.com/wellnessliving/wl-sdk (PHP) and wl-sdk-js SDKs; this file selects roughly four representative endpoints per logical API area rather than reproducing the full catalog. Every WellnessLiving API resource is a `.json`-suffixed endpoint whose path is derived deterministically from the SDK model class's namespace (e.g. the PHP class `WellnessLiving\Wl\Staff\StaffElementModel` serves `/Wl/Staff/StaffElement.json`). Legacy numbered variants of several endpoints exist for backward compatibility (e.g. `Finish47`, `ServiceList52`, `Purchase72`) and are omitted here in favor of their current unsuffixed counterpart.
+  title: WellnessLiving Reviews API
+  description: Curated, representative subset of WellnessLiving's official production API (RESTful, JSON-over-HTTPS).
   version: 1.1.20260620071011
   contact:
     name: WellnessLiving Support
@@ -28,7 +28,7 @@ paths:
   /Wl/Review/Review.json:
     post:
       operationId: post_Wl_Review_Review
-      summary: Submits user's review.
+      summary: Submits user's review
       description: 'Validates the captcha, saves the review rating and text for the specified location, and returns reward score
 
         information if the business awards points for leaving a review.'
@@ -66,40 +66,28 @@ paths:
                 properties:
                   i_score:
                     description: The `i_score` field.
-                    nullable: true
                   i_score_facebook:
                     description: The `i_score_facebook` field.
-                    nullable: true
                   i_score_twitter:
                     description: The `i_score_twitter` field.
-                    nullable: true
                   is_score:
                     description: The `is_score` field.
-                    nullable: true
                   is_score_facebook:
                     description: The `is_score_facebook` field.
-                    nullable: true
                   is_score_twitter:
                     description: The `is_score_twitter` field.
-                    nullable: true
                   is_share_points:
                     description: The `is_share_points` field.
-                    nullable: true
                   is_share_points_none:
                     description: The `is_share_points_none` field.
-                    nullable: true
                   k_login_activity:
                     description: The `k_login_activity` field.
-                    nullable: true
                   k_review:
                     description: The `k_review` field.
-                    nullable: true
                   uid:
                     description: The `uid` field.
-                    nullable: true
                   url_share:
                     description: The `url_share` field.
-                    nullable: true
         '400':
           $ref: '#/components/responses/BadRequest'
         '401':
@@ -115,7 +103,7 @@ paths:
   /Wl/Review/ReviewList/ReviewList.json:
     get:
       operationId: get_Wl_Review_ReviewList_ReviewList
-      summary: Retrieves a list of reviews.
+      summary: Retrieves a list of reviews
       description: 'Returns reviews for the specified location, or all reviews for the business if no location is given, with support
 
         for filtering by user, ordering, and pagination.'
@@ -127,8 +115,9 @@ paths:
         in: query
         required: false
         schema:
-          type: integer
-          nullable: true
+          type:
+          - integer
+          - 'null'
         description: 'If not specified, this request will return all review keys. If specified, this request will return detailed reviews
 
           (10 per page).
@@ -175,7 +164,6 @@ paths:
                 properties:
                   a_review:
                     description: The `a_review` field.
-                    nullable: true
         '400':
           $ref: '#/components/responses/BadRequest'
         '401':
@@ -191,7 +179,7 @@ paths:
   /Wl/Review/ReviewReply.json:
     post:
       operationId: post_Wl_Review_ReviewReply
-      summary: Saves the reply text and optional status update for the given review.
+      summary: Saves the reply text and optional status update for the given review
       description: 'Validates edit access for the current user, persists the reply text and optional review status change,
 
         and records the replying staff or admin user.'
@@ -245,29 +233,15 @@ paths:
         '500':
           $ref: '#/components/responses/ServerError'
 components:
-  parameters:
-    XErrorRules:
-      name: X-Error-Rules
-      in: header
-      required: false
-      schema:
-        type: string
-      description: Opt in to mapping internal API error statuses to real 4xx HTTP codes. By default the API always answers HTTP 200 even on error, with the failure encoded in the JSON body; setting this header (e.g. to `default`) makes the gateway translate matched error statuses to 400/403/404 responses instead.
   responses:
-    ServerError:
-      description: Unexpected server error.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorResponse'
-    ValidationError:
-      description: The request payload failed field-level validation.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorResponse'
     Unauthorized:
       description: Missing, expired, or invalid Bearer token / session.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    Forbidden:
+      description: Authenticated but not permitted to access this business, location, or resource.
       content:
         application/json:
           schema:
@@ -284,12 +258,26 @@ components:
         application/json:
           schema:
             $ref: '#/components/schemas/ErrorResponse'
-    Forbidden:
-      description: Authenticated but not permitted to access this business, location, or resource.
+    ServerError:
+      description: Unexpected server error.
       content:
         application/json:
           schema:
             $ref: '#/components/schemas/ErrorResponse'
+    ValidationError:
+      description: The request payload failed field-level validation.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+  parameters:
+    XErrorRules:
+      name: X-Error-Rules
+      in: header
+      required: false
+      schema:
+        type: string
+      description: Opt in to mapping internal API error statuses to real 4xx HTTP codes. By default the API always answers HTTP 200 even on error, with the failure encoded in the JSON body; setting this header (e.g. to `default`) makes the gateway translate matched error statuses to 400/403/404 responses instead.
   schemas:
     ErrorResponse:
       type: object

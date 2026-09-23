@@ -1,7 +1,7 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
-  title: WellnessLiving Appointments Clients API
-  description: Curated, representative subset of WellnessLiving's official production API (RESTful, JSON-over-HTTPS). WellnessLiving is business-management software for fitness studios, gyms, spas, and salons; this API is the same one its own web and mobile clients (Achieve, Elevate) call, and is published for approved partners via an official OpenAPI document at github.com/wellnessliving/openapi (324 paths across 45+ resource areas as of the 2026-06-20 build). Endpoints below are grounded in that official spec and in the public github.com/wellnessliving/wl-sdk (PHP) and wl-sdk-js SDKs; this file selects roughly four representative endpoints per logical API area rather than reproducing the full catalog. Every WellnessLiving API resource is a `.json`-suffixed endpoint whose path is derived deterministically from the SDK model class's namespace (e.g. the PHP class `WellnessLiving\Wl\Staff\StaffElementModel` serves `/Wl/Staff/StaffElement.json`). Legacy numbered variants of several endpoints exist for backward compatibility (e.g. `Finish47`, `ServiceList52`, `Purchase72`) and are omitted here in favor of their current unsuffixed counterpart.
+  title: WellnessLiving Clients API
+  description: Curated, representative subset of WellnessLiving's official production API (RESTful, JSON-over-HTTPS).
   version: 1.1.20260620071011
   contact:
     name: WellnessLiving Support
@@ -28,7 +28,7 @@ paths:
   /Wl/Member/Info/Info.json:
     get:
       operationId: get_Wl_Member_Info_Info
-      summary: Returns information about specified member.
+      summary: Returns information about specified member
       description: 'Supports both single-user and batch modes: when `$a_uid` is provided, returns a keyed list of user data in
 
         `$a_result_list`; otherwise returns data for the single user identified by `$uid`. When `$is_full` is `true`,
@@ -42,8 +42,9 @@ paths:
         in: query
         required: false
         schema:
-          type: array
-          nullable: true
+          type:
+          - array
+          - 'null'
           items:
             type: string
         description: 'Primary keys of users whose information must be returned.
@@ -54,8 +55,9 @@ paths:
         in: query
         required: false
         schema:
-          type: array
-          nullable: true
+          type:
+          - array
+          - 'null'
           items:
             type: string
         description: 'List of dates for load additional information about users.
@@ -124,40 +126,28 @@ paths:
                 properties:
                   a_info:
                     description: The `a_info` field.
-                    nullable: true
                   a_result_list:
                     description: The `a_result_list` field.
-                    nullable: true
                   a_visit_last:
                     description: The `a_visit_last` field.
-                    nullable: true
                   a_visit_next:
                     description: The `a_visit_next` field.
-                    nullable: true
                   i_lifetime_visit:
                     description: The `i_lifetime_visit` field.
-                    nullable: true
                   is_traveller:
                     description: The `is_traveller` field.
-                    nullable: true
                   m_lifetime_value:
                     description: The `m_lifetime_value` field.
-                    nullable: true
                   s_member:
                     description: The `s_member` field.
-                    nullable: true
                   text_first_name:
                     description: The `text_first_name` field.
-                    nullable: true
                   text_fullname:
                     description: The `text_fullname` field.
-                    nullable: true
                   url_barcode:
                     description: The `url_barcode` field.
-                    nullable: true
                   url_email:
                     description: The `url_email` field.
-                    nullable: true
         '400':
           $ref: '#/components/responses/BadRequest'
         '401':
@@ -173,8 +163,12 @@ paths:
   /Wl/Profile/Purchase/PurchaseList.json:
     get:
       operationId: get_Wl_Profile_Purchase_PurchaseList
-      summary: Retrieves a list of user's purchase items to show in user profile.
-      description: "Returns the complete purchase history for the client in the given business, covering all\n item types such as memberships, redemption codes, enrollments, products, appointments, and\n gift cards. Package components are resolved and included inline beside their parent item."
+      summary: Retrieves a list of user's purchase items to show in user profile
+      description: 'Returns the complete purchase history for the client in the given business, covering all
+
+        item types such as memberships, redemption codes, enrollments, products, appointments, and
+
+        gift cards. Package components are resolved and included inline beside their parent item.'
       tags:
       - Clients
       parameters:
@@ -201,7 +195,6 @@ paths:
                 properties:
                   a_purchase:
                     description: The `a_purchase` field.
-                    nullable: true
         '400':
           $ref: '#/components/responses/BadRequest'
         '401':
@@ -217,8 +210,12 @@ paths:
   /Wl/Profile/ProfileCreate.json:
     post:
       operationId: post_Wl_Profile_ProfileCreate
-      summary: Creates a new client profile with the provided personal details in the specified business.
-      description: "Creates or retrieves a user account by email or phone, saves personal details such as name,\n address, phones, birthday, gender, and vaccination status, registers the user in the\n business, and optionally adds them to the lead report and sets intents."
+      summary: Creates a new client profile with the provided personal details in the…
+      description: 'Creates or retrieves a user account by email or phone, saves personal details such as name,
+
+        address, phones, birthday, gender, and vaccination status, registers the user in the
+
+        business, and optionally adds them to the lead report and sets intents.'
       tags:
       - Clients
       parameters:
@@ -301,7 +298,6 @@ paths:
                 properties:
                   uid:
                     description: The `uid` field.
-                    nullable: true
         '400':
           $ref: '#/components/responses/BadRequest'
         '401':
@@ -317,7 +313,7 @@ paths:
   /Wl/Family/Relation/FamilyRelation.json:
     get:
       operationId: get_Wl_Family_Relation_FamilyRelation
-      summary: Gets relationships list.
+      summary: Gets relationships list
       description: 'Returns all relationship types enabled for the given business, or all system-defined relationship types if no
 
         business key is provided.'
@@ -341,7 +337,6 @@ paths:
                 properties:
                   a_business_relationships:
                     description: The `a_business_relationships` field.
-                    nullable: true
         '400':
           $ref: '#/components/responses/BadRequest'
         '401':
@@ -355,29 +350,15 @@ paths:
         '500':
           $ref: '#/components/responses/ServerError'
 components:
-  parameters:
-    XErrorRules:
-      name: X-Error-Rules
-      in: header
-      required: false
-      schema:
-        type: string
-      description: Opt in to mapping internal API error statuses to real 4xx HTTP codes. By default the API always answers HTTP 200 even on error, with the failure encoded in the JSON body; setting this header (e.g. to `default`) makes the gateway translate matched error statuses to 400/403/404 responses instead.
   responses:
-    ServerError:
-      description: Unexpected server error.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorResponse'
-    ValidationError:
-      description: The request payload failed field-level validation.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorResponse'
     Unauthorized:
       description: Missing, expired, or invalid Bearer token / session.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    Forbidden:
+      description: Authenticated but not permitted to access this business, location, or resource.
       content:
         application/json:
           schema:
@@ -394,12 +375,26 @@ components:
         application/json:
           schema:
             $ref: '#/components/schemas/ErrorResponse'
-    Forbidden:
-      description: Authenticated but not permitted to access this business, location, or resource.
+    ServerError:
+      description: Unexpected server error.
       content:
         application/json:
           schema:
             $ref: '#/components/schemas/ErrorResponse'
+    ValidationError:
+      description: The request payload failed field-level validation.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+  parameters:
+    XErrorRules:
+      name: X-Error-Rules
+      in: header
+      required: false
+      schema:
+        type: string
+      description: Opt in to mapping internal API error statuses to real 4xx HTTP codes. By default the API always answers HTTP 200 even on error, with the failure encoded in the JSON body; setting this header (e.g. to `default`) makes the gateway translate matched error statuses to 400/403/404 responses instead.
   schemas:
     ErrorResponse:
       type: object

@@ -1,7 +1,7 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
-  title: WellnessLiving Appointments Authentication API
-  description: Curated, representative subset of WellnessLiving's official production API (RESTful, JSON-over-HTTPS). WellnessLiving is business-management software for fitness studios, gyms, spas, and salons; this API is the same one its own web and mobile clients (Achieve, Elevate) call, and is published for approved partners via an official OpenAPI document at github.com/wellnessliving/openapi (324 paths across 45+ resource areas as of the 2026-06-20 build). Endpoints below are grounded in that official spec and in the public github.com/wellnessliving/wl-sdk (PHP) and wl-sdk-js SDKs; this file selects roughly four representative endpoints per logical API area rather than reproducing the full catalog. Every WellnessLiving API resource is a `.json`-suffixed endpoint whose path is derived deterministically from the SDK model class's namespace (e.g. the PHP class `WellnessLiving\Wl\Staff\StaffElementModel` serves `/Wl/Staff/StaffElement.json`). Legacy numbered variants of several endpoints exist for backward compatibility (e.g. `Finish47`, `ServiceList52`, `Purchase72`) and are omitted here in favor of their current unsuffixed counterpart.
+  title: WellnessLiving Authentication API
+  description: Curated, representative subset of WellnessLiving's official production API (RESTful, JSON-over-HTTPS).
   version: 1.1.20260620071011
   contact:
     name: WellnessLiving Support
@@ -28,8 +28,8 @@ paths:
   /Core/Passport/Login/Enter/Enter.json:
     post:
       operationId: post_Core_Passport_Login_Enter_Enter
-      summary: Signs the user in using their login and hashed password.
-      description: 'Accepts the user login, a password hash derived using the notepad obtained from [NotepadApi](/Core/Passport/Login/Enter/Notepad.json),
+      summary: Signs the user in using their login and hashed password
+      description: 'Accepts the user login, a password hash derived using the notepad obtained from NotepadApi,
 
         and an optional remember preference. Validates credentials, enforces CAPTCHA when too many failed
 
@@ -84,7 +84,6 @@ paths:
                 properties:
                   url_redirect:
                     description: The `url_redirect` field.
-                    nullable: true
         '400':
           $ref: '#/components/responses/BadRequest'
         '401':
@@ -100,7 +99,7 @@ paths:
   /Core/Passport/Enter/Jwt/JwtToken.json:
     get:
       operationId: get_Core_Passport_Enter_Jwt_JwtToken
-      summary: Returns a jwt token that can be used to log user.
+      summary: Returns a jwt token that can be used to log user
       description: 'Requires the user to be signed in. Generates a signed JWT token tied to the current authorization
 
         header and user ID that can be passed to other services to authenticate the user without sharing session cookies.'
@@ -118,7 +117,6 @@ paths:
                 properties:
                   s_token:
                     description: The `s_token` field.
-                    nullable: true
         '400':
           $ref: '#/components/responses/BadRequest'
         '401':
@@ -134,7 +132,7 @@ paths:
   /Core/Passport/Login/SignOut/SignOut.json:
     post:
       operationId: post_Core_Passport_Login_SignOut_SignOut
-      summary: Signs user out.
+      summary: Signs user out
       description: 'Requires the user to be signed in, fires a before-logout event allowing listeners to intercept or
 
         handle the logout, then clears the current session. Throws an error if the user is authenticated
@@ -169,7 +167,7 @@ paths:
   /Wl/Login/Login.json:
     get:
       operationId: get_Wl_Login_Login
-      summary: Retrieves information about user.
+      summary: Retrieves information about user
       description: 'Returns name, gender, photo URL, email, and staff details for the specified user within the given business.
 
         Public staff information is returned even without profile access; full client details require access to the
@@ -203,8 +201,9 @@ paths:
         in: query
         required: false
         schema:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
         description: 'The key of the user.
 
 
@@ -219,49 +218,34 @@ paths:
                 properties:
                   can_postcard:
                     description: The `can_postcard` field.
-                    nullable: true
                   can_send_message:
                     description: The `can_send_message` field.
-                    nullable: true
                   id_gender:
                     description: The `id_gender` field.
-                    nullable: true
                   is_photo_empty:
                     description: The `is_photo_empty` field.
-                    nullable: true
                   k_staff:
                     description: The `k_staff` field.
-                    nullable: true
                   s_first_name:
                     description: The `s_first_name` field.
-                    nullable: true
                   s_last_name:
                     description: The `s_last_name` field.
-                    nullable: true
                   text_mail_client:
                     description: The `text_mail_client` field.
-                    nullable: true
                   text_mail_staff:
                     description: The `text_mail_staff` field.
-                    nullable: true
                   text_name_first_staff:
                     description: The `text_name_first_staff` field.
-                    nullable: true
                   text_name_full_client:
                     description: The `text_name_full_client` field.
-                    nullable: true
                   text_name_full_staff:
                     description: The `text_name_full_staff` field.
-                    nullable: true
                   text_name_last_staff:
                     description: The `text_name_last_staff` field.
-                    nullable: true
                   uid:
                     description: The `uid` field.
-                    nullable: true
                   uid_staff:
                     description: The `uid_staff` field.
-                    nullable: true
         '400':
           $ref: '#/components/responses/BadRequest'
         '401':
@@ -275,29 +259,15 @@ paths:
         '500':
           $ref: '#/components/responses/ServerError'
 components:
-  parameters:
-    XErrorRules:
-      name: X-Error-Rules
-      in: header
-      required: false
-      schema:
-        type: string
-      description: Opt in to mapping internal API error statuses to real 4xx HTTP codes. By default the API always answers HTTP 200 even on error, with the failure encoded in the JSON body; setting this header (e.g. to `default`) makes the gateway translate matched error statuses to 400/403/404 responses instead.
   responses:
-    ServerError:
-      description: Unexpected server error.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorResponse'
-    ValidationError:
-      description: The request payload failed field-level validation.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorResponse'
     Unauthorized:
       description: Missing, expired, or invalid Bearer token / session.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    Forbidden:
+      description: Authenticated but not permitted to access this business, location, or resource.
       content:
         application/json:
           schema:
@@ -314,12 +284,26 @@ components:
         application/json:
           schema:
             $ref: '#/components/schemas/ErrorResponse'
-    Forbidden:
-      description: Authenticated but not permitted to access this business, location, or resource.
+    ServerError:
+      description: Unexpected server error.
       content:
         application/json:
           schema:
             $ref: '#/components/schemas/ErrorResponse'
+    ValidationError:
+      description: The request payload failed field-level validation.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+  parameters:
+    XErrorRules:
+      name: X-Error-Rules
+      in: header
+      required: false
+      schema:
+        type: string
+      description: Opt in to mapping internal API error statuses to real 4xx HTTP codes. By default the API always answers HTTP 200 even on error, with the failure encoded in the JSON body; setting this header (e.g. to `default`) makes the gateway translate matched error statuses to 400/403/404 responses instead.
   schemas:
     ErrorResponse:
       type: object

@@ -1,7 +1,7 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
-  title: WellnessLiving Appointments Rewards API
-  description: Curated, representative subset of WellnessLiving's official production API (RESTful, JSON-over-HTTPS). WellnessLiving is business-management software for fitness studios, gyms, spas, and salons; this API is the same one its own web and mobile clients (Achieve, Elevate) call, and is published for approved partners via an official OpenAPI document at github.com/wellnessliving/openapi (324 paths across 45+ resource areas as of the 2026-06-20 build). Endpoints below are grounded in that official spec and in the public github.com/wellnessliving/wl-sdk (PHP) and wl-sdk-js SDKs; this file selects roughly four representative endpoints per logical API area rather than reproducing the full catalog. Every WellnessLiving API resource is a `.json`-suffixed endpoint whose path is derived deterministically from the SDK model class's namespace (e.g. the PHP class `WellnessLiving\Wl\Staff\StaffElementModel` serves `/Wl/Staff/StaffElement.json`). Legacy numbered variants of several endpoints exist for backward compatibility (e.g. `Finish47`, `ServiceList52`, `Purchase72`) and are omitted here in favor of their current unsuffixed counterpart.
+  title: WellnessLiving Rewards API
+  description: Curated, representative subset of WellnessLiving's official production API (RESTful, JSON-over-HTTPS).
   version: 1.1.20260620071011
   contact:
     name: WellnessLiving Support
@@ -28,7 +28,7 @@ paths:
   /Wl/Reward/Score/Current/Current.json:
     get:
       operationId: get_Wl_Reward_Score_Current_Current
-      summary: Retrieves information about current score in wellnessliving points.
+      summary: Retrieves information about current score in wellnessliving points
       description: 'Returns the user''s current reward point balance, their rank in the first available leaderboard, and the
 
         leaderboard title for the specified business.'
@@ -58,13 +58,10 @@ paths:
                 properties:
                   i_board_rank:
                     description: The `i_board_rank` field.
-                    nullable: true
                   i_score:
                     description: The `i_score` field.
-                    nullable: true
                   s_board_title:
                     description: The `s_board_title` field.
-                    nullable: true
         '400':
           $ref: '#/components/responses/BadRequest'
         '401':
@@ -80,7 +77,7 @@ paths:
   /Wl/Reward/Prize/Prize.json:
     get:
       operationId: get_Wl_Reward_Prize_Prize
-      summary: Retrieves a list of redeemable prizes.
+      summary: Retrieves a list of redeemable prizes
       description: 'Returns all active redeemable prizes for the specified business, ordered by point cost, including the prize key
 
         and required score for each item.'
@@ -104,10 +101,8 @@ paths:
                 properties:
                   a_prize:
                     description: The `a_prize` field.
-                    nullable: true
                   a_score:
                     description: The `a_score` field.
-                    nullable: true
         '400':
           $ref: '#/components/responses/BadRequest'
         '401':
@@ -123,7 +118,7 @@ paths:
   /Wl/Reward/Action/Action.json:
     get:
       operationId: get_Wl_Reward_Action_Action
-      summary: Retrieves a list of available reward actions.
+      summary: Retrieves a list of available reward actions
       description: 'Returns all reward actions visible to the specified user in the given business, optionally filtered by category,
 
         including the score value and request status for each action.'
@@ -159,7 +154,6 @@ paths:
                 properties:
                   a_reward_action:
                     description: The `a_reward_action` field.
-                    nullable: true
         '400':
           $ref: '#/components/responses/BadRequest'
         '401':
@@ -175,7 +169,7 @@ paths:
   /Wl/Reward/Board/List.json:
     get:
       operationId: get_Wl_Reward_Board_List
-      summary: Retrieves a list of reward board items to show.
+      summary: Retrieves a list of reward board items to show
       description: 'Returns an ordered list of user IDs ranked by points for the specified reward board, up to the configured
 
         maximum number of entries.'
@@ -205,7 +199,6 @@ paths:
                 properties:
                   a_uid:
                     description: The `a_uid` field.
-                    nullable: true
         '400':
           $ref: '#/components/responses/BadRequest'
         '401':
@@ -219,29 +212,15 @@ paths:
         '500':
           $ref: '#/components/responses/ServerError'
 components:
-  parameters:
-    XErrorRules:
-      name: X-Error-Rules
-      in: header
-      required: false
-      schema:
-        type: string
-      description: Opt in to mapping internal API error statuses to real 4xx HTTP codes. By default the API always answers HTTP 200 even on error, with the failure encoded in the JSON body; setting this header (e.g. to `default`) makes the gateway translate matched error statuses to 400/403/404 responses instead.
   responses:
-    ServerError:
-      description: Unexpected server error.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorResponse'
-    ValidationError:
-      description: The request payload failed field-level validation.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorResponse'
     Unauthorized:
       description: Missing, expired, or invalid Bearer token / session.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    Forbidden:
+      description: Authenticated but not permitted to access this business, location, or resource.
       content:
         application/json:
           schema:
@@ -258,12 +237,26 @@ components:
         application/json:
           schema:
             $ref: '#/components/schemas/ErrorResponse'
-    Forbidden:
-      description: Authenticated but not permitted to access this business, location, or resource.
+    ServerError:
+      description: Unexpected server error.
       content:
         application/json:
           schema:
             $ref: '#/components/schemas/ErrorResponse'
+    ValidationError:
+      description: The request payload failed field-level validation.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+  parameters:
+    XErrorRules:
+      name: X-Error-Rules
+      in: header
+      required: false
+      schema:
+        type: string
+      description: Opt in to mapping internal API error statuses to real 4xx HTTP codes. By default the API always answers HTTP 200 even on error, with the failure encoded in the JSON body; setting this header (e.g. to `default`) makes the gateway translate matched error statuses to 400/403/404 responses instead.
   schemas:
     ErrorResponse:
       type: object
