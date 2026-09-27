@@ -50,6 +50,7 @@ tags:
 - Scheduling
 - Membership
 - Point-of-Sale
+- Real-Time
 tags_raw:
 - Fitness
 - Wellness
@@ -58,6 +59,7 @@ tags_raw:
 - Scheduling
 - Memberships
 - Point of Sale
+- Real-Time
 created: '2026-07-03'
 modified: '2026-07-03'
 specificationVersion: '0.23'
