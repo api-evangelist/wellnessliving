@@ -487,6 +487,9 @@ apis:
   - type: AsyncAPI
     url: asyncapi/wellnessliving-asyncapi.yml
 common:
+- type: CapabilityMap
+  url: capabilities/wellnessliving-capability-edges.yml
+  name: WellnessLiving Business Capability Map
 - type: AgenticAccess
   url: agentic-access/wellnessliving-agentic-access.yml
 - type: DomainSecurity
