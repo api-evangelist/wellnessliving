@@ -1,4 +1,4 @@
-# WellnessLiving (wellnessliving)
+# WellnessLiving
 
 <!-- API-EVANGELIST-PROVENANCE:BEGIN -->
 > ### About this repository
@@ -66,337 +66,161 @@
 
 WellnessLiving is all-in-one business-management software for fitness studios, gyms, spas, salons, and wellness businesses - scheduling, point of sale, memberships/passes, marketing, and client engagement in one platform, serving over 10 million users worldwide. WellnessLiving publishes a real, extensive RESTful API (324+ JSON-over-HTTPS endpoints across 45+ resource areas as of the 2026-06-20 build) that powers its own Achieve client app and Elevate staff app - documented in an official public OpenAPI specification (github.com/wellnessliving/openapi) and public PHP/JavaScript SDKs (wl-sdk, wl-sdk-js) - but the API itself is partner-gated: access requires contacting a WellnessLiving Account Executive or Support, completing an API Access Questionnaire, and signing an NDA and API Agreement before the Integrations Team issues application credentials for staging and production. Core resources cover clients/members, classes and schedules, one-on-one appointments, the shared booking/checkout wizard, memberships and passes (Purchase Options), staff, locations, business configuration, retail sales/catalog, payments (the Thoth payment microservice), authentication, rewards/loyalty, reviews, reporting, and a channel-based real-time WebSocket notification layer.
 
-**APIs.json:** [https://raw.githubusercontent.com/api-evangelist/wellnessliving/refs/heads/main/apis.yml](https://raw.githubusercontent.com/api-evangelist/wellnessliving/refs/heads/main/apis.yml)
+**Areas:** Fitness · Wellness · Spa · Business Management · Scheduling · Membership · Point-of-Sale · Real-Time
 
-## Tags
+## WellnessLiving on APIs.io
 
-- Fitness
-- Wellness
-- Spa
-- Business Management
-- Scheduling
-- Memberships
-- Point of Sale
+Everything profiled for WellnessLiving is published on APIs.io rather than in this repository. Start at the provider page — **[apis.io/providers/wellnessliving/](https://apis.io/providers/wellnessliving/)** — or go straight to one of the APIs or properties below.
 
-## Timestamps
+### APIs (15)
 
-- **Created:** 2026-07-03
-- **Modified:** 2026-07-03
+- [WellnessLiving Appointments API](https://apis.io/apis/wellnessliving/wellnessliving-appointments-api/) — The Appointments API from WellnessLiving — 4 operation(s) for appointments.
+- [WellnessLiving Authentication API](https://apis.io/apis/wellnessliving/wellnessliving-authentication-api/) — The Authentication API from WellnessLiving — 4 operation(s) for authentication.
+- [WellnessLiving Booking API](https://apis.io/apis/wellnessliving/wellnessliving-booking-api/) — The Booking API from WellnessLiving — 4 operation(s) for booking.
+- [WellnessLiving Business API](https://apis.io/apis/wellnessliving/wellnessliving-business-api/) — The Business API from WellnessLiving — 4 operation(s) for business.
+- [WellnessLiving Catalog API](https://apis.io/apis/wellnessliving/wellnessliving-catalog-api/) — The Catalog API from WellnessLiving — 4 operation(s) for catalog.
+- [WellnessLiving Classes API](https://apis.io/apis/wellnessliving/wellnessliving-classes-api/) — The Classes API from WellnessLiving — 4 operation(s) for classes.
+- [WellnessLiving Clients API](https://apis.io/apis/wellnessliving/wellnessliving-clients-api/) — The Clients API from WellnessLiving — 4 operation(s) for clients.
+- [WellnessLiving Locations API](https://apis.io/apis/wellnessliving/wellnessliving-locations-api/) — The Locations API from WellnessLiving — 4 operation(s) for locations.
+- [WellnessLiving Payments API](https://apis.io/apis/wellnessliving/wellnessliving-payments-api/) — The Payments API from WellnessLiving — 4 operation(s) for payments.
+- [WellnessLiving Promotions API](https://apis.io/apis/wellnessliving/wellnessliving-promotions-api/) — The Promotions API from WellnessLiving — 4 operation(s) for promotions.
+- [WellnessLiving Reports API](https://apis.io/apis/wellnessliving/wellnessliving-reports-api/) — The Reports API from WellnessLiving — 3 operation(s) for reports.
+- [WellnessLiving Reviews API](https://apis.io/apis/wellnessliving/wellnessliving-reviews-api/) — The Reviews API from WellnessLiving — 3 operation(s) for reviews.
+- [WellnessLiving Rewards API](https://apis.io/apis/wellnessliving/wellnessliving-rewards-api/) — The Rewards API from WellnessLiving — 4 operation(s) for rewards.
+- [WellnessLiving Staff API](https://apis.io/apis/wellnessliving/wellnessliving-staff-api/) — The Staff API from WellnessLiving — 4 operation(s) for staff.
+- [WellnessLiving WebSocket API](https://apis.io/apis/wellnessliving/wellnessliving-websocket-api/) — The WebSocket API from WellnessLiving — 1 operation(s) for websocket.
 
-## APIs
+### Published properties
 
-### WellnessLiving Clients API
+Each property below is a page on APIs.io carrying the machine-readable artifact and what it says.
 
-Client (member) profile management, purchase history, and family relationships - the customer record at the center of every booking, membership, and sale.
+#### AsyncAPI (1)
 
-- **Human URL:** [https://help.wellnessliving.com/en/articles/10697645-getting-started-with-the-wellnessliving-api](https://help.wellnessliving.com/en/articles/10697645-getting-started-with-the-wellnessliving-api)
-- **Base URL:** `https://us.wellnessliving.com`
+Event-driven and webhook contracts.
 
-#### Tags
+- [WellnessLiving Real-Time Notifications (WebSocket)](https://apis.io/asyncapis/wellnessliving/wellnessliving-asyncapi/)
 
-- Clients
-- Members
-- Profile
-- Family
+#### Event channels (1)
 
-#### Properties
+Individual events and webhooks the provider emits.
 
-- [Documentation](https://www.wellnessliving.com/developer-portal/getting-started/introduction/)
-- [API Reference](https://help.wellnessliving.com/en/articles/10697645-getting-started-with-the-wellnessliving-api)
-- [OpenAPI](openapi/wellnessliving-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [Postman Collection](collections/wellnessliving.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/wellnessliving.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
+- [wl/websocket/channel](https://apis.io/channels/wellnessliving/wl-websocket-channel/)
 
-### WellnessLiving Classes & Schedules API
+#### Agentic access (1)
 
-Group class and event catalog plus the live schedule of bookable sessions - listing, viewing, filtering by location/staff/time, and cancelling a client's booked session.
+Which operations an agent can call, which act, and which need a human in the loop.
 
-- **Human URL:** [https://www.wellnessliving.com/developer-portal/endpoints/endpoints](https://www.wellnessliving.com/developer-portal/endpoints/endpoints)
-- **Base URL:** `https://us.wellnessliving.com`
+- [Wellnessliving Agentic Access](https://apis.io/agentic-access/wellnessliving/wellnessliving-agentic-access/)
 
-#### Tags
+#### Collections (15)
 
-- Classes
-- Schedules
-- Group Fitness
+Postman and Open Collection request collections.
 
-#### Properties
+- [WellnessLiving API](https://apis.io/collections/wellnessliving/open-wellnessliving/)
+- [WellnessLiving Appointments API](https://apis.io/collections/wellnessliving/open-wellnessliving-appointments-api/)
+- [WellnessLiving Appointments Authentication API](https://apis.io/collections/wellnessliving/open-wellnessliving-authentication-api/)
+- [WellnessLiving Appointments Booking API](https://apis.io/collections/wellnessliving/open-wellnessliving-booking-api/)
+- [WellnessLiving Appointments Business API](https://apis.io/collections/wellnessliving/open-wellnessliving-business-api/)
+- [WellnessLiving Appointments Catalog API](https://apis.io/collections/wellnessliving/open-wellnessliving-catalog-api/)
+- [WellnessLiving Appointments Classes API](https://apis.io/collections/wellnessliving/open-wellnessliving-classes-api/)
+- [WellnessLiving Appointments Clients API](https://apis.io/collections/wellnessliving/open-wellnessliving-clients-api/)
+- [WellnessLiving Appointments Locations API](https://apis.io/collections/wellnessliving/open-wellnessliving-locations-api/)
+- [WellnessLiving Appointments Payments API](https://apis.io/collections/wellnessliving/open-wellnessliving-payments-api/)
+- [WellnessLiving Appointments Promotions API](https://apis.io/collections/wellnessliving/open-wellnessliving-promotions-api/)
+- [WellnessLiving Appointments Reports API](https://apis.io/collections/wellnessliving/open-wellnessliving-reports-api/)
+- [WellnessLiving Appointments Rewards API](https://apis.io/collections/wellnessliving/open-wellnessliving-rewards-api/)
+- [WellnessLiving Appointments Staff API](https://apis.io/collections/wellnessliving/open-wellnessliving-staff-api/)
+- [WellnessLiving Appointments WebSocket API](https://apis.io/collections/wellnessliving/open-wellnessliving-websocket-api/)
 
-- [Documentation](https://www.wellnessliving.com/developer-portal/getting-started/introduction/)
-- [API Reference](https://www.wellnessliving.com/developer-portal/endpoints/endpoints)
-- [OpenAPI](openapi/wellnessliving-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [Postman Collection](collections/wellnessliving.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/wellnessliving.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
+#### Governance rules (1)
 
-### WellnessLiving Appointments API
+Spectral rulesets for the provider's contracts.
 
-One-on-one appointment booking - service and staff availability, calendar day availability, and completing (or rescheduling) an appointment booking for one or more clients.
+- [WellnessLiving — asyncapi rules](https://apis.io/rules/wellnessliving/wellnessliving-asyncapi-spectral-rules/)
 
-- **Human URL:** [https://www.wellnessliving.com/developer-portal/endpoints/endpoints](https://www.wellnessliving.com/developer-portal/endpoints/endpoints)
-- **Base URL:** `https://us.wellnessliving.com`
+#### Security (2)
 
-#### Tags
+Authentication, trust centre, and vulnerability disclosure.
 
-- Appointments
-- 1:1 Services
+- [Wellnessliving Authentication](https://apis.io/security/wellnessliving/wellnessliving-authentication/)
+- [Wellnessliving Domain Security](https://apis.io/security/wellnessliving/wellnessliving-domain-security/)
 
-#### Properties
+#### Plans and pricing (1)
 
-- [Documentation](https://www.wellnessliving.com/developer-portal/getting-started/introduction/)
-- [API Reference](https://www.wellnessliving.com/developer-portal/endpoints/endpoints)
-- [OpenAPI](openapi/wellnessliving-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [Postman Collection](collections/wellnessliving.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/wellnessliving.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
+Published plans, tiers and prices.
 
-### WellnessLiving Booking Wizard API
+- [Wellnessliving Plans Pricing](https://apis.io/plans/wellnessliving/wellnessliving-plans-pricing/)
 
-The multi-step booking/checkout engine shared by classes, events, and appointments - resolves the ordered wizard steps, prices and books the selected Purchase Option or payment method, and checks whether an existing booking can be cancelled.
+#### Rate limits (1)
 
-- **Human URL:** [https://www.wellnessliving.com/developer-portal/endpoints/endpoints](https://www.wellnessliving.com/developer-portal/endpoints/endpoints)
-- **Base URL:** `https://us.wellnessliving.com`
+Published request limits.
 
-#### Tags
+- [Wellnessliving Rate Limits](https://apis.io/rate-limits/wellnessliving/wellnessliving-rate-limits/)
 
-- Booking
-- Checkout
+#### FinOps (1)
 
-#### Properties
+What the API costs to run, by operation.
 
-- [Documentation](https://www.wellnessliving.com/developer-portal/getting-started/introduction/)
-- [API Reference](https://www.wellnessliving.com/developer-portal/endpoints/endpoints)
-- [OpenAPI](openapi/wellnessliving-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [Postman Collection](collections/wellnessliving.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/wellnessliving.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
+- [Wellnessliving Finops](https://apis.io/finops/wellnessliving/wellnessliving-finops/)
 
-### WellnessLiving Memberships & Passes API
+## Where to find this API
 
-Purchase Options - memberships, class packages, and passes - plus the guest passes clients can extend to friends and family from an active membership.
+Links to the company's own pages. This repository publishes no copy of their specifications — the canonical document is theirs and lives at the URLs below.
 
-- **Human URL:** [https://www.wellnessliving.com/developer-portal/endpoints/endpoints](https://www.wellnessliving.com/developer-portal/endpoints/endpoints)
-- **Base URL:** `https://us.wellnessliving.com`
-
-#### Tags
-
-- Promotions
-- Memberships
-- Guest Pass
-
-#### Properties
-
-- [Documentation](https://www.wellnessliving.com/developer-portal/getting-started/introduction/)
-- [API Reference](https://www.wellnessliving.com/developer-portal/endpoints/endpoints)
-- [OpenAPI](openapi/wellnessliving-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [Postman Collection](collections/wellnessliving.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/wellnessliving.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-
-### WellnessLiving Staff API
-
-Staff directory, staff profile detail, create/update of a staff record, and the privilege set that governs what a signed-in staff member can access.
-
-- **Human URL:** [https://www.wellnessliving.com/developer-portal/endpoints/endpoints](https://www.wellnessliving.com/developer-portal/endpoints/endpoints)
-- **Base URL:** `https://us.wellnessliving.com`
-
-#### Tags
-
-- Staff
-
-#### Properties
-
-- [Documentation](https://www.wellnessliving.com/developer-portal/getting-started/introduction/)
-- [API Reference](https://www.wellnessliving.com/developer-portal/endpoints/endpoints)
-- [OpenAPI](openapi/wellnessliving-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [Postman Collection](collections/wellnessliving.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/wellnessliving.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-
-### WellnessLiving Locations API
-
-Business location directory and detail, plus creating/editing a location and its weekly working-hours schedule.
-
-- **Human URL:** [https://www.wellnessliving.com/developer-portal/endpoints/endpoints](https://www.wellnessliving.com/developer-portal/endpoints/endpoints)
-- **Base URL:** `https://us.wellnessliving.com`
-
-#### Tags
-
-- Locations
-
-#### Properties
-
-- [Documentation](https://www.wellnessliving.com/developer-portal/getting-started/introduction/)
-- [API Reference](https://www.wellnessliving.com/developer-portal/endpoints/endpoints)
-- [OpenAPI](openapi/wellnessliving-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [Postman Collection](collections/wellnessliving.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/wellnessliving.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-
-### WellnessLiving Business API
-
-Business-level profile and configuration - locale, franchise status, enabled services, subscription/plan state - and self-service creation of a new business account.
-
-- **Human URL:** [https://www.wellnessliving.com/developer-portal/endpoints/endpoints](https://www.wellnessliving.com/developer-portal/endpoints/endpoints)
-- **Base URL:** `https://us.wellnessliving.com`
-
-#### Tags
-
-- Business
-
-#### Properties
-
-- [Documentation](https://www.wellnessliving.com/developer-portal/getting-started/introduction/)
-- [API Reference](https://www.wellnessliving.com/developer-portal/endpoints/endpoints)
-- [OpenAPI](openapi/wellnessliving-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [Postman Collection](collections/wellnessliving.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/wellnessliving.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-
-### WellnessLiving Sales & Catalog API
-
-Retail storefront catalog (products, promotions, events, coupons), live cart pricing, checkout/payment for store items, and purchase receipts.
-
-- **Human URL:** [https://www.wellnessliving.com/developer-portal/endpoints/endpoints](https://www.wellnessliving.com/developer-portal/endpoints/endpoints)
-- **Base URL:** `https://us.wellnessliving.com`
-
-#### Tags
-
-- Catalog
-- Purchases
-- Point of Sale
-
-#### Properties
-
-- [Documentation](https://www.wellnessliving.com/developer-portal/getting-started/introduction/)
-- [API Reference](https://www.wellnessliving.com/developer-portal/endpoints/endpoints)
-- [OpenAPI](openapi/wellnessliving-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [Postman Collection](collections/wellnessliving.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/wellnessliving.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-
-### WellnessLiving Payments API
-
-The Thoth payment microservice underlying WellnessLiving checkout - client payment accounts, saved bank cards, manually charging/crediting an account, and daily transaction reporting.
-
-- **Human URL:** [https://www.wellnessliving.com/developer-portal/endpoints/endpoints](https://www.wellnessliving.com/developer-portal/endpoints/endpoints)
-- **Base URL:** `https://us.wellnessliving.com`
-
-#### Tags
-
-- Payments
-- Thoth WlPay
-
-#### Properties
-
-- [Documentation](https://www.wellnessliving.com/developer-portal/getting-started/introduction/)
-- [API Reference](https://www.wellnessliving.com/developer-portal/endpoints/endpoints)
-- [OpenAPI](openapi/wellnessliving-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [Postman Collection](collections/wellnessliving.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/wellnessliving.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-
-### WellnessLiving Authentication API
-
-Session sign-in/sign-out and JWT token issuance for the officially published API, plus looking up a user's public login information within a business.
-
-- **Human URL:** [https://www.wellnessliving.com/developer-portal/getting-started/authentication-guide/](https://www.wellnessliving.com/developer-portal/getting-started/authentication-guide/)
-- **Base URL:** `https://us.wellnessliving.com`
-
-#### Tags
-
-- Authentication
-- Login
-
-#### Properties
-
-- [Documentation](https://www.wellnessliving.com/developer-portal/getting-started/introduction/)
-- [API Reference](https://www.wellnessliving.com/developer-portal/getting-started/authentication-guide/)
-- [OpenAPI](openapi/wellnessliving-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [Postman Collection](collections/wellnessliving.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/wellnessliving.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-
-### WellnessLiving Rewards & Loyalty API
-
-The WellnessLiving Rewards points program - current score and leaderboard rank, redeemable prizes, and the reward-earning actions configured for a business.
-
-- **Human URL:** [https://www.wellnessliving.com/developer-portal/endpoints/endpoints](https://www.wellnessliving.com/developer-portal/endpoints/endpoints)
-- **Base URL:** `https://us.wellnessliving.com`
-
-#### Tags
-
-- Rewards
-- Loyalty
-
-#### Properties
-
-- [Documentation](https://www.wellnessliving.com/developer-portal/getting-started/introduction/)
-- [API Reference](https://www.wellnessliving.com/developer-portal/endpoints/endpoints)
-- [OpenAPI](openapi/wellnessliving-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [Postman Collection](collections/wellnessliving.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/wellnessliving.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-
-### WellnessLiving Reviews API
-
-Client reviews for a business location - submitting a rating and review, listing reviews, and posting a business reply.
-
-- **Human URL:** [https://www.wellnessliving.com/developer-portal/endpoints/endpoints](https://www.wellnessliving.com/developer-portal/endpoints/endpoints)
-- **Base URL:** `https://us.wellnessliving.com`
-
-#### Tags
-
-- Reviews
-
-#### Properties
-
-- [Documentation](https://www.wellnessliving.com/developer-portal/getting-started/introduction/)
-- [API Reference](https://www.wellnessliving.com/developer-portal/endpoints/endpoints)
-- [OpenAPI](openapi/wellnessliving-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [Postman Collection](collections/wellnessliving.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/wellnessliving.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-
-### WellnessLiving Reports API
-
-Business-intelligence reporting - single-report data, multi-report page collections, and an access check for a given report.
-
-- **Human URL:** [https://www.wellnessliving.com/developer-portal/endpoints/endpoints](https://www.wellnessliving.com/developer-portal/endpoints/endpoints)
-- **Base URL:** `https://us.wellnessliving.com`
-
-#### Tags
-
-- Reports
-
-#### Properties
-
-- [Documentation](https://www.wellnessliving.com/developer-portal/getting-started/introduction/)
-- [API Reference](https://www.wellnessliving.com/developer-portal/endpoints/endpoints)
-- [OpenAPI](openapi/wellnessliving-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [Postman Collection](collections/wellnessliving.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/wellnessliving.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-
-### WellnessLiving Real-Time Notifications API
-
-The channel-based WebSocket push layer used by WellnessLiving's own web and mobile clients for live updates (report progress, visit status, messenger chat) - a client authorizes onto a channel with this REST call immediately after opening the socket.
-
-- **Human URL:** [https://github.com/wellnessliving/openapi](https://github.com/wellnessliving/openapi)
-- **Base URL:** `https://us.wellnessliving.com`
-
-#### Tags
-
-- WebSocket
-- Real-Time
-
-#### Properties
-
-- [Documentation](https://www.wellnessliving.com/developer-portal/getting-started/introduction/)
-- [API Reference](https://github.com/wellnessliving/openapi)
-- [OpenAPI](openapi/wellnessliving-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [Postman Collection](collections/wellnessliving.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/wellnessliving.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-- [AsyncAPI](asyncapi/wellnessliving-asyncapi.yml) — [AsyncAPI Specification](https://www.asyncapi.com/docs/reference/specification/latest)
-
-## Common Properties
-
-- [GitHub Organization](https://github.com/wellnessliving)
-- [LinkedIn](https://www.linkedin.com/company/wellnesslivingsoftware)
 - [Website](https://www.wellnessliving.com/)
 - [Documentation](https://www.wellnessliving.com/developer-portal/getting-started/introduction/)
-- [Plans](plans/wellnessliving-plans-pricing.yml)
-- [Rate Limits](rate-limits/wellnessliving-rate-limits.yml)
-- [Fin Ops](finops/wellnessliving-finops.yml)
+- [Blog](https://www.wellnessliving.com/blog/feed/)
+- [GitHub](https://github.com/wellnessliving)
 
-## Maintainers
+## API Evangelist rating
 
-**FN:** Kin Lane  
-**Email:** kin@apievangelist.com
+**Kin Score 32.8** — thin · rubric 0.24.0 · scored 2026-10-17
+
+| Facet | Score |
+|---|---|
+| Discoverability | 66.1 |
+| Contract quality | 57.6 |
+| Contract governance | 11.4 |
+| Operational transparency | 10.5 |
+| Developer ergonomics | 32.1 |
+| Access clarity | 7.9 |
+
+**Agent readiness 20.7** — agent-aware
+
+| Agent-readiness dimension | Result |
+|---|---|
+| Spec Presence | yes |
+| Agentic Access | derived (partial credit) |
+| Reversibility Documented | documented (partial credit) |
+| MCP Server | — |
+| Auth Clarity | bearer (partial credit) |
+| Idempotency | — |
+| Error Semantics | — |
+| OpenAPI Examples | — |
+| Rate Limit Signal | derived (partial credit) |
+| Event Surface Described | derived (partial credit) |
+| Agent Skills | — |
+| Well Known Catalog | — |
+| Consent Identity | — |
+| Agent Card | — |
+| Dry Run Mode | — |
+| Delegated Identity | — |
+| Protected Resource Metadata | — |
+| Dynamic Client Registration | — |
+| Agentic Commerce | — |
+
+**Regulatory alignment 11.8** — Horizontal (data, software, accessibility, platform)
+
+The rubric is published at [github.com/api-evangelist/kin-score](https://github.com/api-evangelist/kin-score). The per-check breakdown behind these numbers — which checks were earned, partial or missed — along with score history and how this provider compares to its peers, is available at [apis.io/providers/wellnessliving/](https://apis.io/providers/wellnessliving/).
+
+## How this profile is made
+
+API Evangelist profiles a company's public API surface the way a developer would find it: the website, developer portal and documentation, the specifications it publishes, its public repositories, and its pricing, status and changelog pages. From that it derives the properties above — contracts split per API, workflows, schemas, collections, governance rules, plans and rate limits — and scores them against the published [Kin Score rubric](https://github.com/api-evangelist/kin-score).
+
+The artifacts are published on [APIs.io](https://apis.io), not in this repository. This repository is the public record for WellnessLiving: the place to say something is wrong, missing or out of date, and to ask for a re-score or a removal.
+
+## Open an issue
+
+- **Something about this listing** — a wrong description, a missing API, a stale artifact or a question about the rating: [open an issue on this repository](https://github.com/api-evangelist/wellnessliving/issues/new).
+- **A new API, or one that is not in the catalog yet** — [submit it on APIs.io](https://apis.io/add/).
+- **Anything else** — [the APIs.io inbox](https://github.com/api-search/inbox/issues/new) or [info@apievangelist.com](mailto:info@apievangelist.com).
